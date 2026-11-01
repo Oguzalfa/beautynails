@@ -1,0 +1,165 @@
+{
+  "startedAt": "2026-11-01T18:39:56.729Z",
+  "base": "http://127.0.0.1:4174/",
+  "physicalDevice": false,
+  "notes": [],
+  "checks": {
+    "AC01": {
+      "pass": true,
+      "detail": "{\"pink\":\"#ef2c83\",\"brand\":\"beauty nails\",\"h1\":\"Güzelliğin,en özel hâli.\",\"em\":\"özel\",\"cards\":4}",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\accept-identity-1440.png"
+      ]
+    },
+    "AC02": {
+      "pass": true,
+      "detail": "service cards=4",
+      "evidence": []
+    },
+    "AC05": {
+      "pass": true,
+      "detail": "portrait webp present",
+      "evidence": []
+    },
+    "AC07_video": {
+      "pass": true,
+      "detail": "Desktop scroll video + mid booking/Escape + anchor/back (anchorY=558, backY=8)",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\desktop-scroll.webm",
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\accept-desktop-p0.png",
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\accept-desktop-p05.png"
+      ]
+    },
+    "AC10_nav": {
+      "pass": true,
+      "detail": "Anchor to #hizmetler scrollY=558; back scrollY=8",
+      "evidence": []
+    },
+    "AC08_video": {
+      "pass": true,
+      "detail": "Mobile video; textAbove=true bar=true overflowX=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\mobile-scroll.webm",
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\accept-mobile-p0.png"
+      ]
+    },
+    "AC03": {
+      "pass": true,
+      "detail": "Mobile first viewport stack + bar",
+      "evidence": []
+    },
+    "BP_320": {
+      "pass": true,
+      "detail": "w=320 overflowX=false face=true barOverlap=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-320.png"
+      ]
+    },
+    "BP_360": {
+      "pass": true,
+      "detail": "w=360 overflowX=false face=true barOverlap=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-360.png"
+      ]
+    },
+    "BP_390": {
+      "pass": true,
+      "detail": "w=390 overflowX=false face=true barOverlap=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-390.png"
+      ]
+    },
+    "BP_768": {
+      "pass": true,
+      "detail": "w=768 overflowX=false face=true barOverlap=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-768.png"
+      ]
+    },
+    "BP_768_orient": {
+      "pass": true,
+      "detail": "orientation swap overflowX=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-768-orient.png"
+      ]
+    },
+    "BP_1024": {
+      "pass": true,
+      "detail": "w=1024 overflowX=false face=true barOverlap=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-1024.png"
+      ]
+    },
+    "BP_1024_orient": {
+      "pass": true,
+      "detail": "orientation swap overflowX=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-1024-orient.png"
+      ]
+    },
+    "BP_1440": {
+      "pass": true,
+      "detail": "w=1440 overflowX=false face=true barOverlap=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-1440.png"
+      ]
+    },
+    "AC04": {
+      "pass": true,
+      "detail": "320/360/390/768/1024(+1440) no overflow/face crop/bar overlap",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-320.png",
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-360.png",
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-390.png",
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-768.png",
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-1024.png",
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\breakpoint-1440.png"
+      ]
+    },
+    "AC15": {
+      "pass": true,
+      "detail": "reduced init pin=false canvas=false copy=1; afterScrollY=800; flipOffPin=false flipOnPin=false",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\reduced-motion-on.png",
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\reduced-motion-runtime.png"
+      ]
+    },
+    "AC16_no_webgl": {
+      "pass": true,
+      "detail": "no-webgl fallback state={\"hasCanvas\":false,\"hasFallback\":true,\"h1\":true,\"cta\":true,\"bgColor\":\"rgba(0, 0, 0, 0)\",\"bgImage\":\"radial-gradient(55% 70% at 74% 42%, rgba(255, 255, 255, 0.55), rgba(0, 0, 0, 0) \",\"looksPink\":true,\"blackHero\":false}",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\webgl-fallback.png"
+      ]
+    },
+    "AC16_context_lost": {
+      "pass": true,
+      "detail": "context loss {\"skipped\":false,\"canvasGone\":true,\"fallback\":true,\"h1\":true,\"heroSceneLoads\":1}",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\webgl-context-lost.png"
+      ]
+    },
+    "AC20_menu": {
+      "pass": true,
+      "detail": "menu open/Escape/focusBack=true",
+      "evidence": []
+    },
+    "AC13": {
+      "pass": true,
+      "detail": "empty submit field errors=3",
+      "evidence": []
+    },
+    "AC12_AC14": {
+      "pass": true,
+      "detail": "draft message honest=true text=\"Taslak hazır. Talebiniz otomatik gönderilmedi. İletişim bilgileri eklendiğinde randevu akışı tamamlanacak.\\n\\nKapat\"",
+      "evidence": [
+        "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\booking-draft.png"
+      ]
+    },
+    "AC18": {
+      "pass": true,
+      "detail": "spacers/canvases before={\"spacers\":0,\"canvases\":1} after={\"spacers\":0,\"canvases\":1} final={\"spacers\":0,\"canvases\":1}",
+      "evidence": []
+    }
+  },
+  "finishedAt": "2026-11-01T18:42:58.851Z"
+}

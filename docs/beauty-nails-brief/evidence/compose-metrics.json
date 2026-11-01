@@ -1,0 +1,32 @@
+{
+  "desktop": {
+    "headerH": 76,
+    "heroH": 410,
+    "stripH": 48,
+    "stripInView": true,
+    "servicesTop": 558,
+    "servicesStartsInFirstScreen": true,
+    "cardsFullyInView": true,
+    "cardsMostlyInView": true,
+    "cardHeights": [
+      210,
+      210,
+      210,
+      210
+    ],
+    "portraitW": 713.90625,
+    "portraitH": 361.078125,
+    "h1FontSize": "84.96px",
+    "h1FontFamily": "Manrope, \"Segoe UI\", sans-serif",
+    "h1Lines": 2,
+    "canvas": true
+  },
+  "video": "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\compose-desktop-scroll.webm",
+  "at": "2026-11-01T18:39:11.488Z",
+  "mobile": {
+    "textAbove": true,
+    "bar": true,
+    "overflowX": false
+  },
+  "mobileVideo": "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\compose-mobile-scroll.webm"
+}

@@ -1,0 +1,51 @@
+:root {
+  --pink: #ef2c83;
+  --pink-hover: #d71f70;
+  --pink-bright: #ffbedb;
+  --pink-hero: #ffe6f2;
+  --pink-mid: #ffb7d5;
+  --pink-deep: #f16aa8;
+  --white-soft: #fffbfd;
+  --white: #ffffff;
+  --ink: #24101f;
+  --ink-muted: #5b4152;
+  --line: #f1c9dc;
+  --focus: #731b52;
+
+  --font-sans: 'Manrope', 'Segoe UI', sans-serif;
+  --font-serif: 'Bodoni Moda', 'Times New Roman', serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  --radius-hero: 24px;
+  --radius-card: 16px;
+  --header-h: 76px;
+  --mobile-bar-h: 72px;
+  --content-max: 1440px;
+  --page-pad: 48px;
+  --hero-h: 410px;
+  --category-h: 48px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --radius-hero: 20px;
+    --header-h: 64px;
+    --page-pad: 18px;
+    --hero-h: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --page-pad: 16px;
+  }
+}

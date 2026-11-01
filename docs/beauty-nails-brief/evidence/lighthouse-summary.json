@@ -1,0 +1,23 @@
+{
+  "url": "http://127.0.0.1:4174/",
+  "formFactor": "desktop",
+  "fetchTime": "2026-11-01T17:57:33.594Z",
+  "scores": {
+    "performance": 0.32,
+    "accessibility": 0.96
+  },
+  "metrics": {
+    "LCP": 6885.0401,
+    "LCP_display": "6.9 s",
+    "CLS": 0.001199044629116651,
+    "CLS_display": "0.001",
+    "TBT": 1832.9999999999995,
+    "TBT_display": "1,830 ms",
+    "FCP": "2.0 s",
+    "SI": "2.7 s"
+  },
+  "env": {
+    "benchmarkIndex": 3727.5,
+    "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+  }
+}

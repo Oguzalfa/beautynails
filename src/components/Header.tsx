@@ -26,11 +26,8 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
       { id: 'iletisim', href: '#iletisim' },
     ]
     const pick = () => {
-      const mobile = window.matchMedia('(max-width: 767px)').matches
       const nodes = marks.flatMap((mark) => {
-        const el = mobile
-          ? document.querySelector(`[data-at-anchor="${mark.id}"]`)
-          : document.getElementById(mark.id)
+        const el = document.querySelector(`[data-at-anchor="${mark.id}"]`)
         return el ? [{ el, href: mark.href }] : []
       })
       const bar = document.querySelector('.bn-header')?.getBoundingClientRect().height ?? 72
@@ -67,7 +64,7 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
     }
     document.addEventListener('keydown', onKey)
     menuRef.current?.querySelector<HTMLAnchorElement>('a')?.focus()
-    const media = window.matchMedia('(min-width: 900px)')
+    const media = window.matchMedia('(min-width: 1024px)')
     const onWide = () => {
       if (media.matches) onCloseMenu()
     }
@@ -86,13 +83,11 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
         const href = link?.getAttribute('href')
         if (href?.startsWith('#')) {
           setCurrent(href)
-          if (window.matchMedia('(max-width: 767px)').matches) {
-            const target = document.querySelector(`[data-at-anchor="${href.slice(1)}"]`)
-            if (target instanceof HTMLElement) {
-              event.preventDefault()
-              const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-              target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
-            }
+          const target = document.querySelector(`[data-at-anchor="${href.slice(1)}"]`)
+          if (target instanceof HTMLElement) {
+            event.preventDefault()
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
           }
         }
       }}
@@ -110,7 +105,7 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
           onOpenBooking()
         }}
       >
-        Özel Randevu
+        Randevu Al
       </PremiumAppointment>
       <button
         ref={toggleRef}

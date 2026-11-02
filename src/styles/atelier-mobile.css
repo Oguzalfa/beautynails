@@ -172,6 +172,10 @@
     border-radius: 17px;
   }
 
+  .bn-at-mani figcaption {
+    display: none;
+  }
+
   .bn-at-hero-foot p {
     margin: 0;
     font-size: 15px;

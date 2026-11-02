@@ -223,6 +223,7 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
               loading="lazy"
               decoding="async"
             />
+            <figcaption>MANİKÜR &amp; PEDİKÜR</figcaption>
           </figure>
           <p>Size özel bakım. Kusursuz detaylar.</p>
           <Cta fit onClick={onOpenBooking}>

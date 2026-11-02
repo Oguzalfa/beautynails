@@ -34,6 +34,8 @@ export function HeroSceneCanvas({
   const apiRef = useRef<SceneApi | null>(null)
   const onLostRef = useRef(onContextLost)
   onLostRef.current = onContextLost
+  const latestRef = useRef({ progress, pointer, active, reduced })
+  latestRef.current = { progress, pointer, active, reduced }
 
   useEffect(() => {
     if (!enabled || !canvasRef.current) return
@@ -62,10 +64,11 @@ export function HeroSceneCanvas({
               },
             })
             apiRef.current = api
-            api.setReduced(reduced)
-            api.setVisible(active)
-            api.setProgress(progress)
-            api.setPointer(pointer.x, pointer.y)
+            const latest = latestRef.current
+            api.setReduced(latest.reduced)
+            api.setProgress(latest.progress)
+            api.setPointer(latest.pointer.x, latest.pointer.y)
+            api.setVisible(latest.active)
           } catch {
             apiRef.current = null
             onLostRef.current?.()
@@ -81,6 +84,8 @@ export function HeroSceneCanvas({
 
     const onResize = () => apiRef.current?.resize()
     window.addEventListener('resize', onResize)
+    const observer = new ResizeObserver(onResize)
+    if (canvasRef.current.parentElement) observer.observe(canvasRef.current.parentElement)
 
     return () => {
       cancelled = true
@@ -88,6 +93,7 @@ export function HeroSceneCanvas({
       window.clearTimeout(fallbackTimer)
       window.removeEventListener('scroll', onScrollKick, true)
       window.removeEventListener('resize', onResize)
+      observer.disconnect()
       api?.dispose()
       apiRef.current = null
     }

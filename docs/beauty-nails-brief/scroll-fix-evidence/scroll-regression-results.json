@@ -1,0 +1,427 @@
+{
+  "base": "http://127.0.0.1:4174/",
+  "mode": "local-preview",
+  "checks": [
+    {
+      "name": "desktop: opaque portrait and panel",
+      "pass": true,
+      "details": [
+        {
+          "p": 0,
+          "portrait": 1,
+          "panel": 1
+        },
+        {
+          "p": 0.2263,
+          "portrait": 1,
+          "panel": 1
+        },
+        {
+          "p": 0.4757,
+          "portrait": 1,
+          "panel": 1
+        },
+        {
+          "p": 0.7263,
+          "portrait": 1,
+          "panel": 1
+        },
+        {
+          "p": 0.9757,
+          "portrait": 1,
+          "panel": 1
+        }
+      ]
+    },
+    {
+      "name": "desktop: real services visible at final scene",
+      "pass": true,
+      "details": {
+        "mode": "pinned",
+        "header": {
+          "top": 0,
+          "bottom": 76,
+          "height": 76
+        },
+        "service": {
+          "top": 76,
+          "bottom": 441.921875,
+          "height": 365.921875
+        },
+        "inner": {
+          "top": 92,
+          "bottom": 413.921875,
+          "height": 321.921875
+        },
+        "bar": null
+      }
+    },
+    {
+      "name": "desktop: no overflow or duplicate renderer",
+      "pass": true,
+      "details": [
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        },
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        },
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        },
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        },
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        }
+      ]
+    },
+    {
+      "name": "desktop: reversible scene clock",
+      "pass": true,
+      "details": {
+        "p": 0.7263,
+        "phase": "c"
+      }
+    },
+    {
+      "name": "desktop: logo returns to start",
+      "pass": true,
+      "details": {
+        "p": 0,
+        "hash": "#top"
+      }
+    },
+    {
+      "name": "desktop: services anchor reaches actual services",
+      "pass": true,
+      "details": {
+        "p": 1,
+        "inner": {
+          "top": 92,
+          "bottom": 413.921875,
+          "height": 321.921875
+        },
+        "hash": "#hizmetler"
+      }
+    },
+    {
+      "name": "desktop: history restores opening",
+      "pass": true,
+      "details": {
+        "p": 0,
+        "hash": "#top"
+      }
+    },
+    {
+      "name": "desktop: booking opens and Escape closes",
+      "pass": true,
+      "details": {
+        "dialogOpen": 1
+      }
+    },
+    {
+      "name": "desktop: runtime reduced motion clears pin",
+      "pass": true,
+      "details": {
+        "p": 0,
+        "phase": "a",
+        "portraitOpacity": 1,
+        "panelOpacity": 1,
+        "header": {
+          "top": 0,
+          "bottom": 76,
+          "height": 76
+        },
+        "bar": null,
+        "service": {
+          "top": 596,
+          "bottom": 961.921875,
+          "height": 365.921875
+        },
+        "inner": {
+          "top": 612,
+          "bottom": 933.921875,
+          "height": 321.921875
+        },
+        "usable": 824,
+        "viewportHeight": 900,
+        "overflow": false,
+        "photos": [
+          {
+            "loaded": true,
+            "rect": {
+              "top": 705.6875,
+              "bottom": 809.875,
+              "height": 104.1875
+            }
+          },
+          {
+            "loaded": true,
+            "rect": {
+              "top": 705.6875,
+              "bottom": 809.875,
+              "height": 104.1875
+            }
+          },
+          {
+            "loaded": true,
+            "rect": {
+              "top": 705.6875,
+              "bottom": 809.875,
+              "height": 104.1875
+            }
+          },
+          {
+            "loaded": true,
+            "rect": {
+              "top": 705.6875,
+              "bottom": 809.875,
+              "height": 104.1875
+            }
+          }
+        ],
+        "serviceCopies": 1,
+        "spacers": 0,
+        "canvases": 0
+      }
+    },
+    {
+      "name": "desktop: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "mobile: opaque portrait and panel",
+      "pass": true,
+      "details": [
+        {
+          "p": 0,
+          "portrait": 1,
+          "panel": 1
+        },
+        {
+          "p": 0.2494,
+          "portrait": 1,
+          "panel": 1
+        },
+        {
+          "p": 0.5,
+          "portrait": 1,
+          "panel": 1
+        },
+        {
+          "p": 0.7494,
+          "portrait": 1,
+          "panel": 1
+        },
+        {
+          "p": 1,
+          "portrait": 1,
+          "panel": 1
+        }
+      ]
+    },
+    {
+      "name": "mobile: real services visible at final scene",
+      "pass": true,
+      "details": {
+        "mode": "pinned",
+        "header": {
+          "top": 0,
+          "bottom": 64,
+          "height": 64
+        },
+        "service": {
+          "top": 64.0009765625,
+          "bottom": 588.7197265625,
+          "height": 524.71875
+        },
+        "inner": {
+          "top": 80.0009765625,
+          "bottom": 560.7197265625,
+          "height": 480.71875
+        },
+        "bar": {
+          "top": 771,
+          "bottom": 844,
+          "height": 73
+        }
+      }
+    },
+    {
+      "name": "mobile: no overflow or duplicate renderer",
+      "pass": true,
+      "details": [
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        },
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        },
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        },
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        },
+        {
+          "overflow": false,
+          "spacers": 1,
+          "canvases": 1
+        }
+      ]
+    },
+    {
+      "name": "mobile: reversible scene clock",
+      "pass": true,
+      "details": {
+        "p": 0.7494,
+        "phase": "c"
+      }
+    },
+    {
+      "name": "mobile: logo returns to start",
+      "pass": true,
+      "details": {
+        "p": 0,
+        "hash": "#top"
+      }
+    },
+    {
+      "name": "mobile: services anchor reaches actual services",
+      "pass": true,
+      "details": {
+        "p": 1,
+        "inner": {
+          "top": 80.0009765625,
+          "bottom": 560.7197265625,
+          "height": 480.71875
+        },
+        "hash": "#hizmetler"
+      }
+    },
+    {
+      "name": "mobile: history restores opening",
+      "pass": true,
+      "details": {
+        "p": 0,
+        "hash": "#top"
+      }
+    },
+    {
+      "name": "mobile: booking opens and Escape closes",
+      "pass": true,
+      "details": {
+        "dialogOpen": 1
+      }
+    },
+    {
+      "name": "mobile: runtime reduced motion clears pin",
+      "pass": true,
+      "details": {
+        "p": 0,
+        "phase": "a",
+        "portraitOpacity": 1,
+        "panelOpacity": 1,
+        "header": {
+          "top": 0,
+          "bottom": 64,
+          "height": 64
+        },
+        "bar": {
+          "top": 771,
+          "bottom": 844,
+          "height": 73
+        },
+        "service": {
+          "top": 740.78125,
+          "bottom": 1265.5,
+          "height": 524.71875
+        },
+        "inner": {
+          "top": 756.78125,
+          "bottom": 1237.5,
+          "height": 480.71875
+        },
+        "usable": 707,
+        "viewportHeight": 844,
+        "overflow": false,
+        "photos": [
+          {
+            "loaded": true,
+            "rect": {
+              "top": 865.75,
+              "bottom": 926.9375,
+              "height": 61.1875
+            }
+          },
+          {
+            "loaded": true,
+            "rect": {
+              "top": 865.75,
+              "bottom": 926.9375,
+              "height": 61.1875
+            }
+          },
+          {
+            "loaded": true,
+            "rect": {
+              "top": 1062.125,
+              "bottom": 1123.3125,
+              "height": 61.1875
+            }
+          },
+          {
+            "loaded": true,
+            "rect": {
+              "top": 1062.125,
+              "bottom": 1123.3125,
+              "height": 61.1875
+            }
+          }
+        ],
+        "serviceCopies": 1,
+        "spacers": 0,
+        "canvases": 0
+      }
+    },
+    {
+      "name": "mobile: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "short viewport: natural flow and reachable services",
+      "pass": true,
+      "details": {
+        "mode": "natural",
+        "spacers": 0,
+        "service": {
+          "top": -4.421875,
+          "bottom": 573.03125,
+          "height": 577.453125
+        }
+      }
+    }
+  ]
+}

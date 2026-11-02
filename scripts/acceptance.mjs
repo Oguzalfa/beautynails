@@ -55,7 +55,7 @@ async function recordDesktopVideo(browser) {
   // Mid scene: open booking while hero still pinned-ish
   await smoothScroll(page, Math.round(hizmetlerY * 0.35), 18)
   await page.screenshot({ path: resolve(OUT, 'accept-desktop-p05.png'), fullPage: false })
-  await page.getByRole('button', { name: 'Özel Randevu' }).click()
+  await page.getByRole('banner').getByRole('button', { name: 'Özel Randevu' }).click()
   await sleep(400)
   await page.keyboard.press('Escape')
   await sleep(300)
@@ -405,15 +405,15 @@ async function menuBookingA11y(browser) {
     () => document.activeElement?.classList?.contains('menu-toggle') || document.activeElement?.closest('.menu-toggle'),
   )
 
-  await page.getByRole('button', { name: 'Randevunuzu Planlayın' }).click()
+  await page.locator('.hero-actions .btn-primary').click()
   await sleep(300)
-  await page.getByRole('button', { name: 'Taslağı Kaydet' }).click()
+  await page.getByRole('button', { name: /taslağ/i }).click()
   await sleep(200)
   const errors = await page.locator('.field-error').count()
   await page.locator('input[name="name"]').fill('Ayşe Deneme')
   await page.locator('input[name="phone"]').fill('05551234567')
   await page.locator('select[name="service"]').selectOption({ index: 1 })
-  await page.getByRole('button', { name: 'Taslağı Kaydet' }).click()
+  await page.getByRole('button', { name: /taslağ/i }).click()
   await sleep(300)
   const draft = await page.locator('.form-success').innerText()
   const honest = /taslak|gönderilmedi|henüz/i.test(draft)

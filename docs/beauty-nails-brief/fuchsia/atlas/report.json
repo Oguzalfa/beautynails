@@ -1,0 +1,761 @@
+{
+  "report": [
+    {
+      "w": 320,
+      "errors": [],
+      "atlas": [
+        200
+      ],
+      "data": {
+        "overflow": 0,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "heroCols": "280px",
+        "hero": [
+          {
+            "top": 578,
+            "left": 20,
+            "right": 300,
+            "width": 280,
+            "text": "Premium Deneyim",
+            "labelWidth": 224,
+            "atlas": true
+          },
+          {
+            "top": 636,
+            "left": 20,
+            "right": 300,
+            "width": 280,
+            "text": "Uzman Ekip",
+            "labelWidth": 224,
+            "atlas": true
+          },
+          {
+            "top": 694,
+            "left": 20,
+            "right": 300,
+            "width": 280,
+            "text": "Size Özel Bakım",
+            "labelWidth": 224,
+            "atlas": true
+          }
+        ],
+        "services": [
+          {
+            "kind": "nails",
+            "cols": "280px",
+            "items": [
+              {
+                "top": 1319,
+                "left": 20,
+                "right": 300,
+                "width": 280,
+                "text": "Kişiye özel tasarım",
+                "labelWidth": 228,
+                "atlas": true
+              },
+              {
+                "top": 1381,
+                "left": 20,
+                "right": 300,
+                "width": 280,
+                "text": "Uzun ömürlü uygulama",
+                "labelWidth": 228,
+                "atlas": true
+              },
+              {
+                "top": 1443,
+                "left": 20,
+                "right": 300,
+                "width": 280,
+                "text": "Sağlıklı tırnak bakımı",
+                "labelWidth": 228,
+                "atlas": true
+              }
+            ]
+          },
+          {
+            "kind": "lashes",
+            "cols": "280px",
+            "items": [
+              {
+                "top": 2037,
+                "left": 20,
+                "right": 300,
+                "width": 280,
+                "text": "Doğal görünüm",
+                "labelWidth": 228,
+                "atlas": true
+              },
+              {
+                "top": 2099,
+                "left": 20,
+                "right": 300,
+                "width": 280,
+                "text": "Hafif ve konforlu",
+                "labelWidth": 228,
+                "atlas": true
+              },
+              {
+                "top": 2161,
+                "left": 20,
+                "right": 300,
+                "width": 280,
+                "text": "Uzman uygulama",
+                "labelWidth": 228,
+                "atlas": true
+              }
+            ]
+          },
+          {
+            "kind": "makeup",
+            "cols": "280px",
+            "items": [
+              {
+                "top": 2756,
+                "left": 20,
+                "right": 300,
+                "width": 280,
+                "text": "Doğal ve estetik sonuçlar",
+                "labelWidth": 228,
+                "atlas": true
+              },
+              {
+                "top": 2818,
+                "left": 20,
+                "right": 300,
+                "width": 280,
+                "text": "Yüzünüze uygun tasarım",
+                "labelWidth": 228,
+                "atlas": true
+              },
+              {
+                "top": 2880,
+                "left": 20,
+                "right": 300,
+                "width": 280,
+                "text": "Uzun süre kalıcı etki",
+                "labelWidth": 228,
+                "atlas": true
+              }
+            ]
+          }
+        ],
+        "svgInFeatures": 0,
+        "glass": 0,
+        "nav": [
+          {
+            "href": "#deneyim",
+            "active": true,
+            "text": "Deneyim"
+          },
+          {
+            "href": "#hizmetler",
+            "active": false,
+            "text": "Hizmetler"
+          },
+          {
+            "href": "#calismalarimiz",
+            "active": false,
+            "text": "Çalışmalarımız"
+          },
+          {
+            "href": "#iletisim",
+            "active": false,
+            "text": "İletişim"
+          }
+        ],
+        "menuVisible": false,
+        "appts": [
+          "Özel Randevu",
+          "Özel Randevu",
+          "Özel Randevu Al",
+          "Özel Randevu Al"
+        ],
+        "buttonsNamedReserve": 0
+      }
+    },
+    {
+      "w": 390,
+      "errors": [],
+      "atlas": [
+        200
+      ],
+      "data": {
+        "overflow": 0,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "heroCols": "350px",
+        "hero": [
+          {
+            "top": 650,
+            "left": 20,
+            "right": 370,
+            "width": 350,
+            "text": "Premium Deneyim",
+            "labelWidth": 294,
+            "atlas": true
+          },
+          {
+            "top": 708,
+            "left": 20,
+            "right": 370,
+            "width": 350,
+            "text": "Uzman Ekip",
+            "labelWidth": 294,
+            "atlas": true
+          },
+          {
+            "top": 766,
+            "left": 20,
+            "right": 370,
+            "width": 350,
+            "text": "Size Özel Bakım",
+            "labelWidth": 294,
+            "atlas": true
+          }
+        ],
+        "services": [
+          {
+            "kind": "nails",
+            "cols": "300px",
+            "items": [
+              {
+                "top": 1429,
+                "left": 20,
+                "right": 320,
+                "width": 300,
+                "text": "Kişiye özel tasarım",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1491,
+                "left": 20,
+                "right": 320,
+                "width": 300,
+                "text": "Uzun ömürlü uygulama",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1553,
+                "left": 20,
+                "right": 320,
+                "width": 300,
+                "text": "Sağlıklı tırnak bakımı",
+                "labelWidth": 248,
+                "atlas": true
+              }
+            ]
+          },
+          {
+            "kind": "lashes",
+            "cols": "300px",
+            "items": [
+              {
+                "top": 2207,
+                "left": 20,
+                "right": 320,
+                "width": 300,
+                "text": "Doğal görünüm",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 2269,
+                "left": 20,
+                "right": 320,
+                "width": 300,
+                "text": "Hafif ve konforlu",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 2331,
+                "left": 20,
+                "right": 320,
+                "width": 300,
+                "text": "Uzman uygulama",
+                "labelWidth": 248,
+                "atlas": true
+              }
+            ]
+          },
+          {
+            "kind": "makeup",
+            "cols": "300px",
+            "items": [
+              {
+                "top": 2986,
+                "left": 20,
+                "right": 320,
+                "width": 300,
+                "text": "Doğal ve estetik sonuçlar",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 3048,
+                "left": 20,
+                "right": 320,
+                "width": 300,
+                "text": "Yüzünüze uygun tasarım",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 3110,
+                "left": 20,
+                "right": 320,
+                "width": 300,
+                "text": "Uzun süre kalıcı etki",
+                "labelWidth": 248,
+                "atlas": true
+              }
+            ]
+          }
+        ],
+        "svgInFeatures": 0,
+        "glass": 0,
+        "nav": [
+          {
+            "href": "#deneyim",
+            "active": true,
+            "text": "Deneyim"
+          },
+          {
+            "href": "#hizmetler",
+            "active": false,
+            "text": "Hizmetler"
+          },
+          {
+            "href": "#calismalarimiz",
+            "active": false,
+            "text": "Çalışmalarımız"
+          },
+          {
+            "href": "#iletisim",
+            "active": false,
+            "text": "İletişim"
+          }
+        ],
+        "menuVisible": false,
+        "appts": [
+          "Özel Randevu",
+          "Özel Randevu",
+          "Özel Randevu Al",
+          "Özel Randevu Al"
+        ],
+        "buttonsNamedReserve": 0
+      }
+    },
+    {
+      "w": 935,
+      "errors": [],
+      "atlas": [
+        200
+      ],
+      "data": {
+        "overflow": 0,
+        "scrollWidth": 935,
+        "clientWidth": 935,
+        "heroCols": "154.062px 154.062px 154.062px",
+        "hero": [
+          {
+            "top": 441,
+            "left": 43,
+            "right": 197,
+            "width": 154,
+            "text": "Premium Deneyim",
+            "labelWidth": 91,
+            "atlas": true
+          },
+          {
+            "top": 441,
+            "left": 209,
+            "right": 363,
+            "width": 154,
+            "text": "Uzman Ekip",
+            "labelWidth": 91,
+            "atlas": true
+          },
+          {
+            "top": 441,
+            "left": 375,
+            "right": 529,
+            "width": 154,
+            "text": "Size Özel Bakım",
+            "labelWidth": 104,
+            "atlas": true
+          }
+        ],
+        "services": [
+          {
+            "kind": "nails",
+            "cols": "300px",
+            "items": [
+              {
+                "top": 797,
+                "left": 486,
+                "right": 786,
+                "width": 300,
+                "text": "Kişiye özel tasarım",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 859,
+                "left": 486,
+                "right": 786,
+                "width": 300,
+                "text": "Uzun ömürlü uygulama",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 921,
+                "left": 486,
+                "right": 786,
+                "width": 300,
+                "text": "Sağlıklı tırnak bakımı",
+                "labelWidth": 248,
+                "atlas": true
+              }
+            ]
+          },
+          {
+            "kind": "lashes",
+            "cols": "300px",
+            "items": [
+              {
+                "top": 1258,
+                "left": 19,
+                "right": 319,
+                "width": 300,
+                "text": "Doğal görünüm",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1320,
+                "left": 19,
+                "right": 319,
+                "width": 300,
+                "text": "Hafif ve konforlu",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1382,
+                "left": 19,
+                "right": 319,
+                "width": 300,
+                "text": "Uzman uygulama",
+                "labelWidth": 248,
+                "atlas": true
+              }
+            ]
+          },
+          {
+            "kind": "makeup",
+            "cols": "300px",
+            "items": [
+              {
+                "top": 1720,
+                "left": 486,
+                "right": 786,
+                "width": 300,
+                "text": "Doğal ve estetik sonuçlar",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1782,
+                "left": 486,
+                "right": 786,
+                "width": 300,
+                "text": "Yüzünüze uygun tasarım",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1844,
+                "left": 486,
+                "right": 786,
+                "width": 300,
+                "text": "Uzun süre kalıcı etki",
+                "labelWidth": 248,
+                "atlas": true
+              }
+            ]
+          }
+        ],
+        "svgInFeatures": 0,
+        "glass": 0,
+        "nav": [
+          {
+            "href": "#deneyim",
+            "active": true,
+            "text": "Deneyim"
+          },
+          {
+            "href": "#hizmetler",
+            "active": false,
+            "text": "Hizmetler"
+          },
+          {
+            "href": "#calismalarimiz",
+            "active": false,
+            "text": "Çalışmalarımız"
+          },
+          {
+            "href": "#iletisim",
+            "active": false,
+            "text": "İletişim"
+          }
+        ],
+        "menuVisible": false,
+        "appts": [
+          "Özel Randevu",
+          "Özel Randevu",
+          "Özel Randevu Al",
+          "Özel Randevu Al"
+        ],
+        "buttonsNamedReserve": 0
+      }
+    },
+    {
+      "w": 1440,
+      "errors": [],
+      "atlas": [
+        200
+      ],
+      "data": {
+        "overflow": 0,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "heroCols": "178.656px 178.672px 178.672px",
+        "hero": [
+          {
+            "top": 613,
+            "left": 66,
+            "right": 245,
+            "width": 179,
+            "text": "Premium Deneyim",
+            "labelWidth": 98,
+            "atlas": true
+          },
+          {
+            "top": 613,
+            "left": 257,
+            "right": 436,
+            "width": 179,
+            "text": "Uzman Ekip",
+            "labelWidth": 98,
+            "atlas": true
+          },
+          {
+            "top": 613,
+            "left": 448,
+            "right": 626,
+            "width": 179,
+            "text": "Size Özel Bakım",
+            "labelWidth": 111,
+            "atlas": true
+          }
+        ],
+        "services": [
+          {
+            "kind": "nails",
+            "cols": "300px",
+            "items": [
+              {
+                "top": 1149,
+                "left": 749,
+                "right": 1049,
+                "width": 300,
+                "text": "Kişiye özel tasarım",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1211,
+                "left": 749,
+                "right": 1049,
+                "width": 300,
+                "text": "Uzun ömürlü uygulama",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1273,
+                "left": 749,
+                "right": 1049,
+                "width": 300,
+                "text": "Sağlıklı tırnak bakımı",
+                "labelWidth": 248,
+                "atlas": true
+              }
+            ]
+          },
+          {
+            "kind": "lashes",
+            "cols": "300px",
+            "items": [
+              {
+                "top": 1699,
+                "left": 29,
+                "right": 329,
+                "width": 300,
+                "text": "Doğal görünüm",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1761,
+                "left": 29,
+                "right": 329,
+                "width": 300,
+                "text": "Hafif ve konforlu",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 1823,
+                "left": 29,
+                "right": 329,
+                "width": 300,
+                "text": "Uzman uygulama",
+                "labelWidth": 248,
+                "atlas": true
+              }
+            ]
+          },
+          {
+            "kind": "makeup",
+            "cols": "300px",
+            "items": [
+              {
+                "top": 2249,
+                "left": 749,
+                "right": 1049,
+                "width": 300,
+                "text": "Doğal ve estetik sonuçlar",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 2311,
+                "left": 749,
+                "right": 1049,
+                "width": 300,
+                "text": "Yüzünüze uygun tasarım",
+                "labelWidth": 248,
+                "atlas": true
+              },
+              {
+                "top": 2373,
+                "left": 749,
+                "right": 1049,
+                "width": 300,
+                "text": "Uzun süre kalıcı etki",
+                "labelWidth": 248,
+                "atlas": true
+              }
+            ]
+          }
+        ],
+        "svgInFeatures": 0,
+        "glass": 0,
+        "nav": [
+          {
+            "href": "#deneyim",
+            "active": true,
+            "text": "Deneyim"
+          },
+          {
+            "href": "#hizmetler",
+            "active": false,
+            "text": "Hizmetler"
+          },
+          {
+            "href": "#calismalarimiz",
+            "active": false,
+            "text": "Çalışmalarımız"
+          },
+          {
+            "href": "#iletisim",
+            "active": false,
+            "text": "İletişim"
+          }
+        ],
+        "menuVisible": false,
+        "appts": [
+          "Özel Randevu",
+          "Özel Randevu",
+          "Özel Randevu Al",
+          "Özel Randevu Al"
+        ],
+        "buttonsNamedReserve": 0
+      }
+    }
+  ],
+  "afterScroll": [
+    {
+      "href": "#deneyim",
+      "active": false
+    },
+    {
+      "href": "#hizmetler",
+      "active": true
+    },
+    {
+      "href": "#calismalarimiz",
+      "active": false
+    },
+    {
+      "href": "#iletisim",
+      "active": false
+    }
+  ],
+  "atContact": [
+    {
+      "href": "#deneyim",
+      "active": false
+    },
+    {
+      "href": "#hizmetler",
+      "active": false
+    },
+    {
+      "href": "#calismalarimiz",
+      "active": false
+    },
+    {
+      "href": "#iletisim",
+      "active": true
+    }
+  ],
+  "dialog": 2,
+  "menu": {
+    "open": true,
+    "hidden": false,
+    "links": [
+      "Deneyim",
+      "Hizmetler",
+      "Çalışmalarımız",
+      "İletişim"
+    ],
+    "cta": "Özel Randevu",
+    "headerNavDisplay": "none",
+    "toggles": 1
+  },
+  "closed": true,
+  "mobileDialog": 2,
+  "motion": "none",
+  "formError": "Hizmet\nTırnak Sanatı\nİpek Kirpik\nKalıcı Makyaj\nKaş & Yüz\nLütfen en az bir hizmet seçin.\nAd Soyad\nLütfen adınızı yazın.\nTelefon\nLütfen telefon numaranızı yazın.\nSaat\nNot (isteğe bağlı)\nWhatsApp taslağını hazırla\n→",
+  "choices": 4,
+  "times": 1,
+  "dates": 0
+}

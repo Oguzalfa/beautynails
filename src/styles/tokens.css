@@ -5,7 +5,8 @@
   --pink-hero: #ffe6f2;
   --pink-mid: #ffb7d5;
   --pink-deep: #f16aa8;
-  --white-soft: #fffbfd;
+  --pink-glow: #ff8fc4;
+  --white-soft: #fff5fa;
   --white: #ffffff;
   --ink: #24101f;
   --ink-muted: #5b4152;
@@ -31,8 +32,9 @@
   --mobile-bar-h: 72px;
   --content-max: 1440px;
   --page-pad: 48px;
-  --hero-h: 410px;
+  --hero-h: 460px;
   --category-h: 48px;
+  --story-p: 0;
 }
 
 @media (max-width: 767px) {

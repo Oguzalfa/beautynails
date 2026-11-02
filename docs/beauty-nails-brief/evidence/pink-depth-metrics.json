@@ -1,0 +1,82 @@
+{
+  "at": "2026-11-01T20:52:45.287Z",
+  "base": "http://127.0.0.1:4174/",
+  "desktopPink0": {
+    "body": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "header": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "hero": {
+      "bg": "radial-gradient(50% 70% at 78% 42%, rgba(255, 255, 255, 0.55",
+      "color": "rgb(36, 16, 31)"
+    },
+    "services": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "experience": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "works": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "booking": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "footer": {
+      "bg": "none",
+      "color": "rgb(91, 65, 82)"
+    },
+    "storyP": "0",
+    "cards": 4
+  },
+  "desktopApproach": {
+    "storyP": "0.6883",
+    "scrollY": 891
+  },
+  "desktopVideo": "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\pink-desktop-scroll.webm",
+  "mobilePink0": {
+    "body": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "header": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "hero": {
+      "bg": "radial-gradient(50% 70% at 78% 42%, rgba(255, 255, 255, 0.55",
+      "color": "rgb(36, 16, 31)"
+    },
+    "services": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "experience": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "works": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "booking": {
+      "bg": "none",
+      "color": "rgb(36, 16, 31)"
+    },
+    "footer": {
+      "bg": "none",
+      "color": "rgb(91, 65, 82)"
+    },
+    "storyP": "0",
+    "cards": 4
+  },
+  "mobileVideo": "C:\\Users\\Oğuzhan\\Desktop\\beautynails\\docs\\beauty-nails-brief\\evidence\\pink-mobile-scroll.webm"
+}

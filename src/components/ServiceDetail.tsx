@@ -29,23 +29,23 @@ export function ServiceDetail({ serviceId, onClose }: Props) {
   if (!service) return null
 
   return (
-    <div className="modal" role="presentation" onClick={onClose}>
+    <div className="bn-modal" role="presentation" onClick={onClose}>
       <div
-        className="modal__panel"
+        className="bn-modal__panel"
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         onClick={(e) => e.stopPropagation()}
       >
-        <button ref={closeRef} type="button" className="modal__close" onClick={onClose}>
+        <button ref={closeRef} type="button" className="bn-modal__close" onClick={onClose}>
           Kapat
         </button>
-        <div className="modal__media">
-          <img src={service.image} alt={service.title} width={640} height={520} />
+        <div className="bn-modal__media">
+          <img src={service.image} alt="" width={512} height={341} />
         </div>
         <h2 id={titleId}>{service.title}</h2>
         <p>{service.detail}</p>
-        <p className="modal__hint">
+        <p>
           Süre, ücret ve ürün detayları randevu görüşmesinde netleştirilir.
         </p>
       </div>

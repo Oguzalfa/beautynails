@@ -1,23 +1,41 @@
-import { services, siteConfig } from '../config/site'
+import { services } from '../config/site'
+
+const alts = [
+  'Pembe French tırnak yakın planı, konsept görsel',
+  'İpek kirpik ve ela göz yakın planı, konsept görsel',
+  'Pembe dudak yakın planı, konsept görsel',
+  'Kaş ve göz çevresi yakın planı, konsept görsel',
+]
 
 export function Works() {
   return (
-    <section id="calismalarimiz" className="works section">
-      <p className="eyebrow">ÇALIŞMALARIMIZ</p>
-      <h2 className="section-title">İmza bakımlardan seçkiler</h2>
-      <p className="works__note">
-        {siteConfig.realPortfolioApproved
-          ? 'Salon çalışmalarımızdan seçilmiş görseller.'
-          : 'Hizmet atmosferini yansıtan konsept görseller. Gerçek müşteri sonucu veya before/after kanıtı değildir.'}
-      </p>
-      <div className="works__grid">
-        {services.map((service) => (
-          <figure key={service.id} className="works__item">
-            <img src={service.image} alt={service.title} width={512} height={512} loading="lazy" />
-            <figcaption>{service.title}</figcaption>
-          </figure>
-        ))}
+    <section id="calismalarimiz" className="bn-section bn-gallery">
+      <div className="bn-container--wide">
+        <div className="bn-heading-row">
+          <div>
+            <p className="bn-font-label">Çalışmalarımız</p>
+            <h2 className="bn-font-section">
+              <span>İmzamız, <em className="bn-font-display">detaylarda.</em></span>
+            </h2>
+          </div>
+          <a className="bn-text-link" href="#calismalarimiz">Tüm Çalışmalar →</a>
+        </div>
+        <div className="bn-photo-grid">
+          {services.map((service, index) => (
+            <img
+              key={service.id}
+              className="bn-gallery__photo"
+              src={service.image}
+              alt={alts[index]}
+              width={512}
+              height={341}
+              loading="lazy"
+            />
+          ))}
+        </div>
+        <p className="bn-gallery__note">Size özel dokunuşlar.</p>
       </div>
+      <hr className="bn-rule" />
     </section>
   )
 }

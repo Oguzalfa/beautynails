@@ -28,8 +28,10 @@ body {
   line-height: 1.5;
   color: var(--ink);
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, #ffe6f2 0%, transparent 55%),
-    var(--white-soft);
+    radial-gradient(ellipse at 15% 8%, #ffe1ed, transparent 38%),
+    radial-gradient(ellipse at 88% 20%, #ffe4ef, transparent 33%),
+    linear-gradient(140deg, #f8b7d2, #f29bc0 52%, #fbc6dd);
+  background-attachment: fixed;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -134,15 +136,21 @@ a {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--ink);
-  border-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(239, 44, 131, 0.45);
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 24px rgba(90, 20, 55, 0.06);
 }
 
 .btn-secondary:hover {
   background: var(--white);
+  border-color: var(--pink);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 3px;
 }
 
 .btn-pink {

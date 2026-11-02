@@ -1,5 +1,8 @@
-import { useEffect, useId, useRef } from 'react'
-import { navLinks, siteConfig } from '../config/site'
+import { useEffect, useId, useRef, useState } from 'react'
+import { navLinks } from '../config/site'
+import { PremiumAppointment, PremiumNav } from './premium/BeautyNailsPremium'
+import { Wordmark } from './Wordmark'
+import { CloseIcon, MenuIcon } from './icons'
 
 type Props = {
   menuOpen: boolean
@@ -8,90 +11,125 @@ type Props = {
   onOpenBooking: () => void
 }
 
-export function Header({
-  menuOpen,
-  onToggleMenu,
-  onCloseMenu,
-  onOpenBooking,
-}: Props) {
+export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: Props) {
   const menuId = useId()
   const toggleRef = useRef<HTMLButtonElement>(null)
-  const firstLinkRef = useRef<HTMLAnchorElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const [current, setCurrent] = useState<string | null>(null)
+  const [away, setAway] = useState(false)
+
+  useEffect(() => {
+    const marks: { id: string; href: string }[] = [
+      { id: 'deneyim', href: '#deneyim' },
+      { id: 'hizmetler', href: '#hizmetler' },
+      { id: 'calismalarimiz', href: '#calismalarimiz' },
+      { id: 'iletisim', href: '#iletisim' },
+    ]
+    const nodes = marks.flatMap((mark) => {
+      const el = document.getElementById(mark.id)
+      return el ? [{ el, href: mark.href }] : []
+    })
+    const pick = () => {
+      const bar = document.querySelector('.bn-header')?.getBoundingClientRect().height ?? 72
+      const line = bar + 24
+      let href = '#deneyim'
+      for (const node of nodes) {
+        if (node.el.getBoundingClientRect().top <= line) href = node.href
+      }
+      const contact = nodes.find((node) => node.href === '#iletisim')
+      if (contact && contact.el.getBoundingClientRect().top < window.innerHeight * 0.62) {
+        href = '#iletisim'
+      }
+      setCurrent(href)
+      setAway(window.scrollY > 24)
+    }
+    pick()
+    window.addEventListener('scroll', pick, { passive: true })
+    window.addEventListener('resize', pick)
+    window.addEventListener('hashchange', pick)
+    return () => {
+      window.removeEventListener('scroll', pick)
+      window.removeEventListener('resize', pick)
+      window.removeEventListener('hashchange', pick)
+    }
+  }, [])
 
   useEffect(() => {
     if (!menuOpen) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
         onCloseMenu()
         toggleRef.current?.focus()
       }
     }
     document.addEventListener('keydown', onKey)
-    firstLinkRef.current?.focus()
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    menuRef.current?.querySelector<HTMLAnchorElement>('a')?.focus()
+    const media = window.matchMedia('(min-width: 900px)')
+    const onWide = () => {
+      if (media.matches) onCloseMenu()
+    }
+    media.addEventListener('change', onWide)
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prev
+      media.removeEventListener('change', onWide)
     }
   }, [menuOpen, onCloseMenu])
 
   return (
-    <header className="site-header">
-      <div className="site-header__inner">
-        <a className="logo" href="#top" onClick={onCloseMenu}>
-          <span className="logo__name">{siteConfig.brand.toLowerCase()}</span>
-          <span className="logo__tag">{siteConfig.tagline}</span>
-        </a>
-
-        <nav className="nav-desktop" aria-label="Ana menü">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        <button type="button" className="btn btn-pink header-cta" onClick={onOpenBooking}>
-          Özel Randevu
-          <span className="cta-arrow" aria-hidden="true">
-            ↗
-          </span>
-        </button>
-
-        <button
-          ref={toggleRef}
-          type="button"
-          className="menu-toggle"
-          aria-expanded={menuOpen}
-          aria-controls={menuId}
-          onClick={onToggleMenu}
-        >
-          <span className="sr-only">{menuOpen ? 'Menüyü kapat' : 'Menüyü aç'}</span>
-          <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
-        </button>
-      </div>
-
-      <div
-        id={menuId}
-        className={`nav-mobile ${menuOpen ? 'is-open' : ''}`}
-        hidden={!menuOpen}
+    <header
+      className={`bn-header${away ? ' is-away' : ''}`}
+      onClick={(event) => {
+        const link = event.target instanceof Element ? event.target.closest('.bnx-nav__link') : null
+        const href = link?.getAttribute('href')
+        if (href?.startsWith('#')) setCurrent(href)
+      }}
+    >
+      <a className="bn-logo" href="#top" onClick={onCloseMenu}>
+        <Wordmark />
+      </a>
+      <PremiumNav items={navLinks} currentHref={current ?? undefined} label="Ana menü" />
+      <PremiumAppointment
+        href="#iletisim"
+        compact
+        className="bn-header__cta"
+        onClick={(event) => {
+          event.preventDefault()
+          onOpenBooking()
+        }}
       >
-        <nav aria-label="Mobil menü">
-          {navLinks.map((link, i) => (
-            <a
-              key={link.href}
-              ref={i === 0 ? firstLinkRef : undefined}
-              href={link.href}
-              onClick={onCloseMenu}
-            >
-              {link.label}
-            </a>
-          ))}
-          <button type="button" className="btn btn-pink" onClick={() => { onCloseMenu(); onOpenBooking() }}>
-            Özel Randevu
-          </button>
-        </nav>
+        Özel Randevu
+      </PremiumAppointment>
+      <button
+        ref={toggleRef}
+        type="button"
+        className="bn-menu-toggle"
+        aria-expanded={menuOpen}
+        aria-controls={menuId}
+        onClick={onToggleMenu}
+      >
+        <span className="bn-sr">{menuOpen ? 'Menüyü kapat' : 'Menüyü aç'}</span>
+        {menuOpen ? <CloseIcon /> : <MenuIcon />}
+      </button>
+      <div
+        ref={menuRef}
+        id={menuId}
+        className={`bn-menu ${menuOpen ? 'is-open' : ''}`}
+        hidden={!menuOpen}
+        onClick={(event) => {
+          if (event.target instanceof Element && event.target.closest('a')) onCloseMenu()
+        }}
+      >
+        <PremiumNav items={navLinks} currentHref={current ?? undefined} label="Mobil menü" />
+        <PremiumAppointment
+          href="#iletisim"
+          onClick={(event) => {
+            event.preventDefault()
+            onCloseMenu()
+            onOpenBooking()
+          }}
+        >
+          Özel Randevu
+        </PremiumAppointment>
       </div>
     </header>
   )

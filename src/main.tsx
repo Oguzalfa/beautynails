@@ -5,6 +5,8 @@ import App from './App'
 import './styles/sazi-mobile-fix.css'
 import './styles/atelier-mobile.css'
 import './styles/atelier-desktop.css'
+import './motion/sazi-motion.css'
+import './styles/sazi-motion-bind.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

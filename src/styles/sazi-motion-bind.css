@@ -1,0 +1,63 @@
+/* Effect anchors only. Does not change type, color, spacing, or grid. */
+
+.bn-page .bn-at-portrait,
+.bn-page .bn-at-gem {
+  position: relative;
+}
+
+.bn-page .bn-at-gem {
+  display: inline-block;
+  flex: none;
+}
+
+@media (max-width: 767px) {
+  .bn-page .bn-at-mani {
+    position: relative;
+  }
+}
+
+.bn-page .bn-menu-toggle > .sazi-fx-clip {
+  opacity: 0.4;
+}
+
+.bn-page [data-sazi-cta].bnx-appointment::after {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+.bn-at-orb-glint {
+  --sazi-fx-glint-x: calc(100% - 64px);
+  --sazi-fx-glint-y: 40px;
+  --sazi-fx-glint-size: 11px;
+  --sazi-fx-delay: 0.6s;
+}
+
+@media (min-width: 768px) {
+  .bn-at-orb-glint {
+    --sazi-fx-glint-x: calc(100% - min(150px, 18vw));
+    --sazi-fx-glint-y: 22%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bn-at-orb-glint {
+    --sazi-fx-glint-x: calc(100% - min(190px, 14vw));
+    --sazi-fx-glint-y: 18%;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bn-page[data-sazi-fx-state='running'] [data-sazi-cta]:hover .sazi-fx-arrow {
+    transform: translateX(3px);
+  }
+}
+
+.bn-page[data-sazi-fx-state='running'] [data-sazi-cta]:focus-visible .sazi-fx-arrow {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bn-page [data-sazi-cta] .sazi-fx-arrow {
+    transform: none !important;
+  }
+}

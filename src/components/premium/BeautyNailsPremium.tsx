@@ -225,6 +225,7 @@ export interface PremiumNavProps {
   className?: string;
   assetBase?: string;
   label?: string;
+  shine?: 'edge' | 'surface';
 }
 
 export function PremiumNav({
@@ -233,6 +234,7 @@ export function PremiumNav({
   className,
   assetBase = DEFAULT_ASSET_BASE,
   label = 'Üst navigasyon',
+  shine,
 }: PremiumNavProps) {
   const ref = useMotionPause<HTMLElement>(true);
 
@@ -243,6 +245,9 @@ export function PremiumNav({
       aria-label={label}
       data-bnx-motion=""
       data-bnx-paused="true"
+      data-sazi-shine={shine}
+      data-sazi-priority={shine ? '9' : undefined}
+      style={shine ? ({ '--sazi-fx-delay': '0.35s' } as CSSProperties) : undefined}
     >
       {items.map((item) => {
         const active = currentHref !== undefined && item.href === currentHref;
@@ -302,7 +307,7 @@ export function PremiumAppointment({
       <span className="bnx-appointment__label">{children}</span>
       <span className="bnx-appointment__orb" aria-hidden="true">
         <svg
-          className="bnx-appointment__arrow"
+          className="bnx-appointment__arrow sazi-fx-arrow"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"

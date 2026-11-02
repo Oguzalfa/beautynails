@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { initSaziMotion } from './motion/sazi-motion.js'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Services } from './components/Services'
@@ -9,6 +10,7 @@ import { BookingPanel } from './components/BookingPanel'
 import { AtelierMobile } from './components/atelier/AtelierMobile'
 
 export default function App() {
+  const pageRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [bookingOpen, setBookingOpen] = useState(false)
   const [serviceId, setServiceId] = useState<string | null>(null)
@@ -18,8 +20,15 @@ export default function App() {
     setMenuOpen(false)
   }, [])
 
+  useEffect(() => {
+    const root = pageRef.current
+    if (!root) return
+    const motion = initSaziMotion(root)
+    return () => motion.destroy()
+  }, [])
+
   return (
-    <div className="bn-page" id="top">
+    <div className="bn-page" id="top" data-sazi-motion="" ref={pageRef}>
       <Header
         menuOpen={menuOpen}
         onToggleMenu={() => setMenuOpen((open) => !open)}

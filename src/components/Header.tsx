@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
 import { navLinks } from '../config/site'
 import { PremiumAppointment, PremiumNav } from './premium/BeautyNailsPremium'
 import { Wordmark } from './Wordmark'
@@ -95,11 +95,15 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
       <a className="bn-logo" href="#top" onClick={onCloseMenu}>
         <Wordmark />
       </a>
-      <PremiumNav items={navLinks} currentHref={current ?? undefined} label="Ana menü" />
+      <PremiumNav items={navLinks} currentHref={current ?? undefined} label="Ana menü" shine="edge" />
       <PremiumAppointment
         href="#iletisim"
         compact
         className="bn-header__cta"
+        data-sazi-cta=""
+        data-sazi-shine="edge"
+        data-sazi-priority="8"
+        style={{ '--sazi-fx-delay': '0.7s' } as CSSProperties}
         onClick={(event) => {
           event.preventDefault()
           onOpenBooking()
@@ -111,6 +115,9 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
         ref={toggleRef}
         type="button"
         className="bn-menu-toggle"
+        data-sazi-shine="edge"
+        data-sazi-priority="1"
+        style={{ '--sazi-fx-delay': '2.4s' } as CSSProperties}
         aria-expanded={menuOpen}
         aria-controls={menuId}
         onClick={onToggleMenu}
@@ -130,6 +137,10 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
         <PremiumNav items={navLinks} currentHref={current ?? undefined} label="Mobil menü" />
         <PremiumAppointment
           href="#iletisim"
+          data-sazi-cta=""
+          data-sazi-shine="edge"
+          data-sazi-priority="5"
+          style={{ '--sazi-fx-delay': '1.9s' } as CSSProperties}
           onClick={(event) => {
             event.preventDefault()
             onCloseMenu()

@@ -1,0 +1,151 @@
+/* Sazi Beauty motion V5. Opt-in only; preserves layout and typography. */
+:where([data-sazi-motion]) {
+  --sazi-fx-ease: cubic-bezier(.22,1,.36,1);
+  --sazi-fx-drift-x: 3px;
+  --sazi-fx-drift-y: 3px;
+  --sazi-fx-drift-time: 9s;
+  --sazi-fx-shine-time: 6.8s;
+  --sazi-fx-glint-time: 7.4s;
+  --sazi-fx-reveal-distance: 12px;
+  --sazi-fx-reveal-time: 480ms;
+}
+:where([data-sazi-motion]) :where([data-sazi-shine]) {
+  position: relative;
+  isolation: isolate;
+}
+:where([data-sazi-motion]) .sazi-fx-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+:where([data-sazi-motion]) .sazi-fx-shine-band {
+  position: absolute;
+  left: -70%;
+  top: -60%;
+  width: 48%;
+  height: 220%;
+  background: linear-gradient(90deg,transparent 0%,rgba(255,209,232,.02) 25%,rgba(255,255,255,.38) 48%,rgba(255,201,226,.13) 58%,transparent 85%);
+  opacity: 0;
+  transform: translate3d(-60%,0,0) skewX(-19deg);
+  animation: sazi-fx-shine var(--sazi-fx-shine-time) var(--sazi-fx-delay,0s) linear infinite;
+  animation-play-state: paused;
+}
+/* Edge mode keeps the light out of the text area. */
+:where([data-sazi-motion]) [data-sazi-shine="edge"] > .sazi-fx-clip {
+  padding: 1.5px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+@supports not (mask-composite: exclude) {
+  :where([data-sazi-motion]) [data-sazi-shine="edge"] > .sazi-fx-clip {
+    height: 2px;
+    bottom: auto;
+    padding: 0;
+    -webkit-mask: none;
+    mask: none;
+  }
+}
+:where([data-sazi-motion]) [data-sazi-drift] {
+  animation: sazi-fx-drift var(--sazi-fx-drift-time) var(--sazi-fx-delay,0s) ease-in-out infinite;
+  animation-play-state: paused;
+}
+/* Apply to a decorative span inside an existing positioned art container. */
+:where([data-sazi-motion]) [data-sazi-glint] {
+  position: absolute;
+  width: var(--sazi-fx-glint-size,14px);
+  height: var(--sazi-fx-glint-size,14px);
+  left: var(--sazi-fx-glint-x,50%);
+  top: var(--sazi-fx-glint-y,50%);
+  pointer-events: none;
+  user-select: none;
+  background: linear-gradient(135deg,#fff 8%,#ffe8f1 42%,#ff74ae 78%,#fff);
+  clip-path: polygon(50% 0,60% 37%,100% 50%,60% 61%,50% 100%,39% 61%,0 50%,39% 38%);
+  opacity: 0;
+  transform: translate(-50%,-50%) scale(.45) rotate(0deg);
+  animation: sazi-fx-glint var(--sazi-fx-glint-time) var(--sazi-fx-delay,0s) ease-in-out infinite;
+  animation-play-state: paused;
+}
+:where([data-sazi-motion]) [data-sazi-reveal] {
+  opacity: 1;
+  transition: opacity var(--sazi-fx-reveal-time) var(--sazi-fx-ease),transform var(--sazi-fx-reveal-time) var(--sazi-fx-ease);
+}
+:where([data-sazi-motion][data-sazi-fx-state="running"]) [data-sazi-reveal][data-sazi-fx-pending] {
+  opacity: 0;
+  transform: translate3d(0,var(--sazi-fx-reveal-distance),0);
+}
+:where([data-sazi-motion][data-sazi-fx-state="running"]) [data-sazi-fx-active="yes"][data-sazi-drift],
+:where([data-sazi-motion][data-sazi-fx-state="running"]) [data-sazi-fx-active="yes"][data-sazi-glint],
+:where([data-sazi-motion][data-sazi-fx-state="running"]) [data-sazi-fx-active="yes"] > .sazi-fx-clip > .sazi-fx-shine-band {
+  animation-play-state: running;
+}
+:where([data-sazi-motion][data-sazi-fx-state="running"]) [data-sazi-fx-active="yes"][data-sazi-drift],
+:where([data-sazi-motion][data-sazi-fx-state="running"]) [data-sazi-fx-active="yes"] > .sazi-fx-clip > .sazi-fx-shine-band {
+  will-change: transform,opacity;
+}
+:where([data-sazi-motion]) [data-sazi-cta] { touch-action: manipulation; }
+:where([data-sazi-motion]) [data-sazi-cta] .sazi-fx-arrow {
+  display: inline-block;
+  transition: transform 160ms var(--sazi-fx-ease);
+}
+:where([data-sazi-motion]) [data-sazi-photo-zoom] { overflow: hidden; }
+:where([data-sazi-motion]) [data-sazi-photo-zoom] > img {
+  transition: transform 300ms var(--sazi-fx-ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  :where([data-sazi-motion][data-sazi-fx-state="running"]) [data-sazi-cta]:hover .sazi-fx-arrow { transform: translateX(3px); }
+  :where([data-sazi-motion][data-sazi-fx-state="running"]) [data-sazi-photo-zoom]:hover > img { transform: scale(1.015); }
+}
+:where([data-sazi-motion][data-sazi-fx-state="running"]) [data-sazi-cta]:focus-visible .sazi-fx-arrow { transform: translateX(3px); }
+/* No scale on the button itself: its existing press/focus behavior is preserved. */
+@media (max-width: 767px) {
+  :where([data-sazi-motion]) {
+    --sazi-fx-drift-x: 1.5px;
+    --sazi-fx-drift-y: 2px;
+    --sazi-fx-drift-time: 10s;
+    --sazi-fx-shine-time: 8.4s;
+    --sazi-fx-glint-time: 9.6s;
+    --sazi-fx-reveal-distance: 8px;
+    --sazi-fx-reveal-time: 420ms;
+  }
+}
+:where([data-sazi-motion][data-sazi-fx-state="reduced"]) [data-sazi-drift],
+:where([data-sazi-motion][data-sazi-fx-state="reduced"]) [data-sazi-glint],
+:where([data-sazi-motion][data-sazi-fx-state="reduced"]) .sazi-fx-shine-band {
+  animation: none;
+}
+:where([data-sazi-motion][data-sazi-fx-state="reduced"]) [data-sazi-drift] { transform: none; }
+:where([data-sazi-motion][data-sazi-fx-state="reduced"]) [data-sazi-glint],
+:where([data-sazi-motion][data-sazi-fx-state="reduced"]) .sazi-fx-shine-band { opacity: 0; }
+:where([data-sazi-motion][data-sazi-fx-state="reduced"]) [data-sazi-reveal] { opacity: 1;transform: none;transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  :where([data-sazi-motion]) [data-sazi-drift],
+  :where([data-sazi-motion]) [data-sazi-glint],
+  :where([data-sazi-motion]) .sazi-fx-shine-band { animation: none; }
+  :where([data-sazi-motion]) [data-sazi-drift] { transform: none; }
+  :where([data-sazi-motion]) [data-sazi-glint],
+  :where([data-sazi-motion]) .sazi-fx-shine-band { opacity: 0; }
+  :where([data-sazi-motion]) [data-sazi-reveal] { opacity: 1!important;transform: none!important;transition: none; }
+  :where([data-sazi-motion]) .sazi-fx-arrow,
+  :where([data-sazi-motion]) [data-sazi-photo-zoom] > img { transform: none!important;transition: none; }
+}
+@keyframes sazi-fx-drift {
+  0%,100% { transform: translate3d(0,0,0); }
+  50% { transform: translate3d(var(--sazi-fx-drift-x),calc(-1 * var(--sazi-fx-drift-y)),0); }
+}
+@keyframes sazi-fx-shine {
+  0%,7% { opacity: 0;transform: translate3d(-60%,0,0) skewX(-19deg); }
+  10% { opacity: .85; }
+  25% { opacity: .85;transform: translate3d(460%,0,0) skewX(-19deg); }
+  28%,100% { opacity: 0;transform: translate3d(460%,0,0) skewX(-19deg); }
+}
+@keyframes sazi-fx-glint {
+  0%,5%,24%,100% { opacity: 0;transform: translate(-50%,-50%) scale(.45) rotate(0deg); }
+  12% { opacity: .95;transform: translate(-50%,-50%) scale(1) rotate(12deg); }
+  17% { opacity: .42;transform: translate(-50%,-50%) scale(.75) rotate(20deg); }
+}

@@ -6,6 +6,7 @@ import { Booking } from './components/Booking'
 import { Footer } from './components/Footer'
 import { ServiceDetail } from './components/ServiceDetail'
 import { BookingPanel } from './components/BookingPanel'
+import { AtelierMobile } from './components/atelier/AtelierMobile'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -29,6 +30,7 @@ export default function App() {
         <Hero onOpenBooking={openBooking} />
         <Services onOpenService={setServiceId} />
         <Booking onOpenBooking={openBooking} />
+        <AtelierMobile onOpenBooking={openBooking} onOpenService={setServiceId} />
       </main>
       <Footer />
       <ServiceDetail serviceId={serviceId} onClose={() => setServiceId(null)} />

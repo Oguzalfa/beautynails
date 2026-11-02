@@ -25,11 +25,14 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
       { id: 'calismalarimiz', href: '#calismalarimiz' },
       { id: 'iletisim', href: '#iletisim' },
     ]
-    const nodes = marks.flatMap((mark) => {
-      const el = document.getElementById(mark.id)
-      return el ? [{ el, href: mark.href }] : []
-    })
     const pick = () => {
+      const mobile = window.matchMedia('(max-width: 767px)').matches
+      const nodes = marks.flatMap((mark) => {
+        const el = mobile
+          ? document.querySelector(`[data-at-anchor="${mark.id}"]`)
+          : document.getElementById(mark.id)
+        return el ? [{ el, href: mark.href }] : []
+      })
       const bar = document.querySelector('.bn-header')?.getBoundingClientRect().height ?? 72
       const line = bar + 24
       let href = '#deneyim'
@@ -81,7 +84,17 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
       onClick={(event) => {
         const link = event.target instanceof Element ? event.target.closest('.bnx-nav__link') : null
         const href = link?.getAttribute('href')
-        if (href?.startsWith('#')) setCurrent(href)
+        if (href?.startsWith('#')) {
+          setCurrent(href)
+          if (window.matchMedia('(max-width: 767px)').matches) {
+            const target = document.querySelector(`[data-at-anchor="${href.slice(1)}"]`)
+            if (target instanceof HTMLElement) {
+              event.preventDefault()
+              const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+              target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+            }
+          }
+        }
       }}
     >
       <a className="bn-logo" href="#top" onClick={onCloseMenu}>

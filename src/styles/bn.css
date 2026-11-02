@@ -1138,40 +1138,39 @@ body {
   }
 }
 
-@media (max-width: 899px) and (min-width: 768px) {
-  .bn-nav {
-    gap: 0;
-    font-size: 13px;
+@media (max-width: 899px) {
+  .bn-header {
+    position: sticky;
+    top: 0;
+    gap: 12px;
+    background: var(--bn-fuchsia-base);
   }
 
-  .bn-nav a {
-    padding-inline: 8px;
+  .bn-menu {
+    top: 68px;
   }
 
-  .bn-header__cta {
-    font-size: 14px;
+  .bn-menu .bnx-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    width: 100%;
+    padding: 6px;
+    border-radius: 18px;
   }
 
-  .bn-hero {
-    aspect-ratio: auto;
-    min-height: 760px;
+  .bn-menu .bnx-nav__link {
+    width: 100%;
+    justify-content: flex-start;
+    min-height: 48px;
+    padding: 0 16px 0 40px;
+    border-radius: 14px;
+    font-size: 16px;
   }
 
-  .bn-hero__title {
-    font-size: 78px;
-  }
-
-  .bn-service__lead {
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: start;
-  }
-
-  .bn-service__features {
-    grid-column: 1 / -1;
-    margin: 8px 0 0;
-    padding: 12px 0 0;
-    border-left: 0;
-    border-top: 1px solid var(--bn-line);
+  .bn-menu .bnx-appointment {
+    width: 100%;
   }
 }
 
@@ -1187,7 +1186,7 @@ body {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 899px) {
   .bn-page {
     --bn-gutter: 20px;
   }
@@ -1209,8 +1208,10 @@ body {
     position: relative;
     inset: auto;
     z-index: 0;
-    height: auto;
-    aspect-ratio: 390 / 320;
+    width: 100%;
+    height: min(82vw, 440px);
+    aspect-ratio: auto;
+    object-fit: cover;
     object-position: 78% 38%;
   }
 
@@ -1218,7 +1219,19 @@ body {
     position: relative;
     inset: auto;
     max-width: none;
-    padding: 8px var(--bn-gutter) 0;
+    padding: 20px var(--bn-gutter) 0;
+  }
+
+  .bn-hero__copy > .bnx-features {
+    margin-top: 22px;
+  }
+
+  .bn-hero__copy .bnx-appointment,
+  .bn-appointment__copy .bnx-appointment,
+  .bn-service__content .bn-button {
+    width: 100%;
+    max-width: none;
+    justify-content: center;
   }
 
   .bn-hero__title {
@@ -1385,10 +1398,13 @@ body {
   }
 
   .bn-footer__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 12px 18px;
-    padding-top: 0;
+    justify-items: start;
+    width: 100%;
+    gap: 0 12px;
+    padding-top: 4px;
     font-size: 15px;
   }
 

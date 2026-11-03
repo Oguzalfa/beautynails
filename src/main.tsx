@@ -7,6 +7,7 @@ import './styles/atelier-mobile.css'
 import './styles/atelier-desktop.css'
 import './motion/sazi-motion.css'
 import './styles/sazi-motion-bind.css'
+import './styles/satin-home.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

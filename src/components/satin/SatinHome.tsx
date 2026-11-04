@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useId, useRef, useState, type RefObject } from 'react'
 import { siteConfig } from '../../config/site'
 import { ArrowIcon, CloseIcon, InstagramIcon, MenuIcon, WhatsAppIcon } from './icons'
+import { JournalSection } from './JournalSection'
+import { journalImages, libraryGallery } from './collection'
 
 type Props = {
   onOpenBooking: (service?: string) => void
@@ -64,6 +66,7 @@ const gallery = [
     srcSet: '/images/satin/gallery-french-480.webp 480w, /images/satin/gallery-french-960.webp 960w',
     sizes: '(min-width: 1024px) 620px, (min-width: 600px) 46vw, 46vw',
   },
+  ...libraryGallery,
 ] as const
 
 type GalleryShot = (typeof gallery)[number]
@@ -223,6 +226,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             <nav className="desktop-nav" aria-label="Sayfa bölümleri">
               <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}>Hizmetler</a>
               <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>Galeri</a>
+              <a href="#yazilar" onClick={(event) => { event.preventDefault(); go('yazilar') }}>Yazılar</a>
               <button className="nav-book" type="button" onClick={book}>Randevu Al</button>
             </nav>
             <button
@@ -343,6 +347,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             </div>
           </div>
         </section>
+        <JournalSection images={journalImages} />
       </div>
 
       <section className="mens-care" id="erkek-bakim" tabIndex={-1} aria-labelledby="erkek-baslik">
@@ -386,6 +391,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             <nav aria-label="Alt bölümler">
               <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}>Hizmetler</a>
               <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>Galeri</a>
+              <a href="#yazilar" onClick={(event) => { event.preventDefault(); go('yazilar') }}>Yazılar</a>
               <button className="nav-book" type="button" onClick={book}>Randevu Al</button>
             </nav>
           </div>
@@ -437,6 +443,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
           <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}><span>01</span>Hizmetler</a>
           <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}><span>02</span>Galeri</a>
           <a href="#erkek-bakim" onClick={(event) => { event.preventDefault(); go('erkek-bakim') }}><span>03</span>Erkek bakım</a>
+          <a href="#yazilar" onClick={(event) => { event.preventDefault(); go('yazilar') }}><span>04</span>Yazılar</a>
         </nav>
         <button className="pill-book" type="button" onClick={book}>
           <span>Randevu Al</span>

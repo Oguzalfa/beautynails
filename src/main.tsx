@@ -8,6 +8,7 @@ import './styles/atelier-desktop.css'
 import './motion/sazi-motion.css'
 import './styles/sazi-motion-bind.css'
 import './styles/satin-home.css'
+import './styles/satin-journal.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

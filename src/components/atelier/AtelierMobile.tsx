@@ -1,53 +1,14 @@
-import { useEffect, useId, useRef, useState, type MouseEvent } from 'react'
+import { useEffect, useId, useRef, type MouseEvent } from 'react'
 import { siteConfig } from '../../config/site'
 import { PremiumIcon, type PremiumIconName } from '../premium/BeautyNailsPremium'
 import { Wordmark } from '../Wordmark'
+import { BeautyGallery } from '../editorial/BeautyGallery'
+import { BeautyJournal } from '../editorial/BeautyJournal'
 
 type Props = {
   onOpenBooking: () => void
   onOpenService: (id: string) => void
 }
-
-type Shot = {
-  src: string
-  alt: string
-  label: string
-  width: number
-  height: number
-  position?: string
-}
-
-const shots: Shot[] = [
-  {
-    src: '/images/fx/nails-macro.webp',
-    alt: 'Stüdyo tırnak fotoğrafı',
-    label: 'Tırnak',
-    width: 900,
-    height: 620,
-  },
-  {
-    src: '/images/fx/lashes-macro.webp',
-    alt: 'Stüdyo kirpik fotoğrafı',
-    label: 'Kirpik',
-    width: 900,
-    height: 520,
-  },
-  {
-    src: '/images/fx/lips-macro.webp',
-    alt: 'Stüdyo makyaj fotoğrafı',
-    label: 'Makyaj',
-    width: 900,
-    height: 450,
-  },
-  {
-    src: '/images/service-kas.webp',
-    alt: 'Stüdyo kaş bakımı fotoğrafı',
-    label: 'Bakım',
-    width: 800,
-    height: 700,
-    position: '50% 22%',
-  },
-]
 
 function Arrow() {
   return (
@@ -104,12 +65,7 @@ function Pair({
 
 export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
   const rootRef = useRef<HTMLDivElement>(null)
-  const dialogRef = useRef<HTMLDivElement>(null)
-  const closeRef = useRef<HTMLButtonElement>(null)
-  const openerRef = useRef<HTMLElement | null>(null)
   const titleId = useId()
-  const [shot, setShot] = useState<number | null>(null)
-  const dialogOpen = shot !== null
   const phoneHref = `tel:+${siteConfig.whatsappNumber}`
   const whatsappHref = `https://wa.me/${siteConfig.whatsappNumber}`
 
@@ -194,42 +150,6 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
     }
   }, [])
 
-  useEffect(() => {
-    if (!dialogOpen) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    closeRef.current?.focus()
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault()
-        setShot(null)
-      }
-      if (event.key === 'Tab') {
-        const items = dialogRef.current?.querySelectorAll<HTMLButtonElement>('button')
-        const first = items?.[0]
-        const last = items?.[items.length - 1]
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault()
-          last?.focus()
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault()
-          first?.focus()
-        }
-      }
-    }
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = prev
-      document.removeEventListener('keydown', onKey)
-      openerRef.current?.focus()
-    }
-  }, [dialogOpen])
-
-  const openShot = (index: number, opener: HTMLElement) => {
-    openerRef.current = opener
-    setShot(index)
-  }
-
   const go = (id: string) => (event: MouseEvent<HTMLAnchorElement>) => {
     const target = document.querySelector(`[data-at-anchor="${id}"]`)
     if (!(target instanceof HTMLElement)) return
@@ -238,7 +158,6 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
     target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
   }
 
-  const current = shot === null ? null : shots[shot]
 
   return (
     <div className="sazi-mobile-v3" ref={rootRef}>
@@ -398,44 +317,8 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
         <Cta onClick={() => onOpenService('kalici-makyaj')}>Makyajı Keşfet</Cta>
       </section>
 
-      <section className="bn-at-gallery bn-at-reveal" data-at-anchor="calismalarimiz" tabIndex={-1} aria-labelledby="at-gallery-title">
-        <span className="bn-at-ribbon bn-at-ribbon--gallery" aria-hidden="true" />
-        <p className="bn-at-kicker-label">ÇALIŞMALARIMIZ</p>
-        <h2 id="at-gallery-title" className="bn-at-name bn-at-name--gallery">
-          <span>İmzamız,</span>
-          <em>detaylarda.</em>
-        </h2>
-        <ul className="bn-at-grid">
-          {shots.map((item, index) => (
-            <li key={item.label}>
-              <button
-                type="button"
-                className="bn-at-tile"
-                onClick={(event) => openShot(index, event.currentTarget)}
-              >
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  width={item.width}
-                  height={item.height}
-                  loading="lazy"
-                  decoding="async"
-                  style={item.position ? { objectPosition: item.position } : undefined}
-                />
-                <span>{item.label}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button
-          type="button"
-          className="bn-at-more"
-          onClick={(event) => openShot(0, event.currentTarget)}
-        >
-          Tüm Çalışmalar
-          <Arrow />
-        </button>
-      </section>
+      <BeautyGallery variant="mobile" />
+      <BeautyJournal variant="mobile" />
 
       <section className="bn-at-book bn-at-reveal" data-at-anchor="iletisim" tabIndex={-1} aria-labelledby="at-book-title">
         <img
@@ -475,6 +358,7 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
           <a href="#iletisim" onClick={go('iletisim')}>
             İletişim
           </a>
+          <a href="#makaleler" onClick={go('makaleler')}>Makaleler</a>
           <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">
             Instagram
           </a>
@@ -482,41 +366,7 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
         <p>© {siteConfig.brand}</p>
       </footer>
 
-      {current ? (
-        <div
-          className="bn-at-dialog"
-          role="presentation"
-          onClick={() => setShot(null)}
-        >
-          <div
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label={current.label}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button ref={closeRef} type="button" onClick={() => setShot(null)}>
-              Kapat
-            </button>
-            <img src={current.src} alt={current.alt} width={current.width} height={current.height} />
-            <p>{current.label}</p>
-            <div className="bn-at-dialog-nav">
-              <button
-                type="button"
-                onClick={() => setShot((value) => (value === null ? 0 : (value + shots.length - 1) % shots.length))}
-              >
-                Önceki
-              </button>
-              <button
-                type="button"
-                onClick={() => setShot((value) => (value === null ? 0 : (value + 1) % shots.length))}
-              >
-                Sonraki
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
+
     </div>
   )
 }

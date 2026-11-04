@@ -13,7 +13,7 @@ const dist = resolve('dist')
 const server = createServer(async (req, res) => {
   try {
     const path = decodeURIComponent(new URL(req.url, 'http://localhost').pathname)
-    const file = resolve(dist, '.' + (path === '/' ? '/index.html' : path))
+    const file = resolve(dist, '.' + (path.endsWith('/') ? path+'index.html' : path))
     if (!file.startsWith(dist + '/') && !file.startsWith(dist + '\\')) throw new Error('Invalid path')
     const data = await readFile(file)
     res.writeHead(200, { 'Content-Type':types[extname(file)] || 'application/octet-stream' })
@@ -48,7 +48,7 @@ try {
     const metrics = await page.evaluate(() => {
       const box = el => { const r=el.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,bottom:r.bottom} }
       const q = s => { const e=document.querySelector(s);return e?box(e):null }
-      const selectors = '.bn-at-title,.bn-at-name,.bn-at-lash-title,.bn-at-book-title,.bn-at-cta,.bn-at-pair li,.bn-at-trust li,.bn-header .bn-wordmark'
+      const selectors = '.bn-at-title,.bn-at-name,.bn-at-lash-title,.bn-at-book-title,.bn-at-cta,.bn-at-pair li,.bn-at-trust li,.bn-header .bn-wordmark,.sz-gallery-toolbar,.sz-shot-caption,.sz-article-card-copy'
       return { width:innerWidth,scroll:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight,
         header:q('.bn-header'),hero:q('.bn-at-hero'),title:q('.bn-at-title'),portrait:q('.bn-at-portrait'),copy:q('.bn-at-hero-foot p'),cta:q('.bn-at-hero-foot .bn-at-cta'),
         trust:[...document.querySelectorAll('.bn-at-trust li')].map(box),
@@ -94,11 +94,11 @@ try {
         const draft = await page.evaluate(() => window.__qaDraft)
         assert.ok(/^https:\/\/wa\.me\/905011281808\?text=/.test(draft),'WhatsApp draft target')
         await page.locator('.bn-modal__close').click()
-        await page.locator('.bn-at-tile').first().click()
-        await page.locator('.bn-at-dialog [role="dialog"]').waitFor()
+        await page.locator('.sazi-mobile-v3 .sz-shot').first().click()
+        await page.locator('.sz-lightbox[open]').waitFor()
         await page.getByRole('button',{name:'Sonraki',exact:true}).click()
         await page.keyboard.press('Escape')
-        assert.equal(await page.locator('.bn-at-dialog').count(),0,'Gallery closes')
+        assert.equal(await page.locator('.sz-lightbox[open]').count(),0,'Gallery closes')
         await page.goto(base+'/#hizmetler')
         await page.evaluate(() => document.fonts.ready)
         await page.waitForTimeout(100)

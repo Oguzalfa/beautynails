@@ -7,6 +7,8 @@ import { Footer } from './components/Footer'
 import { ServiceDetail } from './components/ServiceDetail'
 import { BookingPanel } from './components/BookingPanel'
 import { AtelierMobile } from './components/atelier/AtelierMobile'
+import { BeautyGallery } from './components/editorial/BeautyGallery'
+import { BeautyJournal } from './components/editorial/BeautyJournal'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -29,6 +31,8 @@ export default function App() {
       <main>
         <Hero onOpenBooking={openBooking} />
         <Services onOpenService={setServiceId} />
+        <BeautyGallery variant="desktop" />
+        <BeautyJournal variant="desktop" />
         <Booking onOpenBooking={openBooking} />
         <AtelierMobile onOpenBooking={openBooking} onOpenService={setServiceId} />
       </main>

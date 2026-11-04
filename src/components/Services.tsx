@@ -61,7 +61,6 @@ export function Services({ onOpenService }: Props) {
           id={band.id}
           className={`bn-service${band.flip ? ' bn-service--flip' : ''}${band.fuchsia ? ' bn-service--fuchsia' : ''}${band.id === 'tirnak-sanati' ? ' bn-service--nails' : ''}${band.id === 'kalici-makyaj' ? ' bn-service--makeup' : ''}`}
         >
-          {band.id === 'ipek-kirpik' ? <span id="calismalarimiz" className="bn-anchor" /> : null}
           <img
             className="bn-service__photo"
             src={band.image}

@@ -1,0 +1,176 @@
+[
+  {
+    "key": "fuchsia-french",
+    "filename": "Fuşya French uçlu zarif el.png",
+    "library_file_id": "libfile_98b863182240819187793811d667d6f8",
+    "source_sha256": "654e235d5bd2cf9283c1b0509ae1ab0c1b0847e6d2f9e8c87ea2273e316deac2",
+    "width": 1513,
+    "height": 1039,
+    "generated": true,
+    "variants": [
+      {
+        "file": "fuchsia-french-480.webp",
+        "width": 480,
+        "height": 330,
+        "bytes": 23984
+      },
+      {
+        "file": "fuchsia-french-768.webp",
+        "width": 768,
+        "height": 527,
+        "bytes": 59158
+      },
+      {
+        "file": "fuchsia-french-1200.webp",
+        "width": 1200,
+        "height": 824,
+        "bytes": 125642
+      }
+    ]
+  },
+  {
+    "key": "crystal-french",
+    "filename": "Kristaller Üzerinde Zarif Fransız Manikürü.png",
+    "library_file_id": "libfile_64942ca10d4c81919a521e94acc196c2",
+    "source_sha256": "3a356774965c7ca933bf5a450ff1bf90063eb25b9c4689d74f6461f33d31a283",
+    "width": 1706,
+    "height": 922,
+    "generated": true,
+    "variants": [
+      {
+        "file": "crystal-french-480.webp",
+        "width": 480,
+        "height": 259,
+        "bytes": 31672
+      },
+      {
+        "file": "crystal-french-768.webp",
+        "width": 768,
+        "height": 415,
+        "bytes": 62044
+      },
+      {
+        "file": "crystal-french-1200.webp",
+        "width": 1200,
+        "height": 649,
+        "bytes": 113302
+      }
+    ]
+  },
+  {
+    "key": "crystal-eye",
+    "filename": "Kahverengi gözler ve pembe kristal.png",
+    "library_file_id": "libfile_73aaa99266c88191bf55bb9246012367",
+    "source_sha256": "8fe3132e5739ab8575cae8a3b3f358c38200d7910bd85e53e82a17b69cf271f4",
+    "width": 1705,
+    "height": 922,
+    "generated": true,
+    "variants": [
+      {
+        "file": "crystal-eye-480.webp",
+        "width": 480,
+        "height": 260,
+        "bytes": 31574
+      },
+      {
+        "file": "crystal-eye-768.webp",
+        "width": 768,
+        "height": 415,
+        "bytes": 73492
+      },
+      {
+        "file": "crystal-eye-1200.webp",
+        "width": 1200,
+        "height": 649,
+        "bytes": 151660
+      }
+    ]
+  },
+  {
+    "key": "rose-lips",
+    "filename": "Doğal parlak gül pembesi dudaklar.png",
+    "library_file_id": "libfile_c4aa4657580c81918f40536cd9b73002",
+    "source_sha256": "9306cd432b1c8af2861cdca9ac3f040c35e9551b4dcf186f37d4ffffcd50099e",
+    "width": 1122,
+    "height": 1402,
+    "generated": true,
+    "variants": [
+      {
+        "file": "rose-lips-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 28224
+      },
+      {
+        "file": "rose-lips-768.webp",
+        "width": 768,
+        "height": 960,
+        "bytes": 73662
+      },
+      {
+        "file": "rose-lips-1200.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 137144
+      }
+    ]
+  },
+  {
+    "key": "rose-gloss",
+    "filename": "Gül pembesi rujla doğal zarafet.png",
+    "library_file_id": "libfile_911ef143c4988191b8609560377e4d82",
+    "source_sha256": "d9b424f80672c1d4d76bb26a550327cf2cea4b558585e2fbcafb73e772b9661f",
+    "width": 1718,
+    "height": 916,
+    "generated": true,
+    "variants": [
+      {
+        "file": "rose-gloss-480.webp",
+        "width": 480,
+        "height": 256,
+        "bytes": 27678
+      },
+      {
+        "file": "rose-gloss-768.webp",
+        "width": 768,
+        "height": 409,
+        "bytes": 64400
+      },
+      {
+        "file": "rose-gloss-1200.webp",
+        "width": 1200,
+        "height": 640,
+        "bytes": 132752
+      }
+    ]
+  },
+  {
+    "key": "satin-nails",
+    "filename": "Fuşya saten üzerinde zarif tırnak sanatı.png",
+    "library_file_id": "libfile_010d7940bbe08191aeb5005687234d9f",
+    "source_sha256": "0e49088e18c9e4d25753d124ddd5e727d0a9c0cc76e0daa7e79972c365983d72",
+    "width": 1122,
+    "height": 1402,
+    "generated": true,
+    "variants": [
+      {
+        "file": "satin-nails-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 42616
+      },
+      {
+        "file": "satin-nails-768.webp",
+        "width": 768,
+        "height": 960,
+        "bytes": 110266
+      },
+      {
+        "file": "satin-nails-1200.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 202654
+      }
+    ]
+  }
+]

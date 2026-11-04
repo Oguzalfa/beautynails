@@ -1,36 +1,31 @@
-import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent, type RefObject } from 'react'
 import { siteConfig } from '../config/site'
+import { useDialog } from '../hooks/useDialog'
 
 type Props = {
   open: boolean
   onClose: () => void
+  returnFocusRef?: RefObject<HTMLElement | null>
 }
 
 const serviceOptions = ['Tırnak Sanatı', 'İpek Kirpik', 'Kalıcı Makyaj', 'Kaş & Yüz'] as const
 
 type Errors = Partial<Record<'name' | 'phone' | 'service', string>>
 
-export function BookingPanel({ open, onClose }: Props) {
+export function BookingPanel({ open, onClose, returnFocusRef }: Props) {
   const titleId = useId()
   const firstRef = useRef<HTMLInputElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const successRef = useRef<HTMLDivElement>(null)
   const [errors, setErrors] = useState<Errors>({})
-  const [status, setStatus] = useState<'idle' | 'opened' | 'blocked'>('idle')
+  const [status, setStatus] = useState<'idle' | 'ready'>('idle')
   const [draftUrl, setDraftUrl] = useState<string | null>(null)
 
+  useDialog(open, panelRef, firstRef, onClose, returnFocusRef)
+
   useEffect(() => {
-    if (!open) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    firstRef.current?.focus()
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = prev
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [open, onClose])
+    if (status === 'ready') successRef.current?.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true })
+  }, [status])
 
   useEffect(() => {
     if (open) return
@@ -75,15 +70,17 @@ export function BookingPanel({ open, onClose }: Props) {
     if (time) lines.push(`Saat: ${time}`)
     if (note) lines.push(`Not: ${note}`)
     const url = `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(lines.join('\n'))}`
-    const opened = window.open(url, '_blank', 'noopener')
     setDraftUrl(url)
-    setStatus(opened ? 'opened' : 'blocked')
+    setStatus('ready')
+    window.open(url, '_blank', 'noopener')
   }
 
   return (
     <div className="bn-modal" role="presentation" onClick={onClose}>
       <div
+        ref={panelRef}
         className="bn-modal__panel bn-modal__panel--form"
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -100,11 +97,9 @@ export function BookingPanel({ open, onClose }: Props) {
         </p>
 
         {status !== 'idle' ? (
-          <div className="bn-form-success" role="status">
+          <div ref={successRef} className="bn-form-success" role="status">
             <p>
-              {status === 'opened'
-                ? 'WhatsApp taslağı açıldı. Mesaj gönderilmeden randevu iletilmez.'
-                : 'Tarayıcı yeni pencereyi engelledi. Aşağıdaki düğme aynı WhatsApp taslağını açar.'}
+              WhatsApp taslağınız hazır. Açılmadıysa aşağıdaki düğmeyi kullanın. Mesajı göndererek randevu talebinizi iletebilirsiniz.
             </p>
             {draftUrl ? (
               <a className="bn-button bn-button--solid" href={draftUrl} target="_blank" rel="noreferrer">
@@ -127,21 +122,22 @@ export function BookingPanel({ open, onClose }: Props) {
                     type="checkbox"
                     value={option}
                     aria-invalid={!!errors.service}
+                    aria-describedby={errors.service ? `${titleId}-service-error` : undefined}
                   />
                   {option}
                 </label>
               ))}
-              {errors.service ? <span className="bn-field-error">{errors.service}</span> : null}
+              {errors.service ? <span id={`${titleId}-service-error`} className="bn-field-error">{errors.service}</span> : null}
             </fieldset>
             <label>
               Ad Soyad
-              <input name="name" autoComplete="name" aria-invalid={!!errors.name} />
-              {errors.name ? <span className="bn-field-error">{errors.name}</span> : null}
+              <input name="name" autoComplete="name" aria-invalid={!!errors.name} aria-describedby={errors.name ? `${titleId}-name-error` : undefined} />
+              {errors.name ? <span id={`${titleId}-name-error`} className="bn-field-error">{errors.name}</span> : null}
             </label>
             <label>
               Telefon
-              <input name="phone" type="tel" autoComplete="tel" aria-invalid={!!errors.phone} />
-              {errors.phone ? <span className="bn-field-error">{errors.phone}</span> : null}
+              <input name="phone" type="tel" autoComplete="tel" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? `${titleId}-phone-error` : undefined} />
+              {errors.phone ? <span id={`${titleId}-phone-error`} className="bn-field-error">{errors.phone}</span> : null}
             </label>
             <label>
               Saat

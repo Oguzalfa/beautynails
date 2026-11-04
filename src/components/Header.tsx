@@ -47,10 +47,18 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
       setAway(window.scrollY > 24)
     }
     pick()
+    const header = document.querySelector<HTMLElement>('.bn-header')
+    const observer = new ResizeObserver(() => {
+      if (header) document.documentElement.style.setProperty('--bn-header-height', `${header.getBoundingClientRect().height}px`)
+      pick()
+    })
+    if (header) observer.observe(header)
     window.addEventListener('scroll', pick, { passive: true })
     window.addEventListener('resize', pick)
     window.addEventListener('hashchange', pick)
     return () => {
+      observer.disconnect()
+      document.documentElement.style.removeProperty('--bn-header-height')
       window.removeEventListener('scroll', pick)
       window.removeEventListener('resize', pick)
       window.removeEventListener('hashchange', pick)

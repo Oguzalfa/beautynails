@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Services } from './components/Services'
@@ -14,6 +14,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [bookingOpen, setBookingOpen] = useState(false)
   const [serviceId, setServiceId] = useState<string | null>(null)
+  const returnFocusRef = useRef<HTMLElement>(null)
 
   const openBooking = useCallback(() => {
     setBookingOpen(true)
@@ -21,7 +22,10 @@ export default function App() {
   }, [])
 
   return (
-    <div className="bn-page" id="top">
+    <div className="bn-page" id="top" onClickCapture={(event) => {
+      const trigger = event.target instanceof Element ? event.target.closest<HTMLElement>('button,a') : null
+      if (trigger && !trigger.closest('.bn-modal')) returnFocusRef.current = trigger
+    }}>
       <Header
         menuOpen={menuOpen}
         onToggleMenu={() => setMenuOpen((open) => !open)}
@@ -37,8 +41,8 @@ export default function App() {
         <AtelierMobile onOpenBooking={openBooking} onOpenService={setServiceId} />
       </main>
       <Footer />
-      <ServiceDetail serviceId={serviceId} onClose={() => setServiceId(null)} />
-      <BookingPanel open={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <ServiceDetail serviceId={serviceId} returnFocusRef={returnFocusRef} onClose={() => setServiceId(null)} />
+      <BookingPanel open={bookingOpen} returnFocusRef={returnFocusRef} onClose={() => setBookingOpen(false)} />
     </div>
   )
 }

@@ -1,37 +1,29 @@
-import { useEffect, useId, useRef } from 'react'
+import { useId, useRef, type RefObject } from 'react'
 import { services } from '../config/site'
+import { useDialog } from '../hooks/useDialog'
 
 type Props = {
   serviceId: string | null
   onClose: () => void
+  returnFocusRef?: RefObject<HTMLElement | null>
 }
 
-export function ServiceDetail({ serviceId, onClose }: Props) {
+export function ServiceDetail({ serviceId, onClose, returnFocusRef }: Props) {
   const titleId = useId()
   const closeRef = useRef<HTMLButtonElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
   const service = services.find((s) => s.id === serviceId) ?? null
 
-  useEffect(() => {
-    if (!service) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    closeRef.current?.focus()
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = prev
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [service, onClose])
+  useDialog(!!service, panelRef, closeRef, onClose, returnFocusRef)
 
   if (!service) return null
 
   return (
     <div className="bn-modal" role="presentation" onClick={onClose}>
       <div
+        ref={panelRef}
         className="bn-modal__panel"
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}

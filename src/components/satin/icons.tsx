@@ -45,13 +45,15 @@ export function CloseIcon({ className }: IconProps) {
 
 export function WhatsAppIcon({ className }: IconProps) {
   return (
-    <Svg className={className}>
-      <path
-        d="M14 3.5a8.2 8.2 0 0 0-7.1 12.3L5.2 20.5l4.9-1.6A8.2 8.2 0 1 0 14 3.5Z"
-        {...stroke}
-      />
-      <path d="M11.2 10.2c.3 1.5 1.8 2.9 3.3 3.3l1.1-.8c.2-.2.5-.2.7 0l1.1.8" {...stroke} />
-    </Svg>
+    <img
+      className={className}
+      src="/icons/whatsapp-mark.svg"
+      width="28"
+      height="28"
+      alt=""
+      aria-hidden="true"
+      decoding="async"
+    />
   )
 }
 

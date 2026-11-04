@@ -3,7 +3,7 @@ import { siteConfig } from '../../config/site'
 import { ArrowIcon, CloseIcon, InstagramIcon, MenuIcon, WhatsAppIcon } from './icons'
 
 type Props = {
-  onOpenBooking: () => void
+  onOpenBooking: (service?: string) => void
   onOpenService: (serviceId: string) => void
 }
 
@@ -47,7 +47,7 @@ const services = [
 const gallery = [
   {
     id: 'nails-example',
-    alt: 'Parlak fuşya badem tırnak tasarımı. Stüdyo örneğidir.',
+    alt: 'Parlak fuşya badem tırnak tasarımı',
     width: 1122,
     height: 1402,
     src: '/images/satin/service-nails.webp',
@@ -57,7 +57,7 @@ const gallery = [
   },
   {
     id: 'french-example',
-    alt: 'Nude zemin üzerinde pembe French tırnaklar. Stüdyo örneğidir.',
+    alt: 'Nude zemin üzerinde pembe French tırnaklar',
     width: 960,
     height: 659,
     src: '/images/satin/gallery-french-960.webp',
@@ -186,12 +186,14 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
     setMenuOpen(true)
   }
 
-  const book = () => {
+  const requestBooking = (service?: string) => {
     restoreMenuFocus.current = false
     setMenuOpen(false)
     setShot(null)
-    onOpenBooking()
+    onOpenBooking(service)
   }
+
+  const book = () => requestBooking()
 
   const go = (id: string) => {
     restoreMenuFocus.current = false
@@ -220,7 +222,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             </a>
             <nav className="desktop-nav" aria-label="Sayfa bölümleri">
               <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}>Hizmetler</a>
-              <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>Örnekler</a>
+              <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>Galeri</a>
               <button className="nav-book" type="button" onClick={book}>Randevu Al</button>
             </nav>
             <button
@@ -259,11 +261,6 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
           </div>
           <div className="hero-shade" />
           <div className="content-width hero-inner" id="icerik" tabIndex={-1}>
-            <p className="editorial-index">
-              <span>THE BEAUTY EDIT</span>
-              <span className="index-line" />
-              <span className="index-number">01</span>
-            </p>
             <div className="hero-copy">
               <h1>
                 <span>Bakışınız.</span>
@@ -312,17 +309,9 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
               ))}
             </div>
 
-            <div className="signature">
-              <h2>
-                Detaylarda
-                <em>fark yaratın.</em>
-              </h2>
-              <span className="signature-rule" />
-            </div>
-
             <div className="gallery" id="ornekler" tabIndex={-1}>
               <div className="section-label">
-                <h2>Örnek görseller</h2>
+                <h2>Tırnak tasarımları</h2>
                 <span />
               </div>
               <div className="gallery-grid">
@@ -358,20 +347,30 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
 
       <section className="mens-care" id="erkek-bakim" tabIndex={-1} aria-labelledby="erkek-baslik">
         <div className="mens-inner">
-          <img
-            src="/images/satin/men-hands-960.webp"
-            srcSet="/images/satin/men-hands-480.webp 480w, /images/satin/men-hands-960.webp 960w, /images/satin/men-hands.webp 1774w"
-            sizes="(min-width: 768px) 48vw, 100vw"
-            width={1774}
-            height={887}
-            alt="Doğal ve bakımlı ojesiz erkek elleri"
-            loading="lazy"
-            decoding="async"
-          />
+          <div className="mens-media">
+            <img
+              src="/images/satin/men-care-reference-960.webp"
+              srcSet="/images/satin/men-care-reference-480.webp 480w, /images/satin/men-care-reference-960.webp 960w, /images/satin/men-care-reference.webp 1774w"
+              sizes="(min-width: 1440px) 712px, (min-width: 768px) 50vw, 100vw"
+              width={1774}
+              height={887}
+              alt="Doğal ve bakımlı ojesiz erkek eli"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <div className="mens-copy">
-            <h2 id="erkek-baslik">Erkek Manikür &amp; Pedikür</h2>
-            <button className="text-link" type="button" onClick={book}>
-              <span className="sr-only">Bakımı keşfet</span>
+            <h2 id="erkek-baslik">
+              <span>Erkek Manikür</span>
+              <span>&amp; Pedikür</span>
+            </h2>
+            <button
+              className="mens-book"
+              type="button"
+              onClick={() => requestBooking('Erkek Manikür & Pedikür')}
+              aria-label="Erkek Manikür ve Pedikür için randevu al"
+            >
+              <span>Randevu Al</span>
               <ArrowIcon />
             </button>
           </div>
@@ -386,7 +385,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             </a>
             <nav aria-label="Alt bölümler">
               <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}>Hizmetler</a>
-              <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>Örnekler</a>
+              <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>Galeri</a>
               <button className="nav-book" type="button" onClick={book}>Randevu Al</button>
             </nav>
           </div>
@@ -396,7 +395,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
               <ArrowIcon />
             </button>
             {whatsappHref ? (
-              <a className="whatsapp-link" href={whatsappHref} target="_blank" rel="noopener noreferrer">
+              <a className="whatsapp-link" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile iletişim">
                 <WhatsAppIcon />
                 <span>WhatsApp</span>
               </a>
@@ -404,6 +403,9 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
           </div>
           <div className="footer-meta">
             <small>© 2026 {siteConfig.brand}</small>
+            <a className="footer-phone" href={`tel:+${siteConfig.whatsappNumber}`}>
+              {siteConfig.phone}
+            </a>
             {siteConfig.instagramUrl ? (
               <a className="icon-button" href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer">
                 <InstagramIcon />
@@ -433,7 +435,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
         </div>
         <nav className="menu-links" aria-label="Mobil menü">
           <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}><span>01</span>Hizmetler</a>
-          <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}><span>02</span>Örnekler</a>
+          <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}><span>02</span>Galeri</a>
           <a href="#erkek-bakim" onClick={(event) => { event.preventDefault(); go('erkek-bakim') }}><span>03</span>Erkek bakım</a>
         </nav>
         <button className="pill-book" type="button" onClick={book}>

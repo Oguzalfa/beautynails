@@ -3,14 +3,15 @@ import { siteConfig } from '../config/site'
 
 type Props = {
   open: boolean
+  initialService?: string | null
   onClose: () => void
 }
 
-const serviceOptions = ['Tırnak Sanatı', 'İpek Kirpik', 'Kalıcı Makyaj', 'Kaş & Yüz'] as const
+const serviceOptions = ['Tırnak Sanatı', 'İpek Kirpik', 'Kalıcı Makyaj', 'Kaş & Yüz', 'Erkek Manikür & Pedikür'] as const
 
 type Errors = Partial<Record<'name' | 'phone' | 'service', string>>
 
-export function BookingPanel({ open, onClose }: Props) {
+export function BookingPanel({ open, initialService, onClose }: Props) {
   const titleId = useId()
   const firstRef = useRef<HTMLInputElement>(null)
   const [errors, setErrors] = useState<Errors>({})
@@ -20,6 +21,7 @@ export function BookingPanel({ open, onClose }: Props) {
   useEffect(() => {
     if (!open) return
     const prev = document.body.style.overflow
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null
     document.body.style.overflow = 'hidden'
     firstRef.current?.focus()
     const onKey = (e: KeyboardEvent) => {
@@ -29,6 +31,7 @@ export function BookingPanel({ open, onClose }: Props) {
     return () => {
       document.body.style.overflow = prev
       document.removeEventListener('keydown', onKey)
+      if (opener?.isConnected) opener.focus({ preventScroll: true })
     }
   }, [open, onClose])
 
@@ -126,6 +129,7 @@ export function BookingPanel({ open, onClose }: Props) {
                     name="service"
                     type="checkbox"
                     value={option}
+                    defaultChecked={option === initialService}
                     aria-invalid={!!errors.service}
                   />
                   {option}

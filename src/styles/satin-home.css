@@ -226,28 +226,6 @@
   padding-top: 104px;
 }
 
-.satin-page .editorial-index {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  width: min(220px, 70%);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  font-weight: 650;
-}
-
-.satin-page .index-line {
-  height: 1px;
-  background: var(--rule);
-  flex: 1;
-  min-width: 15px;
-}
-
-.satin-page .index-number {
-  font: italic 18px/1 var(--serif);
-  letter-spacing: 0;
-}
-
 .satin-page .hero-copy {
   padding-top: 140px;
   padding-bottom: 66px;
@@ -472,40 +450,6 @@
   opacity: 1;
 }
 
-.satin-page .signature {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  gap: 24px;
-  align-items: flex-end;
-  margin-top: -2px;
-  padding-bottom: 35px;
-}
-
-.satin-page .signature h2 {
-  font: 400 clamp(39px, 10vw, 112px) / 0.86 var(--serif);
-  letter-spacing: -0.055em;
-  overflow-wrap: anywhere;
-}
-
-.satin-page .signature h2 em {
-  color: var(--blush-100);
-  display: block;
-  padding-left: 30px;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: -0.065em;
-}
-
-.satin-page .signature-rule {
-  height: 1px;
-  background: var(--rule);
-  flex: 1;
-  min-width: 20px;
-  margin-bottom: 11px;
-  display: none;
-}
-
 .satin-page .gallery {
   position: relative;
   z-index: 1;
@@ -583,63 +527,91 @@
 }
 
 .satin-page .mens-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   width: min(100%, calc(var(--content) + var(--gutter) * 2));
   margin-inline: auto;
-  min-height: 172px;
-  display: grid;
-  grid-template-columns: 48% 52%;
 }
 
-.satin-page .mens-inner > img {
-  height: 100%;
+.satin-page .mens-media {
+  position: relative;
+  aspect-ratio: 2.2;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.satin-page .mens-media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
   max-width: none;
   object-fit: cover;
-  object-position: 25% center;
-  max-height: 240px;
+  object-position: 50% 45%;
 }
 
 .satin-page .mens-copy {
-  padding: 22px 22px 22px 28px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
   min-width: 0;
+  padding: 28px var(--gutter) 32px;
 }
 
 .satin-page .mens-copy h2 {
-  flex: 1;
-  min-width: 0;
-  font-size: clamp(18px, 4.2vw, 34px);
+  font-size: clamp(28px, 4vw, 44px);
   font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: -0.04em;
-  overflow-wrap: anywhere;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
 }
 
-.satin-page .text-link {
-  width: 44px;
-  min-width: 44px;
-  height: 44px;
-  padding: 0;
-  display: flex;
+.satin-page .mens-copy h2 span {
+  display: block;
+}
+
+.satin-page .mens-book {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex: none;
-  background: none;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 48px;
+  min-width: 148px;
+  max-width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
   color: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
-.satin-page .text-link span {
-  font-size: 11px;
-}
-
-.satin-page .text-link svg {
-  width: 24px;
-  height: 20px;
+.satin-page .mens-book svg {
   flex: none;
+  width: 28px;
+  height: 24px;
+}
+
+.satin-page .mens-book:hover {
+  color: var(--blush-100);
+  border-bottom-color: currentColor;
+}
+
+@media (min-width: 768px) {
+  .satin-page .mens-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .satin-page .mens-media {
+    aspect-ratio: auto;
+    min-height: clamp(280px, 25vw, 360px);
+  }
+
+  .satin-page .mens-copy {
+    padding: 36px clamp(28px, 4vw, 64px);
+  }
 }
 
 .satin-page .site-footer {
@@ -732,16 +704,32 @@
   display: none;
 }
 
-.satin-page .whatsapp-link svg {
+.satin-page .whatsapp-link img {
+  display: block;
   width: 28px;
-  height: 24px;
+  height: 28px;
+  aspect-ratio: 1;
+  flex: none;
+  object-fit: contain;
 }
 
 .satin-page .footer-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
   padding-bottom: 10px;
+}
+
+.satin-page .footer-phone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .satin-page .footer-meta small {
@@ -923,28 +911,8 @@
     bottom: 12px;
   }
 
-  .satin-page .signature h2 {
-    font-size: 38px;
-  }
-
-  .satin-page .signature h2 em {
-    padding-left: 20px;
-  }
-
   .satin-page .footer-top .brand {
     font-size: 15px;
-  }
-
-  .satin-page .mens-copy {
-    padding: 22px 15px;
-  }
-
-  .satin-page .mens-copy h2 {
-    font-size: 17px;
-  }
-
-  .satin-page .text-link span {
-    font-size: 13px;
   }
 
   .satin-page .pill-book {
@@ -985,14 +953,6 @@
     padding-top: 105px;
   }
 
-  .satin-page .signature {
-    padding-bottom: 55px;
-  }
-
-  .satin-page .signature-rule {
-    display: block;
-  }
-
   .satin-page .gallery {
     padding-bottom: 40px;
   }
@@ -1027,13 +987,6 @@
     font-size: 18px;
   }
 
-  .satin-page .mens-copy {
-    padding: 35px;
-  }
-
-  .satin-page .text-link span {
-    font-size: 13px;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -1072,11 +1025,6 @@
   .satin-page .hero-inner {
     padding-top: 142px;
     height: 100%;
-  }
-
-  .satin-page .editorial-index {
-    width: 285px;
-    font-size: 11px;
   }
 
   .satin-page .hero-copy {
@@ -1169,24 +1117,6 @@
     height: 21px;
   }
 
-  .satin-page .signature h2 {
-    font-size: clamp(82px, 8.4vw, 132px);
-  }
-
-  .satin-page .signature h2 em {
-    padding-left: 80px;
-  }
-
-  .satin-page .signature {
-    padding-bottom: 75px;
-  }
-
-  .satin-page .signature-rule {
-    flex: 0 1 240px;
-    margin-left: 28px;
-    margin-bottom: 22px;
-  }
-
   .satin-page .gallery {
     padding-bottom: 65px;
   }
@@ -1200,27 +1130,6 @@
     height: 42px;
     right: 20px;
     bottom: 20px;
-  }
-
-  .satin-page .mens-inner {
-    min-height: 265px;
-  }
-
-  .satin-page .mens-inner > img {
-    max-height: 340px;
-  }
-
-  .satin-page .mens-copy {
-    padding: 36px 64px 36px 52px;
-  }
-
-  .satin-page .mens-copy h2 {
-    font-size: clamp(28px, 3.1vw, 42px);
-  }
-
-  .satin-page .text-link svg {
-    width: 34px;
-    height: 28px;
   }
 
   .satin-page .site-footer {
@@ -1262,9 +1171,9 @@
     gap: 15px;
   }
 
-  .satin-page .whatsapp-link svg {
+  .satin-page .whatsapp-link img {
     width: 40px;
-    height: 34px;
+    height: 40px;
   }
 
   .satin-page .footer-meta small {
@@ -1305,28 +1214,6 @@ body {
     text-shadow: 0 2px 18px rgba(60, 0, 28, 0.28);
   }
 
-  .satin-page .editorial-index {
-    line-height: 1.2;
-    width: max-content;
-    max-width: 100%;
-    flex-wrap: wrap;
-  }
-
-  .satin-page .editorial-index > span:first-child {
-    min-width: 0;
-    max-width: 100%;
-    overflow-wrap: anywhere;
-  }
-
-  .satin-page .index-line {
-    flex: 0 0 28px;
-    min-width: 28px;
-  }
-
-  .satin-page .index-number {
-    line-height: 1;
-  }
-
   .satin-page .service-caption {
     right: 10px;
   }
@@ -1364,18 +1251,6 @@ body {
   }
 }
 
-@media (max-width: 430px) {
-  .satin-page .editorial-index {
-    font-size: 9px;
-    letter-spacing: 0.04em;
-  }
-
-  .satin-page .index-line {
-    flex-basis: 12px;
-    min-width: 12px;
-  }
-}
-
 @media (min-width: 768px) and (max-width: 1023px) {
   .satin-page .hero-art img {
     object-position: 74% 28%;
@@ -1391,16 +1266,6 @@ body {
     line-height: 0.98;
   }
 
-  .satin-page .editorial-index {
-    width: max-content;
-    max-width: 42%;
-    flex-wrap: wrap;
-  }
-
-  .satin-page .index-line {
-    flex: 0 0 28px;
-    min-width: 28px;
-  }
 }
 
 @media (max-width: 900px) and (max-height: 480px) {

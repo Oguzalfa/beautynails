@@ -16,7 +16,9 @@ export function Footer() {
         <p className="bn-footer__contact">
           <a href={`tel:+${siteConfig.whatsappNumber}`}>{siteConfig.phone}</a>
           <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a>
-          <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+          {siteConfig.instagramUrl ? (
+            <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+          ) : null}
         </p>
       ) : null}
       <p className="bn-footer__legal">© {siteConfig.brand}</p>

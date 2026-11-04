@@ -221,7 +221,7 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
         <div className="bn-at-portrait">
           <img
             src="/images/fx/hero-portrait-glass.webp"
-            alt="Şazi Beauty portresi, yüz ve el bakımı"
+            alt="BeautyNails portresi, yüz ve el bakımı"
             width={1200}
             height={800}
             fetchPriority="high"
@@ -472,9 +472,11 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
           <a href="#iletisim" onClick={go('iletisim')}>
             İletişim
           </a>
-          <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">
-            Instagram
-          </a>
+          {siteConfig.instagramUrl ? (
+            <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">
+              Instagram
+            </a>
+          ) : null}
         </nav>
         <p>© {siteConfig.brand}</p>
       </footer>

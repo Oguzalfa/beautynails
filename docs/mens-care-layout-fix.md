@@ -2,7 +2,9 @@
 
 Tarih: 4 Kasım 2026. Başlangıç: `3d762b1ba9b71aa6acdf3c3c3e6a6807472599c6`.
 
-Erkek bakım bandı 768 px altında fotoğraf üstte, başlık ve düğme altta olacak şekilde düzenlendi. Tablet ve masaüstünde görsel ile metin eşit yükseklikte iki sütundur. Görselin kendi kapsayıcısı, tutarlı kadrajı ve taşma sınırı vardır. Başlık iki satıra ayrılır; randevu düğmesi görünür metin ve ok içerir, en az 48 px yüksekliğindedir.
+Erkek bakım bandı 768 px altında fotoğraf üstte, başlık ve düğme fotoğrafın altındaki tek satırda olacak şekilde düzenlendi. Randevu düğmesi başlığın sağında ve dikey olarak ortalıdır. Tablet ve masaüstünde görsel ile metin eşit yükseklikte iki sütundur; metin sütununda da düğme başlığın sağındadır. Görselin kendi kapsayıcısı, tutarlı kadrajı ve taşma sınırı vardır. Başlık iki satıra ayrılır; randevu düğmesi görünür metin ve ok içerir, en az 48 px yüksekliğindedir.
+
+`7dd6fb1` üzerine mobil revizyon: metin alanı iki sütunlu grid oldu. Mobil başlık 21–28 px, düğme 13 px; düğmenin dokunma alanı 48 px yüksekliğini korur. 320–430 px testlerinde metin satırı yaklaşık 96–106 px yüksekliğindedir. Yan güvenli alanlar korunur. Mobil menüden bir bölüme dokununca oluşan gereksiz odak çerçevesi kaldırıldı; klavye odağının görünür çerçevesi `:focus-visible` ile korunur.
 
 Erkek bölümünün düğmesi mevcut randevu panelini `Erkek Manikür & Pedikür` seçili açar. Genel randevu girişleri önceki seçimi taşımadan açılır. Panel kapatılınca odak açan kontrole geri döner.
 
@@ -18,17 +20,17 @@ WhatsApp'ın eksik çizilmiş simgesi ayrı `public/icons/whatsapp-mark.svg` dos
 - `git diff --check`: geçti.
 - Üretim çıktısı desteklenen yerel HTTP önizlemesinde Cloud Chrome ile denetlendi. Aşağıdaki boyutlar iframe viewportlarıdır; fiziksel cihaz testi değildir.
 
-| Ekran | Erkek bölümünün düzeni | Yatay taşma | Başlık/düğme çakışması | Animasyon |
+| Ekran | Erkek bölümünün düzeni | Yatay taşma | Başlık/düğme | Animasyon |
 |---|---|---|---|---|
-| 320×740 | Alt alta | Yok | Yok | Yok |
-| 360×800 | Alt alta | Yok | Yok | Yok |
-| 390×844 | Alt alta | Yok | Yok | Yok |
-| 430×932 | Alt alta | Yok | Yok | Yok |
-| 768×1024 | Eşit yükseklikte iki sütun | Yok | Yok | Yok |
-| 1024×768 | Eşit yükseklikte iki sütun | Yok | Yok | Yok |
-| 1440×900 | Eşit yükseklikte iki sütun | Yok | Yok | Yok |
+| 320×740 | Fotoğraf üstte, metin altta | Yok | Yan yana, çakışma yok | Yok |
+| 360×800 | Fotoğraf üstte, metin altta | Yok | Yan yana, çakışma yok | Yok |
+| 390×844 | Fotoğraf üstte, metin altta | Yok | Yan yana, çakışma yok | Yok |
+| 430×932 | Fotoğraf üstte, metin altta | Yok | Yan yana, çakışma yok | Yok |
+| 768×1024 | Eşit yükseklikte iki sütun | Yok | Yan yana, çakışma yok | Yok |
+| 1024×768 | Eşit yükseklikte iki sütun | Yok | Yan yana, çakışma yok | Yok |
+| 1440×900 | Eşit yükseklikte iki sütun | Yok | Yan yana, çakışma yok | Yok |
 
-Görsel her boyutta kendi kapsayıcısını doldurdu. Düğme yüksekliği tüm boyutlarda 48 px idi. Computed animation-name none, transition-duration 0s kaldı. Kaldırılan metinler görünür DOM'da bulunmadı.
+Görsel her boyutta kendi kapsayıcısını doldurdu. Son CSS ile yedi ölçüde `scrollWidth === clientWidth`, başlığın kendi kutusuna sığması, düğmenin metin kutusu içinde kalması ve başlık/düğme dikey merkezlerinin eşitliği doğrulandı. Başlık her ölçüde iki satırdır. Düğme yüksekliği tüm boyutlarda 48 px idi. Computed animation-name none, transition-duration 0s kaldı. Kaldırılan metinler görünür DOM'da bulunmadı.
 
 390×844 üretim önizlemesinde şu beş etkileşim geçti:
 

@@ -63,7 +63,7 @@
 }
 
 .satin-page :is(button, a):focus-visible,
-.satin-page section:focus {
+.satin-page section:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 5px;
 }
@@ -551,17 +551,17 @@
 }
 
 .satin-page .mens-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
   min-width: 0;
-  padding: 28px var(--gutter) 32px;
+  padding: 24px var(--gutter);
 }
 
 .satin-page .mens-copy h2 {
-  font-size: clamp(28px, 4vw, 44px);
+  min-width: 0;
+  font-size: clamp(21px, 6vw, 28px);
   font-weight: 500;
   line-height: 1.12;
   letter-spacing: -0.035em;
@@ -575,22 +575,24 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 10px;
   min-height: 48px;
-  min-width: 148px;
+  min-width: 0;
+  width: max-content;
   max-width: 100%;
   padding: 10px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.65);
   color: var(--white);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .satin-page .mens-book svg {
   flex: none;
-  width: 28px;
-  height: 24px;
+  width: 24px;
+  height: 20px;
 }
 
 .satin-page .mens-book:hover {
@@ -610,7 +612,16 @@
   }
 
   .satin-page .mens-copy {
-    padding: 36px clamp(28px, 4vw, 64px);
+    gap: clamp(16px, 2vw, 28px);
+    padding: 32px clamp(24px, 3vw, 48px);
+  }
+
+  .satin-page .mens-copy h2 {
+    font-size: clamp(24px, 3vw, 44px);
+  }
+
+  .satin-page .mens-book {
+    font-size: 14px;
   }
 }
 
@@ -1220,6 +1231,11 @@ body {
 
   .satin-page .site-footer {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .satin-page .mens-copy {
+    padding-left: max(var(--gutter), env(safe-area-inset-left));
+    padding-right: max(var(--gutter), env(safe-area-inset-right));
   }
 
   .satin-page .menu-dialog {

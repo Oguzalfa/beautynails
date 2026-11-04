@@ -114,19 +114,52 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
   const whatsappHref = `https://wa.me/${siteConfig.whatsappNumber}`
 
   useEffect(() => {
+    let active = true
+    let frame = 0
+    const navigate = () => {
+      if (!active || !window.matchMedia('(max-width: 767px)').matches) return
+      const id = window.location.hash.slice(1)
+      if (!id) return
+      const target = rootRef.current?.querySelector<HTMLElement>(`[data-at-anchor="${CSS.escape(id)}"]`)
+      target?.scrollIntoView({ behavior: 'instant', block: 'start' })
+    }
+    const schedule = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(navigate)
+    }
+    schedule()
+    // Native hashes resolve to the hidden desktop sections on phones. Resolve
+    // them again after font layout settles so shared links reach visible content.
+    void document.fonts.ready.then(() => { if (active) schedule() })
+    window.addEventListener('hashchange', schedule)
+    return () => {
+      active = false
+      cancelAnimationFrame(frame)
+      window.removeEventListener('hashchange', schedule)
+    }
+  }, [])
+
+  useEffect(() => {
     const root = rootRef.current
     if (!root) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
     const reveals = [...root.querySelectorAll<HTMLElement>('.bn-at-reveal')]
     const chromes = [...root.querySelectorAll<HTMLElement>('.bn-at-chrome')]
+    const visibleChromes = new Set<Element>()
+    const syncChrome = () => {
+      chromes.forEach((el) => {
+        const paused = !visibleChromes.has(el) || reduce.matches || document.hidden
+        el.setAttribute('data-paused', paused ? 'true' : 'false')
+      })
+    }
     const apply = () => {
       if (reduce.matches) {
         root.classList.remove('is-script')
         reveals.forEach((el) => el.classList.add('is-in'))
-        chromes.forEach((el) => el.setAttribute('data-paused', 'true'))
-        return
+      } else {
+        root.classList.add('is-script')
       }
-      root.classList.add('is-script')
+      syncChrome()
     }
     apply()
     const io = new IntersectionObserver(
@@ -143,24 +176,20 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
     const pause = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const paused = !entry.isIntersecting || reduce.matches || document.hidden
-          entry.target.setAttribute('data-paused', paused ? 'true' : 'false')
+            if (entry.isIntersecting) visibleChromes.add(entry.target)
+            else visibleChromes.delete(entry.target)
         })
+          syncChrome()
       },
       { threshold: 0.01 },
     )
     chromes.forEach((el) => pause.observe(el))
-    const onHide = () => {
-      chromes.forEach((el) => {
-        if (document.hidden || reduce.matches) el.setAttribute('data-paused', 'true')
-      })
-    }
-    document.addEventListener('visibilitychange', onHide)
+    document.addEventListener('visibilitychange', syncChrome)
     reduce.addEventListener('change', apply)
     return () => {
       io.disconnect()
       pause.disconnect()
-      document.removeEventListener('visibilitychange', onHide)
+      document.removeEventListener('visibilitychange', syncChrome)
       reduce.removeEventListener('change', apply)
     }
   }, [])
@@ -171,7 +200,22 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
     document.body.style.overflow = 'hidden'
     closeRef.current?.focus()
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setShot(null)
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        setShot(null)
+      }
+      if (event.key === 'Tab') {
+        const items = dialogRef.current?.querySelectorAll<HTMLButtonElement>('button')
+        const first = items?.[0]
+        const last = items?.[items.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last?.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first?.focus()
+        }
+      }
     }
     document.addEventListener('keydown', onKey)
     return () => {
@@ -198,7 +242,7 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
 
   return (
     <div className="sazi-mobile-v3" ref={rootRef}>
-      <section className="bn-at-hero bn-at-reveal" data-at-anchor="deneyim" aria-labelledby={titleId}>
+      <section className="bn-at-hero" data-at-anchor="deneyim" tabIndex={-1} aria-labelledby={titleId}>
         <h1 id={titleId} className="bn-at-title">
           <span>Sıradanın</span>
           <em>ötesinde.</em>
@@ -232,20 +276,20 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
         <ul className="bn-at-trust">
           <li>
             <PremiumIcon name="diamond" size={32} tone="dark" animated={false} />
-            <span>Premium Deneyim</span>
+            <span>Premium<br />Deneyim</span>
           </li>
           <li>
             <PremiumIcon name="lotus" size={32} tone="dark" animated={false} />
-            <span>Uzman Ekip</span>
+            <span>Uzman<br />Ekip</span>
           </li>
           <li>
             <PremiumIcon name="heart" size={32} tone="dark" animated={false} />
-            <span>Size Özel Bakım</span>
+            <span>Size Özel<br />Bakım</span>
           </li>
         </ul>
       </section>
 
-      <section className="bn-at-nails bn-at-reveal" data-at-anchor="hizmetler" aria-labelledby="at-nails-title">
+      <section className="bn-at-nails bn-at-reveal" data-at-anchor="hizmetler" tabIndex={-1} aria-labelledby="at-nails-title">
         <span className="bn-at-ribbon" aria-hidden="true" />
         <div className="bn-at-kicker">
           <p>HİZMETLERİMİZ</p>
@@ -354,7 +398,7 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
         <Cta onClick={() => onOpenService('kalici-makyaj')}>Makyajı Keşfet</Cta>
       </section>
 
-      <section className="bn-at-gallery bn-at-reveal" data-at-anchor="calismalarimiz" aria-labelledby="at-gallery-title">
+      <section className="bn-at-gallery bn-at-reveal" data-at-anchor="calismalarimiz" tabIndex={-1} aria-labelledby="at-gallery-title">
         <span className="bn-at-ribbon bn-at-ribbon--gallery" aria-hidden="true" />
         <p className="bn-at-kicker-label">ÇALIŞMALARIMIZ</p>
         <h2 id="at-gallery-title" className="bn-at-name bn-at-name--gallery">
@@ -393,7 +437,7 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
         </button>
       </section>
 
-      <section className="bn-at-book bn-at-reveal" data-at-anchor="iletisim" aria-labelledby="at-book-title">
+      <section className="bn-at-book bn-at-reveal" data-at-anchor="iletisim" tabIndex={-1} aria-labelledby="at-book-title">
         <img
           className="bn-at-chrome bn-at-orb"
           src="/images/fx/appointment-chrome.webp"

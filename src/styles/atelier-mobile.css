@@ -68,6 +68,13 @@
     top: 25px;
   }
 
+  .bn-page .bn-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    max-height: calc(100dvh - 96px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    overscroll-behavior: contain;
+  }
+
   .sazi-mobile-v3 {
     --at-gutter: 20px;
     display: block;
@@ -86,18 +93,22 @@
   .bn-at-makeup,
   .bn-at-gallery,
   .bn-at-book {
+    /* Keep first/last child margins inside each coloured section. overflow:
+       clip alone does not contain margins and left stray colour bands. */
+    display: flow-root;
     position: relative;
     overflow: clip;
     scroll-margin-top: 76px;
   }
 
   .bn-at-hero {
-    background: linear-gradient(180deg, #ff0874 0%, #ff5c9a 34%, #ffbdd5 70%, #fad3e1 100%);
-    padding-top: 8px;
+    background: #fad3e1;
   }
 
   .bn-at-title {
-    margin: 10px var(--at-gutter) 14px;
+    margin: 0;
+    padding: 18px var(--at-gutter) 16px;
+    background: #ff0874;
     color: #090909;
     font-weight: 850;
     font-size: clamp(46px, 16.4vw, 70px);
@@ -121,20 +132,30 @@
     letter-spacing: -0.03em;
   }
 
+  .bn-at-portrait {
+    background: linear-gradient(180deg, #ff0874 68%, #fad3e1 100%);
+  }
+
   .bn-at-portrait img {
     display: block;
     width: 100%;
-    height: clamp(290px, 78vw, 330px);
+    height: clamp(240px, 72vw, 320px);
     object-fit: cover;
     object-position: 78% 34%;
+    /* Blend the actual image edges into the adjacent surfaces, not a gradient
+       stretched over the full hero whose stops move when the copy wraps. */
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 20px, #000 calc(100% - 48px), transparent);
+    mask-image: linear-gradient(180deg, transparent, #000 20px, #000 calc(100% - 48px), transparent);
   }
 
   .bn-at-hero-foot {
     display: grid;
-    grid-template-columns: 108px minmax(0, 1fr);
-    gap: 10px 12px;
-    align-items: end;
-    margin: -28px var(--at-gutter) 0;
+    grid-template-columns: clamp(88px, 26vw, 108px) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: 12px 14px;
+    align-items: center;
+    margin: 0 var(--at-gutter);
+    padding-top: 12px;
     position: relative;
     z-index: 1;
   }
@@ -154,9 +175,10 @@
   }
 
   .bn-at-mani {
-    width: 108px;
-    height: 136px;
-    margin: 0;
+    width: 100%;
+    height: clamp(112px, 32vw, 136px);
+    align-self: start;
+    margin: -26px 0 0;
     padding: 3px;
     border-radius: 20px;
     background: linear-gradient(160deg, #fff, #ffbdd5 42%, #fff 68%, #d90050);
@@ -174,6 +196,7 @@
 
   .bn-at-hero-foot p {
     margin: 0;
+    min-width: 0;
     font-size: 15px;
     line-height: 1.35;
     font-weight: 500;
@@ -183,7 +206,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
-    margin: 22px 0 8px;
+    margin: 22px 0 0;
     padding: 0 var(--at-gutter) 18px;
     list-style: none;
   }
@@ -200,6 +223,10 @@
     font-size: 12px;
     line-height: 1.15;
     font-weight: 600;
+  }
+
+  .bn-at-trust li > span:last-child {
+    min-height: 2.3em;
   }
 
   .bn-at-trust li:last-child {
@@ -437,6 +464,14 @@
     padding-right: 8px;
     font-size: 14px;
     line-height: 1.25;
+  }
+
+  .bn-at-pair .bnx-icon {
+    flex-shrink: 0;
+  }
+
+  .bn-at-pair li > span:last-child {
+    min-width: 0;
   }
 
   .bn-at-pair li + li {
@@ -760,7 +795,7 @@
     align-items: flex-end;
     justify-content: center;
     background: rgba(9, 9, 9, 0.46);
-    padding: 16px;
+    padding: 16px max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
   }
 
   .bn-at-dialog [role='dialog'] {
@@ -771,6 +806,7 @@
     border-radius: 18px 18px 0 0;
     background: #fff;
     color: #090909;
+    overscroll-behavior: contain;
   }
 
   .bn-at-dialog img {
@@ -824,13 +860,16 @@
     --at-gutter: 16px;
   }
 
-  .bn-at-mani {
-    grid-row: 1;
+  .bn-at-hero-foot {
+    gap: 10px 12px;
   }
 
-  .bn-at-hero-foot .bn-at-cta--fit {
-    grid-column: 1 / -1;
-    grid-row: 2;
+  .bn-at-hero-foot p {
+    font-size: 14px;
+  }
+
+  .bn-at-hero-foot .bn-at-cta {
+    padding-left: 14px;
   }
 }
 

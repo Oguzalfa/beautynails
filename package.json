@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort",
     "acceptance": "node scripts/acceptance.mjs",
+    "test:mobile": "node scripts/mobile-layout-qa.mjs",
     "lighthouse": "lighthouse http://127.0.0.1:4174/ --only-categories=performance,accessibility --output=json --output=html --output-path=docs/beauty-nails-brief/evidence/lighthouse --chrome-flags=\"--headless --no-sandbox\" --form-factor=desktop --screenEmulation.mobile=false --screenEmulation.width=1440 --screenEmulation.height=900"
   },
   "dependencies": {

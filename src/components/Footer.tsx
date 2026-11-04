@@ -1,5 +1,6 @@
 import { navLinks, siteConfig } from '../config/site'
 import { Wordmark } from './Wordmark'
+import { ServiceLinks } from './ServiceLinks'
 
 export function Footer() {
   return (
@@ -20,6 +21,7 @@ export function Footer() {
         </p>
       ) : null}
       <p className="bn-footer__legal">© {siteConfig.brand}</p>
+      <ServiceLinks />
     </footer>
   )
 }

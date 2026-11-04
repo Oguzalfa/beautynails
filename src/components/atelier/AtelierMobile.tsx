@@ -4,6 +4,7 @@ import { PremiumIcon, type PremiumIconName } from '../premium/BeautyNailsPremium
 import { Wordmark } from '../Wordmark'
 import { BeautyGallery } from '../editorial/BeautyGallery'
 import { BeautyJournal } from '../editorial/BeautyJournal'
+import { ServiceLinks } from '../ServiceLinks'
 
 type Props = {
   onOpenBooking: () => void
@@ -363,6 +364,7 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
             Instagram
           </a>
         </nav>
+        <ServiceLinks />
         <p>© {siteConfig.brand}</p>
       </footer>
 

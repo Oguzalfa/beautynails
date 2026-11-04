@@ -98,7 +98,7 @@ try{
       assert.equal(await page.locator('.sz-reading-body h2').count(),4,'Complete article body')
       assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://www.sazibeauty.com/bakim-rehberi/'+article.slug+'/','Article canonical')
       const schema=await page.locator('script[type="application/ld+json"]').textContent()
-      assert.equal(JSON.parse(schema)[0]['@type'],'BlogPosting','Article structured data')
+      assert.equal(JSON.parse(schema)['@graph'].find(item=>item['@type']==='BlogPosting')?.['@type'],'BlogPosting','Article structured data')
       assert.equal(await page.locator('.sz-reading-cta a').getAttribute('href'),'/#iletisim','Original booking path')
       await page.screenshot({path:resolve(output,`${label}-${width}-${article.slug}.png`),fullPage:width===390})
     }

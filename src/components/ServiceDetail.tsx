@@ -45,6 +45,7 @@ export function ServiceDetail({ serviceId, onClose }: Props) {
         </div>
         <h2 id={titleId}>{service.title}</h2>
         <p>{service.detail}</p>
+        <a className="sz-service-detail-link" href={`/hizmetler/${service.id}/`}>Hizmet rehberini okuyun ↗</a>
         <p>
           Süre, ücret ve ürün detayları randevu görüşmesinde netleştirilir.
         </p>

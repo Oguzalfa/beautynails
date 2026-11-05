@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir node_modules/.cache/sazi-ssr --emptyOutDir && node scripts/build-journal.mjs && node scripts/build-seo.mjs",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir node_modules/.cache/sazi-ssr --emptyOutDir && node scripts/build-journal.mjs && node scripts/build-seo.mjs && node scripts/build-indexnow.mjs",
     "lint": "oxlint",
     "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort",
     "acceptance": "node scripts/acceptance.mjs",
@@ -13,6 +13,8 @@
     "test:responsive": "node scripts/mobile-responsive-qa.mjs",
     "test:editorial": "node scripts/editorial-qa.mjs",
     "test:seo": "node scripts/seo-qa.mjs",
+    "test:indexnow": "node --test scripts/indexnow.test.mjs",
+    "indexnow": "node scripts/submit-indexnow.mjs",
     "lighthouse": "lighthouse http://127.0.0.1:4174/ --only-categories=performance,accessibility --output=json --output=html --output-path=docs/beauty-nails-brief/evidence/lighthouse --chrome-flags=\"--headless --no-sandbox\" --form-factor=desktop --screenEmulation.mobile=false --screenEmulation.width=1440 --screenEmulation.height=900"
   },
   "dependencies": {

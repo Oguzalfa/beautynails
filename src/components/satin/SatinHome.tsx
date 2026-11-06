@@ -286,11 +286,15 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             <h2 id="hizmetler-baslik" className="sr-only">Hizmetler</h2>
             <div className="service-composition">
               {services.map((service) => (
-                <button
+                <a
                   key={service.id}
                   className={`service-card ${service.className}`}
-                  type="button"
-                  onClick={() => onOpenService(service.id)}
+                  href={`/hizmetler/${service.id}/`}
+                  onClick={(event) => {
+                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                    event.preventDefault()
+                    onOpenService(service.id)
+                  }}
                 >
                   <img
                     className="service-photo"
@@ -309,7 +313,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
                     <span className="service-rule" />
                   </span>
                   <ArrowIcon className="service-arrow" />
-                </button>
+                </a>
               ))}
             </div>
 
@@ -366,8 +370,10 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
           </div>
           <div className="mens-copy">
             <h2 id="erkek-baslik">
+              <a href="/hizmetler/erkek-manikur-pedikur/">
               <span>Erkek Manikür</span>
               <span>&amp; Pedikür</span>
+              </a>
             </h2>
             <button
               className="mens-book"

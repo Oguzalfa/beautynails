@@ -8,3 +8,5 @@ It is a separate business from Şazi Beauty and Şükrü Çankırılı. Never co
 - The existing Vercel project is `prj_vZql3jGLP8VRfPH53jDkFGbEA5Pt`, with `beautynails-three.vercel.app` as its Vercel domain.
 - Preserve the fuchsia satin design, mobile layout, gallery and journal, and the user's no-animation requirement.
 - Legacy internal identifiers are not brand information. Do not infer a business identity from old CSS or asset filenames.
+- The SEO canonical origin is `https://www.beautynails.com.tr`. Keep static page metadata, sitemap and JSON-LD consistent with it; Vercel preview aliases stay outside indexing.
+- Never invent a physical address, coordinates, ratings, opening hours or Google verification token. Without a verified address, use Organization/Service data instead of claiming local rich-result eligibility.

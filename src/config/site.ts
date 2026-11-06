@@ -1,5 +1,6 @@
 export const siteConfig = {
   brand: 'BeautyNails',
+  url: 'https://www.beautynails.com.tr',
   wordmark: 'beautynails',
   tagline: 'NAIL & BEAUTY STUDIO',
   locale: 'tr-TR',

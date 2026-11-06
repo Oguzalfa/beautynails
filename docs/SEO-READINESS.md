@@ -48,6 +48,16 @@ Kabul betiği renderer fonksiyonlarını tekrar kullanmak yerine `dist` içindek
 
 Yayın sonrasında özel alan adında 10 sayfanın 200, rastgele bulunmayan bir adresin 404, kök alan adının www'ye 308 döndüğü; www'de noindex başlığı olmadığı ve Vercel adresinde olduğu gerçek HTTP yanıtlarından kontrol edilmelidir. Tarayıcıda hydration hataları, yeni sayfaların mobil yerleşimi ve randevu akışı da doğrulanmalıdır. Kaynak denetimi tek başına bu canlı kontrollerin yerine geçmez.
 
+## IndexNow bildirimi
+
+IndexNow için bu alan adına özel bir anahtar dosyası `public` dizininde tutulur; üretimde kök adresten UTF-8 düz metin olarak sunulur. Bu anahtar Google Search Console doğrulama kodundan ve Bing Webmaster hesap yetkisinden ayrıdır. Dosyayı değiştirmek mevcut IndexNow sahiplik kanıtını değiştirir; gerekmedikçe yeniden anahtar üretmeyin.
+
+Yayın tamamlandıktan sonra `python3 scripts/submit-indexnow.py` komutu canlı anahtar dosyasını ve sitemap'i kontrol eder, yalnız `https://www.beautynails.com.tr` adreslerini `https://api.indexnow.org/indexnow` uç noktasına tek seferde gönderir. Derleme sırasında kendiliğinden bildirim gönderilmez; hata durumunda otomatik tekrar yapılmaz. Çıktıda gerçek HTTP yanıtı ve gönderilen URL listesi bulunur.
+
+HTTP 200 isteğin alındığını, HTTP 202 ise anahtar doğrulaması beklediğini gösterir. Bu yanıtlar sayfaların indekslendiği veya sıralama aldığı anlamına gelmez. IndexNow, Google Search Console'daki indeks isteğinin yerine geçmez.
+
+Resmî protokol: https://www.indexnow.org/documentation
+
 ## SEO ve GEO'nun sınırları
 
 Google'ın AI özellikleri için ayrı bir AI şeması, AI metin dosyası veya özel bir "GEO puanı" gerekmiyor. Taranabilir sayfalar, açık ve doğru metinler, gerçek işletme bilgileri, iç bağlantılar ve kullanıcı deneyimi ortak temeldir. Google'ın tarama, dizine alma, sıralama veya AI yanıtlarında kaynak olarak gösterme kararları garanti edilemez. Yerel aramalarda gelişim için doğrulanmış işletme adresi ve tutarlı Google Business Profile bilgileri ayrıca gereklidir.

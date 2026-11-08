@@ -226,3 +226,5 @@ body.sz-article-page{margin:0;background:#fad3e1}
  .sz-shot-caption{margin:0 6px 6px}
 }
 @media(prefers-reduced-motion:reduce){.sz-shot>img,.sz-article-card,.sz-article-image img{transition:none;transform:none}}
+.sz-journal-all{margin-block-start:20px}
+.sz-reading-related{display:grid;justify-items:start;gap:8px}

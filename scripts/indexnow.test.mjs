@@ -40,6 +40,28 @@ test('dry run makes no requests', async () => {
   assert.deepEqual(client.calls,[])
 })
 
+test('selected URL dry run reports only the requested sitemap URLs', async () => {
+  const client=clientFor()
+  const selection=[urls[1]]
+  const result=await submitIndexNow({xml,key,client,urls:selection})
+  assert.equal(result.status,'dry-run')
+  assert.equal(result.urlCount,1)
+  assert.deepEqual(result.urls,selection)
+  assert.deepEqual(client.calls,[])
+})
+
+test('empty, duplicate and unknown URL selections fail before network requests', async () => {
+  for (const [selection,error] of [
+    [[],/at least one URL/],
+    [[urls[0],urls[0]],/only once/],
+    [[urls[1],origin+'/outside-sitemap/'],/in the local sitemap/],
+  ]) {
+    const client=clientFor()
+    await assert.rejects(submitIndexNow({xml,key,client,urls:selection,submit:true}),error)
+    assert.deepEqual(client.calls,[])
+  }
+})
+
 test('missing, redirected, HTML and mismatched proof cannot send a notification', async () => {
   for (const options of [{proofStatus:404},{proofStatus:308},{contentType:'text/html'},{proof:'not-the-key'}]) {
     const client=clientFor(options)
@@ -66,6 +88,27 @@ test('one successful batch has canonical host/URLs and does not claim indexing',
   assert.equal(result.status,'received')
   assert.equal(result.indexed,null)
   assert.equal(result.indexingStatus,'not-checked')
+})
+
+test('selected submission validates the full live sitemap and checks only selected pages', async () => {
+  const client=clientFor()
+  const selection=[urls[1]]
+  const result=await submitIndexNow({xml,key,client,urls:selection,submit:true})
+  assert.equal(result.status,'received')
+  assert.equal(result.urlCount,1)
+  assert.deepEqual(result.urls,selection)
+  assert.deepEqual(client.calls.filter(call=>call.method==='GET').map(call=>call.url),[
+    `${origin}/${key}.txt`,origin+'/sitemap.xml',...selection,
+  ])
+  const posts=client.calls.filter(call=>call.method==='POST')
+  assert.equal(posts.length,1)
+  assert.deepEqual(posts[0].options.data.urlList,selection)
+
+  const staleClient=clientFor({liveXml:xml.replace(`<url><loc>${urls[0]}</loc></url>`,'')})
+  await assert.rejects(submitIndexNow({xml,key,client:staleClient,urls:selection,submit:true}),/Live sitemap does not match/)
+  assert.deepEqual(staleClient.calls.map(call=>[call.method,call.url]),[
+    ['GET',`${origin}/${key}.txt`],['GET',origin+'/sitemap.xml'],
+  ])
 })
 
 test('202 stays pending; rejected/rate-limited responses do not retry', async () => {

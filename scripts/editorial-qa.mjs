@@ -21,9 +21,11 @@ const base=process.env.QA_URL||`http://127.0.0.1:${server.address().port}`
 const engine=process.env.QA_ENGINE||'chromium'
 const browser=await(engine==='webkit'?webkit:chromium).launch({headless:true})
 const articles=JSON.parse(await readFile('src/content/journal.json','utf8'))
+const articlePaths=articles.map(article=>`/bakim-rehberi/${article.slug}/`)
 const reports=[]
 const label=process.env.QA_LABEL||engine
 try{
+  assert.equal(articles.length,5,'Five articles in the full journal')
   for(const width of(process.env.QA_WIDTHS||'320,390,430,768,1024,1440').split(',').map(Number)){
     const height=Number(process.env.QA_HEIGHT)||(width<768?844:1000)
     const context=await browser.newContext({locale:'tr-TR',viewport:{width,height},isMobile:width<768,hasTouch:width<768,deviceScaleFactor:1,reducedMotion:'reduce'})
@@ -49,7 +51,9 @@ try{
     const gallery=page.locator(`.sz-gallery.sz-only-${variant}`)
     const journal=page.locator(`.sz-journal.sz-only-${variant}`)
     assert.equal(await gallery.locator('.sz-shot').count(),6,'Six curated images')
-    assert.equal(await journal.locator('.sz-article-card').count(),3,'Three articles')
+    const homepageArticles=await journal.locator('a.sz-article-card').evaluateAll(cards=>cards.map(card=>card.getAttribute('href')))
+    assert.deepEqual(homepageArticles,articlePaths.slice(0,3),'Three current articles on the homepage')
+    assert.ok(await journal.locator('a.sz-pill-link[href="/bakim-rehberi/"]').isVisible(),'Visible link to the complete journal')
     await gallery.screenshot({path:resolve(output,`${label}-${width}-gallery.png`)})
     await journal.screenshot({path:resolve(output,`${label}-${width}-journal.png`)})
     for(const [category,count] of[['Tırnak',3],['Kirpik',1],['Makyaj',2],['Tümü',6]]){
@@ -84,8 +88,9 @@ try{
     assert.ok(journalPosition.y>=60&&journalPosition.y<=110,'Direct journal link')
     const firstArticle=page.locator(`.sz-journal.sz-only-${variant} .sz-article-card`).first()
     await firstArticle.click()
-    await page.waitForURL('**/bakim-rehberi/tirnak-formu-ve-kisisel-stil/')
+    await page.waitForURL(base+articlePaths[0])
     assert.equal(await page.locator('h1').count(),1,'Article opens through card')
+    assert.equal(await page.locator('h1').innerText(),articles[0].title,'Lead card opens the current lead article')
     for(const article of articles){
       const response=await page.goto(base+`/bakim-rehberi/${article.slug}/`,{waitUntil:'load'})
       assert.equal(response.status(),200,'Article direct URL')
@@ -95,23 +100,25 @@ try{
       assert.deepEqual(checks.broken,[],'Article images')
       assert.deepEqual(checks.clipped,[],'Article clipped text: '+article.slug)
       assert.equal(await page.locator('h1').count(),1,'One article H1')
-      assert.equal(await page.locator('.sz-reading-body h2').count(),4,'Complete article body')
+      assert.equal(await page.locator('.sz-reading-body h2').count(),article.sections.length,'Complete article body')
       assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://www.sazibeauty.com/bakim-rehberi/'+article.slug+'/','Article canonical')
       const schema=await page.locator('script[type="application/ld+json"]').textContent()
       assert.equal(JSON.parse(schema)['@graph'].find(item=>item['@type']==='BlogPosting')?.['@type'],'BlogPosting','Article structured data')
       assert.equal(await page.locator('.sz-reading-cta a').getAttribute('href'),'/#iletisim','Original booking path')
       await page.screenshot({path:resolve(output,`${label}-${width}-${article.slug}.png`),fullPage:width===390})
     }
-    await page.goto(base+'/bakim-rehberi/',{waitUntil:'load'})
-    assert.equal(await page.locator('.sz-article-card').count(),3,'Article index')
+    const listingResponse=await page.goto(base+'/bakim-rehberi/',{waitUntil:'load'})
+    assert.equal(listingResponse.status(),200,'Journal index direct URL')
+    const listedArticles=await page.locator('.sz-index-grid a.sz-article-card').evaluateAll(cards=>cards.map(card=>card.getAttribute('href')))
+    assert.deepEqual(listedArticles,articlePaths,'All five articles appear on the journal index in order')
     for(const path of['/robots.txt','/sitemap.xml']){
       const response=await context.request.get(base+path)
       assert.equal(response.status(),200,path)
     }
     assert.deepEqual(errors,[],'Browser errors')
     assert.deepEqual(failed,[],'Network errors')
-    reports.push({width,height,engine,gallery:6,articles:3,filters:true,lightbox:true,hashes:true,articleRoutes:true,overflow:false,result:'PASS'})
-    console.log(`PASS ${engine} ${width}x${height}: 6 images, filters + lightbox, 3 complete articles, direct URLs, no overflow/errors`)
+    reports.push({width,height,engine,gallery:6,articles:articles.length,homepageArticleCards:3,listingLink:true,filters:true,lightbox:true,hashes:true,articleRoutes:true,overflow:false,result:'PASS'})
+    console.log(`PASS ${engine} ${width}x${height}: 6 images, filters + lightbox, 3 homepage cards with listing link, ${articles.length} complete articles, direct URLs, no overflow/errors`)
     await context.close()
   }
 }finally{

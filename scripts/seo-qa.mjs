@@ -3,7 +3,7 @@ import { createServer } from 'node:http'
 import { readFile, mkdir, writeFile } from 'node:fs/promises'
 import { resolve, extname, sep } from 'node:path'
 import { chromium, webkit } from 'playwright'
-import { locales, languageNames, localeTags, localeDir, localizedContent, pageHref } from '../src/i18n/routes.mjs'
+import { locales, languageNames, localeTags, ogLocales, localeDir, localizedContent, pageHref } from '../src/i18n/routes.mjs'
 
 const canonicalOrigin = 'https://www.sazibeauty.com'
 const organizationId = canonicalOrigin + '/#organization'
@@ -14,6 +14,9 @@ const engine = process.env.QA_ENGINE || 'chromium'
 const label = process.env.QA_LABEL || engine
 const widths = (process.env.QA_WIDTHS || '320,390,768,1440').split(',').map(Number)
 const { services, journal: articles } = localizedContent.tr
+const localGuideSlugs = ['maltepe-manikur-pedikur-rehberi', 'maltepe-kirpik-kalici-makyaj-randevu-rehberi']
+const legacyArticleSlug = articles.find(article => !localGuideSlugs.includes(article.slug))?.slug
+const localGuideArea = 'Maltepe, İstanbul'
 const sourcePages = [
   { path:'/', type:'home' },
   ...services.map(service => ({ path:`/hizmetler/${service.slug}/`, type:'service', slug:service.slug })),
@@ -79,6 +82,10 @@ function assertLanguageAlternates(links, sourcePath, label) {
   expected.push(['x-default', canonicalOrigin + sourcePath])
   assert.deepEqual(actual.sort(), expected.sort(), label + ': all reciprocal language variants')
 }
+function assertLocalizedLink(hrefs, locale, sourcePath, label) {
+  const href = pageHref(locale, sourcePath)
+  assert.ok(hrefs.includes(href) || hrefs.includes(canonicalOrigin + href), `${label}: localized link ${href}`)
+}
 function checkNoInventedFacts(node) {
   if (!node || typeof node !== 'object') return
   for (const [key, value] of Object.entries(node)) {
@@ -108,6 +115,7 @@ function inspectHtml(html, { source, locale, entry, path }) {
   assert.equal(htmlAttributes?.lang, locale, `${path}: document language`)
   assert.equal(htmlAttributes?.dir || 'ltr', localeDir(locale), `${path}: text direction`)
   const text = bodyText(html)
+  const hrefs = tags(html, 'a').map(item => item.href)
   const minimum = source.type === 'home' ? 1000 : source.type === 'service' ? 700 : 300
   assert.ok(text.length >= minimum, `${path}: substantial initial text (${text.length})`)
   assert.ok(!html.includes('<div id="root"></div>'), `${path}: nonempty initial app HTML`)
@@ -127,10 +135,8 @@ function inspectHtml(html, { source, locale, entry, path }) {
   if (source.type === 'home') {
     const heading = translated(locale, 'Sıradanın')
     assert.ok(headings.every(value => value.includes(heading)), `${path}: desktop and mobile hero translated`)
-    const hrefs = tags(html, 'a').map(item => item.href)
     for (const service of services) {
-      const href = pageHref(locale, `/hizmetler/${service.slug}/`)
-      assert.ok(hrefs.includes(href) || hrefs.includes(canonicalOrigin + href), `${path}: localized service link ${href}`)
+      assertLocalizedLink(hrefs, locale, `/hizmetler/${service.slug}/`, path)
     }
   }
   const schemas = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(match => JSON.parse(match[1]))
@@ -154,6 +160,9 @@ function inspectHtml(html, { source, locale, entry, path }) {
     assert.equal(service?.provider?.['@id'], organizationId, `${path}: service entity`)
     assert.equal(service?.name, entry.title, `${path}: localized service schema name`)
     assert.equal(service?.url, canonicalOrigin + path, `${path}: localized service schema URL`)
+    for (const guide of articles.filter(item => item.relatedServices?.includes(source.slug))) {
+      assertLocalizedLink(hrefs, locale, `/bakim-rehberi/${guide.slug}/`, `${path}: related guide`)
+    }
   }
   if (source.type === 'article') {
     const article = schema['@graph'].find(item => item['@type'] === 'BlogPosting')
@@ -161,6 +170,35 @@ function inspectHtml(html, { source, locale, entry, path }) {
     assert.equal(article.headline, entry.title, `${path}: localized article schema headline`)
     assert.equal(article.inLanguage, localeTags[locale], `${path}: localized article schema language`)
     assert.equal(article.mainEntityOfPage?.['@id'], canonicalOrigin + path + '#webpage', `${path}: localized article schema page`)
+    if (localGuideSlugs.includes(source.slug)) {
+      const guide = articles.find(item => item.slug === source.slug)
+      assert.equal(entry.area, localGuideArea, `${path}: Maltepe guide area`)
+      assert.deepEqual(entry.relatedServices, guide.relatedServices, `${path}: localized guide keeps its service relationships`)
+      assert.equal(article.description, entry.excerpt, `${path}: localized article schema description`)
+      assert.equal(article.datePublished, entry.date, `${path}: article publication date`)
+      assert.equal(article.spatialCoverage?.['@type'], 'Place', `${path}: article spatial coverage type`)
+      assert.equal(article.spatialCoverage?.name, localGuideArea, `${path}: Maltepe spatial coverage`)
+      const social = Object.fromEntries(meta.filter(item => item.property).map(item => [item.property, item.content]))
+      assert.equal(social['og:type'], 'article', `${path}: article social type`)
+      assert.equal(social['og:locale'], ogLocales[locale], `${path}: localized social language`)
+      assert.equal(social['og:title'], titles[0], `${path}: localized social title`)
+      assert.equal(social['og:description'], entry.excerpt, `${path}: localized social description`)
+      assert.equal(social['og:image:alt'], entry.alt, `${path}: localized social image alternative`)
+      assert.equal(social['og:url'], canonicalOrigin + path, `${path}: localized social URL`)
+      for (const slug of guide.relatedServices) {
+        assertLocalizedLink(hrefs, locale, `/hizmetler/${slug}/`, `${path}: related service`)
+      }
+    }
+  }
+  if (source.type === 'journal') {
+    const entries = localizedContent[locale].journal
+    const list = schema['@graph'].find(item => item['@type'] === 'ItemList')
+    const expectedItems = entries.map((article, index) => {
+      const sourcePath = `/bakim-rehberi/${article.slug}/`
+      assertLocalizedLink(hrefs, locale, sourcePath, `${path}: journal listing`)
+      return { position:index + 1, name:article.title, url:canonicalOrigin + pageHref(locale, sourcePath) }
+    })
+    assert.deepEqual(list?.itemListElement?.map(({position, name, url}) => ({position, name, url})), expectedItems, `${path}: ordered journal schema inventory`)
   }
   return { path, locale, sourcePath:source.path, title:titles[0], heading:headings[0], description:descriptions[0].content, textLength:text.length, canonical:canonicals[0].href, schema:true }
 }
@@ -190,6 +228,16 @@ async function inspectLayout(page) {
 async function expectDocumentLanguage(page, locale) {
   assert.equal(await page.locator('html').getAttribute('lang'), locale, `${page.url()}: rendered language`)
   assert.equal(await page.locator('html').evaluate(element => getComputedStyle(element).direction), localeDir(locale), `${page.url()}: rendered direction`)
+}
+
+async function inspectHomepageJournal(page, locale) {
+  const journal = page.locator('.sz-journal:visible')
+  assert.equal(await journal.count(), 1, `${locale}: one visible homepage journal`)
+  const cards = await journal.locator('a.sz-article-card').evaluateAll(elements => elements.map(element => element.getAttribute('href')))
+  const expected = localizedContent[locale].journal.slice(0, 3).map(article => pageHref(locale, `/bakim-rehberi/${article.slug}/`))
+  assert.deepEqual(cards, expected, `${locale}: exactly three current homepage articles`)
+  const listing = pageHref(locale, '/bakim-rehberi/')
+  assert.ok(await journal.locator(`a.sz-pill-link[href="${listing}"]`).isVisible(), `${locale}: visible link to all journal articles`)
 }
 
 async function openPicker(page, touch) {
@@ -324,9 +372,15 @@ try {
   const sitemapEntries = [...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g)]
   const sitemapUrls = sitemapEntries.map(match => decode(match[1]))
   const sitemapByUrl = new Map(sitemapEntries.map(match => [decode(match[1]), match[2]]))
-  assert.equal(sourcePages.length, 10, 'Ten original Turkish pages')
+  assert.equal(articles.length, 5, 'Five journal articles')
+  assert.deepEqual(articles.slice(0, 2).map(article => article.slug), localGuideSlugs, 'Two Maltepe guides lead the journal')
+  for (const guide of articles.slice(0, 2)) {
+    assert.ok(Array.isArray(guide.relatedServices) && guide.relatedServices.length > 0, `${guide.slug}: guide names related services`)
+    assert.ok(guide.relatedServices.every(slug => services.some(service => service.slug === slug)), `${guide.slug}: related services exist`)
+  }
+  assert.equal(sourcePages.length, 12, 'Twelve Turkish pages')
   for (const source of sourcePages) assert.equal(pageHref('tr', source.path), source.path, 'Original Turkish routes remain stable')
-  assert.equal(pages.length, 70, 'Seven languages with ten pages each')
+  assert.equal(pages.length, 84, 'Seven languages with twelve pages each')
   assert.equal(sitemapUrls.length, pages.length, 'Full localized sitemap inventory')
   assert.deepEqual([...new Set(sitemapUrls)].sort(), pages.map(item => canonicalOrigin + item.path).sort(), 'Exact canonical sitemap inventory')
   const rawPages = []
@@ -365,12 +419,14 @@ try {
   const noJsFooter = noJsPage.locator('.bn-at-foot')
   for (const service of services) assert.equal(await noJsFooter.locator(`a[href="/hizmetler/${service.slug}/"]`).isVisible(), true, `Visible no-JS service link: ${service.slug}`)
   assert.equal(await noJsFooter.locator('a[href="/iletisim/"]').isVisible(), true, 'Visible no-JS contact link')
+  await inspectHomepageJournal(noJsPage, 'tr')
   await noJsPage.screenshot({path:resolve(output,`${label}-no-js-390.png`)})
   for (const locale of locales.filter(item => item !== 'tr')) {
     await noJsPage.goto(base + pageHref(locale), {waitUntil:'load'})
     await expectDocumentLanguage(noJsPage, locale)
     const title = await noJsPage.getByRole('heading', {level:1}).innerText()
     assert.ok(title.includes(translated(locale, 'Sıradanın')), 'Visible localized homepage heading without JS')
+    await inspectHomepageJournal(noJsPage, locale)
     for (const service of services) {
       const path = pageHref(locale, `/hizmetler/${service.slug}/`)
       assert.equal(await noJsFooter.locator(`a[href="${path}"]`).isVisible(), true, `Visible localized service link without JS: ${path}`)
@@ -383,7 +439,7 @@ try {
   await noJsPage.waitForURL(base + pageHref('en', firstService))
   await expectDocumentLanguage(noJsPage, 'en')
   assert.equal(await noJsPage.getByRole('heading', {level:1}).innerText(), localizedContent.en.services[0].title, 'Static service and language link work without JS')
-  report.checks.push({type:'javascript-disabled',width:390,locales,homepages:true,serviceLanguageLink:true,status:'PASS'})
+  report.checks.push({type:'javascript-disabled',width:390,locales,homepages:true,homepageJournal:true,serviceLanguageLink:true,status:'PASS'})
   await noJs.close()
   console.log(`PASS ${engine}: seven homepages and equivalent static service links work without JavaScript`)
 
@@ -436,7 +492,8 @@ try {
 
     const localizedLayouts = pages.filter(item => item.locale !== 'tr' && (
       width === 390 || ['en','de','ar'].includes(item.locale)
-    ) && (['home','contact','journal'].includes(item.source.type) || [services[0].slug, articles[0].slug].includes(item.source.slug)))
+    ) && (['home','contact','journal'].includes(item.source.type) || [services[0].slug, legacyArticleSlug].includes(item.source.slug)
+      || (width === 390 && localGuideSlugs.includes(item.source.slug))))
     const layoutPages = [...pages.filter(item => item.locale === 'tr' && item.path !== '/'), ...localizedLayouts]
     const localizedBookings = []
     for (const { path, locale, source, entry } of layoutPages) {

@@ -1,6 +1,7 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { parseArgs } from 'node:util'
 import { request } from 'playwright'
 import { validateKey } from './build-indexnow.mjs'
 
@@ -25,8 +26,19 @@ export function payloadFor(xml, value) {
   return { host:new URL(origin).host, key, keyLocation:`${origin}/${key}.txt`, urlList:sitemapUrls(xml) }
 }
 
-export async function submitIndexNow({ xml, key, client, submit = false }) {
+export async function submitIndexNow({ xml, key, client, submit = false, urls }) {
   const payload = payloadFor(xml, key)
+  const localSitemapUrls = payload.urlList
+  if (urls !== undefined) {
+    if (!Array.isArray(urls) || !urls.length || new Set(urls).size !== urls.length) {
+      throw new Error('Select at least one URL and specify each URL only once.')
+    }
+    const canonicalUrls = new Set(localSitemapUrls)
+    if (Array.from(urls).some(url => !canonicalUrls.has(url))) {
+      throw new Error('Every selected URL must be an exact canonical address in the local sitemap.')
+    }
+    payload.urlList = [...urls]
+  }
   const receipt = { host:payload.host, endpoint, urlCount:payload.urlList.length, urls:payload.urlList, submittedAt:null, httpStatus:null, status:'dry-run', indexed:null, indexingStatus:'not-checked' }
   if (!submit) return receipt
 
@@ -35,7 +47,7 @@ export async function submitIndexNow({ xml, key, client, submit = false }) {
     throw new Error('Live IndexNow ownership file is missing, redirected or mismatched. No submission made.')
   }
   const sitemap = await client.get(origin + '/sitemap.xml', { maxRedirects:0 })
-  if (sitemap.status() !== 200 || JSON.stringify(sitemapUrls(await sitemap.text())) !== JSON.stringify(payload.urlList)) {
+  if (sitemap.status() !== 200 || JSON.stringify(sitemapUrls(await sitemap.text())) !== JSON.stringify(localSitemapUrls)) {
     throw new Error('Live sitemap does not match this build. No submission made.')
   }
   for (const url of payload.urlList) {
@@ -74,18 +86,21 @@ async function localKey() {
 }
 
 async function main() {
-  const args = process.argv.slice(2)
-  if (args.some(arg => arg !== '--submit')) throw new Error('Usage: npm run indexnow -- [--submit]')
+  const { values: { submit, url: urls } } = parseArgs({
+    options: {
+      submit: { type:'boolean' },
+      url: { type:'string', multiple:true },
+    },
+  })
   const key = await localKey()
   const xml = await readFile('dist/sitemap.xml', 'utf8')
-  const submit = args.includes('--submit')
   let client
   try {
     if (submit) {
       const server = process.env.HTTPS_PROXY || process.env.HTTP_PROXY
       client = await request.newContext({ timeout:30000, ...(server ? { proxy:{server} } : {}) })
     }
-    const receipt = await submitIndexNow({ xml, key, client, submit })
+    const receipt = await submitIndexNow({ xml, key, client, submit, urls })
     if (submit) {
       const directory = resolve('../.sazi-indexnow-qa')
       await mkdir(directory, {recursive:true})

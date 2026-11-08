@@ -41,7 +41,7 @@ function card(locale, article, index) {
 let built = 0
 for (const locale of locales) {
   const copy = readingCopy[locale]
-  const { journal: articles } = localizedContent[locale]
+  const { journal: articles, services } = localizedContent[locale]
   const home = escape(pageHref(locale))
   const listing = escape(pageHref(locale, journalPath))
   const booking = escape(pageHref(locale, '/#iletisim'))
@@ -50,17 +50,24 @@ for (const locale of locales) {
     if (!/^[a-z0-9-]+$/.test(article.slug)) throw new Error('Invalid editorial slug: ' + article.slug)
     const turkishPath = articlePath(article.slug)
     const url = absolute(pageHref(locale, turkishPath))
-    const related = articles.filter(item => item.slug !== article.slug)
+    const related = articles.filter(item => item.slug !== article.slug).slice(0, 3)
+    const relatedServices = (article.relatedServices ?? []).map(slug => {
+      const service = services.find(item => item.slug === slug)
+      if (!service) throw new Error('Unknown service in article ' + article.slug + ': ' + slug)
+      return service
+    })
+    const serviceLinks = relatedServices.length ? `<section class="sz-content sz-related"><h2>${escape(copy.services)}</h2><nav class="sz-related-grid" aria-label="${escape(copy.services)}">${relatedServices.map(service => `<a class="sz-related-link" href="${escape(pageHref(locale, '/hizmetler/' + service.slug + '/'))}"><span><small>${escape(copy.serviceGuide)}</small><strong>${escape(service.title)}</strong></span></a>`).join('')}</nav></section>` : ''
     const body = `<main><article class="sz-content">
   <div class="sz-reading-hero"><div><ol class="sz-breadcrumbs" aria-label="${escape(copy.breadcrumb)}"><li><a href="${home}">${escape(siteConfig.brand)}</a></li><li aria-hidden="true">/</li><li><a href="${listing}">${escape(copy.journal)}</a></li></ol><p class="sz-article-meta"><span>${escape(article.category)}</span><span>${escape(copy.readTime(article.readTime))}</span></p><h1>${escape(article.title)}</h1><p class="sz-reading-deck">${escape(article.excerpt)}</p></div><figure class="sz-reading-cover"><img src="${image(article.image)}" srcset="${srcset(article.image)}" sizes="(min-width:768px) 45vw,90vw" ${imageDimensions(article.image)} alt="${escape(article.alt)}" fetchpriority="high"><span>${escape(copy.journalLabel)} ${arrow(locale)}</span></figure></div>
   <div class="sz-reading-body"><p class="sz-reading-intro">${escape(article.intro)}</p><nav class="sz-reading-toc" aria-label="${escape(copy.inArticle)}"><strong>${escape(copy.inArticle)}</strong><ol>${article.sections.map((section, index) => `<li><a href="#not-${index + 1}">${escape(section.title)}</a></li>`).join('')}</ol></nav>${article.sections.map((section, index) => `<section aria-labelledby="not-${index + 1}"><h2 id="not-${index + 1}">${escape(section.title)}</h2>${section.paragraphs.map(paragraph => `<p>${escape(paragraph)}</p>`).join('')}</section>${index === 0 ? `<blockquote class="sz-reading-quote">${escape(article.quote)}</blockquote>` : ''}`).join('')}<aside class="sz-reading-cta"><p>${copy.articleCta.map(escape).join('<br>')}</p><a class="sz-pill-link" href="${booking}">${escape(copy.book)} ${arrow(locale)}</a></aside></div>
-  </article><section class="sz-content sz-related" aria-labelledby="related-title"><h2 id="related-title">${escape(copy.relatedArticles)}</h2><div class="sz-related-grid">${related.map(item => `<a class="sz-related-link" href="${escape(pageHref(locale, articlePath(item.slug)))}"><img src="${image(item.image, 480)}" width="112" height="112" alt="${escape(item.alt)}" loading="lazy"><span><small>${escape(item.category)}</small><strong>${escape(item.title)}</strong></span></a>`).join('')}</div></section></main>`
+  </article>${serviceLinks}<section class="sz-content sz-related" aria-labelledby="related-title"><h2 id="related-title">${escape(copy.relatedArticles)}</h2><div class="sz-related-grid">${related.map(item => `<a class="sz-related-link" href="${escape(pageHref(locale, articlePath(item.slug)))}"><img src="${image(item.image, 480)}" width="112" height="112" alt="${escape(item.alt)}" loading="lazy"><span><small>${escape(item.category)}</small><strong>${escape(item.title)}</strong></span></a>`).join('')}</div></section></main>`
     const graph = [
       {
         '@type': 'BlogPosting', '@id': url + '#article', headline: article.title, description: article.excerpt,
         image: absolute(image(article.image)), datePublished: article.date, dateModified: article.date,
         inLanguage: localeTags[locale], author: { '@id': organizationId }, publisher: { '@id': organizationId },
         mainEntityOfPage: { '@id': url + '#webpage' },
+        ...(article.area ? { spatialCoverage: { '@type': 'Place', name: article.area } } : {}),
       },
       breadcrumb(locale, turkishPath, [[copy.journal, journalPath], [article.title, turkishPath]]),
     ]

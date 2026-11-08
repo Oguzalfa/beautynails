@@ -175,6 +175,87 @@
   ],
   "journal": [
     {
+      "slug": "maltepe-manikur-pedikur-rehberi",
+      "localizedSlug": "maltepe-manicure-pedicure-guide",
+      "category": "Nail care",
+      "title": "Maltepe manicure and pedicure guide",
+      "excerpt": "Comparing manicure and pedicure options in Maltepe? Decide on a finish, ask about hygiene and removal, and confirm what your appointment includes.",
+      "image": "fuchsia-french",
+      "alt": "Manicure with fuchsia French tips against pink satin",
+      "readTime": "3 min read",
+      "date": "2026-11-09",
+      "intro": "If you are looking for a manicure or pedicure in Maltepe, start by choosing what you want from the appointment. A short, natural finish, a pedicure without polish and a detailed nail design call for different conversations. Confirm which services the studio offers before you choose a time.",
+      "quote": "Ask what the appointment includes before you set aside time for it.",
+      "sections": [
+        {
+          "title": "Choose between everyday grooming and a decorative finish",
+          "paragraphs": [
+            "For everyday grooming, think about your preferred length, nail shape and whether you want a natural, buffed or polished finish. Men looking for discreet hand or foot care can ask about a polish-free manicure or pedicure and describe the length and finish they prefer.",
+            "If you want colour, French tips or nail art, bring one clear reference photo and say which detail you want to keep. For a pedicure, mention whether you want polish and whether there is an existing coating to remove."
+          ]
+        },
+        {
+          "title": "Ask how the appointment is handled",
+          "paragraphs": [
+            "When comparing studios, ask how they prepare the work surface between clients, which tools are single-use and how they clean reusable tools. If an existing coating or extension needs removal, ask whether that step is included and how much extra time to allow.",
+            "Describe anything that affects the service in advance, including a damaged nail or an area that is uncomfortable. That gives the studio a chance to clarify what the appointment can cover before you travel."
+          ]
+        },
+        {
+          "title": "Confirm the details before travelling from Maltepe",
+          "paragraphs": [
+            "In your first message, include the service you want, whether you are booking hands, feet or both, the finish you prefer and any removal you need. Ask the studio to confirm availability, what is included, the estimated duration and the total price.",
+            "To enquire about a nail appointment with Şazi Beauty, message the studio on WhatsApp at +90 501 128 18 08. If you also want a pedicure, ask whether it is available for that booking. Confirm the address and appointment time with the studio before setting out."
+          ]
+        }
+      ],
+      "area": "Maltepe, İstanbul",
+      "relatedServices": [
+        "tirnak-sanati"
+      ]
+    },
+    {
+      "slug": "maltepe-kirpik-kalici-makyaj-randevu-rehberi",
+      "localizedSlug": "maltepe-lash-extensions-permanent-makeup-guide",
+      "category": "Lashes & makeup",
+      "title": "Maltepe lash extensions and permanent makeup guide",
+      "excerpt": "Researching lash extensions or permanent makeup in Maltepe? Prepare reference photos and ask about the consultation, aftercare and appointment details.",
+      "image": "crystal-eye",
+      "alt": "Brown eye with defined lashes and a pink crystal detail",
+      "readTime": "3 min read",
+      "date": "2026-11-09",
+      "intro": "If you are comparing lash extensions or permanent makeup appointments in Maltepe, name the service and the effect you want before you enquire. A softly defined lash line and a subtle lip tint call for different consultations. A few notes about your daily routine and preferences can help the studio explain your options.",
+      "quote": "Bring a photo for the effect you like and describe the detail that matters to you.",
+      "sections": [
+        {
+          "title": "For lash extensions, describe the look and upkeep you want",
+          "paragraphs": [
+            "If you want definition that feels understated, say what you mean by natural. You might want a finer lash line, less length at the outer corner or a shape that feels comfortable with glasses. Bring a reference and mention whether you already have extensions that may need removing.",
+            "Ask how the studio chooses length, curl and fullness for your eye shape. Ask what the first appointment includes, how maintenance appointments are arranged and what the studio expects you to do between visits."
+          ]
+        },
+        {
+          "title": "For permanent makeup, ask to review the plan before deciding",
+          "paragraphs": [
+            "Specify the area you are enquiring about and the effect you prefer. For a lip colour consultation, for example, bring a shade reference and explain whether you want subtle definition or a stronger wash of colour. Mention any previous work in the area so the practitioner can discuss your options.",
+            "Ask to review the proposed shape and pigment choice during the consultation. Discuss what to expect during healing, the aftercare instructions and whether a follow-up is usually planned. If you have had a reaction to a product before, mention it when you enquire so the studio can explain how it assesses suitability."
+          ]
+        },
+        {
+          "title": "Send a clear appointment enquiry",
+          "paragraphs": [
+            "In your message, include the service you want, a short description of the intended look and any existing work. Ask whether you need a separate consultation, what the appointment includes and what to allow for time and cost.",
+            "For a Şazi Beauty enquiry, message WhatsApp at +90 501 128 18 08. Confirm the availability of the specific service, the appointment address and your time directly with the studio before travelling from Maltepe."
+          ]
+        }
+      ],
+      "area": "Maltepe, İstanbul",
+      "relatedServices": [
+        "ipek-kirpik",
+        "kalici-makyaj"
+      ]
+    },
+    {
       "slug": "tirnak-formu-ve-kisisel-stil",
       "localizedSlug": "nail-shape-and-personal-style",
       "category": "Nails & style",

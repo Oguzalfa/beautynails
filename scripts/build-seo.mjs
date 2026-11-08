@@ -5,12 +5,11 @@ import { pathToFileURL } from 'node:url'
 
 await build({ build: { outDir: 'dist', emptyOutDir: true } })
 await build({ publicDir: false, build: { ssr: 'src/entry-server.tsx', outDir: 'dist-ssr', emptyOutDir: true } })
-const { render, contentPages, getSeo, siteConfig } = await import(pathToFileURL(resolve('dist-ssr/entry-server.js')).href)
+const { render, pagePaths: paths, getSeo, siteConfig } = await import(pathToFileURL(resolve('dist-ssr/entry-server.js')).href)
 const template = await readFile('dist/index.html', 'utf8')
 const escape = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 const verification = process.env.GOOGLE_SITE_VERIFICATION?.trim()
 if (verification && !/^[a-zA-Z0-9_-]+$/.test(verification)) throw new Error('Invalid Google verification token')
-const paths = ['/', ...contentPages.map((p) => p.path)]
 for (const path of [...paths, '/not-found/']) {
   const seo = getSeo(path)
   const head = [
@@ -18,19 +17,22 @@ for (const path of [...paths, '/not-found/']) {
     `<meta name="description" content="${escape(seo.description)}">`,
     `<meta name="robots" content="${seo.valid ? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' : 'noindex, follow'}">`,
     ...(seo.canonical ? [`<link rel="canonical" href="${escape(seo.canonical)}">`] : []),
-    `<meta property="og:site_name" content="BeautyNails">`, `<meta property="og:locale" content="tr_TR">`,
+    ...seo.alternates.map(({ language, url }) => `<link rel="alternate" hreflang="${language}" href="${escape(url)}">`),
+    `<meta property="og:site_name" content="BeautyNails">`, `<meta property="og:locale" content="${seo.ogLocale}">`,
+    ...(seo.valid ? seo.ogAlternates.map((locale) => `<meta property="og:locale:alternate" content="${locale}">`) : []),
     `<meta property="og:type" content="${seo.type}">`, `<meta property="og:title" content="${escape(seo.title)}">`,
     `<meta property="og:description" content="${escape(seo.description)}">`,
     ...(seo.canonical ? [`<meta property="og:url" content="${escape(seo.canonical)}">`] : []),
     `<meta property="og:image" content="${escape(seo.image)}">`,
-    `<meta property="og:image:alt" content="BeautyNails tırnak ve güzellik stüdyosu">`,
+    `<meta property="og:image:alt" content="${escape(seo.imageAlt)}">`,
     `<meta name="twitter:card" content="summary_large_image">`, `<meta name="twitter:title" content="${escape(seo.title)}">`,
     `<meta name="twitter:description" content="${escape(seo.description)}">`, `<meta name="twitter:image" content="${escape(seo.image)}">`,
     ...(verification ? [`<meta name="google-site-verification" content="${escape(verification)}">`] : []),
     ...(seo.jsonLd ? [`<script type="application/ld+json">${JSON.stringify(seo.jsonLd).replaceAll('<', '\\u003c')}</script>`] : []),
   ].join('\n')
   let html = template.replace(/<title>[\s\S]*?<\/title>/, '').replace(/<meta\s+name="description"[\s\S]*?>/, '')
-  if (path !== '/') html = html.replace(/<link[^>]+rel="preload"[^>]+as="image"[^>]*>/g, '')
+  html = html.replace('<html lang="tr">', `<html lang="${seo.locale}" dir="${seo.locale === 'ar' ? 'rtl' : 'ltr'}">`)
+  if (!seo.isHome) html = html.replace(/<link[^>]+rel="preload"[^>]+as="image"[^>]*>/g, '')
   html = html.replace('</head>', `${head}\n</head>`).replace('<div id="root"></div>', `<div id="root" data-prerendered="true">${render(path)}</div>`)
   const dest = path === '/not-found/' ? 'dist/404.html' : path === '/' ? 'dist/index.html' : `dist${path}index.html`
   await mkdir(dirname(dest), { recursive: true }); await writeFile(dest, html)

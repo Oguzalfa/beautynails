@@ -3,13 +3,13 @@ import { ServiceDetail } from './components/ServiceDetail'
 import { BookingPanel } from './components/BookingPanel'
 import { SatinHome } from './components/satin/SatinHome'
 import { ContentPage } from './components/satin/ContentPage'
-import { getContentPage, normalizeContentPath } from './components/satin/pages'
+import { getRoute } from './routes'
 
 type Props = { initialPath?: string }
 
 export default function App({ initialPath }: Props) {
-  const path = normalizeContentPath(initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname))
-  const page = getContentPage(path)
+  const route = getRoute(initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname))
+  const locale = route?.locale ?? 'tr'
   const [bookingOpen, setBookingOpen] = useState(false)
   const [bookingService, setBookingService] = useState<string | null>(null)
   const [serviceId, setServiceId] = useState<string | null>(null)
@@ -20,14 +20,14 @@ export default function App({ initialPath }: Props) {
 
   return (
     <>
-      {path === '/' ? (
-        <SatinHome onOpenBooking={openBooking} onOpenService={setServiceId} />
+      {route?.sourcePath === '/' ? (
+        <SatinHome locale={locale} onOpenBooking={openBooking} onOpenService={setServiceId} />
       ) : (
-        <ContentPage page={page} onBook={openBooking} />
+        <ContentPage locale={locale} path={route?.path ?? '/'} page={route?.page ?? null} onBook={openBooking} />
       )}
       <div className="bn-page">
-        <ServiceDetail serviceId={serviceId} onClose={() => setServiceId(null)} />
-        <BookingPanel open={bookingOpen} initialService={bookingService} onClose={() => setBookingOpen(false)} />
+        <ServiceDetail locale={locale} serviceId={serviceId} onClose={() => setServiceId(null)} />
+        <BookingPanel locale={locale} open={bookingOpen} initialService={bookingService} onClose={() => setBookingOpen(false)} />
       </div>
     </>
   )

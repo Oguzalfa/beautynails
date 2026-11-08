@@ -1,37 +1,55 @@
 import { siteConfig } from '../../config/site'
+import type { Locale } from '../../locales'
+import { getLocalizedPage, pagesForLocale, pathForLocale } from '../../routes'
+import { LanguageSelector } from '../LanguageSelector'
+import { contentPageCopy } from './content-page-copy'
 import { ArrowIcon, WhatsAppIcon } from './icons'
-import { contentPages, type ContentPageData } from './pages'
+import type { ContentPageData } from './pages'
 
 type Props = {
+  locale: Locale
+  path: string
   page: ContentPageData | null
   onBook: (service?: string) => void
 }
 
-export function ContentPage({ page, onBook }: Props) {
+export function ContentPage({ locale, path, page, onBook }: Props) {
+  const copy = contentPageCopy[locale]
+  const contentPages = pagesForLocale(locale)
   const articles = contentPages.filter((item) => item.kind === 'article')
   const services = contentPages.filter((item) => item.kind === 'service')
   const isIndex = page?.kind === 'journal-index' || page?.kind === 'service-index'
   const listedPages = page?.kind === 'service-index' ? services : articles
+  const homePath = locale === 'tr' ? '/?lang=tr' : pathForLocale('/', locale)
+  const servicesPath = pathForLocale('/hizmetler/', locale)
+  const journalPath = pathForLocale('/yazilar/', locale)
+  const bookingService = page?.kind === 'service' && page.serviceId
+    ? getLocalizedPage(`/hizmetler/${page.serviceId}/`, 'tr')?.heading
+    : undefined
+  const book = () => onBook(bookingService)
 
   return (
-    <div className="satin-page content-page">
-      <a className="content-page-skip" href="#sayfa-icerik">İçeriğe geç</a>
+    <div className="satin-page content-page" lang={locale}>
+      <a className="content-page-skip" href="#sayfa-icerik">{copy.skip}</a>
       <header className="content-page-header content-width">
-        <a className="brand" href="/" aria-label="BeautyNails ana sayfa">{siteConfig.wordmark}</a>
-        <nav aria-label="Sayfa bölümleri">
-          <a href="/hizmetler/">Hizmetler</a>
-          <a href="/yazilar/">Yazılar</a>
-          <button className="nav-book" type="button" onClick={() => onBook(page?.kind === 'service' ? page.heading : undefined)}>Randevu Al</button>
-        </nav>
+        <a className="brand" href={homePath} aria-label={copy.brandHome}>{siteConfig.wordmark}</a>
+        <div className="content-header-actions">
+          <nav aria-label={copy.pageSections}>
+            <a href={servicesPath}>{copy.services}</a>
+            <a href={journalPath}>{copy.articles}</a>
+            <button className="nav-book" type="button" onClick={book}>{copy.book}</button>
+          </nav>
+          <LanguageSelector locale={locale} path={path} />
+        </div>
       </header>
 
       <main id="sayfa-icerik" className="content-width content-page-main" tabIndex={-1}>
-        <nav className="content-breadcrumb" aria-label="İçerik yolu">
+        <nav className="content-breadcrumb" aria-label={copy.breadcrumb}>
           <ol>
-            <li><a href="/">Ana sayfa</a></li>
-            {page?.kind === 'article' ? <li><a href="/yazilar/">Bakım notları</a></li> : null}
-            {page?.kind === 'service' ? <li><a href="/hizmetler/">Hizmetler</a></li> : null}
-            <li aria-current="page">{page?.heading ?? 'Sayfa bulunamadı'}</li>
+            <li><a href={homePath}>{copy.home}</a></li>
+            {page?.kind === 'article' ? <li><a href={journalPath}>{copy.journal}</a></li> : null}
+            {page?.kind === 'service' ? <li><a href={servicesPath}>{copy.services}</a></li> : null}
+            <li aria-current="page">{page?.heading ?? copy.notFound}</li>
           </ol>
         </nav>
 
@@ -41,7 +59,7 @@ export function ContentPage({ page, onBook }: Props) {
               <header className="content-story-heading">
                 <p className="content-kicker">{page.category}</p>
                 <h1>{page.heading}</h1>
-                {page.kind === 'article' ? <p className="content-byline">BeautyNails · Bakım notları</p> : null}
+                {page.kind === 'article' ? <p className="content-byline">{siteConfig.brand} · {copy.journal}</p> : null}
                 <p className="content-story-intro">{page.intro}</p>
               </header>
               {page.image ? (
@@ -58,9 +76,9 @@ export function ContentPage({ page, onBook }: Props) {
                     </section>
                   ))}
                   <div className="content-story-contact">
-                    <p>Tercihlerinizi birlikte netleştirelim.</p>
-                    <button className="content-book" type="button" onClick={() => onBook(page.kind === 'service' ? page.heading : undefined)}>
-                      <span>Randevu Al</span><ArrowIcon />
+                    <p>{copy.contactPrompt}</p>
+                    <button className="content-book" type="button" onClick={book}>
+                      <span>{copy.book}</span><ArrowIcon />
                     </button>
                   </div>
                 </div>
@@ -77,13 +95,13 @@ export function ContentPage({ page, onBook }: Props) {
                     <p className="content-kicker">{item.category}</p>
                     <h2><a href={item.path}>{item.heading}</a></h2>
                     <p>{item.intro}</p>
-                    <a className="content-read-link" href={item.path}>{page.kind === 'service-index' ? 'Hizmeti incele' : 'Yazıyı oku'} <ArrowIcon /></a>
+                    <a className="content-read-link" href={item.path}>{page.kind === 'service-index' ? copy.readService : copy.readArticle} <ArrowIcon /></a>
                   </article>
                 ))}
               </div>
             ) : (
               <aside className="content-related" aria-labelledby="ilgili-icerikler">
-                <h2 id="ilgili-icerikler">{page.kind === 'service' ? 'Diğer hizmetler' : 'Diğer bakım notları'}</h2>
+                <h2 id="ilgili-icerikler">{page.kind === 'service' ? copy.otherServices : copy.otherArticles}</h2>
                 <ul>
                   {(page.kind === 'service' ? services : articles).filter((item) => item.path !== page.path).map((item) => (
                     <li key={item.path}><a href={item.path}>{item.heading}<ArrowIcon /></a></li>
@@ -95,18 +113,18 @@ export function ContentPage({ page, onBook }: Props) {
         ) : (
           <section className="content-not-found">
             <p className="content-kicker">404</p>
-            <h1>Sayfa bulunamadı.</h1>
-            <p>Bu adres artık kullanılmıyor veya yanlış yazılmış olabilir. BeautyNails ana sayfasından hizmetlere ve yazılara ulaşabilirsiniz.</p>
-            <a className="content-read-link" href="/">Ana sayfaya dön <ArrowIcon /></a>
+            <h1>{copy.notFound}.</h1>
+            <p>{copy.notFoundDescription}</p>
+            <a className="content-read-link" href={homePath}>{copy.returnHome} <ArrowIcon /></a>
           </section>
         )}
       </main>
 
       <footer className="content-page-footer">
         <div className="content-width">
-          <a className="brand" href="/">{siteConfig.wordmark}</a>
+          <a className="brand" href={homePath} aria-label={copy.brandHome}>{siteConfig.wordmark}</a>
           <div className="content-page-contact">
-            <a href={`tel:+${siteConfig.whatsappNumber}`}>{siteConfig.phone}</a>
+            <a href={`tel:+${siteConfig.whatsappNumber}`} dir="ltr">{siteConfig.phone}</a>
             <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer"><WhatsAppIcon /><span>WhatsApp</span></a>
           </div>
           <p>© {siteConfig.brand}</p>

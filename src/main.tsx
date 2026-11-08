@@ -10,6 +10,7 @@ import './styles/sazi-motion-bind.css'
 import './styles/satin-home.css'
 import './styles/satin-journal.css'
 import './styles/satin-pages.css'
+import './styles/satin-languages.css'
 
 const root = document.getElementById('root')!
 const app = (

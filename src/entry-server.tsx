@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { renderToString } from 'react-dom/server'
 import App from './App'
-export { contentPages } from './components/satin/pages'
+export { pagePaths } from './routes'
 export { getSeo } from './seo'
 export { siteConfig } from './config/site'
 export function render(pathname: string) {

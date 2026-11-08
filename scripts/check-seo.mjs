@@ -4,18 +4,78 @@ import { resolve, sep } from 'node:path'
 
 // Inspect the files a crawler actually receives, independently of the renderer.
 const origin = 'https://www.beautynails.com.tr'
-const routes = new Map([
-  ['/', 'home'],
-  ['/hizmetler/', 'index'],
-  ['/hizmetler/tirnak-sanati/', 'service'],
-  ['/hizmetler/ipek-kirpik/', 'service'],
-  ['/hizmetler/kalici-makyaj/', 'service'],
-  ['/hizmetler/erkek-manikur-pedikur/', 'service'],
-  ['/yazilar/', 'index'],
-  ['/yazilar/tirnak-sekli/', 'article'],
-  ['/yazilar/kirpik-ifadesi/', 'article'],
-  ['/yazilar/erkek-bakimi/', 'article'],
-])
+const languages = ['tr', 'en', 'de', 'ru', 'ar', 'uz', 'tk']
+const routeGroups = [
+  { kind: 'home', tr: '/', en: '/en/', de: '/de/', ru: '/ru/', uz: '/uz/', tk: '/tk/' },
+  { kind: 'index', tr: '/hizmetler/', en: '/en/services/', de: '/de/leistungen/', ru: '/ru/uslugi/', uz: '/uz/xizmatlar/', tk: '/tk/hyzmatlar/' },
+  {
+    kind: 'service',
+    tr: '/hizmetler/tirnak-sanati/',
+    en: '/en/services/nail-art/',
+    de: '/de/leistungen/nageldesign/',
+    ru: '/ru/uslugi/dizain-nogtei/',
+    uz: '/uz/xizmatlar/tirnoq-dizayni/',
+    tk: '/tk/hyzmatlar/dyrnak-sungaty/',
+  },
+  {
+    kind: 'service',
+    tr: '/hizmetler/ipek-kirpik/',
+    en: '/en/services/eyelash-extensions/',
+    de: '/de/leistungen/seidenwimpern/',
+    ru: '/ru/uslugi/narashchivanie-resnits/',
+    uz: '/uz/xizmatlar/ipak-kipriklar/',
+    tk: '/tk/hyzmatlar/kirpik-uzaltmak/',
+  },
+  {
+    kind: 'service',
+    tr: '/hizmetler/kalici-makyaj/',
+    en: '/en/services/permanent-makeup/',
+    de: '/de/leistungen/permanent-make-up/',
+    ru: '/ru/uslugi/permanentnyi-makiyazh/',
+    uz: '/uz/xizmatlar/doimiy-makiyaj/',
+    tk: '/tk/hyzmatlar/hemiselik-makiyaz/',
+  },
+  {
+    kind: 'service',
+    tr: '/hizmetler/erkek-manikur-pedikur/',
+    en: '/en/services/mens-manicure-pedicure/',
+    de: '/de/leistungen/herren-manikuere-pedikuere/',
+    ru: '/ru/uslugi/muzhskoi-manikyur-i-pedikyur/',
+    uz: '/uz/xizmatlar/erkaklar-manikyur-pedikyur/',
+    tk: '/tk/hyzmatlar/erkek-manikyur-pedikyur/',
+  },
+  { kind: 'index', tr: '/yazilar/', en: '/en/journal/', de: '/de/magazin/', ru: '/ru/stati/', uz: '/uz/maqolalar/', tk: '/tk/yazgylar/' },
+  {
+    kind: 'article',
+    tr: '/yazilar/tirnak-sekli/',
+    en: '/en/journal/nail-shape/',
+    de: '/de/magazin/nagelform-waehlen/',
+    ru: '/ru/stati/kak-vybrat-formu-nogtei/',
+    uz: '/uz/maqolalar/tirnoq-shaklini-tanlash/',
+    tk: '/tk/yazgylar/dyrnak-gornusi/',
+  },
+  {
+    kind: 'article',
+    tr: '/yazilar/kirpik-ifadesi/',
+    en: '/en/journal/lash-style/',
+    de: '/de/magazin/persoenlicher-wimpernlook/',
+    ru: '/ru/stati/vyrazitelnost-resnits/',
+    uz: '/uz/maqolalar/kiprik-uslubi/',
+    tk: '/tk/yazgylar/kirpik-gornusi/',
+  },
+  {
+    kind: 'article',
+    tr: '/yazilar/erkek-bakimi/',
+    en: '/en/journal/mens-grooming/',
+    de: '/de/magazin/dezente-herrenpflege/',
+    ru: '/ru/stati/muzhskoi-ukhod/',
+    uz: '/uz/maqolalar/erkaklar-parvarishi/',
+    tk: '/tk/yazgylar/erkek-idegi/',
+  },
+].map((group) => ({ ...group, ar: group.en.replace('/en/', '/ar/') }))
+const routes = new Map(routeGroups.flatMap(({ kind, ...paths }) =>
+  languages.map((language) => [paths[language], { kind, language, paths }])))
+assert.equal(routes.size, 70, 'seven languages with ten distinct routes each')
 const dist = resolve('dist')
 const decode = (value) => value.replace(/&(amp|quot|apos|lt|gt|#39);/g, (_, key) => ({
   amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', '#39': "'",
@@ -53,11 +113,14 @@ function checkNoInventedBusinessFields(value, pagePath) {
   }
 }
 
-for (const [path, kind] of routes) {
+for (const [path, { kind, language, paths }] of routes) {
   const html = await readFile(pageFile(path), 'utf8')
   const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1]
+  const body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1]
   assert.ok(head, `${path}: valid head required`)
-  assert.equal(tags(html, 'html')[0]?.lang, 'tr', `${path}: Turkish document language`)
+  assert.ok(body, `${path}: full HTML body required`)
+  assert.equal(tags(html, 'html')[0]?.lang, language, `${path}: correct document language`)
+  assert.equal(tags(html, 'html')[0]?.dir, language === 'ar' ? 'rtl' : 'ltr', `${path}: correct reading direction`)
   const title = [...head.matchAll(/<title\b[^>]*>([\s\S]*?)<\/title>/gi)]
   assert.equal(title.length, 1, `${path}: exactly one title`)
   assert.match(text(title[0][1]), /BeautyNails/)
@@ -67,8 +130,17 @@ for (const [path, kind] of routes) {
   assert.equal(description.length, 1, `${path}: exactly one description`)
   assert.ok(description[0].content?.length > 40, `${path}: descriptive summary required`)
   descriptions.add(description[0].content)
-  const canonical = tags(head, 'link').filter((item) => item.rel === 'canonical')
+  const headLinks = tags(head, 'link')
+  const canonical = headLinks.filter((item) => item.rel === 'canonical')
   assert.deepEqual(canonical.map((item) => item.href), [origin + path], `${path}: exact preferred canonical`)
+  const alternates = headLinks.filter((item) => item.rel === 'alternate' && item.hreflang !== undefined)
+  assert.equal(alternates.length, languages.length + 1, `${path}: one hreflang per language and the default`)
+  const expectedAlternates = Object.fromEntries([
+    ...languages.map((choice) => [choice, origin + paths[choice]]),
+    ['x-default', origin + paths.tr],
+  ])
+  assert.deepEqual(Object.fromEntries(alternates.map((item) => [item.hreflang, item.href])),
+    expectedAlternates, `${path}: reciprocal language group, including the Turkish x-default`)
   const robots = meta.filter((item) => item.name === 'robots')
   assert.equal(robots.length, 1, `${path}: one robots directive`)
   assert.ok(robots[0].content.split(/\s*,\s*/).includes('index'), `${path}: indexable HTML`)
@@ -80,15 +152,19 @@ for (const [path, kind] of routes) {
     assert.match(item.content, /^[a-zA-Z0-9_-]+$/)
     assert.doesNotMatch(item.content, /placeholder|todo|your[_-]?token/i)
   }
-  const visibleHtml = withoutScripts(html)
+  const visibleHtml = withoutScripts(body)
+  const visibleText = text(visibleHtml)
   assert.equal([...visibleHtml.matchAll(/<h1(?:\s|>)/gi)].length, 1, `${path}: one server-rendered H1`)
   assert.match(visibleHtml, /data-prerendered="true"/)
   assert.doesNotMatch(visibleHtml, /<div\s+id="root"[^>]*>\s*<\/div>/i)
   assert.doesNotMatch(html, /şazi|sazibeauty/i, `${path}: correct business identity`)
-  assert.ok(text(html).includes('0532 242 23 03'), `${path}: verified contact is visible`)
-  if (kind === 'article') {
-    assert.ok(text(html).split(/\s+/).length > 240, `${path}: full article text must exist without JavaScript`)
-    assert.ok([...visibleHtml.matchAll(/<h2(?:\s|>)/gi)].length >= 4, `${path}: article sections must be rendered`)
+  assert.ok(visibleText.includes('0532 242 23 03'), `${path}: verified contact is visible`)
+  if (kind === 'article' || kind === 'service') {
+    const story = visibleHtml.match(/<article\b[^>]*>([\s\S]*?)<\/article>/i)?.[1]
+    assert.ok(story, `${path}: primary content article is server-rendered`)
+    assert.ok(tags(story, 'h2').length >= 4, `${path}: all detail sections must be rendered`)
+    const minimumWords = kind === 'article' ? 200 : 120
+    assert.ok(text(story).split(/\s+/).length > minimumWords, `${path}: full detail text must exist without JavaScript`)
   }
 
   const scripts = [...head.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
@@ -108,6 +184,7 @@ for (const [path, kind] of routes) {
   assert.ok(graph.some((node) => type(node, 'WebSite') && node.url === origin + '/'))
   const page = graph.find((node) => type(node, kind === 'index' ? 'CollectionPage' : 'WebPage'))
   assert.equal(page?.url, origin + path, `${path}: page entity matches canonical`)
+  assert.equal(page?.inLanguage, language, `${path}: page entity matches document language`)
   if (kind !== 'home') {
     const crumbs = graph.find((node) => type(node, 'BreadcrumbList'))?.itemListElement
     assert.ok(crumbs?.length >= 2, `${path}: breadcrumbs required`)
@@ -117,13 +194,15 @@ for (const [path, kind] of routes) {
   if (kind === 'service') assert.ok(graph.some((node) => type(node, 'Service') && node.url === origin + path))
   if (kind === 'article') {
     const article = graph.find((node) => type(node, 'Article'))
-    assert.ok(article?.headline && text(html).includes(article.headline), `${path}: article headline is visible`)
+    assert.ok(article?.headline && visibleText.includes(article.headline), `${path}: article headline is visible`)
+    assert.equal(article.inLanguage, language, `${path}: article entity matches document language`)
     assert.equal(article.mainEntityOfPage?.['@id'], page['@id'])
     assert.equal(article.publisher?.['@id'], org['@id'])
   }
   if (kind === 'index') assert.ok(graph.some((node) => type(node, 'ItemList') && node.itemListElement?.length >= 3))
 
   const localLinks = []
+  const languageLinks = new Map()
   for (const anchor of tags(visibleHtml, 'a')) {
     if (!anchor.href || /^(?:mailto:|tel:|javascript:)/i.test(anchor.href)) continue
     const target = new URL(anchor.href, origin + path)
@@ -131,11 +210,23 @@ for (const [path, kind] of routes) {
     const targetPath = target.pathname === '/' ? '/' : `${target.pathname.replace(/\/+$/, '')}/`
     assert.ok(routes.has(targetPath), `${path}: broken internal link ${anchor.href}`)
     localLinks.push(targetPath)
+    if (anchor.hreflang) {
+      const targets = languageLinks.get(anchor.hreflang) ?? new Set()
+      targets.add(targetPath)
+      languageLinks.set(anchor.hreflang, targets)
+    }
+  }
+  for (const choice of languages) {
+    if (choice === language) continue
+    assert.ok(languageLinks.get(choice)?.has(paths[choice]),
+      `${path}: body language link to ${paths[choice]} required`)
   }
   links.set(path, localLinks)
   for (const tag of ['script', 'link', 'img', 'source']) for (const resource of tags(html, tag)) {
     if (resource.src) await checkAsset(resource.src, path)
-    if (tag === 'link' && resource.href && resource.rel !== 'canonical') await checkAsset(resource.href, path)
+    if (tag === 'link' && resource.href && !['canonical', 'alternate'].includes(resource.rel)) {
+      await checkAsset(resource.href, path)
+    }
     if (resource.srcset) for (const candidate of resource.srcset.split(',')) await checkAsset(candidate.trim().split(/\s+/)[0], path)
   }
   for (const item of meta.filter((entry) => entry.property === 'og:image' || entry.name === 'twitter:image')) await checkAsset(item.content, path)
@@ -162,6 +253,7 @@ assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`))
 const missing = await readFile('dist/404.html', 'utf8')
 assert.ok(tags(missing, 'meta').some((item) => item.name === 'robots' && /\bnoindex\b/i.test(item.content)))
 assert.ok(!tags(missing, 'link').some((item) => item.rel === 'canonical'))
+assert.ok(!tags(missing, 'link').some((item) => item.rel === 'alternate' && item.hreflang))
 assert.match(text(missing), /Sayfa bulunamadı/)
 assert.equal([...withoutScripts(missing).matchAll(/<h1(?:\s|>)/gi)].length, 1)
 
@@ -177,4 +269,4 @@ for (const rule of noindexRules) {
   assert.ok(!pattern.test('www.beautynails.com.tr'), 'the custom domain must remain indexable')
 }
 assert.ok(!(hosting.rewrites ?? []).some((rule) => /index\.html$/.test(rule.destination)), 'unknown routes must not fall back to a 200 homepage')
-console.log(`SEO acceptance passed: ${routes.size} prerendered pages, unique metadata, canonical, truthful JSON-LD, complete articles, crawlable links, ${checkedAssets.size} local assets, sitemap, robots, 404 and host-scoped alias exclusion.`)
+console.log(`SEO acceptance passed: ${routes.size} prerendered pages in ${languages.length} languages, reciprocal hreflang, language links, self-canonicals, unique metadata, localized truthful JSON-LD, full text, ${checkedAssets.size} local assets, sitemap, robots, 404 and alias exclusion.`)

@@ -1,10 +1,15 @@
 import { useCallback, useEffect, useId, useRef, useState, type RefObject } from 'react'
 import { siteConfig } from '../../config/site'
+import type { Locale } from '../../locales'
+import { pathForLocale } from '../../routes'
+import { LanguageSelector } from '../LanguageSelector'
 import { ArrowIcon, CloseIcon, InstagramIcon, MenuIcon, WhatsAppIcon } from './icons'
 import { JournalSection } from './JournalSection'
 import { journalImages, libraryGallery } from './collection'
+import { homeCopy } from './home-copy'
 
 type Props = {
+  locale: Locale
   onOpenBooking: (service?: string) => void
   onOpenService: (serviceId: string) => void
 }
@@ -14,8 +19,6 @@ const services = [
     id: 'tirnak-sanati',
     className: 'service-nails',
     number: '01',
-    name: 'Tırnak Sanatı',
-    alt: 'Parlak fuşya badem tırnak tasarımı',
     width: 1122,
     height: 1402,
     src: '/images/satin/service-nails-960.webp',
@@ -26,8 +29,6 @@ const services = [
     id: 'ipek-kirpik',
     className: 'service-lashes',
     number: '02',
-    name: 'İpek Kirpik',
-    alt: 'İpek kirpik ve göz yakın planı',
     width: 960,
     height: 1200,
     src: '/images/satin/service-lashes-960.webp',
@@ -37,8 +38,6 @@ const services = [
     id: 'kalici-makyaj',
     className: 'service-makeup',
     number: '03',
-    name: 'Kalıcı Makyaj',
-    alt: 'Doğal gül pembesi dudak yakın planı',
     width: 1122,
     height: 1402,
     src: '/images/satin/service-lips.webp',
@@ -49,7 +48,6 @@ const services = [
 const gallery = [
   {
     id: 'nails-example',
-    alt: 'Parlak fuşya badem tırnak tasarımı',
     width: 1122,
     height: 1402,
     src: '/images/satin/service-nails.webp',
@@ -59,7 +57,6 @@ const gallery = [
   },
   {
     id: 'french-example',
-    alt: 'Nude zemin üzerinde pembe French tırnaklar',
     width: 960,
     height: 659,
     src: '/images/satin/gallery-french-960.webp',
@@ -111,7 +108,8 @@ function useFocusTrap(open: boolean, dialogRef: RefObject<HTMLDialogElement | nu
   }, [dialogRef, onClose, open])
 }
 
-export function SatinHome({ onOpenBooking, onOpenService }: Props) {
+export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
+  const copy = homeCopy[locale]
   const menuTitleId = useId()
   const lightTitleId = useId()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -213,9 +211,9 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
   const whatsappHref = siteConfig.whatsappNumber ? `https://wa.me/${siteConfig.whatsappNumber}` : null
 
   return (
-    <div className="satin-page">
+    <div className="satin-page" lang={locale}>
       <a className="skip-link" href="#icerik" onClick={(event) => { event.preventDefault(); focusSection('icerik') }}>
-        İçeriğe geç
+        {copy.skipToContent}
       </a>
       <div className="women-world">
         <header className="site-header">
@@ -223,23 +221,26 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             <a className="brand" href="#top" onClick={(event) => { event.preventDefault(); focusSection('top') }}>
               {siteConfig.wordmark}
             </a>
-            <nav className="desktop-nav" aria-label="Sayfa bölümleri">
-              <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}>Hizmetler</a>
-              <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>Galeri</a>
-              <a href="#yazilar" onClick={(event) => { event.preventDefault(); go('yazilar') }}>Yazılar</a>
-              <button className="nav-book" type="button" onClick={book}>Randevu Al</button>
+            <nav className="desktop-nav" aria-label={copy.navigation}>
+              <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}>{copy.services}</a>
+              <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>{copy.gallery}</a>
+              <a href="#yazilar" onClick={(event) => { event.preventDefault(); go('yazilar') }}>{copy.journal}</a>
+              <button className="nav-book" type="button" onClick={book}>{copy.book}</button>
             </nav>
-            <button
-              ref={menuButtonRef}
-              className="icon-button menu-toggle"
-              type="button"
-              aria-expanded={menuOpen}
-              aria-controls="menu-dialog"
-              onClick={() => (menuOpen ? setMenuOpen(false) : openMenu())}
-            >
-              {menuOpen ? <CloseIcon /> : <MenuIcon />}
-              <span className="sr-only">{menuOpen ? 'Menüyü kapat' : 'Menüyü aç'}</span>
-            </button>
+            <div className="satin-header-actions">
+              <LanguageSelector locale={locale} path={pathForLocale('/', locale)} />
+              <button
+                ref={menuButtonRef}
+                className="icon-button menu-toggle"
+                type="button"
+                aria-expanded={menuOpen}
+                aria-controls="menu-dialog"
+                onClick={() => (menuOpen ? setMenuOpen(false) : openMenu())}
+              >
+                {menuOpen ? <CloseIcon /> : <MenuIcon />}
+                <span className="sr-only">{menuOpen ? copy.closeMenu : copy.openMenu}</span>
+              </button>
+            </div>
           </div>
         </header>
 
@@ -257,7 +258,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
                 sizes="100vw"
                 width={480}
                 height={640}
-                alt="Fuşya saten üzerinde pembe manikürlü el ve kirpik yakın planı"
+                alt={copy.heroAlt}
                 fetchPriority="high"
                 decoding="async"
               />
@@ -267,11 +268,11 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
           <div className="content-width hero-inner" id="icerik" tabIndex={-1}>
             <div className="hero-copy">
               <h1>
-                <span>Bakışınız.</span>
-                <em>Unutulmaz.</em>
+                <span>{copy.heroHeading[0]}</span>{' '}
+                <em>{copy.heroHeading[1]}</em>
               </h1>
               <button className="circle-book" type="button" onClick={book}>
-                <span>Randevu Al</span>
+                <span>{copy.heroBook}</span>
                 <ArrowIcon />
               </button>
             </div>
@@ -283,13 +284,13 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             <p className="outline-word">BEAUTY</p>
           </div>
           <div className="content-width">
-            <h2 id="hizmetler-baslik" className="sr-only">Hizmetler</h2>
+            <h2 id="hizmetler-baslik" className="sr-only">{copy.services}</h2>
             <div className="service-composition">
               {services.map((service) => (
                 <a
                   key={service.id}
                   className={`service-card ${service.className}`}
-                  href={`/hizmetler/${service.id}/`}
+                  href={pathForLocale(`/hizmetler/${service.id}/`, locale)}
                   onClick={(event) => {
                     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
                     event.preventDefault()
@@ -309,7 +310,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
                   />
                   <span className="service-caption">
                     <span className="service-number">{service.number}</span>
-                    <span className="service-name">{service.name}</span>
+                    <span className="service-name">{copy.serviceNames[service.id]}</span>
                     <span className="service-rule" />
                   </span>
                   <ArrowIcon className="service-arrow" />
@@ -319,7 +320,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
 
             <div className="gallery" id="ornekler" tabIndex={-1}>
               <div className="section-label">
-                <h2>Tırnak tasarımları</h2>
+                <h2>{copy.galleryHeading}</h2>
                 <span />
               </div>
               <div className="gallery-grid">
@@ -340,7 +341,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
                       sizes={item.sizes}
                       width={item.width}
                       height={item.height}
-                      alt={item.alt}
+                      alt={copy.galleryAlts[item.id]}
                       loading="lazy"
                       decoding="async"
                     />
@@ -351,7 +352,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             </div>
           </div>
         </section>
-        <JournalSection images={journalImages} />
+        <JournalSection images={journalImages} locale={locale} />
       </div>
 
       <section className="mens-care" id="erkek-bakim" tabIndex={-1} aria-labelledby="erkek-baslik">
@@ -363,25 +364,25 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
               sizes="(min-width: 1440px) 712px, (min-width: 768px) 50vw, 100vw"
               width={1774}
               height={887}
-              alt="Doğal ve bakımlı ojesiz erkek eli"
+              alt={copy.mensAlt}
               loading="lazy"
               decoding="async"
             />
           </div>
           <div className="mens-copy">
             <h2 id="erkek-baslik">
-              <a href="/hizmetler/erkek-manikur-pedikur/">
-              <span>Erkek Manikür</span>
-              <span>&amp; Pedikür</span>
+              <a href={pathForLocale('/hizmetler/erkek-manikur-pedikur/', locale)}>
+                <span>{copy.mensHeading[0]}</span>{' '}
+                <span>{copy.mensHeading[1]}</span>
               </a>
             </h2>
             <button
               className="mens-book"
               type="button"
               onClick={() => requestBooking('Erkek Manikür & Pedikür')}
-              aria-label="Erkek Manikür ve Pedikür için randevu al"
+              aria-label={copy.bookMensCare}
             >
-              <span>Randevu Al</span>
+              <span>{copy.book}</span>
               <ArrowIcon />
             </button>
           </div>
@@ -394,20 +395,20 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
             <a className="brand" href="#top" onClick={(event) => { event.preventDefault(); focusSection('top') }}>
               {siteConfig.wordmark}
             </a>
-            <nav aria-label="Alt bölümler">
-              <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}>Hizmetler</a>
-              <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>Galeri</a>
-              <a href="#yazilar" onClick={(event) => { event.preventDefault(); go('yazilar') }}>Yazılar</a>
-              <button className="nav-book" type="button" onClick={book}>Randevu Al</button>
+            <nav aria-label={copy.footerNavigation}>
+              <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}>{copy.services}</a>
+              <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}>{copy.gallery}</a>
+              <a href="#yazilar" onClick={(event) => { event.preventDefault(); go('yazilar') }}>{copy.journal}</a>
+              <button className="nav-book" type="button" onClick={book}>{copy.book}</button>
             </nav>
           </div>
           <div className="footer-actions">
             <button className="pill-book" type="button" onClick={book}>
-              <span>Randevu Al</span>
+              <span>{copy.book}</span>
               <ArrowIcon />
             </button>
             {whatsappHref ? (
-              <a className="whatsapp-link" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile iletişim">
+              <a className="whatsapp-link" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label={copy.whatsappLabel}>
                 <WhatsAppIcon />
                 <span>WhatsApp</span>
               </a>
@@ -416,7 +417,7 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
           <div className="footer-meta">
             <small>© 2026 {siteConfig.brand}</small>
             <a className="footer-phone" href={`tel:+${siteConfig.whatsappNumber}`}>
-              {siteConfig.phone}
+              <bdi>{siteConfig.phone}</bdi>
             </a>
             {siteConfig.instagramUrl ? (
               <a className="icon-button" href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer">
@@ -442,17 +443,17 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
           <p id={menuTitleId} className="brand">{siteConfig.wordmark}</p>
           <button className="icon-button" type="button" data-close onClick={() => setMenuOpen(false)}>
             <CloseIcon />
-            <span className="sr-only">Menüyü kapat</span>
+            <span className="sr-only">{copy.closeMenu}</span>
           </button>
         </div>
-        <nav className="menu-links" aria-label="Mobil menü">
-          <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}><span>01</span>Hizmetler</a>
-          <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}><span>02</span>Galeri</a>
-          <a href="#erkek-bakim" onClick={(event) => { event.preventDefault(); go('erkek-bakim') }}><span>03</span>Erkek bakım</a>
-          <a href="#yazilar" onClick={(event) => { event.preventDefault(); go('yazilar') }}><span>04</span>Yazılar</a>
+        <nav className="menu-links" aria-label={copy.mobileNavigation}>
+          <a href="#hizmetler" onClick={(event) => { event.preventDefault(); go('hizmetler') }}><span>01</span>{copy.services}</a>
+          <a href="#ornekler" onClick={(event) => { event.preventDefault(); go('ornekler') }}><span>02</span>{copy.gallery}</a>
+          <a href="#erkek-bakim" onClick={(event) => { event.preventDefault(); go('erkek-bakim') }}><span>03</span>{copy.mensCare}</a>
+          <a href="#yazilar" onClick={(event) => { event.preventDefault(); go('yazilar') }}><span>04</span>{copy.journal}</a>
         </nav>
         <button className="pill-book" type="button" onClick={book}>
-          <span>Randevu Al</span>
+          <span>{copy.book}</span>
           <ArrowIcon />
         </button>
       </dialog>
@@ -469,12 +470,12 @@ export function SatinHome({ onOpenBooking, onOpenService }: Props) {
       >
         <button className="icon-button lightbox-close" type="button" data-close onClick={() => setShot(null)}>
           <CloseIcon />
-          <span className="sr-only">Görseli kapat</span>
+          <span className="sr-only">{copy.closeImage}</span>
         </button>
         {shot ? (
           <figure>
-            <img id={lightTitleId} src={shot.src} alt={shot.alt} width={shot.width} height={shot.height} />
-            <figcaption>{shot.alt}</figcaption>
+            <img id={lightTitleId} src={shot.src} alt={copy.galleryAlts[shot.id]} width={shot.width} height={shot.height} />
+            <figcaption>{copy.galleryAlts[shot.id]}</figcaption>
           </figure>
         ) : null}
       </dialog>

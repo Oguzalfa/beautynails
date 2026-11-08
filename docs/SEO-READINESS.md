@@ -10,10 +10,12 @@ Canonical adresleri, sitemap ve sosyal paylaşım URL'leri aynı www alan adın�
 
 ## Uygulama kapsamı
 
-- Ana sayfa, dört hizmet sayfası, üç makale ve iki içerik dizini olmak üzere **10 URL** için ilk HTTP yanıtında gerçek metin içeren statik HTML hazırlanır. Kullanıcılar ve tarayıcılar aynı içeriği alır; yalnız botlara farklı sayfa sunulmaz.
+- Türkçe, İngilizce, Almanca, Rusça, Arapça, Özbekçe ve Türkmence dillerinde ana sayfa, dört hizmet, üç makale ve iki dizin olmak üzere **70 URL** tam HTML içerikle sunulur.
+- Türkçe yollar kökte kalır. Çeviriler `/en/`, `/de/`, `/ru/`, `/ar/`, `/uz/` ve `/tk/` altında ayrı adresler kullanır. Her karşılık kendi canonical adresine ve karşılıklı `hreflang` bağlantılarına sahiptir. `x-default` Türkçe sayfayı gösterir.
+- Dil seçici aynı sayfanın çevirisini açar ve tercihi tarayıcıda saklar. Ana sayfa girişi önce seçimi, seçim yoksa tarayıcının ilk dilini dikkate alır. Doğrudan hizmet ve yazı bağlantılarında sayfanın dili URL'den gelir. Arapça sayfalar sağdan sola dizilir.
 - Her sayfanın tek H1'i, özgün başlığı ve açıklaması, kendi absolute canonical adresi, Open Graph ve Twitter paylaşım bilgisi vardır.
 - Hizmetler ve yazılar gerçek `<a href>` bağlantılarıyla keşfedilir. Makale metni okumak için bir pencereye tıklamak veya JavaScript çalıştırmak gerekmez.
-- `sitemap.xml` yalnız tercih edilen 10 URL'yi içerir; `robots.txt` taramaya izin verir ve sitemap adresini bildirir. Uydurma güncelleme tarihleri kullanılmaz.
+- `sitemap.xml` 70 canonical URL'yi içerir. `robots.txt` taramaya izin verir ve sitemap adresini bildirir.
 - Bulunmayan adresler için ayrı 404 HTML'i hazırlanır; `noindex` taşır ve canonical içermez. Üretimde bilinmeyen adresin gerçek HTTP 404 dönmesi ayrıca doğrulanmalıdır.
 - JSON-LD: Organization, WebSite, WebPage/CollectionPage, Service, Article, BreadcrumbList ve ilgili içerik listeleri kullanılır. Yapılandırılmış veri görünen içerikle aynı işletmeyi ve sayfayı tarif eder.
 
@@ -44,9 +46,9 @@ npm run build
 npm run check:seo
 ```
 
-Kabul betiği renderer fonksiyonlarını tekrar kullanmak yerine `dist` içindeki gerçek HTML ve dosyaları inceler: 10 sayfa, tek H1, özgün metadata, canonical, JSON-LD türleri ve doğru işletme, tam makale metinleri, bağlantı üzerinden keşif, yerel görseller/fontlar/bundle dosyaları, sitemap, robots ve noindex 404 kontrol edilir. Bu bir sıralama puanı veya Google tarafından verilmiş sertifika değildir.
+Kabul betiği `dist` içindeki 70 HTML sayfasında belge dilini, okuma yönünü, H1'i, metadata, canonical ve hreflang bağlantılarını, JSON-LD'yi ve görünür metni kontrol eder. Dahili bağlantılar, yerel dosyalar, sitemap, robots ve 404 sayfası da denetlenir.
 
-Yayın sonrasında özel alan adında 10 sayfanın 200, rastgele bulunmayan bir adresin 404, kök alan adının www'ye 308 döndüğü; www'de noindex başlığı olmadığı ve Vercel adresinde olduğu gerçek HTTP yanıtlarından kontrol edilmelidir. Tarayıcıda hydration hataları, yeni sayfaların mobil yerleşimi ve randevu akışı da doğrulanmalıdır. Kaynak denetimi tek başına bu canlı kontrollerin yerine geçmez.
+Yayın sonrasında 70 canonical adresi, 404 yanıtını, www yönlendirmesini ve Vercel kopyasının `noindex` başlığını kontrol edin. Dil başlığı olmadan kök Türkçe açılmalı, desteklenen dil tercihiyle geçici yönlendirme çalışmalı ve açık dil adresleri kendi dilinde kalmalıdır. Tarayıcıda mobil dil seçiciyi ve randevu akışını doğrulayın.
 
 ## IndexNow bildirimi
 

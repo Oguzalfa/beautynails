@@ -1,22 +1,28 @@
 import { useId } from 'react'
+import type { Locale } from '../../locales'
+import { journalForLocale, pathForLocale } from '../../routes'
+import { homeCopy } from './home-copy'
 import { ArrowIcon } from './icons'
-import { journalArticles, type JournalArticleId } from './journal'
+import type { JournalArticleId } from './journal'
+
 export type JournalImage = { src: string; srcSet?: string; sizes?: string; width: number; height: number; alt: string }
-type Props = { images: Record<JournalArticleId, JournalImage> }
-export function JournalSection({ images }: Props) {
+type Props = { images: Record<JournalArticleId, JournalImage>; locale: Locale }
+
+export function JournalSection({ images, locale }: Props) {
+  const copy = homeCopy[locale]
   const sectionTitleId = useId()
   return (
     <section className="journal" id="yazilar" tabIndex={-1} aria-labelledby={sectionTitleId}>
       <div className="content-width">
         <div className="journal-heading">
           <div>
-            <p className="journal-eyebrow">Güzellik &amp; bakım</p>
-            <h2 id={sectionTitleId}>Bakım <em>notları.</em></h2>
+            <p className="journal-eyebrow">{copy.journalEyebrow}</p>
+            <h2 id={sectionTitleId}>{copy.journalHeading[0]} <em>{copy.journalHeading[1]}</em></h2>
           </div>
-          <p className="journal-description">Tarzınızı seçerken size eşlik edecek notlar.</p>
+          <p className="journal-description">{copy.journalDescription}</p>
         </div>
         <div className="journal-grid">
-          {journalArticles.map((article, index) => {
+          {journalForLocale(locale).map((article, index) => {
             const image = images[article.id]
             return (
               <article
@@ -24,19 +30,18 @@ export function JournalSection({ images }: Props) {
                 key={article.id}
               >
                 <div className="journal-card-media">
-                  <img {...image} loading="lazy" decoding="async" />
+                  <img {...image} alt={copy.journalAlts[article.id]} loading="lazy" decoding="async" />
                 </div>
                 <div className="journal-card-copy">
                   <p className="journal-category">{article.category}</p>
                   <h3>{article.title}</h3>
-                  <p className="journal-card-intro">{article.intro}</p>
+                  <p className="journal-card-intro">{article.excerpt}</p>
                   <a
-                    href={`/yazilar/${article.id}/`}
+                    href={pathForLocale(`/yazilar/${article.id}/`, locale)}
                     className="journal-read"
-                    aria-label={`${article.title} — yazıyı oku`}
-
+                    aria-label={`${article.title} — ${copy.journalRead}`}
                   >
-                    <span>Yazıyı oku</span><ArrowIcon />
+                    <span>{copy.journalRead}</span><ArrowIcon />
                   </a>
                 </div>
               </article>

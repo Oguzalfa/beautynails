@@ -1,0 +1,304 @@
+{
+  "services": [
+    {
+      "slug": "tirnak-sanati",
+      "localizedSlug": "nageldesign-manikuere-pedikuere",
+      "title": "Nageldesign, Maniküre und Pediküre",
+      "description": "Entdecken Sie Ideen für Nageldesign, Maniküre und Pediküre bei Şazi Beauty. Teilen Sie Ihre Wünsche zu Form, Farbe und Details in Ihrer Terminanfrage mit.",
+      "intro": "Form, Farbe und kleine Details machen Ihr Nageldesign persönlich. Bei Şazi Beauty können Sie sich zu Nageldesign, Maniküre und Pediküre informieren und Ihren Wunschlook schon in der Terminanfrage beschreiben. Vom schlichten Finish bis zum leuchtenden Pink helfen ausgewählte Beispiele dabei, Ihre Vorstellungen im Gespräch zu erklären.",
+      "image": "/images/fx/nails-macro.webp",
+      "sections": [
+        {
+          "title": "Form und Länge für Ihren Alltag",
+          "paragraphs": [
+            "Überlegen Sie, welche Nagelform zu Ihrem Alltag passt. Bevorzugen Sie kurze Nägel mit klarer Linie, eine ovale Silhouette oder eine Mandelform? Vielleicht gefällt Ihnen auf einem Foto die Farbe und auf einem anderen die Länge. Bringen Sie beide Ideen ins Gespräch ein."
+          ]
+        },
+        {
+          "title": "Inspiration für Farben und Details",
+          "paragraphs": [
+            "Wählen Sie zuerst die Richtung Ihres Designs: French-Spitzen, eine durchgehende Farbe oder ein kleiner Akzent. Die Farben und Texturen in der Galerie können als Inspiration dienen. Welche Töne dem Bildschirmbeispiel entsprechen, lässt sich beim Termin anhand der verfügbaren Farben besprechen. Erwähnen Sie auch Details, die Sie vermeiden möchten."
+          ]
+        },
+        {
+          "title": "So bereiten Sie Ihre Terminanfrage vor",
+          "paragraphs": [
+            "Wählen Sie im Formular „Nageldesign“. Ob Sie sich für eine Maniküre, eine Pediküre oder ein bestimmtes Design interessieren, können Sie im Notizfeld angeben. Umfang, Dauer und Preis besprechen Sie bei der Terminabstimmung."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "Kann ich ein Beispielfoto mitbringen?",
+          "answer": "Gerne können Sie ein oder zwei Beispiele zeigen. Sagen Sie dazu, welche Form, Farbe oder welches Detail Ihnen besonders gefällt. So lässt sich Ihr Wunschlook leichter beschreiben."
+        },
+        {
+          "question": "Wie gebe ich an, ob ich eine Maniküre oder Pediküre möchte?",
+          "answer": "Wählen Sie „Nageldesign“ und schreiben Sie ins Notizfeld, ob Sie eine Maniküre oder Pediküre möchten. Die Notiz wird in den WhatsApp-Entwurf übernommen."
+        },
+        {
+          "question": "Ist mein Termin nach dem Ausfüllen des Formulars bestätigt?",
+          "answer": "Das Formular erstellt einen WhatsApp-Entwurf, den Sie selbst abschicken. Uhrzeit und weitere Einzelheiten klären Sie im anschließenden Austausch."
+        }
+      ],
+      "relatedArticle": "tirnak-formu-ve-kisisel-stil"
+    },
+    {
+      "slug": "ipek-kirpik",
+      "localizedSlug": "seidenwimpern",
+      "title": "Seidenwimpern für Ihren individuellen Look",
+      "description": "Informieren Sie sich bei Şazi Beauty über Seidenwimpern. Beschreiben Sie den gewünschten Look und teilen Sie Ihre Fragen in einer Terminanfrage mit.",
+      "intro": "Wenn Sie nach Ideen für Seidenwimpern suchen, überlegen Sie zunächst, welche Wirkung Ihnen gefällt. Die Länge auf einem Beispielfoto ist nur ein Anhaltspunkt. Möchten Sie einen dezenten, weichen oder markanten Look? In Ihrer Terminanfrage bei Şazi Beauty können Sie Ihre Wünsche beschreiben und Fragen zur Anwendung stellen.",
+      "image": "/images/fx/lashes-macro.webp",
+      "sections": [
+        {
+          "title": "Beschreiben Sie die gewünschte Wirkung",
+          "paragraphs": [
+            "Ihr tägliches Make-up und Ihr persönlicher Stil geben Hinweise darauf, welcher Wimpernlook Ihnen gefällt. Zeigen Sie ein Beispiel, das für Sie natürlich wirkt, und eines, das Sie zu auffällig finden. Sagen Sie auch, welche Dichte oder Wirkung Sie vermeiden möchten."
+          ]
+        },
+        {
+          "title": "Besprechen Sie Ihre Beispielfotos",
+          "paragraphs": [
+            "Licht, Perspektive und Make-up prägen die Wirkung eines Fotos. Nutzen Sie das Bild, um die Details zu zeigen, die Ihnen gefallen. Welcher Look sich mit den angebotenen Möglichkeiten umsetzen lässt, können Sie bei der Terminabstimmung erfragen."
+          ]
+        },
+        {
+          "title": "Eine kurze Notiz vor dem Gespräch",
+          "paragraphs": [
+            "Falls Sie bereits eine Wimpernbehandlung hatten, erwähnen Sie diese zusammen mit Ihrem aktuellen Wunsch. Notieren Sie Fragen zur Anwendung, zur Dauer, zum Preis und zur anschließenden Pflege. So können Sie die für Sie wichtigen Punkte im Gespräch direkt ansprechen."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "Wie beschreibe ich einen natürlichen Wimpernlook?",
+          "answer": "Zeigen Sie Beispiele, die Ihrem Alltagsstil nahekommen. Schreiben Sie in die Terminanfrage, dass Sie eine dezente Wirkung wünschen, und nennen Sie Details, die Sie vermeiden möchten."
+        },
+        {
+          "question": "Wie erfahre ich, welche Anwendungen angeboten werden?",
+          "answer": "Wählen Sie im Terminformular „Seidenwimpern“ und notieren Sie Ihre Fragen. Die verfügbaren Möglichkeiten und Ihre Wünsche besprechen Sie bei der Terminabstimmung."
+        },
+        {
+          "question": "Wie wird meine Terminanfrage übermittelt?",
+          "answer": "Das Formular erstellt aus Ihrer Auswahl und Ihren Notizen einen WhatsApp-Entwurf. Sobald Sie die Nachricht abgeschickt haben, können Sie die passende Uhrzeit und weitere Einzelheiten klären."
+        }
+      ],
+      "relatedArticle": "kirpik-gorunumunde-denge"
+    },
+    {
+      "slug": "kalici-makyaj",
+      "localizedSlug": "permanent-make-up",
+      "title": "Permanent Make-up nach Ihren Stilvorstellungen",
+      "description": "Erfahren Sie mehr über Permanent Make-up bei Şazi Beauty. Teilen Sie Ihre Farb- und Stilwünsche mit und fragen Sie einen Termin an, um die Möglichkeiten zu besprechen.",
+      "intro": "Wenn Sie über Permanent Make-up nachdenken, überlegen Sie, was Ihnen an Ihrem täglichen Make-up gefällt und welches Detail Sie betonen möchten. Bei Şazi Beauty können Sie sich über das Angebot informieren und Ihre Wünsche zu Farbe und Wirkung in der Terminanfrage beschreiben. Ein paar konkrete Notizen helfen Ihnen, sich auf das Gespräch vorzubereiten.",
+      "image": "/images/fx/lips-macro.webp",
+      "sections": [
+        {
+          "title": "Gehen Sie von Ihrem Alltagslook aus",
+          "paragraphs": [
+            "Welche Farben tragen Sie gewöhnlich? Bevorzugen Sie einen dezenten oder einen markanteren Look? Beschreiben Sie, was Ihnen an einem Make-up-Foto gefällt. Vielleicht ist es die Farbfamilie, die Kontur oder der weiche Gesamteindruck. Auch ein einzelnes Detail kann als Orientierung dienen."
+          ]
+        },
+        {
+          "title": "Besprechen Sie Farbe und gewünschte Wirkung",
+          "paragraphs": [
+            "Farben können je nach Beleuchtung, Aufnahme und Bildschirm unterschiedlich wirken. Nehmen Sie Ihr Beispielfoto als Ausgangspunkt und besprechen Sie die verfügbaren Optionen. Sagen Sie, welche Farben oder Effekte Sie vermeiden möchten, und fragen Sie nach den Anwendungen, die das Angebot umfasst."
+          ]
+        },
+        {
+          "title": "Nehmen Sie Ihre Fragen in die Terminanfrage auf",
+          "paragraphs": [
+            "Erwähnen Sie, falls Sie schon eine vergleichbare Behandlung hatten. Fragen zum Ablauf, zur Dauer, zum Preis und zur Zeit danach können Sie im Notizfeld festhalten. Welche Anwendung infrage kommt und was sie umfasst, klären Sie im Gespräch."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "Welche Farbe und welcher Look passen zu mir?",
+          "answer": "Teilen Sie Beispiele, die Ihnen gefallen, und erzählen Sie von Ihren Make-up-Gewohnheiten. So können Sie im Gespräch Ihren Wunschlook mit den verfügbaren Möglichkeiten abgleichen."
+        },
+        {
+          "question": "Wie erfahre ich den Preis und die Dauer der Anwendung?",
+          "answer": "Wählen Sie „Permanent Make-up“ und schreiben Sie in die Notiz, für welche Anwendung Sie sich interessieren. Umfang, Dauer und Preis klären Sie bei der Terminabstimmung."
+        },
+        {
+          "question": "Sendet das Formular meine WhatsApp-Nachricht automatisch?",
+          "answer": "Das Formular bereitet einen Nachrichtenentwurf vor. Senden Sie die Nachricht selbst in WhatsApp ab, damit Ihre Anfrage ankommt. Anschließend können Sie die Termindetails besprechen."
+        }
+      ],
+      "relatedArticle": "pembe-tonlariyla-renk-uyumu"
+    },
+    {
+      "slug": "kas-yuz",
+      "localizedSlug": "augenbrauen-gesichtspflege",
+      "title": "Augenbrauen und Gesichtspflege: Informationen und Termine",
+      "description": "Erkundigen Sie sich bei Şazi Beauty nach Augenbrauen- und Gesichtspflege. Beschreiben Sie Ihre Wünsche und stellen Sie Ihre Fragen in einer Terminanfrage.",
+      "intro": "Überlegen Sie, welche Wirkung Sie sich für Ihre Augenbrauen und Ihr Gesicht wünschen. Bevorzugen Sie weiche Konturen, eine klare Form oder einen besonders dezenten Look? In Ihrer Terminanfrage können Sie Ihre Vorstellungen beschreiben und sich über das Angebot für Augenbrauen und Gesicht bei Şazi Beauty informieren.",
+      "image": "/images/bn/service-brows.webp",
+      "sections": [
+        {
+          "title": "Betrachten Sie den Gesamtausdruck",
+          "paragraphs": [
+            "Wenn Ihnen die Augenbrauen auf einem Foto gefallen, schauen Sie genauer hin. Ist es der Verlauf der Kontur, die deutliche Form oder der Gesamtausdruck? Nennen Sie bei Ihrem Beispiel auch, was Sie vermeiden möchten. Ihr tägliches Make-up gibt weitere Hinweise darauf, wie Sie sich Ihren Look vorstellen."
+          ]
+        },
+        {
+          "title": "Nutzen Sie Beispielfotos als Gesprächseinstieg",
+          "paragraphs": [
+            "Perspektive, Licht und Make-up beeinflussen, wie Augenbrauen und Gesicht auf Fotos wirken. Zeigen Sie mit Ihrem Beispiel die Details, die Ihnen gefallen. Beschreiben Sie im Gespräch auch Ihren aktuellen Look und fragen Sie nach den verfügbaren Möglichkeiten und dem Umfang der Pflege."
+          ]
+        },
+        {
+          "title": "Machen Sie Ihre Anfrage konkret",
+          "paragraphs": [
+            "Wählen Sie im Formular „Augenbrauen & Gesicht“ und beschreiben Sie die gewünschte Pflege oder Wirkung im Notizfeld. Erwähnen Sie frühere Anwendungen und offene Fragen. Dauer und Preis hängen vom gewünschten Leistungsumfang ab und werden bei der Terminabstimmung besprochen."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "Wie unterscheide ich in meiner Anfrage zwischen Augenbrauen und Gesichtspflege?",
+          "answer": "Wählen Sie „Augenbrauen & Gesicht“ und geben Sie im Notizfeld an, welche Pflege Sie interessiert. Ergänzen Sie Ihre Wünsche oder Fragen zu den gewünschten Details."
+        },
+        {
+          "question": "Wo erfahre ich, welche Anwendungen angeboten werden?",
+          "answer": "Nennen Sie in Ihrer Nachricht die Pflege, an die Sie denken, oder beschreiben Sie Ihre Vorstellungen. Das Angebot und die verfügbaren Optionen besprechen Sie im anschließenden Austausch."
+        },
+        {
+          "question": "Wie wird die Uhrzeit für meinen Termin festgelegt?",
+          "answer": "Geben Sie im Formular Ihre gewünschte Uhrzeit an. Sobald Sie den vorbereiteten WhatsApp-Entwurf abgeschickt haben, können Sie Verfügbarkeit und Termindetails klären."
+        }
+      ],
+      "relatedArticle": "kirpik-gorunumunde-denge"
+    }
+  ],
+  "journal": [
+    {
+      "slug": "tirnak-formu-ve-kisisel-stil",
+      "localizedSlug": "nagelform-persoenlicher-stil",
+      "category": "Nägel & Stil",
+      "title": "Form, Farbe und Details für Ihren Nagelstil",
+      "excerpt": "Mandelform oder oval? Nude oder Fuchsia? So lassen sich Ihre Vorlieben zu einem stimmigen Nageldesign verbinden.",
+      "image": "fuchsia-french",
+      "alt": "Maniküre mit fuchsiafarbenen French-Spitzen auf rosa Satin",
+      "readTime": "3 Min.",
+      "date": "2026-11-04",
+      "intro": "Bei einem Nageldesign wirkt die Farbe mit Form, Länge und kleinen Details zusammen. Derselbe Rosaton kann auf kurzen ovalen Nägeln ganz anders aussehen als auf längeren Nägeln in Mandelform. Orientieren Sie sich an Ihrem Alltag und daran, wie Sie sich selbst am liebsten sehen.",
+      "quote": "Ein guter Stil passt zu Ihrem Leben.",
+      "sections": [
+        {
+          "title": "Beginnen Sie bei Ihrem Alltag",
+          "paragraphs": [
+            "Die Zeit am Computer, Ihre Lieblingsaccessoires und die Kleidung, die Sie gerne tragen, geben Ihnen Hinweise für die Auswahl. Mögen Sie kurze Nägel mit klarer Form oder eine längere Silhouette? Eine Antwort auf diese Frage hilft beim Termin oft mehr als eine große Sammlung von Beispielfotos.",
+            "Wählen Sie drei Bilder aus und notieren Sie zu jedem, was Ihnen gefällt. Vielleicht ist es einmal der Farbton, einmal die Linie an der Spitze und einmal die Länge. Aus diesen Details lässt sich im Gespräch ein Nageldesign entwickeln, das zu Ihnen passt."
+          ]
+        },
+        {
+          "title": "Die Form bestimmt die Silhouette",
+          "paragraphs": [
+            "Ovale Nägel wirken durch ihre Rundung weich. Die Mandelform verjüngt sich zur Spitze hin, während eckige Nägel eine klare Abschlusslinie haben. Wählen Sie die Silhouette, die Ihnen an Ihrer Hand gefällt und deren Länge zu Ihrem Alltag passt.",
+            "Wenn Ihnen mehrere Kombinationen gefallen, entscheiden Sie sich zuerst für eine Form. Anschließend lassen sich Farbe und Verzierungen leichter vorstellen. Eine French-Linie kann je nach Nagelform einen ganz anderen Charakter bekommen."
+          ]
+        },
+        {
+          "title": "Stimmen Sie Farbe und Details aufeinander ab",
+          "paragraphs": [
+            "Eine fuchsiafarbene Spitze auf Nude setzt einen kräftigen Akzent auf kleiner Fläche. Eine durchgehend fuchsiafarbene Maniküre wirkt auffälliger und einheitlicher. Überlegen Sie zuerst, welche Wirkung Sie sich wünschen: schlicht, glänzend, romantisch oder markant.",
+            "Eine dünne Linie, ein einzelner Akzentnagel oder ein glänzendes Finish kann genügen. Wenn Ihnen mehrere Ideen gefallen, können Sie sich eine davon für den nächsten Termin aufheben."
+          ]
+        },
+        {
+          "title": "Bringen Sie eine kurze Stilnotiz zum Termin mit",
+          "paragraphs": [
+            "Ihre Lieblingsfarbe, die gewünschte Länge und ein oder zwei Beispielfotos sind ein guter Einstieg. Sagen Sie auch, welche Details Sie vermeiden möchten. Mit diesen Hinweisen kann sich die Auswahl an Ihren Wünschen und Ihrer Hand orientieren."
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "kirpik-gorunumunde-denge",
+      "localizedSlug": "natuerlicher-oder-markanter-wimpernlook",
+      "category": "Wimpern & Ausdruck",
+      "title": "Welcher Wimpernlook passt zu Ihnen: natürlich oder markant?",
+      "excerpt": "Wer seinen Wunschlook beschreiben möchte, kann mit der gewünschten Wirkung beginnen und danach über die Länge sprechen.",
+      "image": "crystal-eye",
+      "alt": "Braunes Auge mit betonten Wimpern und einem rosa Kristallakzent",
+      "readTime": "3 Min.",
+      "date": "2026-11-04",
+      "intro": "Wenn uns ein Wimpernlook gefällt, fällt es oft schwer, den Grund zu benennen. Ist es die Länge, der Schwung oder die Leichtigkeit des Gesamteindrucks? Wenn Sie wissen, welche Wirkung Sie sich wünschen, können Sie Beispielfotos gezielter auswählen.",
+      "quote": "Ein Foto gibt die Idee. Ihr Ausdruck gibt ihr die Richtung.",
+      "sections": [
+        {
+          "title": "Finden Sie Worte für die gewünschte Wirkung",
+          "paragraphs": [
+            "Weich, dezent, definiert oder auffällig: Welches Wort beschreibt Ihren Wunsch am besten? Versuchen Sie, vor dem Termin einen Satz zu formulieren, etwa „Ich möchte einen Look, der zu meinem Alltag passt“ oder „Für einen besonderen Anlass möchte ich meine Augen stärker betonen“. Damit geben Sie einen klareren Eindruck als mit einer Längenangabe allein.",
+            "Vergleichen Sie Fotos mit ähnlicher Beleuchtung und einem ähnlichen Bildausschnitt. Eyeliner, Lidschatten und Perspektive prägen den Gesamteindruck mit. Wenn Sie benennen können, was Sie auf dem Foto anspricht, fällt es Ihnen leichter, Ihren Wunsch zu erklären."
+          ]
+        },
+        {
+          "title": "Beziehen Sie Ihren Alltagsstil ein",
+          "paragraphs": [
+            "Tragen Sie normalerweise ein leichtes Make-up oder betonen Sie Ihre Augen im Alltag? Überlegen Sie, welcher Wimpernlook sich in Ihren gewohnten Stil einfügt. Denken Sie dabei auch an einen ganz normalen Morgen und daran, wie Sie dann aussehen möchten.",
+            "Wenn Sie noch unsicher sind, sammeln Sie Beispiele in zwei Gruppen: Looks, die Ihnen gefallen, und solche, die Sie zu auffällig finden. Beide helfen im Gespräch. Beschreiben Sie, welche Dichte oder welche Form am äußeren Augenwinkel Sie vermeiden möchten."
+          ]
+        },
+        {
+          "title": "Nutzen Sie Fotos als Ausgangspunkt",
+          "paragraphs": [
+            "Augenpartie und natürliche Wimpern sind bei jedem Menschen verschieden. Zeigen Sie deshalb den Teil des Fotos, der Ihnen gefällt. Sätze wie „Ich mag den Schwung am äußeren Augenwinkel“ oder „Ich möchte, dass die Wimpern weniger dicht wirken“ machen Ihre Wünsche greifbar.",
+            "Fragen Sie beim Termin nach den verfügbaren Methoden, ihrer Eignung und der anschließenden Pflege. Erwähnen Sie frühere Wimpernbehandlungen. Besprechen Sie Ihre Fragen direkt mit der Person, die die Anwendung durchführt, damit Sie Ihre Entscheidung auf konkrete Informationen stützen können."
+          ]
+        },
+        {
+          "title": "Wählen Sie die Wirkung, die Ihnen entspricht",
+          "paragraphs": [
+            "Wo ein natürlicher Look endet und ein markanter beginnt, empfindet jeder anders. Was Sie als elegant empfinden, hängt von Ihrem Alltag und Ihrem Geschmack ab. Beschreiben Sie in Ihrer Stilnotiz, welche Wirkung Ihnen beim Blick in den Spiegel gefallen würde."
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "pembe-tonlariyla-renk-uyumu",
+      "localizedSlug": "rosa-farbkombinationen",
+      "category": "Farbe & Inspiration",
+      "title": "Ihr Rosa zwischen Fuchsia und Nude",
+      "excerpt": "Rosatöne können einen sanften Akzent setzen oder den ganzen Look prägen. Entdecken Sie Kombinationen für Ihren Stil.",
+      "image": "rose-lips",
+      "alt": "Nahaufnahme von Lippen in einem natürlichen Rosenrosa",
+      "readTime": "3 Min.",
+      "date": "2026-11-04",
+      "intro": "Rosa umfasst viele Nuancen. Ein sanfter Nudeton, ein Hauch Rosenrosa und ein leuchtendes Fuchsia wirken je nach Kombination ganz unterschiedlich. Für einen stimmigen Look können Sie mehrere verwandte Töne aufgreifen und ihnen jeweils unterschiedlich viel Raum geben.",
+      "quote": "Eine stimmige Farbkombination lebt vom Zusammenspiel der Töne.",
+      "sections": [
+        {
+          "title": "Wählen Sie eine Hauptfarbe und einen Begleitton",
+          "paragraphs": [
+            "Entscheiden Sie zuerst, welches Detail ins Auge fallen soll. Zu einer leuchtenden Maniküre kann ein ruhiger Lippenton schön wirken. Möchten Sie die Lippen betonen, könnten Ihnen dezentere Nägel gefallen. Probieren Sie aus, wie sich der Gesamteindruck verändert, wenn Sie jeweils einer Farbe den Vortritt lassen.",
+            "Beziehen Sie auch Kleidung, Schmuck und Accessoires in Ihre Farbwahl ein. Manchmal reicht ein kräftiger Ton, manchmal passen mehrere ähnliche und sanfte Farben besser zusammen. Wählen Sie die Kombination, in der Sie sich wiedererkennen."
+          ]
+        },
+        {
+          "title": "Das Finish verändert die Farbwirkung",
+          "paragraphs": [
+            "Glänzende und matte Oberflächen können ähnliche Farbtöne unterschiedlich wirken lassen. Rosa auf einem Satinstoff hat einen anderen Charakter als derselbe Ton auf einem glänzenden Nagel. Achten Sie bei Beispielfotos auch auf das Licht und die Textur, die Ihnen gefallen.",
+            "Fragen Sie sich bei einem Foto: „Gefällt mir die Farbe, der Glanz oder die schlichte Linie?“ So erkennen Sie leichter, was Ihre Beispiele verbindet. Vielleicht suchen Sie vor allem ein weiches Finish und sind beim genauen Rosaton flexibel."
+          ]
+        },
+        {
+          "title": "Setzen Sie verwandte Rosatöne unterschiedlich ein",
+          "paragraphs": [
+            "Rosenrosa, Nude und Fuchsia können im selben Look unterschiedlich viel Fläche einnehmen. Eine schmale French-Spitze, ein dezentes Accessoire oder ein einzelner Farbakzent bringt einen kräftigen Ton unaufdringlich zur Geltung. Für einen einheitlicheren Look können Sie einem Rosaton mehr Raum geben.",
+            "Auf Fotos kann ein Farbton durch Bildschirm, Licht und Aufnahmebedingungen anders wirken. Schauen Sie sich vor der endgültigen Wahl beim Termin die verfügbaren Farben an und besprechen Sie, welche Ihrer Vorstellung am nächsten kommt."
+          ]
+        },
+        {
+          "title": "Stellen Sie eine kleine Inspirationscollage zusammen",
+          "paragraphs": [
+            "Legen Sie ein Stoffmuster, eine Lieblingsnagellackfarbe und ein Make-up-Foto nebeneinander. Beschreiben Sie ihre gemeinsame Wirkung mit einem Wort: schlicht, lebhaft, romantisch oder glänzend. Mit diesen drei Beispielen können Sie beim nächsten Beauty-Termin leichter erklären, welchen Look Sie sich wünschen."
+          ]
+        }
+      ]
+    }
+  ]
+}

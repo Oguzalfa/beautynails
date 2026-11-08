@@ -31,7 +31,7 @@ const reports = []
 try {
   for (const width of widths) {
     const height = Number(process.env.QA_HEIGHT) || (width < 768 ? 844 : 1000)
-    const context = await browser.newContext({ viewport:{ width, height }, isMobile:width < 768, hasTouch:width < 768, deviceScaleFactor:1, reducedMotion:'reduce' })
+      const context = await browser.newContext({ locale:'tr-TR', viewport:{ width, height }, isMobile:width < 768, hasTouch:width < 768, deviceScaleFactor:1, reducedMotion:'reduce' })
     const page = await context.newPage()
     const errors = []
     const failed = []

@@ -1,0 +1,76 @@
+.bn-header > .bnx-nav { margin-inline: 0 auto; }
+.bn-header .bn-menu-toggle { margin-inline: 0; }
+.bn-header .bn-logo { direction: ltr; }
+
+@media (max-width: 899px) {
+  .bn-header > .sz-language { margin-inline-start: auto; }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  .bn-header { gap: 12px; }
+  .bn-header > .bnx-nav .bnx-nav__link { font-size: 12px; }
+}
+
+html:not([lang='tr']) .bn-page :is(.bn-service__title, .bn-at-name, .bn-at-lash-title) {
+  overflow-wrap: anywhere;
+}
+
+html:not([lang='tr']) .bn-page .bn-service__content .bn-button {
+  max-width: 100%;
+  white-space: normal;
+}
+
+@media (min-width: 900px) {
+  html:not([lang='tr']) .bn-hero__title {
+    font-size: clamp(56px, 8.8vw, 144px);
+    overflow-wrap: anywhere;
+  }
+  html:not([lang='tr']) .bn-appointment__title {
+    font-size: clamp(44px, 5.4vw, 94px);
+  }
+}
+
+@media (max-width: 899px) {
+  html:not([lang='tr']) .bn-hero__title > span { white-space: normal; }
+}
+
+@media (max-width: 767px) {
+  html:not([lang='tr']) .bn-at-title {
+    font-size: clamp(40px, 12.7vw, 62px);
+    overflow-wrap: anywhere;
+  }
+  html:not([lang='tr']) .bn-at-title em { font-size: 1.05em; }
+  html:not([lang='tr']) .bn-at-cta { white-space: normal; }
+}
+
+html[dir='rtl'] .bn-page {
+  --bn-sans: Tahoma, Arial, sans-serif;
+  --bn-serif: Tahoma, Arial, sans-serif;
+  font-family: var(--bn-sans);
+}
+html[dir='rtl'] .bn-page :is(h1, h2, h3, em, .bn-eyebrow, .bn-at-eyebrow, .sz-eyebrow) {
+  letter-spacing: normal;
+}
+html[dir='rtl'] .bn-page :is(.bnx-appointment__label, .bnx-nav__link, .bnx-feature__label) {
+  font-family: Tahoma, Arial, sans-serif;
+  letter-spacing: normal;
+}
+html[dir='rtl'] .bn-page :is(.bn-hero__title, .bn-hero__title em, .bn-at-title, .bn-at-title em) {
+  line-height: 1.12;
+}
+html[dir='rtl'] .bn-page :is(a[href^='tel:'], .bn-footer__legal) { direction: ltr; }
+html[dir='rtl'] .bn-menu .bnx-nav__link { padding-inline: 38px 16px; }
+html[dir='rtl'] .bn-page .bn-at-trust li { border-right: 0; border-inline-end: 1px solid rgb(9 9 9 / .22); }
+html[dir='rtl'] .bn-page .bn-at-trust li:last-child { border-inline-end: 0; }
+html[dir='rtl'] .bn-page .bn-at-orb { right: auto; left: -42px; }
+
+@media (min-width: 900px) {
+  /* The portrait and booking art have their subjects on the right. */
+  html[dir='rtl'] .bn-hero { width: 100%; }
+  html[dir='rtl'] .bn-hero__copy {
+    left: var(--bn-gutter);
+    right: auto;
+    width: min(46%, 680px);
+  }
+  html[dir='rtl'] .bn-hero__title { font-size: clamp(52px, 7.8vw, 128px); }
+}

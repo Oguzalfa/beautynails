@@ -1,0 +1,304 @@
+{
+  "services": [
+    {
+      "slug": "tirnak-sanati",
+      "localizedSlug": "nail-art",
+      "title": "Nail art, manicures and pedicures",
+      "description": "Explore nail art, manicures and pedicures at Şazi Beauty. Share your ideas for shape, colour and detail when you request an appointment.",
+      "intro": "Shape, colour and small details give a manicure its character. At Şazi Beauty, you can ask about nail art, manicures and pedicures and describe the look you have in mind when requesting an appointment. Bringing together a few ideas you like, from a simple finish to a vivid pink, gives us a starting point for the consultation.",
+      "image": "/images/fx/nails-macro.webp",
+      "sections": [
+        {
+          "title": "Shape, length and everyday style",
+          "paragraphs": [
+            "Think about how you use your hands every day as you choose a look. Tell us whether you prefer a short, clean outline, a soft oval or a tapered almond shape. You might like the colour in one photo and the length in another. Bring both ideas to the consultation."
+          ]
+        },
+        {
+          "title": "Ideas for colour and detail",
+          "paragraphs": [
+            "Start with the overall look you want, whether that's French tips, a single colour or a small accent. Use the gallery to explore colours and textures, then compare your reference shade with the available options during the consultation. Mention any details you'd prefer to leave out."
+          ]
+        },
+        {
+          "title": "Prepare your appointment request",
+          "paragraphs": [
+            "Choose Nail Art on the appointment form. Use the notes field to specify a manicure, pedicure or the design you have in mind. The studio will confirm the service details, duration and price when you get in touch."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "Can I bring a reference photo?",
+          "answer": "Yes. Share one or two examples and point out the shape, colour or detail you like. That helps us understand the look you want."
+        },
+        {
+          "question": "How do I ask for a manicure or pedicure?",
+          "answer": "Select Nail Art and write manicure or pedicure in the notes field. Your note will be included in the WhatsApp message draft."
+        },
+        {
+          "question": "Does filling out the form confirm my appointment?",
+          "answer": "The form prepares a WhatsApp message for you to send. The studio will confirm availability and appointment details after you get in touch."
+        }
+      ],
+      "relatedArticle": "tirnak-formu-ve-kisisel-stil"
+    },
+    {
+      "slug": "ipek-kirpik",
+      "localizedSlug": "lash-extensions",
+      "title": "Lash extensions for the look you want",
+      "description": "Explore lash extensions at Şazi Beauty. Tell us whether you prefer a natural or more defined look and request an appointment to discuss the options.",
+      "intro": "When looking for lash extension ideas, start with the overall effect you like. You might want a subtle, soft or more defined look. Request an appointment at Şazi Beauty to learn about the service and talk through your preferences.",
+      "image": "/images/fx/lashes-macro.webp",
+      "sections": [
+        {
+          "title": "Describe the effect you want",
+          "paragraphs": [
+            "Your everyday makeup and the styles you enjoy can help you describe the look you have in mind. Share an example that feels natural to you and another that looks too pronounced. Point out any volume or styling details you'd like to avoid."
+          ]
+        },
+        {
+          "title": "Talk through your references",
+          "paragraphs": [
+            "Lighting, camera angle and makeup all contribute to the effect you see in a photo. Use the reference to show the specific details you like and ask which options are available for you during the consultation."
+          ]
+        },
+        {
+          "title": "Make a few notes before your consultation",
+          "paragraphs": [
+            "Mention any previous lash treatments and tell us what you're looking for now. Make a note of your questions about the application, duration, price and aftercare so you can discuss them directly with the studio."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "How can I explain that I want a natural look?",
+          "answer": "Share references that feel close to your everyday style. In the appointment notes, describe the subtle effect you want and mention any details you'd prefer to avoid."
+        },
+        {
+          "question": "How can I find out which options are available?",
+          "answer": "Choose Lash Extensions on the appointment form and include your questions. The studio will explain the options and discuss your preferences during the consultation."
+        },
+        {
+          "question": "How do I send my appointment request?",
+          "answer": "The form creates a WhatsApp draft with your chosen service and notes. Send the message to discuss available times and the consultation details."
+        }
+      ],
+      "relatedArticle": "kirpik-gorunumunde-denge"
+    },
+    {
+      "slug": "kalici-makyaj",
+      "localizedSlug": "permanent-makeup",
+      "title": "Permanent makeup and personal style",
+      "description": "Learn about permanent makeup at Şazi Beauty. Share the colours and look you prefer, and request a consultation to discuss the service.",
+      "intro": "If you're considering permanent makeup, start by describing what you like about your everyday look and which feature you'd like to bring out. Ask Şazi Beauty about the service and include your preferences for colour and definition in your appointment request. A few clear notes can help you prepare for the consultation.",
+      "image": "/images/fx/lips-macro.webp",
+      "sections": [
+        {
+          "title": "Start with your everyday look",
+          "paragraphs": [
+            "Think about the colours you usually wear and how much definition you like. Pick a makeup photo you enjoy and describe what draws you to it. You might like the colour family, the shape of a line or the softness of the overall finish. Choose the elements that fit your own style."
+          ]
+        },
+        {
+          "title": "Discuss colour and expectations",
+          "paragraphs": [
+            "Lighting and camera settings can change how a colour appears on screen. Bring the photo as a reference and review the available shades during the consultation. Mention any colours or effects you'd prefer to avoid and ask which treatments the service includes."
+          ]
+        },
+        {
+          "title": "Add your questions to the appointment notes",
+          "paragraphs": [
+            "Mention any previous permanent makeup treatments. Use the notes field for questions about the procedure, duration, price and what to expect afterwards. The studio will discuss the service and assessment details during the consultation."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "How do I choose a colour or look that suits me?",
+          "answer": "Share a few examples and describe your everyday makeup. The studio can discuss the look you want and explain the available options during the consultation."
+        },
+        {
+          "question": "How do I find out the price and duration?",
+          "answer": "Choose Permanent Makeup and use the notes field to tell us which treatment you're asking about. The studio will discuss the service details, duration and price when you get in touch."
+        },
+        {
+          "question": "Will the form send the WhatsApp message for me?",
+          "answer": "The form prepares a message draft. Send it in WhatsApp to share your request with the studio and discuss your appointment."
+        }
+      ],
+      "relatedArticle": "pembe-tonlariyla-renk-uyumu"
+    },
+    {
+      "slug": "kas-yuz",
+      "localizedSlug": "brows-and-face",
+      "title": "Brow and face care appointments",
+      "description": "Explore brow and face care at Şazi Beauty. Tell us about the look you want, ask about the service and request an appointment.",
+      "intro": "Start your brow and face care consultation by describing the overall look you like. You might prefer a subtle, defined or softer effect. Request an appointment at Şazi Beauty to learn about the Brows & Face service and talk through the details you're considering.",
+      "image": "/images/bn/service-brows.webp",
+      "sections": [
+        {
+          "title": "Think about your overall look",
+          "paragraphs": [
+            "When you like a brow style, consider what catches your eye. It might be the shape, the definition or the way the brows frame the face. Alongside an example you like, mention any detail you'd prefer to avoid. Your usual makeup routine can also help explain the effect you want."
+          ]
+        },
+        {
+          "title": "Use your reference to start the conversation",
+          "paragraphs": [
+            "Camera angle, lighting and makeup all affect how a style appears in photos. Use a reference to point out the details you like. During the consultation, show us your current look, share your preferences and ask which options the service includes."
+          ]
+        },
+        {
+          "title": "Tell us what you'd like to know",
+          "paragraphs": [
+            "Choose Brows & Face on the form and use the notes field to describe the treatment or look you're interested in. Mention any previous treatments and include your questions. The studio will confirm the service details, duration and price during the consultation."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "How do I specify brow care or face care?",
+          "answer": "Choose Brows & Face and name the service you'd like in the notes field. Add any styling preferences or questions you'd like to discuss."
+        },
+        {
+          "question": "How do I find out what the service includes?",
+          "answer": "Name the treatment you're considering or describe what you'd like to achieve in your message. The studio can explain the available options and what each treatment involves."
+        },
+        {
+          "question": "How do I arrange an appointment time?",
+          "answer": "You can enter a preferred time on the request form. Send the WhatsApp draft to the studio to discuss availability and confirm the appointment details."
+        }
+      ],
+      "relatedArticle": "kirpik-gorunumunde-denge"
+    }
+  ],
+  "journal": [
+    {
+      "slug": "tirnak-formu-ve-kisisel-stil",
+      "localizedSlug": "nail-shape-and-personal-style",
+      "category": "Nails & style",
+      "title": "Three elements of nail style, shape, colour and detail",
+      "excerpt": "Almond or oval? Nude or fuchsia? Find a way to bring shape, colour and detail together.",
+      "image": "fuchsia-french",
+      "alt": "Manicure with fuchsia French tips against pink satin",
+      "readTime": "3 min read",
+      "date": "2026-11-04",
+      "intro": "Shape, length and a small accent can make the same shade of pink feel like an entirely different manicure. Start with your everyday routine and how you'd like your nails to look on an ordinary day.",
+      "quote": "A good nail style fits the way you live.",
+      "sections": [
+        {
+          "title": "Start with your everyday routine",
+          "paragraphs": [
+            "Hours at a keyboard, the accessories you reach for and the clothes you like to wear all give you clues. Would short, clean nails feel right for you, or do you enjoy a longer shape? Answering that question before your appointment gives you a clear starting point for choosing references.",
+            "Pick three photos you like and note what stands out in each one. You might choose the colour from one, the tip line from another and the length from a third. Discussing those individual details can help you put together a look that feels like your own."
+          ]
+        },
+        {
+          "title": "Shape sets the outline",
+          "paragraphs": [
+            "An oval gives you a rounded line, an almond shape tapers towards the tip and a square has a straighter edge. Consider how each shape looks on your hands, what feels practical and which length you prefer.",
+            "If you feel torn between several designs, choose the shape first. Adding colour and small embellishments afterwards makes it easier to picture the finished manicure. Even the same French tip can look different on two nail shapes."
+          ]
+        },
+        {
+          "title": "Balance colour and detail",
+          "paragraphs": [
+            "A fuchsia tip on a nude base gives a vivid colour a smaller place in the design. An all-over fuchsia makes a stronger statement. Decide on the feeling you want first, whether it's simple, glossy, romantic or bold.",
+            "A fine line, a small accent on one nail or a glossy finish may be enough. If you like several ideas, try one at this appointment and save another for your next manicure."
+          ]
+        },
+        {
+          "title": "Bring a short style note to your appointment",
+          "paragraphs": [
+            "Bring your preferred colour, the length you have in mind and one or two examples. Mention any detail you want to leave out. A few specific notes make it easier to adapt an idea from a photo to your own preferences."
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "kirpik-gorunumunde-denge",
+      "localizedSlug": "lash-style-and-balance",
+      "category": "Lashes & definition",
+      "title": "Finding your balance between natural and defined lashes",
+      "excerpt": "Start with the effect you want when you're choosing a lash style. Length is one part of the look.",
+      "image": "crystal-eye",
+      "alt": "Close-up of a brown eye with defined lashes and a pink crystal detail",
+      "readTime": "3 min read",
+      "date": "2026-11-04",
+      "intro": "It can be hard to say what makes a lash look stand out in a photo. You might like the length, the direction of the lash line or the softness of the overall look. Decide which effect appeals to you before gathering references.",
+      "quote": "Use photos for inspiration and choose the effect that feels right for you.",
+      "sections": [
+        {
+          "title": "Put the effect you want into words",
+          "paragraphs": [
+            "Do you want a softer, subtler, more defined or more striking look? Before your appointment, try describing it in one sentence. You could say, 'I'd like a look that fits my everyday style' or 'I'd like my eyes to stand out a little more for a special occasion.' That gives the studio a clearer starting point than a length alone.",
+            "Compare reference photos taken in similar light and from a similar distance. Eyeliner, eyeshadow and camera angle all contribute to what you see. Point out the element you like to make your preference easier to explain."
+          ]
+        },
+        {
+          "title": "Consider your everyday style",
+          "paragraphs": [
+            "Do you usually wear light makeup, or is eye makeup a regular part of your look? A lash style can feel more cohesive when it fits what you already wear. Think about how you want to look on a typical morning as well as in a special occasion photo.",
+            "If you're unsure, gather two sets of references. Keep the styles that feel right in one group and those you find too bold in the other. Both can help you explain your preferences. Mention any volume or lash line shape that you dislike."
+          ]
+        },
+        {
+          "title": "Treat the reference as a starting point",
+          "paragraphs": [
+            "Eye shape and natural lashes vary from person to person. Explain what you like in the photo and let that guide the consultation. For example, 'I like the shape at the outer corner' or 'I'd prefer less volume than this' gives the studio something specific to work with.",
+            "Ask the studio to discuss the application, suitability and aftercare during your appointment. Mention any previous lash treatments. Ask the person carrying out the treatment about the method and what to expect afterwards so you can make an informed choice."
+          ]
+        },
+        {
+          "title": "Choose the look that feels like you",
+          "paragraphs": [
+            "What feels natural or defined depends on your taste and your everyday style. A good note for your appointment describes the effect you'd like to see when you look in the mirror."
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "pembe-tonlariyla-renk-uyumu",
+      "localizedSlug": "finding-your-shade-of-pink",
+      "category": "Colour & inspiration",
+      "title": "Finding your shade of pink, from fuchsia to nude",
+      "excerpt": "Find a soft accent or a bold signature within the same colour family.",
+      "image": "rose-lips",
+      "alt": "Close-up of lips in a natural rose-pink shade",
+      "readTime": "3 min read",
+      "date": "2026-11-04",
+      "intro": "Pink can be soft and close to nude, warm and rosy or vivid like fuchsia. Each shade creates a different effect depending on the details you pair it with. Try bringing several shades together by choosing which one will lead and which will play a supporting role.",
+      "quote": "Different shades can work together when each has room to stand out.",
+      "sections": [
+        {
+          "title": "Choose a lead colour and a companion shade",
+          "paragraphs": [
+            "Decide which detail you want people to notice first. A softer lip shade can balance a vivid manicure. On a day when you want the lip colour to stand out, you might prefer a simpler nail design. Try that approach when you need a starting point for choosing colours.",
+            "Consider your outfit, jewellery and accessories alongside your makeup and nails. One strong shade might pull the look together, or several soft colours close to each other might suit you better. Choose the combination that feels most like you."
+          ]
+        },
+        {
+          "title": "Finish changes how a colour feels",
+          "paragraphs": [
+            "Glossy and matte finishes can give similar shades a different character. Pink satin and a glossy pink manicure catch the light in different ways. When choosing a reference, notice the light and texture that appeal to you as well as the name of the shade.",
+            "When a photo catches your eye, ask yourself whether you like the colour, the shine or the clean lines. That distinction can help you see what your references have in common. You might discover that the soft finish is the detail you've been looking for."
+          ]
+        },
+        {
+          "title": "Leave room for subtle differences",
+          "paragraphs": [
+            "Rose pink, nude pink and fuchsia can each take up a different amount of space in one look. A small French tip, a delicate accessory or a single accent is a simple way to wear a vivid shade. Give one shade more room if you want a stronger, more cohesive statement.",
+            "Screens, lighting and camera settings can all affect the colour you see in a photo. Look at the available shades during your appointment and compare them with your reference before deciding."
+          ]
+        },
+        {
+          "title": "Put together a small inspiration board",
+          "paragraphs": [
+            "Place a fabric texture, a nail polish shade you love and a makeup photo you like side by side. Find one word for the feeling they share, such as simple, vivid, romantic or glossy. That small board gives you a starting point for describing your next beauty look."
+          ]
+        }
+      ]
+    }
+  ]
+}

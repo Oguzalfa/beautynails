@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import './beauty-nails-exact.css';
+import { useLocale } from '../../i18n/LocaleContext';
 
 /**
  * These components display the approved raster atlas. They never redraw an icon.
@@ -180,6 +181,7 @@ export function FeatureSet({
   assetBase = DEFAULT_ASSET_BASE,
   animated = true,
 }: FeatureSetProps) {
+  const { locale, t } = useLocale();
   const ref = useMotionPause<HTMLUListElement>(animated);
   const tone = kind === 'hero' || kind === 'lashes' ? 'dark' : 'rose';
 
@@ -199,13 +201,13 @@ export function FeatureSet({
             assetBase={assetBase}
           />
           <span className="bnx-feature__label">
-            {feature.lines ? (
+            {locale === 'tr' && feature.lines ? (
               <>
                 <span>{feature.lines[0]}</span>{' '}
                 <span>{feature.lines[1]}</span>
               </>
             ) : (
-              feature.label
+              t(feature.label)
             )}
           </span>
         </li>
@@ -232,15 +234,16 @@ export function PremiumNav({
   currentHref,
   className,
   assetBase = DEFAULT_ASSET_BASE,
-  label = 'Üst navigasyon',
+  label,
 }: PremiumNavProps) {
+  const { t } = useLocale();
   const ref = useMotionPause<HTMLElement>(true);
 
   return (
     <nav
       ref={ref}
       className={classes('bnx-nav', className)}
-      aria-label={label}
+      aria-label={label ?? t('Üst navigasyon')}
       data-bnx-motion=""
       data-bnx-paused="true"
     >
@@ -279,12 +282,13 @@ export interface PremiumAppointmentProps
 
 export function PremiumAppointment({
   href,
-  children = 'Özel Randevu',
+  children,
   assetBase = DEFAULT_ASSET_BASE,
   className,
   compact = false,
   ...anchorProps
 }: PremiumAppointmentProps) {
+  const { t } = useLocale();
   const ref = useMotionPause<HTMLAnchorElement>(true);
 
   return (
@@ -299,7 +303,7 @@ export function PremiumAppointment({
       <span className="bnx-appointment__gem" aria-hidden="true">
         <PremiumIcon name="diamond" size={32} assetBase={assetBase} />
       </span>
-      <span className="bnx-appointment__label">{children}</span>
+      <span className="bnx-appointment__label">{children ?? t('Özel Randevu')}</span>
       <span className="bnx-appointment__orb" aria-hidden="true">
         <svg
           className="bnx-appointment__arrow"

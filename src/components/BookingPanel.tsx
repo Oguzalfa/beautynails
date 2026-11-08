@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type RefObject } from 'react'
 import { siteConfig } from '../config/site'
 import { useDialog } from '../hooks/useDialog'
+import { useLocale } from '../i18n/LocaleContext'
 
 type Props = {
   open: boolean
@@ -13,6 +14,7 @@ const serviceOptions = ['Tırnak Sanatı', 'İpek Kirpik', 'Kalıcı Makyaj', 'K
 type Errors = Partial<Record<'name' | 'phone' | 'service', string>>
 
 export function BookingPanel({ open, onClose, returnFocusRef }: Props) {
+  const { t } = useLocale()
   const titleId = useId()
   const firstRef = useRef<HTMLInputElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
@@ -62,13 +64,13 @@ export function BookingPanel({ open, onClose, returnFocusRef }: Props) {
     }
 
     const lines = [
-      `Merhaba, ${siteConfig.brand} randevu talebi:`,
-      `Hizmet: ${services.join(', ')}`,
-      `Ad soyad: ${name}`,
-      `Telefon: ${phone}`,
+      t('Merhaba, {brand} randevu talebi:').replace('{brand}', () => siteConfig.brand),
+      t('Hizmet: {services}').replace('{services}', () => services.map(t).join(', ')),
+      t('Ad soyad: {name}').replace('{name}', () => name),
+      t('Telefon: {phone}').replace('{phone}', () => phone),
     ]
-    if (time) lines.push(`Saat: ${time}`)
-    if (note) lines.push(`Not: ${note}`)
+    if (time) lines.push(t('Saat: {time}').replace('{time}', () => time))
+    if (note) lines.push(t('Not: {note}').replace('{note}', () => note))
     const url = `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(lines.join('\n'))}`
     setDraftUrl(url)
     setStatus('ready')
@@ -87,33 +89,33 @@ export function BookingPanel({ open, onClose, returnFocusRef }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <button type="button" className="bn-modal__close" onClick={onClose}>
-          Kapat
+          {t('Kapat')}
         </button>
-        <h2 id={titleId}>Randevu talebi</h2>
+        <h2 id={titleId}>{t('Randevu talebi')}</h2>
         <p>
           {siteConfig.bookingProviderUrl
-            ? 'Sizi mevcut randevu akışına yönlendireceğiz.'
-            : `Randevu talebi ${siteConfig.phone} numaralı WhatsApp hattına hazırlanır. Mesajı siz gönderirsiniz.`}
+            ? t('Sizi mevcut randevu akışına yönlendireceğiz.')
+            : t('Randevu talebi {phone} numaralı WhatsApp hattına hazırlanır. Mesajı siz gönderirsiniz.').replace('{phone}', () => siteConfig.phone)}
         </p>
 
         {status !== 'idle' ? (
           <div ref={successRef} className="bn-form-success" role="status">
             <p>
-              WhatsApp taslağınız hazır. Açılmadıysa aşağıdaki düğmeyi kullanın. Mesajı göndererek randevu talebinizi iletebilirsiniz.
+              {t('WhatsApp taslağınız hazır. Açılmadıysa aşağıdaki düğmeyi kullanın. Mesajı göndererek randevu talebinizi iletebilirsiniz.')}
             </p>
             {draftUrl ? (
               <a className="bn-button bn-button--solid" href={draftUrl} target="_blank" rel="noreferrer">
-                WhatsApp taslağını aç
+                {t('WhatsApp taslağını aç')}
               </a>
             ) : null}
             <button type="button" className="bn-button bn-button--outline" onClick={onClose}>
-              Kapat
+              {t('Kapat')}
             </button>
           </div>
         ) : (
           <form className="bn-form" onSubmit={onSubmit} noValidate>
             <fieldset className="bn-form__choices">
-              <legend>Hizmet</legend>
+              <legend>{t('Hizmet')}</legend>
               {serviceOptions.map((option, index) => (
                 <label key={option}>
                   <input
@@ -124,31 +126,31 @@ export function BookingPanel({ open, onClose, returnFocusRef }: Props) {
                     aria-invalid={!!errors.service}
                     aria-describedby={errors.service ? `${titleId}-service-error` : undefined}
                   />
-                  {option}
+                  {t(option)}
                 </label>
               ))}
-              {errors.service ? <span id={`${titleId}-service-error`} className="bn-field-error">{errors.service}</span> : null}
+              {errors.service ? <span id={`${titleId}-service-error`} className="bn-field-error">{t(errors.service)}</span> : null}
             </fieldset>
             <label>
-              Ad Soyad
+              {t('Ad Soyad')}
               <input name="name" autoComplete="name" aria-invalid={!!errors.name} aria-describedby={errors.name ? `${titleId}-name-error` : undefined} />
-              {errors.name ? <span id={`${titleId}-name-error`} className="bn-field-error">{errors.name}</span> : null}
+              {errors.name ? <span id={`${titleId}-name-error`} className="bn-field-error">{t(errors.name)}</span> : null}
             </label>
             <label>
-              Telefon
+              {t('Telefon')}
               <input name="phone" type="tel" autoComplete="tel" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? `${titleId}-phone-error` : undefined} />
-              {errors.phone ? <span id={`${titleId}-phone-error`} className="bn-field-error">{errors.phone}</span> : null}
+              {errors.phone ? <span id={`${titleId}-phone-error`} className="bn-field-error">{t(errors.phone)}</span> : null}
             </label>
             <label>
-              Saat
+              {t('Saat')}
               <input name="time" type="time" />
             </label>
             <label>
-              Not (isteğe bağlı)
+              {t('Not (isteğe bağlı)')}
               <textarea name="note" rows={3} />
             </label>
             <button type="submit" className="bn-button bn-button--solid">
-              WhatsApp taslağını hazırla
+              {t('WhatsApp taslağını hazırla')}
               <span aria-hidden="true">→</span>
             </button>
           </form>

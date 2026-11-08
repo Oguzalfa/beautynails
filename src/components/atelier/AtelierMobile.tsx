@@ -5,6 +5,7 @@ import { Wordmark } from '../Wordmark'
 import { BeautyGallery } from '../editorial/BeautyGallery'
 import { BeautyJournal } from '../editorial/BeautyJournal'
 import { ServiceLinks } from '../ServiceLinks'
+import { useLocale } from '../../i18n/LocaleContext'
 
 type Props = {
   onOpenBooking: () => void
@@ -65,10 +66,13 @@ function Pair({
 }
 
 export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
+  const { locale, t, href } = useLocale()
   const rootRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
   const phoneHref = `tel:+${siteConfig.whatsappNumber}`
   const whatsappHref = `https://wa.me/${siteConfig.whatsappNumber}`
+  const [nailsLead, ...nailsRest] = t('Tırnak Sanatı').split(' ')
+  const [makeupLead, ...makeupRest] = t('Kalıcı Makyaj').split(' ')
 
   useEffect(() => {
     let active = true
@@ -164,13 +168,13 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
     <div className="sazi-mobile-v3" ref={rootRef}>
       <section className="bn-at-hero" data-at-anchor="deneyim" tabIndex={-1} aria-labelledby={titleId}>
         <h1 id={titleId} className="bn-at-title">
-          <span>Sıradanın</span>
-          <em>ötesinde.</em>
+          <span>{t('Sıradanın')}</span>{' '}
+          <em>{t('ötesinde.')}</em>
         </h1>
         <div className="bn-at-portrait">
           <img
             src="/images/fx/hero-portrait-glass.webp"
-            alt="Şazi Beauty portresi, yüz ve el bakımı"
+            alt={t('Şazi Beauty portresi, yüz ve el bakımı')}
             width={1200}
             height={800}
             fetchPriority="high"
@@ -188,23 +192,23 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
               decoding="async"
             />
           </figure>
-          <p>Size özel bakım. Kusursuz detaylar.</p>
+          <p>{t('Size özel bakım. Kusursuz detaylar.')}</p>
           <Cta fit onClick={onOpenBooking}>
-            Randevu Al
+            {t('Randevu Al')}
           </Cta>
         </div>
         <ul className="bn-at-trust">
           <li>
             <PremiumIcon name="diamond" size={32} tone="dark" animated={false} />
-            <span>Premium<br />Deneyim</span>
+            <span>{locale === 'tr' ? <>Premium<br />Deneyim</> : t('Premium Deneyim')}</span>
           </li>
           <li>
             <PremiumIcon name="lotus" size={32} tone="dark" animated={false} />
-            <span>Uzman<br />Ekip</span>
+            <span>{locale === 'tr' ? <>Uzman<br />Ekip</> : t('Uzman Ekip')}</span>
           </li>
           <li>
             <PremiumIcon name="heart" size={32} tone="dark" animated={false} />
-            <span>Size Özel<br />Bakım</span>
+            <span>{locale === 'tr' ? <>Size Özel<br />Bakım</> : t('Size Özel Bakım')}</span>
           </li>
         </ul>
       </section>
@@ -212,14 +216,13 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
       <section className="bn-at-nails bn-at-reveal" data-at-anchor="hizmetler" tabIndex={-1} aria-labelledby="at-nails-title">
         <span className="bn-at-ribbon" aria-hidden="true" />
         <div className="bn-at-kicker">
-          <p>HİZMETLERİMİZ</p>
+          <p>{t('HİZMETLERİMİZ')}</p>
           <span className="bn-at-badge">01</span>
         </div>
         <h2 id="at-nails-title" className="bn-at-name">
-          <span>Tırnak</span>
-          <em>Sanatı</em>
+          <span>{nailsLead}</span>{nailsRest.length ? <> <em>{nailsRest.join(' ')}</em></> : null}
         </h2>
-        <p className="bn-at-sub">Zarif, modern ve size özel.</p>
+        <p className="bn-at-sub">{t('Zarif, modern ve size özel.')}</p>
         <div className="bn-at-frame">
           <span className="bn-at-rail" aria-hidden="true">
             ŞAZİ BEAUTY
@@ -227,13 +230,13 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
           <div className="bn-at-photo">
             <img
               src="/images/fx/nails-macro.webp"
-              alt="Fransız manikür tırnak uygulaması"
+              alt={t('Fransız manikür tırnak uygulaması')}
               width={900}
               height={1000}
               loading="lazy"
               decoding="async"
             />
-            <span className="bn-at-pill">Kalıcı görünüm</span>
+            <span className="bn-at-pill">{t('Kalıcı görünüm')}</span>
             <figure className="bn-at-inset">
               <img
                 src="/images/bn/service-nails.webp"
@@ -243,58 +246,55 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
                 loading="lazy"
                 decoding="async"
               />
-              <figcaption>MANİKÜR &amp; PEDİKÜR</figcaption>
+              <figcaption>{t('MANİKÜR & PEDİKÜR')}</figcaption>
             </figure>
           </div>
         </div>
         <Pair
-          left={{ icon: 'sparkle', label: 'Kişiye özel tasarım' }}
-          right={{ icon: 'leaf', label: 'Özenli tırnak bakımı' }}
+          left={{ icon: 'sparkle', label: t('Kişiye özel tasarım') }}
+          right={{ icon: 'leaf', label: t('Özenli tırnak bakımı') }}
         />
-        <Cta onClick={() => onOpenService('tirnak-sanati')}>Detayları Keşfedin</Cta>
+        <Cta onClick={() => onOpenService('tirnak-sanati')}>{t('Detayları Keşfedin')}</Cta>
         <span className="bn-at-wave" aria-hidden="true" />
       </section>
 
       <section className="bn-at-lashes bn-at-reveal" aria-labelledby="at-lash-title">
         <span className="bn-at-badge">02</span>
         <h2 id="at-lash-title" className="bn-at-lash-title">
-          İpek Kirpik
+          {t('İpek Kirpik')}
         </h2>
-        <p className="bn-at-sub">Bakışınızda zarif bir dokunuş.</p>
+        <p className="bn-at-sub">{t('Bakışınızda zarif bir dokunuş.')}</p>
         <div className="bn-at-photo bn-at-photo--lash">
           <img
             src="/images/fx/lashes-macro.webp"
-            alt="İpek kirpik uygulanmış göz"
+            alt={t('İpek kirpik uygulanmış göz')}
             width={1000}
             height={520}
             loading="lazy"
             decoding="async"
           />
           <span className="bn-at-pill bn-at-pill--low">
-            Doğal
-            <br />
-            görünüm
+            {locale === 'tr' ? <>Doğal<br />görünüm</> : t('Doğal görünüm')}
           </span>
           <span className="bn-at-chrome bn-at-lash-chrome" aria-hidden="true" data-paused="true" />
         </div>
         <Pair
-          left={{ icon: 'leaf', label: 'Hafif ve konforlu' }}
-          right={{ icon: 'sparkle', label: 'Uzman uygulama' }}
+          left={{ icon: 'leaf', label: t('Hafif ve konforlu') }}
+          right={{ icon: 'sparkle', label: t('Uzman uygulama') }}
         />
-        <Cta onClick={() => onOpenService('ipek-kirpik')}>Kirpiği Keşfet</Cta>
+        <Cta onClick={() => onOpenService('ipek-kirpik')}>{t('Kirpiği Keşfet')}</Cta>
       </section>
 
       <section className="bn-at-makeup bn-at-reveal" aria-labelledby="at-makeup-title">
         <span className="bn-at-badge">03</span>
         <h2 id="at-makeup-title" className="bn-at-name bn-at-name--makeup">
-          <span>Kalıcı</span>
-          <em>Makyaj</em>
+          <span>{makeupLead}</span>{makeupRest.length ? <> <em>{makeupRest.join(' ')}</em></> : null}
         </h2>
-        <p className="bn-at-sub">Doğal güzellik, her zaman.</p>
+        <p className="bn-at-sub">{t('Doğal güzellik, her zaman.')}</p>
         <div className="bn-at-photo bn-at-photo--lips">
           <img
             src="/images/fx/lips-macro.webp"
-            alt="Kalıcı makyaj dudak uygulaması"
+            alt={t('Kalıcı makyaj dudak uygulaması')}
             width={1000}
             height={450}
             loading="lazy"
@@ -303,7 +303,7 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
           <figure className="bn-at-brow">
             <img
               src="/images/bn/service-brows.webp"
-              alt="Kaş detayı"
+              alt={t('Kaş detayı')}
               width={420}
               height={300}
               loading="lazy"
@@ -312,10 +312,10 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
           </figure>
         </div>
         <Pair
-          left={{ icon: 'lips', label: 'Yüzünüze uygun tasarım' }}
-          right={{ icon: 'sparkle', label: 'Doğal ve estetik görünüm' }}
+          left={{ icon: 'lips', label: t('Yüzünüze uygun tasarım') }}
+          right={{ icon: 'sparkle', label: t('Doğal ve estetik görünüm') }}
         />
-        <Cta onClick={() => onOpenService('kalici-makyaj')}>Makyajı Keşfet</Cta>
+        <Cta onClick={() => onOpenService('kalici-makyaj')}>{t('Makyajı Keşfet')}</Cta>
       </section>
 
       <BeautyGallery variant="mobile" />
@@ -334,32 +334,32 @@ export function AtelierMobile({ onOpenBooking, onOpenService }: Props) {
         />
         <h2 id="at-book-title" className="bn-at-book-title">
           <span>
-            Kendinize <em>özel</em>
+            {t('Kendinize')} <em>{t('özel')}</em>
           </span>
-          <span>bir zaman ayırın.</span>
+          <span>{t('bir zaman ayırın.')}</span>
         </h2>
-        <p className="bn-at-sub">Size uygun bakımı birlikte planlayalım.</p>
-        <Cta onClick={onOpenBooking}>Randevu Al</Cta>
+        <p className="bn-at-sub">{t('Size uygun bakımı birlikte planlayalım.')}</p>
+        <Cta onClick={onOpenBooking}>{t('Randevu Al')}</Cta>
         <div className="bn-at-quick">
           <a href={whatsappHref} target="_blank" rel="noreferrer">
             WhatsApp
           </a>
-          <a href={phoneHref}>Ara</a>
+          <a href={phoneHref}>{t('Ara')}</a>
         </div>
       </section>
 
       <footer className="bn-at-foot">
-        <a className="bn-at-foot-logo" href="#top">
+        <a className="bn-at-foot-logo" href={href('#top')}>
           <Wordmark />
         </a>
-        <nav className="bn-at-foot-nav" aria-label="Kısa bağlantılar">
-          <a href="#hizmetler" onClick={go('hizmetler')}>
-            Hizmetler
+        <nav className="bn-at-foot-nav" aria-label={t('Kısa bağlantılar')}>
+          <a href={href('#hizmetler')} onClick={go('hizmetler')}>
+            {t('Hizmetler')}
           </a>
-          <a href="#iletisim" onClick={go('iletisim')}>
-            İletişim
+          <a href={href('#iletisim')} onClick={go('iletisim')}>
+            {t('İletişim')}
           </a>
-          <a href="#makaleler" onClick={go('makaleler')}>Makaleler</a>
+          <a href={href('#makaleler')} onClick={go('makaleler')}>{t('Makaleler')}</a>
           <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">
             Instagram
           </a>

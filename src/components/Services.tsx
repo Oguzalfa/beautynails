@@ -1,12 +1,13 @@
 import { ArrowUpRight } from './icons'
 import { FeatureSet, type FeatureSetKind } from './premium/BeautyNailsPremium'
+import { useLocale } from '../i18n/LocaleContext'
 
 type Props = { onOpenService: (id: string) => void }
 
 type Band = {
   id: string
   number: string
-  title: [string, string]
+  title: string
   description: string
   image: string
   alt: string
@@ -20,7 +21,7 @@ const bands: Band[] = [
   {
     id: 'tirnak-sanati',
     number: '01',
-    title: ['Tırnak', 'Sanatı'],
+    title: 'Tırnak Sanatı',
     description: 'Zarif, modern ve size özel tırnak tasarımları.',
     image: '/images/fx/nails-macro.webp',
     alt: 'Pembe Fransız manikürü yakın planı',
@@ -30,7 +31,7 @@ const bands: Band[] = [
   {
     id: 'ipek-kirpik',
     number: '02',
-    title: ['İpek', 'Kirpik'],
+    title: 'İpek Kirpik',
     description: 'Daha etkileyici ve doğal bir bakış.',
     image: '/images/fx/lashes-macro.webp',
     alt: 'Belirgin kirpikli ela göz yakın planı',
@@ -42,7 +43,7 @@ const bands: Band[] = [
   {
     id: 'kalici-makyaj',
     number: '03',
-    title: ['Kalıcı', 'Makyaj'],
+    title: 'Kalıcı Makyaj',
     description: 'Doğal güzellik, her zaman.',
     image: '/images/fx/lips-macro.webp',
     alt: 'Parlak pembe dudak yakın planı',
@@ -52,10 +53,13 @@ const bands: Band[] = [
 ]
 
 export function Services({ onOpenService }: Props) {
+  const { t } = useLocale()
   return (
     <section id="hizmetler" aria-labelledby="services-title">
-      <h2 id="services-title" className="bn-sr">Hizmetler</h2>
-      {bands.map((band) => (
+      <h2 id="services-title" className="bn-sr">{t('Hizmetler')}</h2>
+      {bands.map((band) => {
+        const [first, ...rest] = t(band.title).split(' ')
+        return (
         <article
           key={band.id}
           id={band.id}
@@ -64,7 +68,7 @@ export function Services({ onOpenService }: Props) {
           <img
             className="bn-service__photo"
             src={band.image}
-            alt={band.alt}
+            alt={t(band.alt)}
             width={1706}
             height={922}
             style={{ objectPosition: band.position }}
@@ -77,12 +81,11 @@ export function Services({ onOpenService }: Props) {
             <div className="bn-service__content">
               <span className="bn-service__tick" aria-hidden="true" />
               <h3 className="bn-service__title">
-                <span>{band.title[0]}</span>
-                <span>{band.title[1]}</span>
+                <span>{first}</span>{rest.length ? <> <span>{rest.join(' ')}</span></> : null}
               </h3>
-              <p className="bn-service__description">{band.description}</p>
+              <p className="bn-service__description">{t(band.description)}</p>
               <button type="button" className="bn-button bn-button--outline" onClick={() => onOpenService(band.id)}>
-                Detayları Keşfedin
+                {t('Detayları Keşfedin')}
                 <ArrowUpRight />
               </button>
             </div>
@@ -92,7 +95,8 @@ export function Services({ onOpenService }: Props) {
             </div>
           </div>
         </article>
-      ))}
+        )
+      })}
     </section>
   )
 }

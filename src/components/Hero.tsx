@@ -1,10 +1,12 @@
 import { FeatureSet, PremiumAppointment } from './premium/BeautyNailsPremium'
+import { useLocale } from '../i18n/LocaleContext'
 
 type Props = {
   onOpenBooking: () => void
 }
 
 export function Hero({ onOpenBooking }: Props) {
+  const { t, href } = useLocale()
   return (
     <section className="bn-hero" id="deneyim" aria-labelledby="hero-title">
       <img
@@ -18,18 +20,18 @@ export function Hero({ onOpenBooking }: Props) {
       />
       <div className="bn-hero__copy">
         <h1 id="hero-title" className="bn-hero__title">
-          <span>Sıradanın</span>
-          <em>ötesinde.</em>
+          <span>{t('Sıradanın')}</span>{' '}
+          <em>{t('ötesinde.')}</em>
         </h1>
-        <p className="bn-hero__intro">Size özel bakım. Kusursuz detaylar.</p>
+        <p className="bn-hero__intro">{t('Size özel bakım. Kusursuz detaylar.')}</p>
         <PremiumAppointment
-          href="#iletisim"
+          href={href('#iletisim')}
           onClick={(event) => {
             event.preventDefault()
             onOpenBooking()
           }}
         >
-          Özel Randevu Al
+          {t('Özel Randevu Al')}
         </PremiumAppointment>
         <FeatureSet kind="hero" />
       </div>

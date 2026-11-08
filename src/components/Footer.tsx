@@ -1,16 +1,18 @@
 import { navLinks, siteConfig } from '../config/site'
 import { Wordmark } from './Wordmark'
 import { ServiceLinks } from './ServiceLinks'
+import { useLocale } from '../i18n/LocaleContext'
 
 export function Footer() {
+  const { t, href } = useLocale()
   return (
     <footer className="bn-footer">
-      <a className="bn-logo" href="#top">
+      <a className="bn-logo" href={href('#top')}>
         <Wordmark />
       </a>
-      <nav className="bn-footer__links" aria-label="Alt menü">
+      <nav className="bn-footer__links" aria-label={t('Alt menü')}>
         {navLinks.map((link) => (
-          <a key={link.href} href={link.href}>{link.label}</a>
+          <a key={link.href} href={href(link.href)}>{t(link.label)}</a>
         ))}
       </nav>
       {siteConfig.phone && siteConfig.whatsappNumber ? (

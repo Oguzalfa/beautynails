@@ -26,7 +26,7 @@ const label=process.env.QA_LABEL||engine
 try{
   for(const width of(process.env.QA_WIDTHS||'320,390,430,768,1024,1440').split(',').map(Number)){
     const height=Number(process.env.QA_HEIGHT)||(width<768?844:1000)
-    const context=await browser.newContext({viewport:{width,height},isMobile:width<768,hasTouch:width<768,deviceScaleFactor:1,reducedMotion:'reduce'})
+    const context=await browser.newContext({locale:'tr-TR',viewport:{width,height},isMobile:width<768,hasTouch:width<768,deviceScaleFactor:1,reducedMotion:'reduce'})
     const page=await context.newPage()
     const errors=[],failed=[]
     page.on('pageerror',e=>errors.push(e.message))

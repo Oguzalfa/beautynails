@@ -3,6 +3,8 @@ import { navLinks } from '../config/site'
 import { PremiumAppointment, PremiumNav } from './premium/BeautyNailsPremium'
 import { Wordmark } from './Wordmark'
 import { CloseIcon, MenuIcon } from './icons'
+import { useLocale } from '../i18n/LocaleContext'
+import { LanguagePicker } from './LanguagePicker'
 
 type Props = {
   menuOpen: boolean
@@ -12,6 +14,8 @@ type Props = {
 }
 
 export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: Props) {
+  const { t } = useLocale()
+  const links = navLinks.map(link => ({ ...link, label: t(link.label) }))
   const menuId = useId()
   const toggleRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -108,7 +112,7 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
       <a className="bn-logo" href="#top" onClick={onCloseMenu}>
         <Wordmark />
       </a>
-      <PremiumNav items={navLinks} currentHref={current ?? undefined} label="Ana menü" />
+      <PremiumNav items={links} currentHref={current ?? undefined} label={t('Ana menü')} />
       <PremiumAppointment
         href="#iletisim"
         compact
@@ -118,8 +122,9 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
           onOpenBooking()
         }}
       >
-        Özel Randevu
+        {t('Özel Randevu')}
       </PremiumAppointment>
+      <LanguagePicker />
       <button
         ref={toggleRef}
         type="button"
@@ -128,7 +133,7 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
         aria-controls={menuId}
         onClick={onToggleMenu}
       >
-        <span className="bn-sr">{menuOpen ? 'Menüyü kapat' : 'Menüyü aç'}</span>
+        <span className="bn-sr">{t(menuOpen ? 'Menüyü kapat' : 'Menüyü aç')}</span>
         {menuOpen ? <CloseIcon /> : <MenuIcon />}
       </button>
       <div
@@ -140,7 +145,7 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
           if (event.target instanceof Element && event.target.closest('a')) onCloseMenu()
         }}
       >
-        <PremiumNav items={navLinks} currentHref={current ?? undefined} label="Mobil menü" />
+        <PremiumNav items={links} currentHref={current ?? undefined} label={t('Mobil menü')} />
         <PremiumAppointment
           href="#iletisim"
           onClick={(event) => {
@@ -149,7 +154,7 @@ export function Header({ menuOpen, onToggleMenu, onCloseMenu, onOpenBooking }: P
             onOpenBooking()
           }}
         >
-          Özel Randevu
+          {t('Özel Randevu')}
         </PremiumAppointment>
       </div>
     </header>

@@ -1,9 +1,11 @@
 import { siteConfig } from '../config/site'
 import { PremiumAppointment } from './premium/BeautyNailsPremium'
+import { useLocale } from '../i18n/LocaleContext'
 
 type Props = { onOpenBooking: () => void }
 
 export function Booking({ onOpenBooking }: Props) {
+  const { t, href } = useLocale()
   return (
     <section className="bn-appointment" id="iletisim" aria-labelledby="appointment-title">
       <img
@@ -16,12 +18,12 @@ export function Booking({ onOpenBooking }: Props) {
         decoding="async"
       />
       <div className="bn-appointment__copy">
-        <p className="bn-eyebrow">Randevunuzu planlayın</p>
+        <p className="bn-eyebrow">{t('Randevunuzu planlayın')}</p>
         <h2 id="appointment-title" className="bn-appointment__title">
-          <span>Kendinize <em>özel</em></span>
-          <span>bir zaman ayırın.</span>
+          <span>{t('Kendinize')} <em>{t('özel')}</em></span>
+          <span>{t('bir zaman ayırın.')}</span>
         </h2>
-        <p className="bn-appointment__intro">Size uygun bakımı birlikte planlayalım.</p>
+        <p className="bn-appointment__intro">{t('Size uygun bakımı birlikte planlayalım.')}</p>
         {siteConfig.phone && siteConfig.whatsappNumber ? (
           <p className="bn-appointment__phone">
             <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noreferrer">
@@ -30,13 +32,13 @@ export function Booking({ onOpenBooking }: Props) {
           </p>
         ) : null}
         <PremiumAppointment
-          href="#iletisim"
+          href={href('#iletisim')}
           onClick={(event) => {
             event.preventDefault()
             onOpenBooking()
           }}
         >
-          Özel Randevu Al
+          {t('Özel Randevu Al')}
         </PremiumAppointment>
       </div>
     </section>

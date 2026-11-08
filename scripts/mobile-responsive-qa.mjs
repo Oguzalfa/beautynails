@@ -65,7 +65,7 @@ async function bounds(page) {
 try {
   browser = await (engine === 'webkit' ? webkit : chromium).launch({ headless:true })
   for (const { width, height } of cases) {
-    const context = await browser.newContext({ viewport:{width,height}, isMobile:true, hasTouch:true, deviceScaleFactor:1, reducedMotion:'reduce' })
+  const context = await browser.newContext({ locale:'tr-TR', viewport:{width,height}, isMobile:true, hasTouch:true, deviceScaleFactor:1, reducedMotion:'reduce' })
     const page = await context.newPage()
     page.setDefaultTimeout(10000)
     const entry = { width, height, checks:[], issues:[] }

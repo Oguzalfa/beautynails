@@ -1,6 +1,7 @@
 import { useId, useRef, type RefObject } from 'react'
 import { services } from '../config/site'
 import { useDialog } from '../hooks/useDialog'
+import { useLocale } from '../i18n/LocaleContext'
 
 type Props = {
   serviceId: string | null
@@ -9,6 +10,7 @@ type Props = {
 }
 
 export function ServiceDetail({ serviceId, onClose, returnFocusRef }: Props) {
+  const { t, href } = useLocale()
   const titleId = useId()
   const closeRef = useRef<HTMLButtonElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
@@ -30,16 +32,16 @@ export function ServiceDetail({ serviceId, onClose, returnFocusRef }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <button ref={closeRef} type="button" className="bn-modal__close" onClick={onClose}>
-          Kapat
+          {t('Kapat')}
         </button>
         <div className="bn-modal__media">
           <img src={service.image} alt="" width={512} height={341} />
         </div>
-        <h2 id={titleId}>{service.title}</h2>
-        <p>{service.detail}</p>
-        <a className="sz-service-detail-link" href={`/hizmetler/${service.id}/`}>Hizmet rehberini okuyun ↗</a>
+        <h2 id={titleId}>{t(service.title)}</h2>
+        <p>{t(service.detail)}</p>
+        <a className="sz-service-detail-link" href={href(`/hizmetler/${service.id}/`)}>{t('Hizmet rehberini okuyun')} <span aria-hidden="true">↗</span></a>
         <p>
-          Süre, ücret ve ürün detayları randevu görüşmesinde netleştirilir.
+          {t('Süre, ücret ve ürün detayları randevu görüşmesinde netleştirilir.')}
         </p>
       </div>
     </div>

@@ -1,72 +1,104 @@
-import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises'
+import { access, readFile, readdir, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { siteConfig } from '../src/config/site.ts'
+import { localizedContent, locales, pageHref } from '../src/i18n/routes.mjs'
+import { absolute, alternateLinks, arrow, breadcrumb, escape, metadata, organizationId, readingCopy, readingShell, writePage } from './reading-copy.mjs'
 
-const seo=JSON.parse(await readFile('src/config/seo.json','utf8'))
-const services=JSON.parse(await readFile('src/content/services-seo.json','utf8'))
-const articles=JSON.parse(await readFile('src/content/journal.json','utf8'))
-const origin=seo.origin
-if(origin!=='https://www.sazibeauty.com')throw new Error('Wrong production SEO origin')
-const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
-const json=value=>JSON.stringify(value).replace(/</g,'\\u003c')
-const absolute=path=>new URL(path,origin).href
-const orgId=origin+'/#organization',siteId=origin+'/#website'
-const organization={'@type':'Organization','@id':orgId,name:siteConfig.brand,url:origin+'/',description:seo.description,logo:absolute('/favicon.svg'),image:absolute(seo.socialImage),telephone:'+'+siteConfig.whatsappNumber,sameAs:[siteConfig.instagramUrl],contactPoint:[{'@type':'ContactPoint',telephone:'+'+siteConfig.whatsappNumber,contactType:'customer service',availableLanguage:['tr']}]}
-const website={'@type':'WebSite','@id':siteId,url:origin+'/',name:siteConfig.brand,inLanguage:'tr-TR',publisher:{'@id':orgId}}
-const verification=String(process.env.GOOGLE_SITE_VERIFICATION||seo.googleSiteVerification||'').trim()
-if(verification&&!/^[A-Za-z0-9_-]{10,200}$/.test(verification))throw new Error('Invalid Google verification token: use the content value, not HTML')
-function metadata(html,{path,title,description,type='website',image=seo.socialImage,graph=[]}){
-  const url=absolute(path)
-  html=html.replace(/<title>[\s\S]*?<\/title>/gi,'')
-    .replace(/<meta\b(?=[^>]*(?:name=["'](?:description|robots|google-site-verification|twitter:[^"']*)["']|property=["']og:[^"']*["']))[^>]*>/gi,'')
-    .replace(/<link\b(?=[^>]*rel=["']canonical["'])[^>]*>/gi,'')
-    .replace(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi,'')
-  const webpage={'@type':type==='article'?'WebPage':path==='/iletisim/'?'ContactPage':'WebPage','@id':url+'#webpage',url,name:title,description,inLanguage:'tr-TR',isPartOf:{'@id':siteId},about:{'@id':orgId}}
-  const head=`<title>${esc(title)}</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${url}"><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta property="og:type" content="${type}"><meta property="og:locale" content="tr_TR"><meta property="og:site_name" content="${esc(siteConfig.brand)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}"><meta property="og:image" content="${absolute(image)}"><meta property="og:image:alt" content="${esc(siteConfig.brand+' güzellik ve bakım seçkisi')}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${absolute(image)}">${path==='/'&&verification?`<meta name="google-site-verification" content="${esc(verification)}">`:''}<script type="application/ld+json">${json({'@context':'https://schema.org','@graph':[organization,website,webpage,...graph]})}</script>`
-  return html.replace('</head>',head+'</head>')
+const servicePath = slug => '/hizmetler/' + slug + '/'
+const journalPath = '/bakim-rehberi/'
+const articlePath = slug => journalPath + slug + '/'
+const contactPath = '/iletisim/'
+const original = localizedContent.tr
+const journalPaths = [journalPath, ...original.journal.map(article => articlePath(article.slug))]
+const turkishPaths = ['/', ...original.services.map(service => servicePath(service.slug)), contactPath, ...journalPaths]
+const localizedPaths = new Set()
+for (const locale of locales) {
+  if (!readingCopy[locale]) throw new Error('Missing static reading labels for ' + locale)
+  for (const group of ['services', 'journal']) {
+    const translatedSlugs = localizedContent[locale][group].map(item => item.slug)
+    const originalSlugs = original[group].map(item => item.slug)
+    if (translatedSlugs.length !== originalSlugs.length || originalSlugs.some(slug => !translatedSlugs.includes(slug))) {
+      throw new Error('Incomplete translated ' + group + ' for ' + locale)
+    }
+  }
+  for (const turkishPath of turkishPaths) {
+    const path = pageHref(locale, turkishPath)
+    if (locale === 'tr' ? path !== turkishPath : !path.startsWith('/' + locale + '/')) {
+      throw new Error('Wrong localized path: ' + locale + ' ' + turkishPath + ' → ' + path)
+    }
+    if (localizedPaths.has(path)) throw new Error('Duplicate localized page: ' + path)
+    localizedPaths.add(path)
+  }
 }
 
-const ssrDir=resolve('node_modules/.cache/sazi-ssr')
-const ssrEntry=(await readdir(ssrDir)).find(name=>/^entry-server\.(m?js)$/.test(name))
-if(!ssrEntry)throw new Error('Missing homepage prerender bundle')
-const {render}=await import(pathToFileURL(resolve(ssrDir,ssrEntry)).href)
-let home=await readFile('dist/index.html','utf8')
-if(!home.includes('<div id="root"></div>'))throw new Error('Unexpected homepage mount point')
-home=home.replace('<div id="root"></div>',()=>`<div id="root">${render()}</div>`)
-const serviceGraph=services.map(s=>({'@type':'Service','@id':absolute(`/hizmetler/${s.slug}/`)+'#service',name:s.title,serviceType:s.title,description:s.description,url:absolute(`/hizmetler/${s.slug}/`),provider:{'@id':orgId}}))
-await writeFile('dist/index.html',metadata(home,{path:'/',title:seo.title,description:seo.description,graph:serviceGraph}))
+const ssrDir = resolve('node_modules/.cache/sazi-ssr')
+const ssrEntry = (await readdir(ssrDir)).find(name => /^entry-server\.(m?js)$/.test(name))
+if (!ssrEntry) throw new Error('Missing homepage prerender bundle')
+const { render } = await import(pathToFileURL(resolve(ssrDir, ssrEntry)).href)
+const homeTemplate = await readFile('dist/index.html', 'utf8')
+if (!homeTemplate.includes('<div id="root"></div>')) throw new Error('Unexpected homepage mount point')
+const editorialCss = await readFile('src/styles/editorial.css', 'utf8')
+const stylesheetPath = '/assets/editorial-' + createHash('sha256').update(editorialCss).digest('hex').slice(0, 10) + '.css'
+await access(resolve('dist', '.' + stylesheetPath))
 
-const stylesheet=(await readdir('dist/assets')).find(name=>/^editorial-[0-9a-f]+\.css$/.test(name))
-if(!stylesheet)throw new Error('Missing shared reading stylesheet')
-const brand=`<a class="sz-reading-brand" href="/">${esc(siteConfig.wordmark)}<small>${esc(siteConfig.tagline)}</small></a>`
-const footer=`<footer class="sz-reading-footer"><div class="sz-content">${brand}<a href="/bakim-rehberi/">Bakım notları</a><a href="/iletisim/">İletişim</a><a href="/#iletisim">Randevu Al ↗</a></div></footer>`
-const shell=body=>`<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/${stylesheet}"><meta name="theme-color" content="#fad3e1"></head><body class="sz-theme sz-article-page"><header class="sz-content"><div class="sz-reading-header">${brand}<a class="sz-pill-link" href="/">Stüdyoya dön ↗</a></div></header>${body}${footer}</body></html>`
-const breadcrumb=(title,path)=>({'@type':'BreadcrumbList','@id':absolute(path)+'#breadcrumb',itemListElement:[{'@type':'ListItem',position:1,name:siteConfig.brand,item:origin+'/'},{'@type':'ListItem',position:2,name:title,item:absolute(path)}]})
-const serviceLinks=`<nav class="sz-related-grid" aria-label="Diğer hizmetler">${services.map(s=>`<a class="sz-related-link" href="/hizmetler/${s.slug}/"><span><small>HİZMET REHBERİ</small><strong>${esc(s.title)}</strong></span></a>`).join('')}</nav>`
-for(const service of services){
-  const path=`/hizmetler/${service.slug}/`
-  const related=articles.find(a=>a.slug===service.relatedArticle)
-  const body=`<main class="sz-content"><div class="sz-reading-hero"><div><ol class="sz-breadcrumbs" aria-label="Sayfa yolu"><li><a href="/">Şazi Beauty</a></li><li>/</li><li><a href="/#hizmetler">Hizmetler</a></li></ol><p class="sz-eyebrow">HİZMET REHBERİ</p><h1>${esc(service.title)}</h1><p class="sz-reading-deck">${esc(service.description)}</p></div><figure class="sz-reading-cover"><img src="${esc(service.image)}" alt="${esc(service.title)} için güzellik seçkisi" width="1200" height="900" fetchpriority="high"></figure></div><article class="sz-reading-body"><p class="sz-reading-intro">${esc(service.intro)}</p>${service.sections.map(section=>`<section><h2>${esc(section.title)}</h2>${section.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</section>`).join('')}<section><h2>Sık sorulan sorular</h2>${service.questions.map(q=>`<details><summary>${esc(q.question)}</summary><p>${esc(q.answer)}</p></details>`).join('')}</section>${related?`<a class="sz-under-link" href="/bakim-rehberi/${related.slug}/">${esc(related.title)} ↗</a>`:''}<aside class="sz-reading-cta"><p>Size uygun bakımı<br />birlikte planlayalım.</p><a class="sz-pill-link" href="/#iletisim">Randevu Al ↗</a></aside></article><section class="sz-related"><h2>Diğer bakım seçenekleri</h2>${serviceLinks}</section></main>`
-  const file=resolve('dist',path.slice(1),'index.html');await mkdir(resolve(file,'..'),{recursive:true})
-  await writeFile(file,metadata(shell(body),{path,title:service.title+' | '+siteConfig.brand,description:service.description,graph:[serviceGraph.find(s=>s.url===absolute(path)),breadcrumb(service.title,path)]}))
+function serviceEntity(locale, service) {
+  const url = absolute(pageHref(locale, servicePath(service.slug)))
+  return {
+    '@type': 'Service', '@id': url + '#service', name: service.title, serviceType: service.title,
+    description: service.description, url, image: absolute(service.image), provider: { '@id': organizationId },
+    mainEntityOfPage: { '@id': url + '#webpage' },
+  }
 }
-const contactDescription='Şazi Beauty randevu ve hizmet bilgileri: 0501 128 18 08. Telefon, WhatsApp ve Instagram üzerinden iletişime geçin; bakım seçeneklerini birlikte planlayalım.'
-await mkdir('dist/iletisim',{recursive:true})
-await writeFile('dist/iletisim/index.html',metadata(shell(`<main class="sz-content"><div class="sz-index-hero"><p class="sz-eyebrow">ŞAZİ BEAUTY / İLETİŞİM</p><h1>Size özel bir <em>dokunuş.</em></h1><p class="sz-reading-deck">Bakım seçenekleri ve randevu için bize ulaşın.</p></div><div class="sz-reading-body"><h2>Şazi Beauty ile iletişim</h2><p>Telefon: <a href="tel:+${siteConfig.whatsappNumber}">${esc(siteConfig.phone)}</a></p><p><a class="sz-pill-link" href="https://wa.me/${siteConfig.whatsappNumber}" target="_blank" rel="noopener noreferrer">WhatsApp ile iletişim ↗</a></p><p><a href="${esc(siteConfig.instagramUrl)}" target="_blank" rel="noopener noreferrer">Instagram: @sazibeauty</a></p><p>İlgilendiğiniz hizmeti, uygun olduğunuz zaman aralığını ve varsa stil notlarınızı paylaşabilirsiniz. Randevu talebiniz ve hizmet ayrıntıları görüşmede netleştirilir.</p><a class="sz-pill-link" href="/#iletisim">Randevu formunu aç ↗</a></div><section class="sz-related">${serviceLinks}</section></main>`),{path:'/iletisim/',title:'İletişim ve Randevu | '+siteConfig.brand,description:contactDescription,graph:[breadcrumb('İletişim','/iletisim/')]}))
 
-for(const path of['/bakim-rehberi/',...articles.map(a=>`/bakim-rehberi/${a.slug}/`)]){
-  const file=resolve('dist',path.slice(1),'index.html');let html=await readFile(file,'utf8')
-  const existing=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])
-  const article=articles.find(a=>path===`/bakim-rehberi/${a.slug}/`)
-  const graph=(Array.isArray(existing)?existing:[existing]).map(item=>{
-    delete item['@context']
-    if(item['@type']==='BlogPosting'){item['@id']=absolute(path)+'#article';item.author={'@id':orgId};item.publisher={'@id':orgId};item.mainEntityOfPage={'@id':absolute(path)+'#webpage'}}
-    return item
-  })
-  await writeFile(file,metadata(html,{path,title:article?article.title+' | '+siteConfig.brand:'Bakım Notları ve Stil Rehberi | '+siteConfig.brand,description:article?.excerpt||'Şazi Beauty’den tırnak stili, kirpik görünümü ve renk uyumu üzerine özgün bakım ve stil notları.',type:article?'article':'website',graph}))
+for (const locale of locales) {
+  const copy = readingCopy[locale]
+  const { services, journal } = localizedContent[locale]
+  const serviceGraph = services.map(service => serviceEntity(locale, service))
+  const homeMarkup = await render(locale)
+  if (typeof homeMarkup !== 'string' || !homeMarkup.trim()) throw new Error('Missing homepage markup for ' + locale)
+  const home = homeTemplate.replace('<div id="root"></div>', () => `<div id="root">${homeMarkup}</div>`)
+  await writePage(locale, '/', metadata(home, {
+    locale, turkishPath: '/', title: copy.homeTitle, description: copy.homeDescription, graph: serviceGraph,
+  }))
+
+  const homeHref = escape(pageHref(locale))
+  const bookingHref = escape(pageHref(locale, '/#iletisim'))
+  const servicesHref = escape(pageHref(locale, '/#hizmetler'))
+  const serviceLinks = exclude => `<nav class="sz-related-grid" aria-label="${escape(copy.relatedServices)}">${services.filter(service => service.slug !== exclude).map(service => `<a class="sz-related-link" href="${escape(pageHref(locale, servicePath(service.slug)))}"><span><small>${escape(copy.serviceGuide)}</small><strong>${escape(service.title)}</strong></span></a>`).join('')}</nav>`
+
+  for (const service of services) {
+    const turkishPath = servicePath(service.slug)
+    const related = journal.find(article => article.slug === service.relatedArticle)
+    const body = `<main class="sz-content"><div class="sz-reading-hero"><div><ol class="sz-breadcrumbs" aria-label="${escape(copy.breadcrumb)}"><li><a href="${homeHref}">${escape(siteConfig.brand)}</a></li><li aria-hidden="true">/</li><li><a href="${servicesHref}">${escape(copy.services)}</a></li></ol><p class="sz-eyebrow">${escape(copy.serviceGuide)}</p><h1>${escape(service.title)}</h1><p class="sz-reading-deck">${escape(service.description)}</p></div><figure class="sz-reading-cover"><img src="${escape(service.image)}" alt="${escape(copy.serviceImage(service.title))}" width="1200" height="900" fetchpriority="high"></figure></div><article class="sz-reading-body"><p class="sz-reading-intro">${escape(service.intro)}</p>${service.sections.map(section => `<section><h2>${escape(section.title)}</h2>${section.paragraphs.map(paragraph => `<p>${escape(paragraph)}</p>`).join('')}</section>`).join('')}<section><h2>${escape(copy.faq)}</h2>${service.questions.map(question => `<details><summary>${escape(question.question)}</summary><p>${escape(question.answer)}</p></details>`).join('')}</section>${related ? `<a class="sz-under-link" href="${escape(pageHref(locale, articlePath(related.slug)))}">${escape(related.title)} ${arrow(locale)}</a>` : ''}<aside class="sz-reading-cta"><p>${copy.serviceCta.map(escape).join('<br>')}</p><a class="sz-pill-link" href="${bookingHref}">${escape(copy.book)} ${arrow(locale)}</a></aside></article><section class="sz-related"><h2>${escape(copy.relatedServices)}</h2>${serviceLinks(service.slug)}</section></main>`
+    await writePage(locale, turkishPath, metadata(readingShell({ locale, turkishPath, stylesheet: stylesheetPath, body }), {
+      locale, turkishPath, title: service.title + ' | ' + siteConfig.brand, description: service.description, image: service.image,
+      imageAlt: copy.serviceImage(service.title),
+      graph: [serviceEntity(locale, service), breadcrumb(locale, turkishPath, [[service.title, turkishPath]])],
+    }))
+  }
+
+  const body = `<main class="sz-content"><div class="sz-index-hero"><p class="sz-eyebrow">${escape(copy.contactEyebrow)}</p><h1>${escape(copy.contactHeading[0])} <em>${escape(copy.contactHeading[1])}</em></h1><p class="sz-reading-deck">${escape(copy.contactIntro)}</p></div><div class="sz-reading-body"><h2>${escape(copy.contactSection)}</h2><p>${escape(copy.phone)}: <a href="tel:+${siteConfig.whatsappNumber}"><bdi dir="ltr">${escape(siteConfig.phone)}</bdi></a></p><p><a class="sz-pill-link" href="https://wa.me/${siteConfig.whatsappNumber}" target="_blank" rel="noopener noreferrer">${escape(copy.whatsapp)} ${arrow(locale)}</a></p><p><a href="${escape(siteConfig.instagramUrl)}" target="_blank" rel="noopener noreferrer" lang="en" dir="ltr">Instagram: @sazibeauty</a></p><p>${escape(copy.contactNotes)}</p><a class="sz-pill-link" href="${bookingHref}">${escape(copy.form)} ${arrow(locale)}</a></div><section class="sz-related">${serviceLinks()}</section></main>`
+  await writePage(locale, contactPath, metadata(readingShell({ locale, turkishPath: contactPath, stylesheet: stylesheetPath, body }), {
+    locale, turkishPath: contactPath, title: copy.contactTitle + ' | ' + siteConfig.brand,
+    description: copy.contactDescription, pageType: 'ContactPage',
+    graph: [breadcrumb(locale, contactPath, [[copy.contact, contactPath]])],
+  }))
 }
-const paths=['/',...services.map(s=>`/hizmetler/${s.slug}/`),'/iletisim/','/bakim-rehberi/',...articles.map(a=>`/bakim-rehberi/${a.slug}/`)]
-await writeFile('dist/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map(path=>`<url><loc>${absolute(path)}</loc></url>`).join('')}</urlset>`)
-await writeFile('dist/404.html',shell('<main class="sz-content sz-index-hero"><h1>Bu sayfa bulunamadı.</h1><a class="sz-pill-link" href="/">Ana sayfaya dön ↗</a></main>').replace('</head>','<title>Sayfa bulunamadı | Şazi Beauty</title><meta name="robots" content="noindex,follow"></head>'))
-console.log(`SEO build: homepage prerendered; ${paths.length} canonical pages; verified business fields only; Search Console token ${verification?'configured':'not supplied'}.`)
+
+// Confirm every sitemap target was written by one of the two static builders.
+for (const path of localizedPaths) await access(resolve('dist', '.' + path, 'index.html'))
+const sitemapEntries = locales.flatMap(locale => turkishPaths.map(turkishPath => {
+  const path = pageHref(locale, turkishPath)
+  const alternate = alternateLinks(turkishPath).map(({ lang, url }) => `<xhtml:link rel="alternate" hreflang="${lang}" href="${escape(url)}"/>`).join('')
+  return `<url><loc>${escape(absolute(path))}</loc>${alternate}</url>`
+}))
+await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${sitemapEntries.join('\n')}\n</urlset>\n`, 'utf8')
+
+const missing = readingCopy.tr
+const missingBody = `<main class="sz-content sz-index-hero"><h1>${escape(missing.missing)}</h1><a class="sz-pill-link" href="/">${escape(missing.home)} ${arrow('tr')}</a></main>`
+const missingPage = readingShell({ locale: 'tr', turkishPath: '/', stylesheet: stylesheetPath, body: missingBody })
+  .replace('</head>', '<title>' + escape(missing.missing + ' | ' + siteConfig.brand) + '</title><meta name="robots" content="noindex,follow"></head>')
+await writeFile('dist/404.html', missingPage, 'utf8')
+console.log(`SEO build: ${locales.length} prerendered homepages, ${localizedPaths.size} canonical pages and reciprocal language alternates.`)

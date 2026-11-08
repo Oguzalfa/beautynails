@@ -7,6 +7,7 @@ import ar, { journalSummaries as journalAr } from './components/satin/localized-
 import uz, { journalSummaries as journalUz } from './components/satin/localized-pages/uz'
 import tk, { journalSummaries as journalTk } from './components/satin/localized-pages/tk'
 import { locales, type Locale } from './locales'
+import { makeLocalGuidePages } from './components/satin/local-guides'
 
 export type { Locale } from './locales'
 
@@ -20,21 +21,33 @@ const journalTranslations: Record<Exclude<Locale, 'tr'>, Record<JournalArticleId
 type Route = { locale: Locale; path: string; sourcePath: string; page: ContentPageData | null }
 const routes = new Map<string, Route>()
 const localePages = {} as Record<Locale, readonly ContentPageData[]>
+const pathsBySource = new Map<string, Map<Locale, string>>()
+
+function registerRoute(route: Route) {
+  if (routes.has(route.path)) throw new Error(`Duplicate page path ${route.path}`)
+  routes.set(route.path, route)
+  const alternates = pathsBySource.get(route.sourcePath) ?? new Map<Locale, string>()
+  alternates.set(route.locale, route.path)
+  pathsBySource.set(route.sourcePath, alternates)
+}
 
 for (const locale of locales) {
   const home = locale === 'tr' ? '/' : `/${locale}/`
-  routes.set(home, { locale, path: home, sourcePath: '/', page: null })
-  localePages[locale] = contentPages.map((original) => {
+  registerRoute({ locale, path: home, sourcePath: '/', page: null })
+  const pages = contentPages.map((original) => {
     const translation = locale === 'tr' ? undefined : translations[locale][original.path]
     if (locale !== 'tr' && !translation) throw new Error(`Missing ${locale} translation for ${original.path}`)
     const page: ContentPageData = translation ? {
       ...original, ...translation,
       image: original.image ? { ...original.image, alt: translation.imageAlt ?? original.image.alt } : undefined,
     } : original
-    if (routes.has(page.path)) throw new Error(`Duplicate page path ${page.path}`)
-    routes.set(page.path, { locale, path: page.path, sourcePath: original.path, page })
+    registerRoute({ locale, path: page.path, sourcePath: original.path, page })
     return page
   })
+  const journalPath = locale === 'tr' ? '/yazilar/' : translations[locale]['/yazilar/'].path
+  const guides = makeLocalGuidePages(locale, journalPath)
+  for (const { page, sourcePath } of guides) registerRoute({ locale, path: page.path, sourcePath, page })
+  localePages[locale] = [...guides.map(({ page }) => page), ...pages]
 }
 
 export const pagePaths = [...routes.keys()]
@@ -45,8 +58,7 @@ export function getRoute(path: string) {
 
 export function pathForLocale(path: string, locale: Locale): string {
   const source = getRoute(path)?.sourcePath ?? '/'
-  if (locale === 'tr') return source
-  return source === '/' ? `/${locale}/` : translations[locale][source].path
+  return pathsBySource.get(source)?.get(locale) ?? (locale === 'tr' ? '/' : `/${locale}/`)
 }
 
 export function getLocalizedPage(path: string, locale: Locale) {

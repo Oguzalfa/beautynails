@@ -76,6 +76,7 @@
   .satin-page .content-article-list h2 { font-size: 28px; }
   .satin-page .content-related { margin-top: 70px; }
   .satin-page .content-related ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .satin-page .journal .content-related ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .satin-page .content-related li + li { border-top: 0; }
   .satin-page .content-related a { border-bottom: 1px solid var(--rule); height: 100%; }
 }

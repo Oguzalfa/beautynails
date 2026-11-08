@@ -23,10 +23,13 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
   const homePath = locale === 'tr' ? '/?lang=tr' : pathForLocale('/', locale)
   const servicesPath = pathForLocale('/hizmetler/', locale)
   const journalPath = pathForLocale('/yazilar/', locale)
-  const bookingService = page?.kind === 'service' && page.serviceId
+  const bookingService = page?.serviceId
     ? getLocalizedPage(`/hizmetler/${page.serviceId}/`, 'tr')?.heading
     : undefined
   const book = () => onBook(bookingService)
+  const companion = page?.serviceId && (page.kind === 'service'
+    ? articles.find((item) => item.serviceId === page.serviceId)
+    : services.find((item) => item.serviceId === page.serviceId))
 
   return (
     <div className="satin-page content-page" lang={locale}>
@@ -77,6 +80,11 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
                   ))}
                   <div className="content-story-contact">
                     <p>{copy.contactPrompt}</p>
+                    {companion ? (
+                      <a className="content-read-link" href={companion.path}>
+                        {companion.heading}<ArrowIcon />
+                      </a>
+                    ) : null}
                     <button className="content-book" type="button" onClick={book}>
                       <span>{copy.book}</span><ArrowIcon />
                     </button>

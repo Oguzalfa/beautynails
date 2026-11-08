@@ -44,6 +44,11 @@ def main():
         parsed = urlsplit(url or "")
         if parsed.scheme != "https" or parsed.netloc != "www.beautynails.com.tr" or parsed.query or parsed.fragment:
             raise ValueError("Only this site's canonical production URLs may be submitted")
+    if len(sys.argv) > 1:
+        requested = {ORIGIN + path for path in sys.argv[1:]}
+        if not requested.issubset(urls):
+            raise ValueError("Pass only canonical paths found in the live sitemap")
+        urls = [url for url in urls if url in requested]
     payload = {"host": "www.beautynails.com.tr", "key": key, "keyLocation": key_location, "urlList": urls}
     request = urllib.request.Request(ENDPOINT, data=json.dumps(payload).encode("utf-8"), headers={
         "Content-Type": "application/json; charset=utf-8", "User-Agent": "BeautyNails-IndexNow/1.0",

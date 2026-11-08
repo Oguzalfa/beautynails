@@ -35,6 +35,7 @@ export function getSeo(pathname: string) {
     graph.push({ '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, index) => ({ '@type': 'ListItem', position: index + 1, ...c })) })
     if (page.kind === 'article') graph.push({ '@type': 'Article', '@id': `${canonical}#article`, headline: page.heading,
       description, inLanguage: locale, mainEntityOfPage: { '@id': `${canonical}#webpage` }, image: [image],
+      ...(page.serviceId ? { about: { '@type': 'Place', name: 'Maltepe' } } : {}),
       author: { '@id': org['@id'] }, publisher: { '@id': org['@id'] } })
     if (page.kind === 'service') graph.push({ '@type': 'Service', '@id': `${canonical}#service`, name: page.heading,
       serviceType: page.heading, description, url: canonical, provider: { '@id': org['@id'] } })

@@ -199,6 +199,7 @@ export function metadata(html, { locale, turkishPath, title, description, type =
     '@type': 'Organization', '@id': organizationId, name: siteConfig.brand, url: absolute('/'),
     description: readingCopy[locale].homeDescription, logo: absolute('/favicon.svg'), image: absolute(seo.socialImage),
     telephone: '+' + siteConfig.whatsappNumber, sameAs: [siteConfig.instagramUrl],
+    location: { '@type': 'Place', name: siteConfig.locality },
     contactPoint: [{
       '@type': 'ContactPoint', telephone: '+' + siteConfig.whatsappNumber,
       contactType: 'customer service', availableLanguage: ['tr'],

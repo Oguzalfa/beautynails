@@ -5,6 +5,7 @@ export const siteConfig = {
   locale: 'tr-TR',
   whatsappNumber: '905011281808',
   phone: '0501 128 18 08',
+  locality: 'Cevizli, Kartal, İstanbul',
   address: null as string | null,
   instagramUrl: 'https://www.instagram.com/sazibeauty/',
   bookingProviderUrl: null as string | null,

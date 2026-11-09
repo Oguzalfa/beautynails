@@ -8,6 +8,7 @@ import { locales, languageNames, localeTags, ogLocales, localeDir, localizedCont
 const canonicalOrigin = 'https://www.sazibeauty.com'
 const organizationId = canonicalOrigin + '/#organization'
 const telephone = '+905011281808'
+const studioLocality = 'Cevizli, Kartal, İstanbul'
 const dist = resolve('dist')
 const output = resolve(process.env.QA_OUT || '../.sazi-seo-qa')
 const engine = process.env.QA_ENGINE || 'chromium'
@@ -150,6 +151,8 @@ function inspectHtml(html, { source, locale, entry, path }) {
   assert.equal(organization['@id'], organizationId, `${path}: stable entity ID`)
   assert.equal(organization.name, 'Şazi Beauty', `${path}: correct business identity`)
   assert.equal(organization.telephone, telephone, `${path}: verified contact phone`)
+  assert.deepEqual(organization.location, { '@type':'Place', name:studioLocality }, `${path}: confirmed studio locality`)
+  if (source.type === 'contact') assert.ok(text.includes(studioLocality), `${path}: visible studio locality`)
   assert.ok(organization.contactPoint?.some(item => item.telephone === telephone), `${path}: consistent contact point`)
   checkNoInventedFacts(schema)
   const webpage = schema['@graph'].find(item => item['@id'] === canonicalOrigin + path + '#webpage')

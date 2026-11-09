@@ -78,7 +78,7 @@ body.sz-article-page{margin:0;background:#fad3e1}
 .sz-reading-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,72px);padding-block:48px}
 .sz-breadcrumbs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;padding:0;list-style:none;font-size:12px;line-height:1.5}
 .sz-breadcrumbs a{color:#090909;text-decoration:underline;text-underline-offset:4px}
-.sz-reading-hero h1{margin:0 0 24px;font-size:clamp(40px,5vw,76px);font-weight:800;line-height:1.02;letter-spacing:-.055em}
+.sz-reading-hero h1{margin:0 0 24px;font-size:clamp(40px,5vw,76px);font-weight:800;line-height:1.02;letter-spacing:-.055em;overflow-wrap:anywhere}
 .sz-reading-hero .sz-article-meta{margin-bottom:18px}
 .sz-reading-deck{max-width:540px;margin:0;font-size:clamp(16px,1.5vw,20px);line-height:1.5;letter-spacing:-.025em}
 .sz-reading-cover{position:relative;margin:0}

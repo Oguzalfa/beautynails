@@ -1,6 +1,6 @@
 /* Exact Premium Fix: approved raster art, no redrawn replacement icons. */
 .bnx-icon{--bnx-size:48px;--bnx-delay:0s;position:relative;display:inline-block;inline-size:var(--bnx-size);block-size:var(--bnx-size);flex:0 0 var(--bnx-size);vertical-align:middle;isolation:isolate;pointer-events:none}
-.bnx-icon__art{position:absolute;inset:0;background-image:var(--bnx-atlas,url('./assets/icon-atlas.png'));background-size:400% 200%;background-repeat:no-repeat;transform-origin:50% 58%;animation:bnx-gem-float 7.2s ease-in-out infinite;animation-delay:var(--bnx-delay)}
+.bnx-icon__art{position:absolute;inset:0;background-image:var(--bnx-atlas,url('/beauty-nails-premium/icon-atlas.png'));background-size:400% 200%;background-repeat:no-repeat;transform-origin:50% 58%;animation:bnx-gem-float 7.2s ease-in-out infinite;animation-delay:var(--bnx-delay)}
 .bnx-icon--diamond .bnx-icon__art{background-position:0 0}
 .bnx-icon--lotus .bnx-icon__art{background-position:33.333333% 0;animation-name:bnx-lotus-breathe}
 .bnx-icon--heart .bnx-icon__art{background-position:66.666667% 0;animation-name:bnx-heart-beat;animation-duration:7.8s}

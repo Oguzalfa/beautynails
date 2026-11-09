@@ -90,11 +90,16 @@ for (const locale of locales) {
 
 // Confirm every sitemap target was written by one of the two static builders.
 for (const path of localizedPaths) await access(resolve('dist', '.' + path, 'index.html'))
-const sitemapEntries = locales.flatMap(locale => turkishPaths.map(turkishPath => {
-  const path = pageHref(locale, turkishPath)
-  const alternate = alternateLinks(turkishPath).map(({ lang, url }) => `<xhtml:link rel="alternate" hreflang="${lang}" href="${escape(url)}"/>`).join('')
-  return `<url><loc>${escape(absolute(path))}</loc>${alternate}</url>`
-}))
+const sitemapEntries = locales.flatMap(locale => {
+  const articleDates = new Map(localizedContent[locale].journal.map(article => [articlePath(article.slug), article.date]))
+  return turkishPaths.map(turkishPath => {
+    const path = pageHref(locale, turkishPath)
+    const date = articleDates.get(turkishPath)
+    const lastmod = date ? `<lastmod>${escape(date)}</lastmod>` : ''
+    const alternate = alternateLinks(turkishPath).map(({ lang, url }) => `<xhtml:link rel="alternate" hreflang="${lang}" href="${escape(url)}"/>`).join('')
+    return `<url><loc>${escape(absolute(path))}</loc>${lastmod}${alternate}</url>`
+  })
+})
 await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${sitemapEntries.join('\n')}\n</urlset>\n`, 'utf8')
 
 const missing = readingCopy.tr

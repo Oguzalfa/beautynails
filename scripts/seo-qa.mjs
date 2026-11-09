@@ -386,7 +386,10 @@ try {
   const rawPages = []
   for (const item of pages) {
     const { path } = item
-    assertLanguageAlternates(tags(sitemapByUrl.get(canonicalOrigin + path), 'xhtml:link'), item.source.path, 'Sitemap ' + path)
+    const sitemapEntry = sitemapByUrl.get(canonicalOrigin + path)
+    assertLanguageAlternates(tags(sitemapEntry, 'xhtml:link'), item.source.path, 'Sitemap ' + path)
+    const dates = [...sitemapEntry.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map(match => match[1])
+    assert.deepEqual(dates, item.source.type === 'article' ? [item.entry.date] : [], `${path}: sitemap uses the recorded article date`)
     const response = await audit.request.get(base + path, {maxRedirects:0})
     assert.equal(response.status(), 200, `${path}: raw HTTP status`)
     assert.match(response.headers()['content-type'] || '', /text\/html/i, `${path}: HTML response`)

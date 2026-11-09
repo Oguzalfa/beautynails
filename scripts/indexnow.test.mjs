@@ -111,6 +111,33 @@ test('selected submission validates the full live sitemap and checks only select
   ])
 })
 
+test('Yandex mode targets its official endpoint after the same preflight checks', async () => {
+  const client = clientFor()
+  const selection = [urls[1]]
+  const options = { xml, key, client, urls:selection, yandex:true }
+  const yandexEndpoint = 'https://yandex.com/indexnow'
+
+  const dryRun = await submitIndexNow(options)
+  assert.equal(dryRun.endpoint, yandexEndpoint)
+  assert.equal(dryRun.status, 'dry-run')
+  assert.deepEqual(client.calls, [])
+
+  const result = await submitIndexNow({ ...options, submit:true })
+  assert.equal(result.endpoint, yandexEndpoint)
+  assert.equal(result.status, 'received')
+  assert.deepEqual(client.calls.map(({ method, url }) => [method, url]), [
+    ['GET', `${origin}/${key}.txt`],
+    ['GET', origin+'/sitemap.xml'],
+    ['GET', selection[0]],
+    ['POST', yandexEndpoint],
+  ])
+  assert.deepEqual(client.calls.at(-1).options, {
+    data: { host:'www.sazibeauty.com', key, keyLocation:`${origin}/${key}.txt`, urlList:selection },
+    headers: { 'Content-Type':'application/json; charset=utf-8' },
+    maxRedirects: 0,
+  })
+})
+
 test('202 stays pending; rejected/rate-limited responses do not retry', async () => {
   for (const postStatus of [202,403,422,429]) {
     const client=clientFor({postStatus})

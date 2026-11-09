@@ -7,6 +7,7 @@ import { validateKey } from './build-indexnow.mjs'
 
 export const origin = 'https://www.sazibeauty.com'
 export const endpoint = 'https://api.indexnow.org/indexnow'
+const yandexEndpoint = 'https://yandex.com/indexnow'
 
 export function sitemapUrls(xml) {
   if (/<!DOCTYPE|<!ENTITY|<sitemapindex\b/i.test(xml)) throw new Error('Use a plain URL sitemap without external entities.')
@@ -26,7 +27,7 @@ export function payloadFor(xml, value) {
   return { host:new URL(origin).host, key, keyLocation:`${origin}/${key}.txt`, urlList:sitemapUrls(xml) }
 }
 
-export async function submitIndexNow({ xml, key, client, submit = false, urls }) {
+export async function submitIndexNow({ xml, key, client, submit = false, urls, yandex = false }) {
   const payload = payloadFor(xml, key)
   const localSitemapUrls = payload.urlList
   if (urls !== undefined) {
@@ -39,7 +40,8 @@ export async function submitIndexNow({ xml, key, client, submit = false, urls })
     }
     payload.urlList = [...urls]
   }
-  const receipt = { host:payload.host, endpoint, urlCount:payload.urlList.length, urls:payload.urlList, submittedAt:null, httpStatus:null, status:'dry-run', indexed:null, indexingStatus:'not-checked' }
+  const targetEndpoint = yandex ? yandexEndpoint : endpoint
+  const receipt = { host:payload.host, endpoint:targetEndpoint, urlCount:payload.urlList.length, urls:payload.urlList, submittedAt:null, httpStatus:null, status:'dry-run', indexed:null, indexingStatus:'not-checked' }
   if (!submit) return receipt
 
   const proof = await client.get(payload.keyLocation, { maxRedirects:0 })
@@ -64,11 +66,11 @@ export async function submitIndexNow({ xml, key, client, submit = false, urls })
     }
   }
 
-  // One batch, one endpoint, no retries: participating engines share the notification.
+  // Send a single batch to the selected endpoint.
   receipt.submittedAt = new Date().toISOString()
   let response
   try {
-    response = await client.post(endpoint, { data:payload, headers:{ 'Content-Type':'application/json; charset=utf-8' }, maxRedirects:0 })
+    response = await client.post(targetEndpoint, { data:payload, headers:{ 'Content-Type':'application/json; charset=utf-8' }, maxRedirects:0 })
   } catch {
     receipt.status = 'delivery-unknown'
     return receipt
@@ -86,10 +88,11 @@ async function localKey() {
 }
 
 async function main() {
-  const { values: { submit, url: urls } } = parseArgs({
+  const { values: { submit, url: urls, yandex } } = parseArgs({
     options: {
       submit: { type:'boolean' },
       url: { type:'string', multiple:true },
+      yandex: { type:'boolean' },
     },
   })
   const key = await localKey()
@@ -100,7 +103,7 @@ async function main() {
       const server = process.env.HTTPS_PROXY || process.env.HTTP_PROXY
       client = await request.newContext({ timeout:30000, ...(server ? { proxy:{server} } : {}) })
     }
-    const receipt = await submitIndexNow({ xml, key, client, submit, urls })
+    const receipt = await submitIndexNow({ xml, key, client, submit, urls, yandex })
     if (submit) {
       const directory = resolve('../.sazi-indexnow-qa')
       await mkdir(directory, {recursive:true})

@@ -2,8 +2,8 @@
   {
     "slug": "tirnak-sanati",
     "title": "Tırnak Sanatı, Manikür ve Pedikür",
-    "description": "Şazi Beauty’de tırnak sanatı, manikür ve pedikür için stil fikirlerini keşfedin. Form, renk ve detay tercihlerinizi paylaşarak randevu talebi oluşturun.",
-    "intro": "Tırnak stiliniz; seçtiğiniz form, renk ve küçük detaylarla kendinize ait bir görünüm kazanır. Şazi Beauty’de tırnak sanatı, manikür ve pedikür hakkında bilgi alabilir, düşündüğünüz görünümü randevu talebinizde anlatabilirsiniz. Sade bir bitişten canlı pembe tonlarına kadar sevdiğiniz fikirleri bir araya getirmek, görüşmeye iyi bir başlangıç sağlar.",
+    "description": "Şazi Beauty’de manikür, pedikür ve tırnak tasarımı için WhatsApp’tan randevu isteyin. Ojesiz bakım, mevcut ojenin çıkarılması ve ücretle ilgili sorularınızı iletin.",
+    "intro": "Manikür eller ve el tırnaklarına, pedikür ayaklar ve ayak tırnaklarına odaklanır. Şazi Beauty’ye randevu talebi gönderirken ikisinden hangisini istediğinizi ve ojesiz bakım, renkli oje ya da tırnak tasarımı tercihinizi yazın. Mevcut oje veya kaplamanın çıkarılması gerekiyorsa bunu da belirtin. Maltepe’den geliyorsanız uygun saatle birlikte güncel konumu isteyin.",
     "image": "/images/fx/nails-macro.webp",
     "sections": [
       {
@@ -35,6 +35,10 @@
         "answer": "Tırnak Sanatı hizmetini seçip not alanına manikür veya pedikür tercihinizi yazabilirsiniz. Hazırlanan WhatsApp mesajında bu not da yer alır."
       },
       {
+        "question": "Erkek manikürü veya ojesiz pedikür için randevu isteyebilir miyim?",
+        "answer": "Evet. Randevu formunda Tırnak Sanatı’nı seçin. El, ayak veya her ikisi için bakım istediğinizi ve ojesiz bitiş tercihinizi not edin. Süreyi ve ücreti WhatsApp görüşmesinde teyit edin."
+      },
+      {
         "question": "Formu doldurunca randevum kesinleşir mi?",
         "answer": "Form bir WhatsApp mesaj taslağı hazırlar; mesajı sizin göndermeniz gerekir. Uygun saat ve randevu ayrıntıları iletişim sırasında netleşir."
       }
@@ -44,8 +48,8 @@
   {
     "slug": "ipek-kirpik",
     "title": "İpek Kirpik ve Bakışınıza Uygun Görünüm",
-    "description": "Şazi Beauty ipek kirpik hizmetini keşfedin. Doğal veya belirgin görünüm beklentinizi paylaşın; uygulama ayrıntıları için bilgi ve randevu talebi oluşturun.",
-    "intro": "İpek kirpik için ilham ararken yalnızca bir fotoğraftaki uzunluğa odaklanmak yerine, nasıl bir ifade sevdiğinizi düşünün. Daha sade, daha yumuşak veya daha belirgin bir görünüm beklentinizi paylaşabilirsiniz. Şazi Beauty’de hizmet hakkında bilgi almak ve tercihlerinizi anlatmak için randevu talebi oluşturabilirsiniz.",
+    "description": "Şazi Beauty ipek kirpik randevusu için istediğiniz görünümü ve varsa mevcut uygulamanızı belirtin. Süre, ücret ve uygun saati WhatsApp’tan teyit edin.",
+    "intro": "İpek kirpik randevusu için doğal ya da daha belirgin bir görünüm istediğinizi söyleyin. Önceden yaptırdığınız kirpik uygulaması varsa paylaşın ve söküm gerekip gerekmediğini sorun. Referans fotoğrafınızda beğendiğiniz yoğunluğu veya uzunluğu belirtmeniz, Şazi Beauty ile görüşürken istediğiniz görünümü anlatmayı kolaylaştırır.",
     "image": "/images/fx/lashes-macro.webp",
     "sections": [
       {
@@ -75,6 +79,10 @@
       {
         "question": "Uygulama seçeneklerini nereden öğrenebilirim?",
         "answer": "Randevu formunda İpek Kirpik seçeneğini işaretleyerek bilgi talebinizi iletebilirsiniz. Uygulama kapsamı ve tercihlerinize ilişkin sorularınız görüşmede ele alınır."
+      },
+      {
+        "question": "Maltepe’den gelmeden önce hangi bilgileri teyit etmeliyim?",
+        "answer": "WhatsApp görüşmesinde kesinleşen saati, toplam süreyi, ücreti ve güncel konum bağlantısını isteyin. Önceki kirpik uygulamanızın çıkarılması gerekiyorsa bunun süreye ve ücrete dahil olup olmadığını sorun."
       },
       {
         "question": "Randevu talebim nasıl iletilir?",

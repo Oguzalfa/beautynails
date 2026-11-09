@@ -3,8 +3,8 @@
     {
       "slug": "tirnak-sanati",
       "localizedSlug": "dyrnak-dizayny-manikyur-pedikyur",
-      "title": "Dyrnak dizaýny, manikýur we pedikýur",
-      "description": "Şazi Beauty-de dyrnak dizaýny, manikýur we pedikýur barada maglumat alyň. Görüş talabyňyzda halaýan görnüşiňizi, reňkiňizi we bezegiňizi beýan ediň.",
+      "title": "Dyrnak dizaýny, dyrnak uzaltmak, manikýur we pedikýur",
+      "description": "Kartalyň Cevizli sebitindäki Şazi Beauty-de dyrnak uzaltmak, dyrnak dizaýny, manikýur we pedikýur barada maglumat alyň. Görüş üçin islegiňizi ýazyň.",
       "intro": "Dyrnagyň görnüşi, reňki we ownuk bezegleri stiliňizi görkezmäge ýardam edýär. Şazi Beauty-de dyrnak dizaýny, manikýur we pedikýur barada sorap, göz öňünde tutýan keşbiňizi görüş talabyňyzda düşündirip bilersiňiz. Sada görnüşden açyk gülgüne reňke çenli halaýan mysallaryňyz gürrüňdeşlige başlangyç bolup biler.",
       "sections": [
         {
@@ -17,6 +17,13 @@
           "title": "Reňk we bezeg üçin pikirler",
           "paragraphs": [
             "Ilki bilen nähili görnüş isleýändigiňizi kesgitläň: frenç uçlar, bir reňk ýa-da kiçijik bezeg. Galereýadaky reňklere we ýüz örtüklerine serediň, görüşde bolsa halaýan öwüşginiňizi bar bolan görnüşler bilen deňeşdiriň. Islemeýän bezegleriňizi hem aýdyň."
+          ]
+        },
+        {
+          "title": "Dyrnak uzaltmak üçin islegiňizi beýan ediň",
+          "paragraphs": [
+            "Emeli dyrnak bilen uzaltmak isleýän bolsaňyz, gündelik işleriňize laýyk uzynlygy, şekili we bezegi bellikde ýazyň. Mysal suratyny paýlaşsaňyz, haýsy reňkiň, şekiliň ýa-da bezegiň göwnüňize ýarandygyny aýratyn görkeziň.",
+            "Dyrnagyňyzda öňki örtük ýa-da emeli dyrnak bar bolsa, görüşden öň bu barada aýdyň. Öňki örtügi aýyrmagyň hyzmatyň içine girýändigini, umumy bahany we size amatly gün üçin boş wagty studiýadan soraň."
           ]
         },
         {
@@ -34,6 +41,10 @@
         {
           "question": "Manikýur ýa-da pedikýur üçin nädip ýüz tutmaly?",
           "answer": "Dyrnak dizaýnyny saýlaň we bellikler bölüminde manikýur ýa-da pedikýur isleýändigiňizi ýazyň. Belligiňiz WhatsApp hatynyň taslamasyna goşular."
+        },
+        {
+          "question": "Dyrnak uzaltmagyň bahasyny we görüş wagtyny öňünden nädip anyklap bilerin?",
+          "answer": "Görüş blankynda Dyrnak dizaýnyny saýlaň. Dyrnak uzaltmak isleýändigiňizi, öňki örtügi aýyrmak gerekdigini we amatly wagty bellikde ýazyň. WhatsApp habaryny iberiň, soňra bahany we boş wagty studiýa bilen anyklaň."
         },
         {
           "question": "Blanky doldursam, görüşim tassyklanýarmy?",

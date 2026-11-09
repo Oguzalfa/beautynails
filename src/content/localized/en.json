@@ -3,8 +3,8 @@
     {
       "slug": "tirnak-sanati",
       "localizedSlug": "nail-art",
-      "title": "Nail art, manicures and pedicures",
-      "description": "Explore nail art, manicures and pedicures at Şazi Beauty. Share your ideas for shape, colour and detail when you request an appointment.",
+      "title": "Nail extensions, nail art, manicures and pedicures",
+      "description": "Ask Şazi Beauty in Cevizli, Kartal about nail extensions, nail art, manicures and pedicures. Get a quote and check appointment availability before you visit.",
       "intro": "Shape, colour and small details give a manicure its character. At Şazi Beauty, you can ask about nail art, manicures and pedicures and describe the look you have in mind when requesting an appointment. Bringing together a few ideas you like, from a simple finish to a vivid pink, gives us a starting point for the consultation.",
       "image": "/images/fx/nails-macro.webp",
       "sections": [
@@ -18,6 +18,13 @@
           "title": "Ideas for colour and detail",
           "paragraphs": [
             "Start with the overall look you want, whether that's French tips, a single colour or a small accent. Use the gallery to explore colours and textures, then compare your reference shade with the available options during the consultation. Mention any details you'd prefer to leave out."
+          ]
+        },
+        {
+          "title": "Planning nail extensions in Cevizli, Kartal",
+          "paragraphs": [
+            "Tell the studio if you would like a new set of nail extensions and what you currently have on your nails. Include the length and shape you prefer. If you share a reference photo, point out the detail you want to bring into your own design.",
+            "If you already have extensions or another nail coating, mention it before you visit. Ask whether removal can be included in the same appointment and how it would affect the quote and time needed."
           ]
         },
         {
@@ -35,6 +42,10 @@
         {
           "question": "How do I ask for a manicure or pedicure?",
           "answer": "Select Nail Art and write manicure or pedicure in the notes field. Your note will be included in the WhatsApp message draft."
+        },
+        {
+          "question": "How do I ask for a quote and an appointment for nail extensions?",
+          "answer": "Select Nail Art on the form and write that you want nail extensions. Add your preferred day or time and say if you have any existing product to remove. Send the WhatsApp draft and ask the studio to confirm the quote and available times before you visit."
         },
         {
           "question": "Does filling out the form confirm my appointment?",

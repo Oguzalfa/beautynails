@@ -1,11 +1,18 @@
 [
   {
     "slug": "tirnak-sanati",
-    "title": "Tırnak Sanatı, Manikür ve Pedikür",
-    "description": "Şazi Beauty’de manikür, pedikür ve tırnak tasarımı için WhatsApp’tan randevu isteyin. Ojesiz bakım, mevcut ojenin çıkarılması ve ücretle ilgili sorularınızı iletin.",
-    "intro": "Manikür eller ve el tırnaklarına, pedikür ayaklar ve ayak tırnaklarına odaklanır. Şazi Beauty’ye randevu talebi gönderirken ikisinden hangisini istediğinizi ve ojesiz bakım, renkli oje ya da tırnak tasarımı tercihinizi yazın. Mevcut oje veya kaplamanın çıkarılması gerekiyorsa bunu da belirtin. Maltepe’den geliyorsanız uygun saatle birlikte güncel konumu isteyin.",
+    "title": "Cevizli Protez Tırnak, Manikür ve Pedikür",
+    "description": "Kartal Cevizli’de Şazi Beauty’ye protez tırnak, manikür veya pedikür için WhatsApp’tan ulaşın. Randevu öncesi fiyat, süre ve mevcut kaplamanın çıkarılmasını sorun.",
+    "intro": "Şazi Beauty’nin Cevizli, Kartal’daki stüdyosuna protez tırnak, manikür veya pedikür için randevu talebi gönderebilirsiniz. Manikür eller ve el tırnaklarına, pedikür ayaklar ve ayak tırnaklarına odaklanır. İstediğiniz bakımı ve ojesiz bitiş, renkli oje ya da tasarım tercihinizi belirtin. Maltepe’den geliyorsanız uygun saatle birlikte güncel konumu isteyin.",
     "image": "/images/fx/nails-macro.webp",
     "sections": [
+      {
+        "title": "Cevizli’de protez tırnak randevusu",
+        "paragraphs": [
+          "Protez tırnak için talep gönderirken istediğiniz uzunluğu, formu ve bitişi paylaşın. Örneğin kısa, oval ve doğal renkli bir görünüm ile daha uzun, desenli bir tasarım farklı taleplerdir. Beğendiğiniz bir fotoğraf varsa hangi ayrıntıyı istediğinizi not edin.",
+          "Tırnağınızda mevcut protez veya kaplama varsa çıkarma, bakım veya yeni uygulamadan hangisini istediğinizi belirtin. Randevuyu kesinleştirmeden önce işlemin kapsamını, çıkarma ve tasarım gibi ek kalemleri, tahmini süreyi ve toplam ücreti WhatsApp’tan sorun."
+        ]
+      },
       {
         "title": "Form, uzunluk ve günlük stil",
         "paragraphs": [
@@ -26,6 +33,10 @@
       }
     ],
     "questions": [
+      {
+        "question": "Protez tırnak fiyatını ve ödeme seçeneklerini nasıl öğrenirim?",
+        "answer": "Randevu formunda Tırnak Sanatı’nı seçip protez tırnak istediğinizi not edin. İstediğiniz formu, tasarımı ve varsa mevcut kaplamayı belirtin. Toplam ücreti ve geçerli ödeme seçeneklerini randevu öncesi WhatsApp’tan teyit edin."
+      },
       {
         "question": "Yanımda bir referans görsel getirebilir miyim?",
         "answer": "Beğendiğiniz bir veya iki örneği paylaşabilirsiniz. Fotoğrafta sizi çeken formu, rengi ya da ayrıntıyı belirtmek, istediğiniz görünümü anlatmayı kolaylaştırır."

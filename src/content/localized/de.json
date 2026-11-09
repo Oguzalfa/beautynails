@@ -3,8 +3,8 @@
     {
       "slug": "tirnak-sanati",
       "localizedSlug": "nageldesign-manikuere-pedikuere",
-      "title": "Nageldesign, Maniküre und Pediküre",
-      "description": "Entdecken Sie Ideen für Nageldesign, Maniküre und Pediküre bei Şazi Beauty. Teilen Sie Ihre Wünsche zu Form, Farbe und Details in Ihrer Terminanfrage mit.",
+      "title": "Nagelverlängerung, Nageldesign, Maniküre und Pediküre",
+      "description": "Fragen Sie bei Şazi Beauty in Cevizli (Kartal) nach Nagelverlängerung, Nageldesign, Maniküre und Pediküre. Klären Sie Preis und Termin vorab.",
       "intro": "Form, Farbe und kleine Details machen Ihr Nageldesign persönlich. Bei Şazi Beauty können Sie sich zu Nageldesign, Maniküre und Pediküre informieren und Ihren Wunschlook schon in der Terminanfrage beschreiben. Vom schlichten Finish bis zum leuchtenden Pink helfen ausgewählte Beispiele dabei, Ihre Vorstellungen im Gespräch zu erklären.",
       "image": "/images/fx/nails-macro.webp",
       "sections": [
@@ -18,6 +18,13 @@
           "title": "Inspiration für Farben und Details",
           "paragraphs": [
             "Wählen Sie zuerst die Richtung Ihres Designs: French-Spitzen, eine durchgehende Farbe oder ein kleiner Akzent. Die Farben und Texturen in der Galerie können als Inspiration dienen. Welche Töne dem Bildschirmbeispiel entsprechen, lässt sich beim Termin anhand der verfügbaren Farben besprechen. Erwähnen Sie auch Details, die Sie vermeiden möchten."
+          ]
+        },
+        {
+          "title": "Nagelverlängerung in Cevizli (Kartal) planen",
+          "paragraphs": [
+            "Geben Sie bei Ihrer Anfrage an, ob Sie eine neue Nagelverlängerung wünschen und welche Länge und Form Sie sich vorstellen. Wenn Sie ein Beispielfoto schicken, beschreiben Sie, welches Detail Ihnen daran gefällt.",
+            "Teilen Sie uns mit, ob Ihre Nägel bereits verlängert oder beschichtet sind. Fragen Sie vorab, ob sich das vorhandene Material beim selben Termin entfernen lässt und wie sich das auf Preis und Zeitbedarf auswirkt."
           ]
         },
         {
@@ -35,6 +42,10 @@
         {
           "question": "Wie gebe ich an, ob ich eine Maniküre oder Pediküre möchte?",
           "answer": "Wählen Sie „Nageldesign“ und schreiben Sie ins Notizfeld, ob Sie eine Maniküre oder Pediküre möchten. Die Notiz wird in den WhatsApp-Entwurf übernommen."
+        },
+        {
+          "question": "Wie frage ich nach Preis und Termin für eine Nagelverlängerung?",
+          "answer": "Wählen Sie im Formular „Nageldesign“ und schreiben Sie „Nagelverlängerung“ ins Notizfeld. Geben Sie Ihren Wunschtermin an und erwähnen Sie, falls vorhandenes Material entfernt werden soll. Senden Sie den WhatsApp-Entwurf und klären Sie Preis und freie Termine vor Ihrem Besuch mit dem Studio."
         },
         {
           "question": "Ist mein Termin nach dem Ausfüllen des Formulars bestätigt?",

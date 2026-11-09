@@ -33,7 +33,7 @@ export const readingCopy = {
     contactIntro: 'Manikür, pedikür, ipek kirpik ve kalıcı makyaj hakkında bilgi almak veya randevu talebi göndermek için Şazi Beauty’ye ulaşın.',
     contactSection: 'Şazi Beauty ile iletişim',
     phone: 'Telefon', whatsapp: 'WhatsApp ile iletişim', form: 'Randevu formunu aç',
-    contactNotes: 'İlgilendiğiniz hizmeti, uygun olduğunuz zaman aralığını ve varsa stil notlarınızı paylaşabilirsiniz. Randevu talebiniz ve hizmet ayrıntıları görüşmede netleştirilir.',
+    contactNotes: 'İstediğiniz hizmeti, uygun olduğunuz günü ve saati yazın. Ziyaretten önce güncel adresi, toplam ücreti ve geçerli ödeme seçeneklerini WhatsApp’tan teyit edin.',
     missing: 'Bu sayfa bulunamadı.', home: 'Ana sayfaya dön',
   },
   en: {
@@ -141,7 +141,7 @@ export const readingCopy = {
     contactIntro: 'Напишите в WhatsApp, чтобы обсудить маникюр, педикюр, наращивание ресниц или перманентный макияж и запросить запись.',
     contactSection: 'Связаться с Şazi Beauty',
     phone: 'Телефон', whatsapp: 'Написать в WhatsApp', form: 'Открыть форму записи',
-    contactNotes: 'Укажите услугу, удобный день и время. Попросите подтвердить стоимость, длительность и актуальный адрес. Если едете из Малтепе, запросите ссылку на карту перед выездом. Запись согласовывается в переписке.',
+    contactNotes: 'Укажите услугу, удобный день и время. Попросите подтвердить стоимость, способы оплаты, длительность и актуальный адрес. Если едете из Малтепе, запросите ссылку на карту перед выездом. Запись согласовывается в переписке.',
     missing: 'Страница не найдена.', home: 'Вернуться на главную',
   },
 }

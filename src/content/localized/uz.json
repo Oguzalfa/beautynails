@@ -3,8 +3,8 @@
     {
       "slug": "tirnak-sanati",
       "localizedSlug": "nail-art",
-      "title": "Tirnoq dizayni, manikyur va pedikyur",
-      "description": "Şazi Beauty salonida tirnoq dizayni, manikyur va pedikyur bilan tanishing. Qabulga yozilish soʻrovida shakl, rang va bezak boʻyicha istaklaringizni yozing.",
+      "title": "Tirnoq uzaytirish, tirnoq dizayni, manikyur va pedikyur",
+      "description": "Kartalning Cevizli hududidagi Şazi Beauty salonidan tirnoq uzaytirish, tirnoq dizayni, manikyur va pedikyur haqida soʻrang. Narx va qabul vaqtini oldindan aniqlang.",
       "intro": "Shakl, rang va kichik bezaklar manikyurga oʻziga xos koʻrinish beradi. Şazi Beauty salonida tirnoq dizayni, manikyur va pedikyur haqida soʻrashingiz hamda qabulga yozilayotganda xohlagan koʻrinishingizni tasvirlashingiz mumkin. Sipo jilodan yorqin pushti ranggacha, oʻzingizga yoqqan bir necha gʻoyani tanlab kelsangiz, maslahatni boshlash osonroq boʻladi.",
       "image": "/images/fx/nails-macro.webp",
       "sections": [
@@ -18,6 +18,13 @@
           "title": "Rang va bezak gʻoyalari",
           "paragraphs": [
             "Avval qanday uslubni xohlayotganingizni aniqlang: fransuz manikyuri, bir xil rang yoki kichik bezak. Galereyadan rang va jilo boʻyicha ilhom oling, maslahat paytida esa tanlagan tusingizni mavjud ranglar bilan solishtiring. Xohlamagan bezaklaringiz boʻlsa, ularni ham ayting."
+          ]
+        },
+        {
+          "title": "Cevizlida tirnoq uzaytirish uchun qabulni rejalashtiring",
+          "paragraphs": [
+            "Tirnoqlaringizni yangidan uzaytirmoqchi boʻlsangiz, soʻrovda istagan uzunlik va shaklni yozing. Namuna suratini yuborsangiz, aynan qaysi tafsiloti sizga yoqqanini ayting.",
+            "Tirnoqlaringiz avval uzaytirilgan boʻlsa yoki ustida qoplama boʻlsa, soʻrovda buni koʻrsating. Uni shu qabulda olib tashlash mumkinmi va bu narxga yoki xizmat davomiyligiga ta’sir qiladimi, oldindan soʻrang."
           ]
         },
         {
@@ -35,6 +42,10 @@
         {
           "question": "Manikyur yoki pedikyur kerakligini qanday koʻrsataman?",
           "answer": "«Tirnoq dizayni»ni tanlang va izohga manikyur yoki pedikyur deb yozing. Izohingiz WhatsApp xabari loyihasiga qoʻshiladi."
+        },
+        {
+          "question": "Tirnoq uzaytirish narxi va qabul vaqtini qanday aniqlayman?",
+          "answer": "Shaklda «Tirnoq dizayni»ni tanlab, izohga «tirnoq uzaytirish» deb yozing. Sizga qulay kun yoki vaqtni va olib tashlash kerak boʻlgan qoplama boʻlsa, uni koʻrsating. Tayyorlangan WhatsApp xabarini yuboring va borishdan oldin narx hamda boʻsh vaqtlarni salon bilan aniqlashtiring."
         },
         {
           "question": "Shaklni toʻldirsam, qabul tasdiqlanadimi?",

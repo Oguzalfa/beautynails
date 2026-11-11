@@ -34,6 +34,41 @@ const pages = {
       },
     ],
   },
+  '/hizmetler/protez-tirnak/': {
+    path: '/uz/xizmatlar/tirnoq-uzaytirish/',
+    title: 'Tirnoq uzaytirish | BeautyNails',
+    description: 'BeautyNails’da tirnoq uzaytirish. Shakl va uzunlikni tanlang, avvalgi qoplama haqida ayting, xizmat tarkibi va amaldagi narxni WhatsApp orqali aniqlang.',
+    heading: 'Tirnoq uzaytirish',
+    intro: 'Tirnoqlaringizni uzaytirmoqchi bo‘lsangiz, qanday shakl va uzunlikni xohlayotganingizni ayting. BeautyNails bilan ko‘rinish va uchrashuv tafsilotlarini kelishib oling.',
+    category: 'Tirnoqlar',
+    imageAlt: 'Tirnoqlar shaklini ko‘rsatuvchi yaqin plandagi tasvir',
+    sections: [
+      {
+        heading: 'Shakl va uzunlikni tanlang',
+        paragraphs: [
+          'Yumaloq, oval yoki bodomsimon uchlardan qaysi biri yoqishini o‘ylab ko‘ring. Odatda tirnoqlaringizni qanchalik uzun tutishingizni va kundalik ishda qo‘llaringizdan qanday foydalanishingizni ayting. Namuna suratini yuborsangiz, sizga aynan shakli, uzunligi yoki rangi yoqqanini alohida yozing. Shunda sizga mos variantlarni muhokama qilish osonlashadi.',
+        ],
+      },
+      {
+        heading: 'Tirnoqlaringizdagi mavjud qoplama haqida ayting',
+        paragraphs: [
+          'Tirnoqlaringizda lak, boshqa qoplama yoki avval uzaytirilgan tirnoqlar bo‘lsa, bu haqda uchrashuvdan oldin xabar bering. Agar qoplamani yechish kerak bo‘lsa, buni o‘sha uchrashuvda bajarish mumkinmi yoki alohida vaqt ajratish kerakmi, deb so‘rang. Studiyadan kelishdan oldin qanday tayyorgarlik ko‘rish kerakligini aniqlang.',
+        ],
+      },
+      {
+        heading: 'Xizmat tarkibi, narx va vaqtni aniqlang',
+        paragraphs: [
+          'Istagan ko‘rinishingizni aytib, uzaytirish xizmatiga nimalar kirishini so‘rang. Rang yoki bezak tanlagan bo‘lsangiz, u ham shu uchrashuvga kiradimi, deb aniqlashtiring. Amaldagi narxni va uchrashuv uchun qancha vaqt ajratish kerakligini studiyadan bilib oling. Saytdagi shakl tayyorlagan WhatsApp xabarini o‘zingiz yuboring va studiyadan vaqt tasdig‘ini kuting.',
+        ],
+      },
+      {
+        heading: 'Maltepedan yo‘lga chiqishdan oldin manzilni tekshiring',
+        paragraphs: [
+          'Maltepedan kelayotgan bo‘lsangiz, BeautyNails’dan uchrashuv manzilini yoki xarita havolasini WhatsApp orqali so‘rang. Zarur bo‘lsa, qaysi kirish eshigidan foydalanishni ham bilib oling. Manzilni xaritada ochib, yo‘lingizni uchrashuv vaqtiga qarab rejalashtiring. Yo‘lga chiqishdan oldin tasdiqlangan vaqt va manzilni suhbatdan qayta tekshiring.',
+        ],
+      },
+    ],
+  },
   '/hizmetler/ipek-kirpik/': {
     path: '/uz/xizmatlar/ipak-kipriklar/',
     title: 'Ipak kipriklar | BeautyNails',

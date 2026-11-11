@@ -10,6 +10,7 @@ type ContentPageCopy = {
   journal: string
   articles: string
   book: string
+  askPrice: string
   contactPrompt: string
   readService: string
   readArticle: string
@@ -31,6 +32,7 @@ export const contentPageCopy: Record<Locale, ContentPageCopy> = {
     journal: 'Bakım notları',
     articles: 'Yazılar',
     book: 'Randevu Al',
+    askPrice: 'WhatsApp’tan fiyat ve saat sor',
     contactPrompt: 'Tercihlerinizi birlikte netleştirelim.',
     readService: 'Hizmeti incele',
     readArticle: 'Yazıyı oku',
@@ -50,6 +52,7 @@ export const contentPageCopy: Record<Locale, ContentPageCopy> = {
     journal: 'Beauty journal',
     articles: 'Journal',
     book: 'Book an appointment',
+    askPrice: 'Ask about price and availability on WhatsApp',
     contactPrompt: 'Let’s talk through the look you have in mind.',
     readService: 'Explore the service',
     readArticle: 'Read the article',
@@ -69,6 +72,7 @@ export const contentPageCopy: Record<Locale, ContentPageCopy> = {
     journal: 'Pflegetipps',
     articles: 'Beiträge',
     book: 'Termin buchen',
+    askPrice: 'Preis und freie Termine per WhatsApp erfragen',
     contactPrompt: 'Lassen Sie uns Ihre Wünsche gemeinsam besprechen.',
     readService: 'Leistung ansehen',
     readArticle: 'Beitrag lesen',
@@ -88,6 +92,7 @@ export const contentPageCopy: Record<Locale, ContentPageCopy> = {
     journal: 'Советы по уходу',
     articles: 'Статьи',
     book: 'Записаться',
+    askPrice: 'Узнать цену и свободное время в WhatsApp',
     contactPrompt: 'Давайте обсудим, какой результат вам нравится.',
     readService: 'Подробнее об услуге',
     readArticle: 'Читать статью',
@@ -107,6 +112,7 @@ export const contentPageCopy: Record<Locale, ContentPageCopy> = {
     journal: 'نصائح العناية',
     articles: 'المقالات',
     book: 'احجز موعدًا',
+    askPrice: 'اسأل عن السعر والمواعيد عبر واتساب',
     contactPrompt: 'لنتحدث عن الإطلالة التي تفضلها.',
     readService: 'تفاصيل الخدمة',
     readArticle: 'اقرأ المقال',
@@ -126,6 +132,7 @@ export const contentPageCopy: Record<Locale, ContentPageCopy> = {
     journal: 'Parvarish bo‘yicha maslahatlar',
     articles: 'Maqolalar',
     book: 'Qabulga yozilish',
+    askPrice: 'Narx va bo‘sh vaqtni WhatsApp orqali so‘rang',
     contactPrompt: 'Sizga yoqadigan uslubni birga muhokama qilaylik.',
     readService: 'Xizmat haqida',
     readArticle: 'Maqolani o‘qish',
@@ -145,6 +152,7 @@ export const contentPageCopy: Record<Locale, ContentPageCopy> = {
     journal: 'Ideg boýunça maslahatlar',
     articles: 'Makalalar',
     book: 'Wagt bellemek',
+    askPrice: 'Bahany we boş wagty WhatsApp arkaly soraň',
     contactPrompt: 'Göwnüňize ýaraýan görnüşi bilelikde ara alyp maslahatlaşalyň.',
     readService: 'Hyzmat barada',
     readArticle: 'Makalany okaň',

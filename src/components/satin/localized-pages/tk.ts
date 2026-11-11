@@ -26,6 +26,33 @@ const pages = {
       },
     ],
   },
+  '/hizmetler/protez-tirnak/': {
+    path: '/tk/hyzmatlar/dyrnak-uzaltmak/',
+    title: 'Dyrnak uzaltmak | BeautyNails',
+    description: 'BeautyNails-de dyrnak uzaltmak. Isleseňiz şekil we uzynlyk boýunça nusga iberiň. Hyzmatyň gerimini, häzirki bahany we wagty WhatsApp arkaly anyklaň.',
+    heading: 'Dyrnak uzaltmak',
+    intro: 'Dyrnaklaryňyzy uzaltmak isleseňiz, halaýan şekiliňizi we uzynlygyňyzy aýdyň. Görnüşi we ýazgynyň jikme-jikliklerini BeautyNails bilen bilelikde anyklaň.',
+    category: 'Dyrnak',
+    imageAlt: 'Dyrnaklaryň şekiliniň ýakyndan görnüşi',
+    sections: [
+      {
+        heading: 'Şekili we uzynlygy saýlaň',
+        paragraphs: ['Tegelek, süýnmek ýa-da badam şekilli uçlardan haýsysyny halaýandygyňyzy pikirleniň. Eliňizi köp ulanýan işleriňiz bar bolsa, size gündelik amatly bolan uzynlygy aýdyň. Nusga surat iberseňiz, onda aýratyn nämäni halaýandygyňyzy hem ýazyň. Bu şekil, uzynlyk ýa-da reňk bolup biler. Saýlawlaryňyzy ýazylmazdan öň studiýa bilen ara alyp maslahatlaşyň.'],
+      },
+      {
+        heading: 'Dyrnaklaryňyzdaky öňki örtük barada aýdyň',
+        paragraphs: ['Dyrnaklaryňyzda lak, başga örtük ýa-da öňki uzaltma bar bolsa, ýazylmazdan öň habar beriň. Öňki örtügi aýyrmak gerek bolsa, muny şol duşuşykda edip bolýarmy ýa-da aýratyn wagt gereklimi diýip soraň. Dyrnaklaryňyzy öňünden nähili taýýarlamalydygy barada BeautyNails-den maglumat alyň.'],
+      },
+      {
+        heading: 'Hyzmatyň gerimini, bahany we wagty anyklaň',
+        paragraphs: ['Isleýän görnüşiňizi aýdyp, dyrnak uzaltmak hyzmatyna nämeleriň girýändigini soraň. Reňk ýa-da bezeg hem isleýän bolsaňyz, onuň şol ýazga girýändigini anyklaň. Häzirki bahany we hyzmat üçin näçe wagt goýmalydygyny studiýadan soraň. Saýtdaky formanyň WhatsApp üçin taýýarlan habaryny özüňiz iberiň we ýazgy wagtyny studiýa bilen tassyklaň.'],
+      },
+      {
+        heading: 'Maltepeden ýola çykmazdan öň salgyny anyklaň',
+        paragraphs: ['Maltepeden gelýän bolsaňyz, BeautyNails-den takyk salgyny ýa-da karta baglanyşygyny WhatsApp arkaly soraň. Zerur bolsa, binanyň haýsy girelgesinden girmelidigini hem anyklaň. Iberilen salgyny kartada açyp, tassyklanan wagta görä ýoluňyzy meýilleşdiriň. Ýola çykmazdan öň salgyny we ýazgy wagtyny söhbetdeşlikden täzeden barlaň.'],
+      },
+    ],
+  },
   '/hizmetler/ipek-kirpik/': {
     path: '/tk/hyzmatlar/kirpik-uzaltmak/',
     title: 'Kirpik uzaltmak | BeautyNails',

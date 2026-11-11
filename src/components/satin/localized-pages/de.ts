@@ -34,6 +34,41 @@ const pages = {
       },
     ],
   },
+  '/hizmetler/protez-tirnak/': {
+    path: '/de/leistungen/nagelverlaengerung/',
+    title: 'Nagelverlängerung | BeautyNails',
+    description: 'Planen Sie Ihre Nagelverlängerung bei BeautyNails. Besprechen Sie Länge, Form und aktuellen Preis und lassen Sie sich Termin und Adresse per WhatsApp bestätigen.',
+    heading: 'Nagelverlängerung',
+    intro: 'Bei einer Nagelverlängerung können Sie Länge und Form nach Ihren Wünschen wählen. Teilen Sie BeautyNails bei Ihrer Terminanfrage mit, welche Nagelform Sie sich vorstellen.',
+    category: 'Nägel',
+    imageAlt: 'Nahaufnahme von glänzenden fuchsiafarbenen Nägeln',
+    sections: [
+      {
+        heading: 'Welche Länge und Form passen zu Ihrem Alltag?',
+        paragraphs: [
+          'Überlegen Sie, wie Sie Ihre Hände im Alltag einsetzen. Wenn Sie viel tippen, ein Instrument spielen oder mit den Händen arbeiten, kann eine kürzere Länge angenehmer sein. Zeigen Sie gerne ein Beispielfoto und sagen Sie, welches Detail Ihnen gefällt, etwa die abgerundeten Spitzen oder die Länge über der Fingerkuppe.',
+        ],
+      },
+      {
+        heading: 'Was ist bei vorhandener Modellage zu beachten?',
+        paragraphs: [
+          'Teilen Sie BeautyNails mit, ob Ihre Nägel bereits lackiert, beschichtet oder verlängert sind. Ein aktuelles Foto kann helfen, den Zustand zu beschreiben. Fragen Sie, ob die vorhandene Beschichtung oder Modellage entfernt werden muss und ob das im selben Termin möglich ist. Beachten Sie die Hinweise des Studios zur Vorbereitung.',
+        ],
+      },
+      {
+        heading: 'Leistungsumfang, aktuellen Preis und Termin klären',
+        paragraphs: [
+          'Im Terminformular können Sie einen WhatsApp-Entwurf mit Ihrer Wunschzeit und Ihren Vorstellungen erstellen. Senden Sie die Nachricht und fragen Sie, was zur Leistung gehört, wie viel sie aktuell kostet und wie viel Zeit Sie einplanen sollten. Richten Sie Ihre weiteren Pläne nach der Terminbestätigung von BeautyNails aus.',
+        ],
+      },
+      {
+        heading: 'Reisen Sie aus Maltepe an?',
+        paragraphs: [
+          'Lassen Sie sich die Adresse oder einen Kartenlink im selben WhatsApp-Chat schicken. Planen Sie die Anfahrt von Ihrem Startpunkt in Maltepe aus mit dem bestätigten Standort. Prüfen Sie vor dem Aufbruch noch einmal die Adresse und die Uhrzeit. Bei Bedarf können Sie auch nach dem passenden Eingang fragen.',
+        ],
+      },
+    ],
+  },
   '/hizmetler/ipek-kirpik/': {
     path: '/de/leistungen/seidenwimpern/',
     title: 'Seidenwimpern | BeautyNails',

@@ -3,6 +3,7 @@ import type { Locale } from '../locales'
 
 export const serviceOptions = [
   'Tırnak Sanatı',
+  'Protez Tırnak',
   'İpek Kirpik',
   'Kalıcı Makyaj',
   'Kaş & Yüz',
@@ -43,6 +44,7 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     services: 'Hizmet',
     serviceNames: {
       'Tırnak Sanatı': 'Tırnak Sanatı',
+      'Protez Tırnak': 'Protez Tırnak',
       'İpek Kirpik': 'İpek Kirpik',
       'Kalıcı Makyaj': 'Kalıcı Makyaj',
       'Kaş & Yüz': 'Kaş & Yüz',
@@ -71,6 +73,7 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     services: 'Services',
     serviceNames: {
       'Tırnak Sanatı': 'Nail Art',
+      'Protez Tırnak': 'Nail Extensions',
       'İpek Kirpik': 'Eyelash Extensions',
       'Kalıcı Makyaj': 'Permanent Makeup',
       'Kaş & Yüz': 'Brow & Face Care',
@@ -99,6 +102,7 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     services: 'Leistungen',
     serviceNames: {
       'Tırnak Sanatı': 'Nageldesign',
+      'Protez Tırnak': 'Nagelverlängerung',
       'İpek Kirpik': 'Wimpernverlängerung',
       'Kalıcı Makyaj': 'Permanent Make-up',
       'Kaş & Yüz': 'Brauen- und Gesichtspflege',
@@ -127,6 +131,7 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     services: 'Услуги',
     serviceNames: {
       'Tırnak Sanatı': 'Дизайн ногтей',
+      'Protez Tırnak': 'Наращивание ногтей',
       'İpek Kirpik': 'Наращивание ресниц',
       'Kalıcı Makyaj': 'Перманентный макияж',
       'Kaş & Yüz': 'Уход за бровями и лицом',
@@ -155,6 +160,7 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     services: 'الخدمات',
     serviceNames: {
       'Tırnak Sanatı': 'تصميم الأظافر',
+      'Protez Tırnak': 'تمديد الأظافر',
       'İpek Kirpik': 'تركيب الرموش',
       'Kalıcı Makyaj': 'المكياج الدائم',
       'Kaş & Yüz': 'العناية بالحواجب والوجه',
@@ -183,6 +189,7 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     services: 'Xizmatlar',
     serviceNames: {
       'Tırnak Sanatı': 'Tirnoq dizayni',
+      'Protez Tırnak': 'Tirnoq uzaytirish',
       'İpek Kirpik': 'Kipriklarni uzaytirish',
       'Kalıcı Makyaj': 'Doimiy makiyaj',
       'Kaş & Yüz': 'Qosh va yuz parvarishi',
@@ -211,6 +218,7 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     services: 'Hyzmatlar',
     serviceNames: {
       'Tırnak Sanatı': 'Dyrnak bezegi',
+      'Protez Tırnak': 'Dyrnak uzaltmak',
       'İpek Kirpik': 'Kirpikleri uzaltmak',
       'Kalıcı Makyaj': 'Hemişelik makiýaž',
       'Kaş & Yüz': 'Gaşlara we ýüze ideg',

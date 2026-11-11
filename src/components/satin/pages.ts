@@ -26,8 +26,8 @@ export type ContentPageData = {
 const servicePages: readonly ContentPageData[] = [
   {
     path: '/hizmetler/tirnak-sanati/',
-    title: 'Tırnak Sanatı ve Manikür | BeautyNails',
-    description: 'BeautyNails tırnak sanatı: tırnak şekli, renk, French ve desen tercihlerinizi birlikte değerlendirin. Bilgi ve randevu için iletişime geçin.',
+    title: 'Tırnak Tasarımı ve Manikür Randevusu | BeautyNails',
+    description: 'BeautyNails’te tırnak tasarımı, manikür, renk, French ve desen seçeneklerini inceleyin. Güncel fiyat ve randevu saati için WhatsApp’tan yazın.',
     kind: 'service',
     serviceId: 'tirnak-sanati',
     category: 'Tırnak',
@@ -48,8 +48,37 @@ const servicePages: readonly ContentPageData[] = [
         paragraphs: ['Tercih ettiğiniz uzunluğu, sevdiğiniz renk ailesini ve özellikle istemediğiniz bir ayrıntıyı not edin. Klavye kullanımı, spor veya ellerinizi sık kullandığınız işler gibi günlük alışkanlıklarınızdan söz edebilirsiniz. Aklınızdaki modelin uygulanabilir seçenekleri ve ihtiyaç duyduğunuz işlem randevu görüşmesinde netleşir.'],
       },
       {
-        heading: 'Bilgi ve randevu',
-        paragraphs: ['Tırnak sanatı için randevu talebi oluştururken varsa seçtiğiniz referans görselleri ve sorularınızı paylaşın. İşlem kapsamı, uygun zaman ve güncel ücret hakkında doğrudan bilgi alabilirsiniz. Sitedeki randevu formu WhatsApp mesaj taslağı hazırlar; mesajı siz gönderirsiniz. Randevunuzun ayrıntılarını işletmeyle görüşerek kesinleştirin.'],
+        heading: 'Randevu kapsamı ve fiyatı',
+        paragraphs: ['Kendi tırnağınızın boyunu koruyarak renk veya desen istiyorsanız tasarım tercihinizi belirtin. Boyunu uzatmak için Protez Tırnak hizmetine bakabilirsiniz. Seçtiğiniz modelin, mevcut kaplamanın ve istediğiniz desenin fotoğrafları üzerinden randevu kapsamını, tahmini süreyi ve güncel ücreti WhatsApp’ta netleştirebilirsiniz.'],
+      },
+    ],
+  },
+  {
+    path: '/hizmetler/protez-tirnak/',
+    title: 'Protez Tırnak Randevusu ve Fiyat Bilgisi | BeautyNails',
+    description: 'BeautyNails’te protez tırnak için boy ve şekil seçeneklerini konuşun. Maltepe’den ziyaret planı, güncel fiyat ve uygun saat için WhatsApp’tan yazın.',
+    kind: 'service',
+    serviceId: 'protez-tirnak',
+    category: 'Tırnak',
+    heading: 'Protez Tırnak',
+    intro: 'BeautyNails’te protez tırnak uygulaması için istediğiniz uzunluğu, şekli ve bitişi birlikte belirleyelim. Modelinizi WhatsApp’tan paylaşarak güncel fiyatı ve uygun saatleri öğrenebilirsiniz.',
+    image: { src: '/images/satin/service-nails-960.webp', width: 1122, height: 1402, alt: 'Fuşya badem biçimli tırnak tasarımı örneği' },
+    sections: [
+      {
+        heading: 'Boy ve şekli nasıl seçebilirsiniz?',
+        paragraphs: ['Protez tırnak, doğal tırnağın boyunu uzatmak ve şeklini belirginleştirmek için tercih edilir. Sevdiğiniz modelde dikkatinizi çeken ayrıntıyı söyleyin. Kısa oval bir görünüm, orta boy badem veya daha köşeli bir uç elde farklı durur. Klavye kullanımı ve spor gibi günlük alışkanlıklarınızı paylaşmanız, randevu görüşmesinde rahat kullanabileceğiniz bir boy seçmenize yardımcı olur.'],
+      },
+      {
+        heading: 'Tırnağınızda mevcut kaplama varsa',
+        paragraphs: ['İlk kez protez tırnak yaptıracaksanız bunu belirtin. Önceki bir uygulama varsa gün ışığında çekilmiş bir el fotoğrafı paylaşın. Yeni uygulama, mevcut kaplamanın bakımı veya çıkarılması ayrı işlemler gerektirebilir. Mevcut durumu önceden göstermek, randevu süresini ve fiyatı doğru kapsam üzerinden konuşmayı kolaylaştırır.'],
+      },
+      {
+        heading: 'Protez tırnak fiyatı ve uygulama süresi',
+        paragraphs: ['Güncel fiyat ve tahmini süre için seçtiğiniz uzunluğu, tek renk ya da desen tercihinizi ve mevcut kaplama durumunu WhatsApp’ta paylaşın. Düğün, davet veya seyahat için hazırlanıyorsanız tarihi de ekleyin. İşlem kapsamını, toplam ücreti ve uygun saati randevunuz kesinleşmeden önce birlikte netleştirebilirsiniz.'],
+      },
+      {
+        heading: 'Maltepe’den randevuya gelirken',
+        paragraphs: ['Maltepe’den yola çıkacaksanız randevu saatinizi onaylatırken güncel konum bağlantısını da isteyin. Ulaşım sürenizi paylaşılan konuma göre hesaplayın. WhatsApp mesajına size uyan günleri ve model fotoğrafınızı ekleyerek hem işlem hem ziyaret planını aynı görüşmede netleştirebilirsiniz.'],
       },
     ],
   },
@@ -160,7 +189,7 @@ export const contentPages: readonly ContentPageData[] = [
   {
     path: '/hizmetler/',
     title: 'Tırnak, Kirpik, Kalıcı Makyaj ve Erkek Bakımı | BeautyNails',
-    description: 'BeautyNails hizmetleri: tırnak sanatı, ipek kirpik, kalıcı makyaj ve erkek manikür-pedikür. Hizmet ayrıntılarını inceleyin, randevu için bilgi alın.',
+    description: 'BeautyNails’te tırnak sanatı, protez tırnak, ipek kirpik, kalıcı makyaj ve erkek manikür-pedikür hizmetlerini inceleyin ve randevu alın.',
     kind: 'service-index',
     heading: 'Size özel bakım.',
     intro: 'Tırnak, kirpik, makyaj ve erkek bakımında tercihlerinizi birlikte netleştirelim. İlgilendiğiniz hizmetin ayrıntılarını inceleyebilirsiniz.',

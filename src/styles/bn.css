@@ -856,6 +856,19 @@ body {
   object-fit: cover;
 }
 
+.bn-modal__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.bn-modal__links .bn-button {
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
 .bn-form {
   display: grid;
   gap: 12px;

@@ -2,7 +2,7 @@ export default {
   nails: {
     slug: 'maltepe-tirnak-randevu-rehberi',
     title: 'Maltepe Tırnak Tasarımı ve Manikür Rehberi | BeautyNails',
-    description: 'Maltepe’den manikür veya tırnak tasarımı randevusu planlıyorsanız işlem kapsamını, mevcut kaplamayı ve güncel konumu önceden nasıl netleştireceğinizi öğrenin.',
+    description: 'Maltepe’den manikür, protez tırnak veya tırnak tasarımı randevusu planlarken işlem kapsamını, mevcut kaplamayı ve güncel konumu önceden netleştirin.',
     heading: 'Maltepe’den tırnak randevusu planlamak',
     intro: 'Maltepe’den yola çıkmadan önce istediğiniz işlemi, tırnağınızdaki mevcut uygulamayı ve randevu saatini birlikte netleştirin. Bir yakın plan fotoğraf ve beğendiğiniz tasarımdan bir örnek, görüşmeye başlamak için yeterli.',
     category: 'Maltepe · Tırnak bakımı',
@@ -10,7 +10,7 @@ export default {
     sections: [
       {
         heading: 'Manikür, tasarım ve uzatma taleplerini ayırın',
-        paragraphs: ['Kendi tırnağınızın boyunu koruyup renk veya desen mi istiyorsunuz, yoksa daha uzun bir görünüm mü? Manikür, nail art ve protez tırnak için aranan işlem kapsamı farklı olabilir. Randevu mesajınızda aradığınız sonucu tarif edin. Uzatma istiyorsanız bu seçeneğin sunulup sunulmadığını özellikle sorun. Bir ilandaki işlem adı tek başına çıkarma, bakım veya deseni kapsadığını göstermez.'],
+        paragraphs: ['Kendi tırnağınızın boyunu koruyup renk veya desen mi istiyorsunuz, yoksa daha uzun bir görünüm mü? Manikür, nail art ve protez tırnak için aranan işlem kapsamı farklı olabilir. Randevu mesajınızda aradığınız sonucu tarif edin. BeautyNails’te uzatma için Protez Tırnak hizmetini seçebilirsiniz. Mevcut kaplamanın çıkarılması, bakım ve desen gibi ayrıntıları randevu öncesinde görüşün.'],
       },
       {
         heading: 'Mevcut uygulamayı önceden gösterin',

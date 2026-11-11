@@ -54,6 +54,41 @@ export default {
       },
     ],
   },
+  '/hizmetler/protez-tirnak/': {
+    path: '/en/services/nail-extensions/',
+    title: 'Nail Extensions | BeautyNails',
+    description: 'Plan your nail extensions at BeautyNails. Choose a length and shape, ask about the current price, and confirm your appointment and the studio address via WhatsApp.',
+    heading: 'Nail Extensions',
+    intro: 'Add length and choose a shape that works for you. Share your preferences with BeautyNails when you request an appointment.',
+    category: 'Nails',
+    imageAlt: 'Close-up of glossy fuchsia nails',
+    sections: [
+      {
+        heading: 'Choose a shape and length',
+        paragraphs: [
+          'Think about how you use your hands during the day. A shorter length might be more comfortable if you type often, play an instrument or work with your hands. If a reference photo catches your eye, point out the detail you like, such as the rounded tips or how far the nails extend beyond the fingertips.',
+        ],
+      },
+      {
+        heading: 'Mention any existing coating or extensions',
+        paragraphs: [
+          'Tell BeautyNails if you already have polish, a coating or extensions on your nails. Share a current photo if that helps explain what is on them. Ask whether removal is needed and whether it can be included in the same appointment. Follow the preparation instructions the studio gives you.',
+        ],
+      },
+      {
+        heading: 'Confirm what is included and the current price',
+        paragraphs: [
+          'Use the appointment form to prepare a WhatsApp message with your preferred time and any references. When you send the message, ask what the service includes, what it currently costs and how much time to set aside. Wait for BeautyNails to confirm your appointment before making plans around it.',
+        ],
+      },
+      {
+        heading: 'Travelling from Maltepe?',
+        paragraphs: [
+          'Ask for the appointment address or a map pin in the same WhatsApp chat. Use the location BeautyNails confirms to plan your journey from Maltepe. Check the address and time together before you set off, and ask about the entrance if you need directions once you arrive.',
+        ],
+      },
+    ],
+  },
   '/hizmetler/ipek-kirpik/': {
     path: '/en/services/eyelash-extensions/',
     title: 'Silk Lash Extensions | BeautyNails',

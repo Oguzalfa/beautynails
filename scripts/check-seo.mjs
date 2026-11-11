@@ -10,6 +10,15 @@ const routeGroups = [
   { kind: 'index', tr: '/hizmetler/', en: '/en/services/', de: '/de/leistungen/', ru: '/ru/uslugi/', uz: '/uz/xizmatlar/', tk: '/tk/hyzmatlar/' },
   {
     kind: 'service',
+    tr: '/hizmetler/protez-tirnak/',
+    en: '/en/services/nail-extensions/',
+    de: '/de/leistungen/nagelverlaengerung/',
+    ru: '/ru/uslugi/narashchivanie-nogtei/',
+    uz: '/uz/xizmatlar/tirnoq-uzaytirish/',
+    tk: '/tk/hyzmatlar/dyrnak-uzaltmak/',
+  },
+  {
+    kind: 'service',
     tr: '/hizmetler/tirnak-sanati/',
     en: '/en/services/nail-art/',
     de: '/de/leistungen/nageldesign/',
@@ -93,7 +102,7 @@ const routeGroups = [
 ].map((group) => ({ ...group, ar: group.en.replace('/en/', '/ar/') }))
 const routes = new Map(routeGroups.flatMap(({ kind, ...paths }) =>
   languages.map((language) => [paths[language], { kind, language, paths }])))
-assert.equal(routes.size, 84, 'seven languages with twelve distinct routes each')
+assert.equal(routes.size, 91, 'seven languages with thirteen distinct routes each')
 const dist = resolve('dist')
 const decode = (value) => value.replace(/&(amp|quot|apos|lt|gt|#39);/g, (_, key) => ({
   amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', '#39': "'",

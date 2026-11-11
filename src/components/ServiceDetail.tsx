@@ -1,7 +1,9 @@
 import { useEffect, useId, useRef } from 'react'
 import { services } from '../config/site'
 import type { Locale } from '../locales'
+import { getLocalizedPage } from '../routes'
 import { bookingCopy, serviceDetailCopy } from './booking-copy'
+import { contentPageCopy } from './satin/content-page-copy'
 
 type Props = {
   serviceId: string | null
@@ -32,6 +34,10 @@ export function ServiceDetail({ serviceId, locale = 'tr', onClose }: Props) {
 
   if (!service) return null
   const detail = locale === 'tr' ? service : serviceDetailCopy[locale][service.id]
+  const servicePage = getLocalizedPage(`/hizmetler/${service.id}/`, locale)
+  const extensionPage = service.id === 'tirnak-sanati'
+    ? getLocalizedPage('/hizmetler/protez-tirnak/', locale)
+    : null
 
   return (
     <div className="bn-modal" role="presentation" onClick={onClose}>
@@ -52,6 +58,18 @@ export function ServiceDetail({ serviceId, locale = 'tr', onClose }: Props) {
         <h2 id={titleId}>{detail.title}</h2>
         <p>{detail.detail}</p>
         <p>{copy.detailsNote}</p>
+        {servicePage?.kind === 'service' ? (
+          <div className="bn-modal__links">
+            <a className="bn-button bn-button--outline" href={servicePage.path}>
+              {contentPageCopy[locale].readService}
+            </a>
+            {extensionPage?.kind === 'service' ? (
+              <a className="bn-button bn-button--outline" href={extensionPage.path}>
+                {extensionPage.heading}
+              </a>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </div>
   )

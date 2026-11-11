@@ -23,13 +23,19 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
   const homePath = locale === 'tr' ? '/?lang=tr' : pathForLocale('/', locale)
   const servicesPath = pathForLocale('/hizmetler/', locale)
   const journalPath = pathForLocale('/yazilar/', locale)
-  const bookingService = page?.serviceId
-    ? getLocalizedPage(`/hizmetler/${page.serviceId}/`, 'tr')?.heading
+  const serviceId = page?.serviceId
+  const bookingService = serviceId
+    ? getLocalizedPage(`/hizmetler/${serviceId}/`, 'tr')?.heading
     : undefined
   const book = () => onBook(bookingService)
-  const companion = page?.serviceId && (page.kind === 'service'
-    ? articles.find((item) => item.serviceId === page.serviceId)
-    : services.find((item) => item.serviceId === page.serviceId))
+  const companion = serviceId && (page?.kind === 'service'
+    ? articles.find((item) => item.serviceId === (serviceId === 'protez-tirnak' ? 'tirnak-sanati' : serviceId))
+    : services.find((item) => item.serviceId === serviceId))
+  const extensions = serviceId === 'tirnak-sanati'
+    ? getLocalizedPage('/hizmetler/protez-tirnak/', locale)
+    : null
+  const hasPriceInquiry = page?.kind === 'service' && (serviceId === 'tirnak-sanati' || serviceId === 'protez-tirnak')
+  const priceMessage = `Merhaba, BeautyNails’te ${bookingService} için güncel fiyat ve uygun randevu saatini öğrenebilir miyim?${locale === 'tr' ? '' : `\nDil: ${locale.toUpperCase()}`}`
 
   return (
     <div className="satin-page content-page" lang={locale}>
@@ -64,6 +70,11 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
                 <h1>{page.heading}</h1>
                 {page.kind === 'article' ? <p className="content-byline">{siteConfig.brand} · {copy.journal}</p> : null}
                 <p className="content-story-intro">{page.intro}</p>
+                {hasPriceInquiry ? (
+                  <a className="content-read-link" href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(priceMessage)}`} target="_blank" rel="noopener noreferrer">
+                    {copy.askPrice}<ArrowIcon />
+                  </a>
+                ) : null}
               </header>
               {page.image ? (
                 <div className="content-story-image">
@@ -81,9 +92,18 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
                   <div className="content-story-contact">
                     <p>{copy.contactPrompt}</p>
                     {companion ? (
-                      <a className="content-read-link" href={companion.path}>
-                        {companion.heading}<ArrowIcon />
-                      </a>
+                      <div>
+                        <a className="content-read-link" href={companion.path}>
+                          {companion.heading}<ArrowIcon />
+                        </a>
+                      </div>
+                    ) : null}
+                    {extensions ? (
+                      <div>
+                        <a className="content-read-link" href={extensions.path}>
+                          {extensions.heading}<ArrowIcon />
+                        </a>
+                      </div>
                     ) : null}
                     <button className="content-book" type="button" onClick={book}>
                       <span>{copy.book}</span><ArrowIcon />

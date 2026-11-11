@@ -15,7 +15,8 @@ const engine = process.env.QA_ENGINE || 'chromium'
 const label = process.env.QA_LABEL || engine
 const widths = (process.env.QA_WIDTHS || '320,390,768,1440').split(',').map(Number)
 const { services, journal: articles } = localizedContent.tr
-const localGuideSlugs = ['maltepe-manikur-pedikur-rehberi', 'maltepe-kirpik-kalici-makyaj-randevu-rehberi']
+const nailExtensionGuideSlug = 'maltepe-protez-tirnak-randevu-rehberi'
+const localGuideSlugs = [nailExtensionGuideSlug, 'maltepe-manikur-pedikur-rehberi', 'maltepe-kirpik-kalici-makyaj-randevu-rehberi']
 const legacyArticleSlug = articles.find(article => !localGuideSlugs.includes(article.slug))?.slug
 const localGuideArea = 'Maltepe, İstanbul'
 const sourcePages = [
@@ -191,6 +192,10 @@ function inspectHtml(html, { source, locale, entry, path }) {
       for (const slug of guide.relatedServices) {
         assertLocalizedLink(hrefs, locale, `/hizmetler/${slug}/`, `${path}: related service`)
       }
+    }
+    if (source.slug === nailExtensionGuideSlug) {
+      assert.ok(entry.bookingMessage?.trim().length > 40, `${path}: meaningful nail extension enquiry`)
+      assert.ok(hrefs.includes(`https://wa.me/${telephone.slice(1)}?text=${encodeURIComponent(entry.bookingMessage)}`), `${path}: correct WhatsApp enquiry link`)
     }
   }
   if (source.type === 'journal') {
@@ -375,15 +380,16 @@ try {
   const sitemapEntries = [...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g)]
   const sitemapUrls = sitemapEntries.map(match => decode(match[1]))
   const sitemapByUrl = new Map(sitemapEntries.map(match => [decode(match[1]), match[2]]))
-  assert.equal(articles.length, 5, 'Five journal articles')
-  assert.deepEqual(articles.slice(0, 2).map(article => article.slug), localGuideSlugs, 'Two Maltepe guides lead the journal')
-  for (const guide of articles.slice(0, 2)) {
+  assert.equal(articles.length, 6, 'Six journal articles')
+  const localGuides = articles.slice(0, localGuideSlugs.length)
+  assert.deepEqual(localGuides.map(article => article.slug), localGuideSlugs, 'Maltepe guides lead the journal')
+  for (const guide of localGuides) {
     assert.ok(Array.isArray(guide.relatedServices) && guide.relatedServices.length > 0, `${guide.slug}: guide names related services`)
     assert.ok(guide.relatedServices.every(slug => services.some(service => service.slug === slug)), `${guide.slug}: related services exist`)
   }
-  assert.equal(sourcePages.length, 12, 'Twelve Turkish pages')
+  assert.equal(sourcePages.length, 13, 'Thirteen Turkish pages')
   for (const source of sourcePages) assert.equal(pageHref('tr', source.path), source.path, 'Original Turkish routes remain stable')
-  assert.equal(pages.length, 84, 'Seven languages with twelve pages each')
+  assert.equal(pages.length, 91, 'Seven languages with thirteen pages each')
   assert.equal(sitemapUrls.length, pages.length, 'Full localized sitemap inventory')
   assert.deepEqual([...new Set(sitemapUrls)].sort(), pages.map(item => canonicalOrigin + item.path).sort(), 'Exact canonical sitemap inventory')
   const rawPages = []

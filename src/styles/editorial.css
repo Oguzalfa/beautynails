@@ -81,6 +81,7 @@ body.sz-article-page{margin:0;background:#fad3e1}
 .sz-reading-hero h1{margin:0 0 24px;font-size:clamp(40px,5vw,76px);font-weight:800;line-height:1.02;letter-spacing:-.055em;overflow-wrap:anywhere}
 .sz-reading-hero .sz-article-meta{margin-bottom:18px}
 .sz-reading-deck{max-width:540px;margin:0;font-size:clamp(16px,1.5vw,20px);line-height:1.5;letter-spacing:-.025em}
+.sz-reading-whatsapp{margin-top:20px;background:#090909;border-color:#090909;color:#fff;white-space:normal}
 .sz-reading-cover{position:relative;margin:0}
 .sz-reading-cover>img{display:block;width:100%;height:clamp(320px,36vw,540px);object-fit:cover;border:1px solid rgba(255,255,255,.9);border-radius:100px 24px 24px 24px;box-shadow:0 12px 24px rgba(121,0,48,.12)}
 .sz-reading-cover>span{position:absolute;bottom:18px;right:18px;display:inline-flex;align-items:center;gap:12px;min-height:44px;padding:10px 16px;border:1px solid rgba(255,255,255,.85);border-radius:999px;background:rgba(255,232,241,.9);font-size:11px;font-weight:700;letter-spacing:.12em}

@@ -186,6 +186,46 @@
   ],
   "journal": [
     {
+      "slug": "maltepe-protez-tirnak-randevu-rehberi",
+      "localizedSlug": "maltepe-dyrnak-uzaltmak-gollanmasy",
+      "category": "Dyrnak we ideg",
+      "title": "Maltepeden dyrnak uzaltmak üçin wagt bellemek",
+      "excerpt": "Dyrnagy ilkinji gezek uzaltmak, täzelemek ýa-da öňki örtügi aýyrmak isleýärsiňizmi? Maltepeden Cevizlä gitmezden öň bahany we wagty anyklaň.",
+      "image": "crystal-french",
+      "alt": "Gülgüne kristallaryň üstünde fransuz uçly dyrnak dizaýnynyň nusgasy",
+      "readTime": "2 minutlyk okama",
+      "date": "2026-11-11",
+      "intro": "Maltepeden dyrnak uzaltmak üçin wagt bellemek isleýän bolsaňyz, ilki haýsy hyzmatyň gerekdigini anyklaň. Şazi Beauty Stambulyň Kartal etrabynyň Cevizli sebitinde ýerleşýär. Ýola çykmazdan öň boş wagty, hyzmatyň mazmunyny we umumy bahany studiýadan soraň.",
+      "quote": "Wagt belleýäniňizde dyrnaklaryňyzdaky öňki örtük barada hem aýdyň.",
+      "sections": [
+        {
+          "title": "Ilkinji gezek uzaltmak, täzelemek ýa-da aýyrmak",
+          "paragraphs": [
+            "Dyrnaklaryňyzy ilkinji gezek uzaltmak isleseňiz, isleýän uzynlygyňyzy we şekiliňizi ýazyň. Mysal üçin, gysga süýri ýa-da orta uzynlykda badam şekilli dyrnak isleýändigiňizi aýdyň. Nusga suratyny iberseňiz, göwnüňize ýaran reňki ýa-da bezegi görkeziň.",
+            "Dyrnaklaryňyz öň uzaldylan bolsa, olary täzelemek isleýändigiňizi ýa-da öňküsini aýryp täzesini goýmak isleýändigiňizi aýdyň. Diňe aýyrmak gerek bolsa, ony aýratyn belläň. Häzirki ýagdaýy görkezýän aýdyň surat studiýa zerur işi meýilleşdirmäge kömek eder."
+          ]
+        },
+        {
+          "title": "Umumy baha nämeleriň girýändigini soraň",
+          "paragraphs": [
+            "WhatsApp arkaly öňki örtügi aýyrmagyň, saýlan uzynlygyňyzyň, şekiliňiziň we bezegiňiziň baha nähili täsir etjekdigini anyklaň. Aýratyn tölenýän işler bar bolsa, olary hem soraň. Hyzmatyň takmynan näçe wagt aljakdygyny, umumy bahany we töleg usullaryny bilelikde anyklaň.",
+            "Bahany aýtmak üçin studiýa goşmaça maglumat gerek bolsa, haýsy suraty ýa-da düşündirişi ibermelidigini soraň."
+          ]
+        },
+        {
+          "title": "Maltepeden ýola çykmazdan öň",
+          "paragraphs": [
+            "Takyk salgyny ýa-da karta baglanyşygyny, duşuşygyň gününi we sagadyny studiýa bilen tassyklaň. Aşakdaky WhatsApp habaryna häzirki örtügiňizi, isleýän görnüşiňizi we size amatly wagty goşup bilersiňiz."
+          ]
+        }
+      ],
+      "area": "Maltepe, İstanbul",
+      "relatedServices": [
+        "tirnak-sanati"
+      ],
+      "bookingMessage": "Salam! Maltepeden geljek, dyrnak uzaltmak üçin wagt bellemek isleýärin. Boş wagtlary, hyzmatyň takmynan näçe wagt aljakdygyny, umumy bahany we töleg usullaryny aýdyp bilersiňizmi? Cevizlidäki takyk salgyny ýa-da karta baglanyşygyny hem iberip bilersiňizmi?"
+    },
+    {
       "slug": "maltepe-manikur-pedikur-rehberi",
       "localizedSlug": "maltepe-manikyur-pedikyur-gollanmasy",
       "category": "Dyrnak we ideg",

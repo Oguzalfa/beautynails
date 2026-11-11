@@ -186,6 +186,46 @@
   ],
   "journal": [
     {
+      "slug": "maltepe-protez-tirnak-randevu-rehberi",
+      "localizedSlug": "maltepe-nagelverlaengerung-termin-ratgeber",
+      "bookingMessage": "Hallo, ich komme aus Maltepe und möchte einen Termin für eine Nagelverlängerung anfragen. Können Sie mir freie Termine, die ungefähre Dauer, den Gesamtpreis, die Zahlungsarten und Ihre genaue Adresse nennen?",
+      "category": "Nägel & Stil",
+      "title": "Nagelverlängerung für Gäste aus Maltepe",
+      "excerpt": "Von Maltepe zu Şazi Beauty in Cevizli, Kartal. Klären Sie vor dem Termin, ob Sie eine Neumodellage, ein Auffüllen oder eine Entfernung wünschen.",
+      "image": "crystal-french",
+      "alt": "Inspiration für French Nails auf rosa Kristallen",
+      "readTime": "2 Min.",
+      "date": "2026-11-11",
+      "intro": "Sie möchten von Maltepe aus einen Termin für eine Nagelverlängerung vereinbaren? Şazi Beauty empfängt Sie in Cevizli, Kartal, Istanbul. Beschreiben Sie bei Ihrer Anfrage Ihre aktuellen Nägel und das gewünschte Ergebnis. Umfang, Preis und genaue Adresse können Sie vor der Anfahrt per WhatsApp klären.",
+      "quote": "Ein Foto Ihrer aktuellen Nägel zeigt den Ausgangspunkt. Ein Beispielfoto zeigt, welches Ergebnis Ihnen gefällt.",
+      "sections": [
+        {
+          "title": "Neumodellage, Auffüllen oder Entfernung?",
+          "paragraphs": [
+            "Wenn Sie eine Neumodellage auf Ihren Naturnägeln wünschen, nennen Sie Ihre bevorzugte Länge, Form und Farbe. Bei einer vorhandenen Modellage schreiben Sie dazu, ob Sie sie auffüllen lassen, das Design komplett erneuern oder die Verlängerung entfernen lassen möchten. Wenn Sie nur eine Entfernung wünschen, können Sie auch nach anschließender Nagelpflege fragen.",
+            "Sind Sie unsicher, ob Auffüllen oder Erneuern besser passt? Schicken Sie ein Foto Ihrer aktuellen Nägel. Zeigen Sie bei einem Wunschbild, ob Ihnen vor allem die Form, die Farbe oder ein bestimmtes Detail gefällt."
+          ]
+        },
+        {
+          "title": "Preis und Zeitaufwand vorab klären",
+          "paragraphs": [
+            "Fragen Sie, welche Leistungen im Preis enthalten sind. Gehen Sie eine mögliche Entfernung, die gewünschte Länge und Form sowie das Nageldesign durch. Falls Sie Verzierungen möchten, nennen Sie auch die Anzahl der Nägel. Lassen Sie sich den Gesamtpreis, die verfügbaren Zahlungsarten und die voraussichtliche Dauer bestätigen."
+          ]
+        },
+        {
+          "title": "Den Besuch von Maltepe aus planen",
+          "paragraphs": [
+            "Wählen Sie im Formular Nageldesign und ergänzen Sie Ihre Wünsche im Notizfeld. Schicken Sie die vorbereitete Nachricht per WhatsApp ab. Lassen Sie sich vor der Abfahrt den Termin und die genaue Adresse oder einen Standortlink bestätigen.",
+            "Eine mögliche Nachricht lautet „Hallo, ich komme aus Maltepe und wünsche mir kurze, ovale Nägel mit French-Spitzen. Eine alte Modellage müsste entfernt werden. Ich kann am Donnerstagnachmittag. Wie lange dauert der Termin, was kostet er insgesamt, wie kann ich zahlen und wie lautet Ihre Adresse in Cevizli?“"
+          ]
+        }
+      ],
+      "area": "Maltepe, İstanbul",
+      "relatedServices": [
+        "tirnak-sanati"
+      ]
+    },
+    {
       "slug": "maltepe-manikur-pedikur-rehberi",
       "localizedSlug": "maltepe-manikuere-pedikuere-ratgeber",
       "category": "Nägel & Stil",

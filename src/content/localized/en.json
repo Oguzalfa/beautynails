@@ -186,6 +186,46 @@
   ],
   "journal": [
     {
+      "slug": "maltepe-protez-tirnak-randevu-rehberi",
+      "localizedSlug": "maltepe-nail-extensions-booking-guide",
+      "bookingMessage": "Hello, I’m coming from Maltepe and would like to book nail extensions. Could you share your available times, estimated duration, total price, payment options and exact address?",
+      "category": "Nail care",
+      "title": "Book Nail Extensions from Maltepe",
+      "excerpt": "Visiting Şazi Beauty in Cevizli, Kartal from Maltepe? Learn what to ask about a new set, maintenance or removal and get a quote before you travel.",
+      "image": "crystal-french",
+      "alt": "French-tip nail design inspiration over pink crystals",
+      "readTime": "2 min read",
+      "date": "2026-11-11",
+      "intro": "If you’re coming from Maltepe for nail extensions, tell Şazi Beauty what’s already on your nails and what you’d like to leave with. The studio is in Cevizli, Kartal, Istanbul. You can ask about a suitable appointment, the total price and the exact address on WhatsApp.",
+      "quote": "A photo of your current nails and a photo of the look you want can answer different questions.",
+      "sections": [
+        {
+          "title": "Choose the right appointment",
+          "paragraphs": [
+            "For a new set on bare nails, describe the length, shape and finish you want. If you already have extensions, say whether you want to keep the current look with maintenance, replace the set or have the extensions removed. For removal only, mention whether you want any nail care afterwards.",
+            "If you aren’t sure whether to ask for maintenance or replacement, share a clear photo of your current set. If you have an inspiration photo, point out the detail you want, such as the length or the French tips."
+          ]
+        },
+        {
+          "title": "Ask what the price includes",
+          "paragraphs": [
+            "Ask the studio to price the planned work and clarify whether removal, the requested length or shape, and nail art are included. Tell the studio how many nails you’d like decorated. Confirm the total, accepted payment options and estimated duration before choosing a time."
+          ]
+        },
+        {
+          "title": "Confirm your visit from Maltepe",
+          "paragraphs": [
+            "Choose Nail Art on the booking form and add your details in the notes, or send a WhatsApp message. Ask for the exact address or a map pin and confirm the available slot before travelling.",
+            "For example, write “Hi, I’m coming from Maltepe. I’d like short oval extensions with French tips and I have an old set to remove. I’m free on Thursday afternoon. Could you confirm the total including removal, payment options, approximate duration and the address in Cevizli?”"
+          ]
+        }
+      ],
+      "area": "Maltepe, İstanbul",
+      "relatedServices": [
+        "tirnak-sanati"
+      ]
+    },
+    {
       "slug": "maltepe-manikur-pedikur-rehberi",
       "localizedSlug": "maltepe-manicure-pedicure-guide",
       "category": "Nail care",

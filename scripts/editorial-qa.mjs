@@ -25,7 +25,7 @@ const articlePaths=articles.map(article=>`/bakim-rehberi/${article.slug}/`)
 const reports=[]
 const label=process.env.QA_LABEL||engine
 try{
-  assert.equal(articles.length,5,'Five articles in the full journal')
+  assert.equal(articles.length,6,'Six articles in the full journal')
   for(const width of(process.env.QA_WIDTHS||'320,390,430,768,1024,1440').split(',').map(Number)){
     const height=Number(process.env.QA_HEIGHT)||(width<768?844:1000)
     const context=await browser.newContext({locale:'tr-TR',viewport:{width,height},isMobile:width<768,hasTouch:width<768,deviceScaleFactor:1,reducedMotion:'reduce'})
@@ -110,7 +110,7 @@ try{
     const listingResponse=await page.goto(base+'/bakim-rehberi/',{waitUntil:'load'})
     assert.equal(listingResponse.status(),200,'Journal index direct URL')
     const listedArticles=await page.locator('.sz-index-grid a.sz-article-card').evaluateAll(cards=>cards.map(card=>card.getAttribute('href')))
-    assert.deepEqual(listedArticles,articlePaths,'All five articles appear on the journal index in order')
+    assert.deepEqual(listedArticles,articlePaths,'All articles appear on the journal index in order')
     for(const path of['/robots.txt','/sitemap.xml']){
       const response=await context.request.get(base+path)
       assert.equal(response.status(),200,path)

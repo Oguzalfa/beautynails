@@ -186,6 +186,46 @@
   ],
   "journal": [
     {
+      "slug": "maltepe-protez-tirnak-randevu-rehberi",
+      "localizedSlug": "maltepe-tirnoq-uzaytirish-qollanmasi",
+      "category": "Maltepe va tirnoq parvarishi",
+      "title": "Maltepedan tirnoq uzaytirish uchun qabulga yozilish",
+      "excerpt": "Tirnoqni ilk bor uzaytirish, yangilash yoki eski qoplamani olib tashlash kerakmi? Maltepedan Cevizliga borishdan oldin narx va vaqtni aniqlang.",
+      "image": "crystal-french",
+      "alt": "Pushti kristallar fonida fransuzcha uchli tirnoq dizayni namunasi",
+      "readTime": "2 daqiqa",
+      "date": "2026-11-11",
+      "intro": "Maltepedan tirnoq uzaytirish uchun qabul izlayotgan boʻlsangiz, avval qaysi ish kerakligini aniqlang. Şazi Beauty studiyasi Istanbulning Kartal tumanidagi Cevizli mahallasida. Boʻsh vaqt, xizmat tarkibi va umumiy narxni studiyadan oldindan soʻrang.",
+      "quote": "Qabulga yozilayotganda hozir tirnoqlaringizda qanday qoplama borligini ham ayting.",
+      "sections": [
+        {
+          "title": "Ilk uzaytirish, yangilash yoki olib tashlash",
+          "paragraphs": [
+            "Tirnoqlaringizni ilk bor uzaytirmoqchi boʻlsangiz, istagan uzunlik va shaklni ayting. Masalan, kalta oval shakl yoki oʻrtacha uzunlikdagi bodomsimon shaklni soʻrashingiz mumkin. Surat yuborsangiz, aynan qaysi rang yoki bezak sizga yoqqanini yozing.",
+            "Avvaldan uzaytirilgan tirnoqlaringiz boʻlsa, ularni yangilashni yoki eski qoplamani olib tashlab, yangisini qoʻyishni xohlayotganingizni ayting. Faqat olib tashlash kerak boʻlsa, buni alohida belgilang. Hozirgi holatning ravshan surati studiyaga qaysi ishni rejalashtirish kerakligini aniqlashga yordam beradi."
+          ]
+        },
+        {
+          "title": "Umumiy narxga nimalar kirishini soʻrang",
+          "paragraphs": [
+            "WhatsApp orqali eski qoplamani olib tashlash, tanlangan uzunlik va shakl hamda bezak narxga qanday ta’sir qilishini soʻrang. Har bir ish uchun haq alohida hisoblansa, uni ham koʻrsatishlarini soʻrang. Taxminiy davomiylikni, yakuniy toʻlovni va qaysi toʻlov usullari mavjudligini birga aniqlang.",
+            "Narxni aytish uchun studiyaga qoʻshimcha ma’lumot kerak boʻlsa, qaysi surat yoki tavsifni yuborish foydali boʻlishini soʻrang."
+          ]
+        },
+        {
+          "title": "Maltepedan yoʻlga chiqishdan oldin",
+          "paragraphs": [
+            "Studiyadan aniq manzil yoki xarita havolasini, qabul kuni va soatini tasdiqlashni soʻrang. Quyidagi WhatsApp soʻroviga hozirgi qoplamangizni, istagan koʻrinishingizni va sizga qulay vaqtni qoʻshishingiz mumkin."
+          ]
+        }
+      ],
+      "area": "Maltepe, İstanbul",
+      "relatedServices": [
+        "tirnak-sanati"
+      ],
+      "bookingMessage": "Assalomu alaykum! Maltepedan kelaman, tirnoq uzaytirish uchun qabulga yozilmoqchiman. Boʻsh vaqtlar, taxminiy davomiylik, umumiy narx va toʻlov usullari haqida ayta olasizmi? Cevizlidagi aniq manzil yoki xarita havolasini ham yuborsangiz."
+    },
+    {
       "slug": "maltepe-manikur-pedikur-rehberi",
       "localizedSlug": "maltepe-manikyur-pedikyur-qollanmasi",
       "category": "Maltepe va tirnoq parvarishi",

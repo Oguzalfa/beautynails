@@ -1,5 +1,45 @@
 [
   {
+    "slug": "maltepe-protez-tirnak-randevu-rehberi",
+    "category": "Maltepe bakım rehberi",
+    "title": "Maltepe Protez Tırnak Randevu Rehberi",
+    "excerpt": "Maltepe’den Cevizli, Kartal’daki Şazi Beauty’ye protez tırnak randevusu planlayın. İlk uygulama, dolgu ve çıkarma için fiyat ve süreyi WhatsApp’tan sorun.",
+    "image": "crystal-french",
+    "alt": "Pembe kristaller üzerinde French uçlu tırnak tasarımı örneği",
+    "readTime": "3 dk",
+    "date": "2026-11-11",
+    "intro": "Maltepe’den protez tırnak randevusu için geliyorsanız Şazi Beauty’nin stüdyosu Cevizli, Kartal, İstanbul’dadır. İlk uygulama, mevcut protezin bakımı veya çıkarma için farklı ayrıntılar gerekir. Durumunuzu tarif ederek stüdyodan uygun işlemi, fiyatı ve randevu süresini birlikte öğrenebilirsiniz.",
+    "quote": "Fiyatı sorarken mevcut kaplamanızı, istediğiniz formu ve tasarımı aynı mesajda belirtin.",
+    "bookingMessage": "Merhaba Şazi Beauty, Maltepe’den protez tırnak randevusu için gelmek istiyorum. Müsait saatleri, tahmini işlem süresini, toplam ücreti, ödeme seçeneklerini ve stüdyonun konumunu paylaşabilir misiniz?",
+    "sections": [
+      {
+        "title": "İlk uygulama, dolgu veya çıkarma",
+        "paragraphs": [
+          "Tırnağınızda kaplama yoksa ilk uygulama istediğinizi ve hedeflediğiniz uzunluğu belirtin. Örneğin, kısa oval form ve doğal renk ile daha uzun badem form ve French uç iki farklı taleptir. Referans fotoğrafınız varsa beğendiğiniz ayrıntıyı da yazın.",
+          "Mevcut protezde uzama veya kırık varsa fotoğraf paylaşın ve dolgu, onarım ya da yenilemenin uygun olup olmadığını sorun. Sadece çıkarma istiyorsanız bunu baştan belirtin. Yeni uygulama da planlıyorsanız iki işlemin aynı randevuya sığıp sığmadığını teyit edin."
+        ]
+      },
+      {
+        "title": "Protez tırnak fiyatına neler dahil?",
+        "paragraphs": [
+          "Teklif isterken önce ana işlemi, sonra mevcut kaplamanın çıkarılması, kırık onarımı veya desen gibi ek talepleri yazın. İstediğiniz form ve uzunluğu paylaşın. Hangi işlemlerin ücrete dahil olduğunu, tahmini süreyi, toplam fiyatı ve ödeme seçeneklerini aynı görüşmede teyit edin.",
+          "WhatsApp’ta «Merhaba, Maltepe’den geleceğim. Tırnaklarımda mevcut protez var. Kısa oval form istiyorum. Fotoğraf göndersem dolgu mu, çıkarıp yenileme mi uygun olduğunu ve toplam fiyatı söyleyebilir misiniz?» diye sorabilirsiniz."
+        ]
+      },
+      {
+        "title": "Maltepe’den yola çıkmadan önce",
+        "paragraphs": [
+          "Gün ve saat tercihinizi yazın. Cevizli, Kartal’daki stüdyonun güncel açık adresini veya harita bağlantısını isteyin. Stüdyonun teyit ettiği konumu Maltepe’deki çıkış noktanızla birlikte haritada açarak yolculuğunuzu planlayın.",
+          "WhatsApp’ta hazır mesajı göndermeden önce mevcut kaplamanızı ve istediğiniz işlemi ekleyebilirsiniz. Randevu saatini ve işlem kapsamını stüdyonun yanıtıyla netleştirin."
+        ]
+      }
+    ],
+    "area": "Maltepe, İstanbul",
+    "relatedServices": [
+      "tirnak-sanati"
+    ]
+  },
+  {
     "slug": "maltepe-manikur-pedikur-rehberi",
     "category": "Maltepe bakım rehberi",
     "title": "Maltepe manikür ve pedikür rehberi",

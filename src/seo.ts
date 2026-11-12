@@ -1,7 +1,7 @@
 import { siteConfig } from './config/site'
 import { contentPageCopy } from './components/satin/content-page-copy'
 import { localeDetails, locales } from './locales'
-import { getRoute, pagesForLocale, pathForLocale } from './routes'
+import { getLocalizedPage, getRoute, pagesForLocale, pathForLocale } from './routes'
 
 export function getSeo(pathname: string) {
   const route = getRoute(pathname)
@@ -11,6 +11,10 @@ export function getSeo(pathname: string) {
   const copy = contentPageCopy[locale]
   const valid = route !== null
   const canonical = route ? `${siteConfig.url}${route.path}` : undefined
+  const pageEntityId = `${canonical}#webpage`
+  const mainEntity = page?.kind === 'article' || page?.kind === 'service'
+    ? { '@id': `${canonical}#${page.kind}` }
+    : undefined
   const title = page?.title ?? (valid ? localeMeta.title : `${copy.notFound} | BeautyNails`)
   const description = page?.description ?? (valid ? localeMeta.description : copy.notFoundDescription)
   const alternates = route ? [
@@ -24,8 +28,9 @@ export function getSeo(pathname: string) {
   const graph: Record<string, unknown>[] = valid ? [org,
     { '@type': 'WebSite', '@id': `${siteConfig.url}/#website`, url: `${siteConfig.url}/`, name: siteConfig.brand,
       inLanguage: locales, publisher: { '@id': org['@id'] } },
-    { '@type': page?.kind.endsWith('index') ? 'CollectionPage' : 'WebPage', '@id': `${canonical}#webpage`,
-      url: canonical, name: title, description, inLanguage: locale, isPartOf: { '@id': `${siteConfig.url}/#website` } },
+    { '@type': page?.kind.endsWith('index') ? 'CollectionPage' : 'WebPage', '@id': pageEntityId,
+      url: canonical, name: title, description, inLanguage: locale, isPartOf: { '@id': `${siteConfig.url}/#website` },
+      ...(mainEntity ? { mainEntity } : {}) },
   ] : []
   if (page) {
     const crumbs = [{ name: copy.home, item: siteConfig.url + pathForLocale('/', locale) }]
@@ -33,12 +38,20 @@ export function getSeo(pathname: string) {
     if (page.kind === 'service') crumbs.push({ name: copy.services, item: siteConfig.url + pathForLocale('/hizmetler/', locale) })
     crumbs.push({ name: page.heading, item: canonical! })
     graph.push({ '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, index) => ({ '@type': 'ListItem', position: index + 1, ...c })) })
-    if (page.kind === 'article') graph.push({ '@type': 'Article', '@id': `${canonical}#article`, headline: page.heading,
-      description, inLanguage: locale, mainEntityOfPage: { '@id': `${canonical}#webpage` }, image: [image],
-      ...(page.serviceId ? { about: { '@type': 'Place', name: 'Maltepe' } } : {}),
-      author: { '@id': org['@id'] }, publisher: { '@id': org['@id'] } })
+    if (page.kind === 'article') {
+      const relatedService = page.serviceId ? getLocalizedPage(`/hizmetler/${page.serviceId}/`, locale) : null
+      const about = [
+        ...(page.serviceId ? [{ '@type': 'Place', name: 'Maltepe' }] : []),
+        ...(relatedService ? [{ '@id': `${siteConfig.url}${relatedService.path}#service` }] : []),
+      ]
+      graph.push({ '@type': 'Article', '@id': `${canonical}#article`, headline: page.heading,
+        description, inLanguage: locale, mainEntityOfPage: { '@id': pageEntityId }, image: [image],
+        ...(about.length ? { about } : {}),
+        author: { '@id': org['@id'] }, publisher: { '@id': org['@id'] } })
+    }
     if (page.kind === 'service') graph.push({ '@type': 'Service', '@id': `${canonical}#service`, name: page.heading,
-      serviceType: page.heading, description, url: canonical, provider: { '@id': org['@id'] } })
+      serviceType: page.heading, description, url: canonical, provider: { '@id': org['@id'] },
+      mainEntityOfPage: { '@id': pageEntityId } })
     if (page.kind.endsWith('index')) graph.push({ '@type': 'ItemList', itemListElement: pagesForLocale(locale)
       .filter((p) => p.kind === (page.kind === 'service-index' ? 'service' : 'article'))
       .map((p, index) => ({ '@type': 'ListItem', position: index + 1, name: p.heading, url: `${siteConfig.url}${p.path}` })) })

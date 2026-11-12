@@ -103,6 +103,10 @@ const routeGroups = [
 const routes = new Map(routeGroups.flatMap(({ kind, ...paths }) =>
   languages.map((language) => [paths[language], { kind, language, paths }])))
 assert.equal(routes.size, 91, 'seven languages with thirteen distinct routes each')
+const guideServicePaths = new Map([
+  ['/yazilar/maltepe-tirnak-randevu-rehberi/', '/hizmetler/tirnak-sanati/'],
+  ['/yazilar/maltepe-ipek-kirpik-randevu-rehberi/', '/hizmetler/ipek-kirpik/'],
+])
 const dist = resolve('dist')
 const decode = (value) => value.replace(/&(amp|quot|apos|lt|gt|#39);/g, (_, key) => ({
   amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', '#39': "'",
@@ -218,13 +222,28 @@ for (const [path, { kind, language, paths }] of routes) {
     assert.equal(crumbs.at(-1).item, origin + path)
     crumbs.forEach((item, index) => assert.equal(item.position, index + 1))
   }
-  if (kind === 'service') assert.ok(graph.some((node) => type(node, 'Service') && node.url === origin + path))
+  if (kind === 'service') {
+    const service = graph.find((node) => type(node, 'Service'))
+    assert.equal(service?.url, origin + path)
+    assert.equal(page.mainEntity?.['@id'], service['@id'])
+    assert.equal(service.mainEntityOfPage?.['@id'], page['@id'])
+  }
   if (kind === 'article') {
     const article = graph.find((node) => type(node, 'Article'))
     assert.ok(article?.headline && visibleText.includes(article.headline), `${path}: article headline is visible`)
     assert.equal(article.inLanguage, language, `${path}: article entity matches document language`)
     assert.equal(article.mainEntityOfPage?.['@id'], page['@id'])
+    assert.equal(page.mainEntity?.['@id'], article['@id'])
     assert.equal(article.publisher?.['@id'], org['@id'])
+    const servicePath = guideServicePaths.get(paths.tr)
+    if (servicePath) {
+      const localizedService = routeGroups.find((group) => group.tr === servicePath)?.[language]
+      assert.ok(localizedService, `${path}: matching service in the article language`)
+      assert.deepEqual(article.about, [
+        { '@type': 'Place', name: 'Maltepe' },
+        { '@id': origin + localizedService + '#service' },
+      ], `${path}: article links its area and service`)
+    }
   }
   if (kind === 'index') assert.ok(graph.some((node) => type(node, 'ItemList') && node.itemListElement?.length >= 3))
 

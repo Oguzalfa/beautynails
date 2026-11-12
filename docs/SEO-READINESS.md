@@ -10,14 +10,14 @@ Canonical adresleri, sitemap ve sosyal paylaşım URL'leri aynı www alan adın�
 
 ## Uygulama kapsamı
 
-- Yedi dilin her birinde ana sayfa, dört hizmet, beş makale ve iki dizin olmak üzere **84 URL** tam HTML içerikle sunulur. Tırnak ve kirpik randevusu için Maltepe rehberleri ilgili hizmetlere bağlanır.
+- Yedi dilin her birinde ana sayfa, beş hizmet, beş makale ve iki dizin olmak üzere **91 URL** tam HTML içerikle sunulur. Tırnak ve kirpik randevusu için Maltepe rehberleri ilgili hizmetlere bağlanır.
 - Türkçe yollar kökte kalır. Çeviriler `/en/`, `/de/`, `/ru/`, `/ar/`, `/uz/` ve `/tk/` altında ayrı adresler kullanır. Her karşılık kendi canonical adresine ve karşılıklı `hreflang` bağlantılarına sahiptir. `x-default` Türkçe sayfayı gösterir.
 - Dil seçici aynı sayfanın çevirisini açar ve tercihi tarayıcıda saklar. Ana sayfa girişi önce seçimi, seçim yoksa tarayıcının ilk dilini dikkate alır. Doğrudan hizmet ve yazı bağlantılarında sayfanın dili URL'den gelir. Arapça sayfalar sağdan sola dizilir.
 - Her sayfanın tek H1'i, özgün başlığı ve açıklaması, kendi absolute canonical adresi, Open Graph ve Twitter paylaşım bilgisi vardır.
 - Hizmetler ve yazılar gerçek `<a href>` bağlantılarıyla keşfedilir. Makale metni okumak için bir pencereye tıklamak veya JavaScript çalıştırmak gerekmez.
-- `sitemap.xml` 84 canonical URL'yi içerir. `robots.txt` taramaya izin verir ve sitemap adresini bildirir.
+- `sitemap.xml` 91 canonical URL'yi içerir. `robots.txt` taramaya izin verir ve sitemap adresini bildirir.
 - Bulunmayan adresler için ayrı 404 HTML'i hazırlanır; `noindex` taşır ve canonical içermez. Üretimde bilinmeyen adresin gerçek HTTP 404 dönmesi ayrıca doğrulanmalıdır.
-- JSON-LD: Organization, WebSite, WebPage/CollectionPage, Service, Article, BreadcrumbList ve ilgili içerik listeleri kullanılır. Yapılandırılmış veri görünen içerikle aynı işletmeyi ve sayfayı tarif eder.
+- JSON-LD: Organization, WebSite, WebPage/CollectionPage, Service, Article, BreadcrumbList ve ilgili içerik listeleri kullanılır. Yapılandırılmış veri görünen içerikle aynı işletmeyi ve sayfayı tarif eder. Hizmet ve makale sayfaları kendi ana varlıklarını belirtir. Maltepe randevu rehberleri konu aldıkları hizmetin aynı dildeki adresini işaret eder.
 
 ## Doğrulanmış ve eksik işletme bilgileri
 
@@ -46,9 +46,9 @@ npm run build
 npm run check:seo
 ```
 
-Kabul betiği `dist` içindeki 84 HTML sayfasında belge dilini, okuma yönünü, H1'i, metadata, canonical ve hreflang bağlantılarını, JSON-LD'yi ve görünür metni kontrol eder. Dahili bağlantılar, yerel dosyalar, sitemap, robots ve 404 sayfası da denetlenir.
+Kabul betiği `dist` içindeki 91 HTML sayfasında belge dilini, okuma yönünü, H1'i, metadata, canonical ve hreflang bağlantılarını, JSON-LD'yi ve görünür metni kontrol eder. Dahili bağlantılar, yerel dosyalar, sitemap, robots ve 404 sayfası da denetlenir.
 
-Yayın sonrasında 84 canonical adresi, 404 yanıtını, www yönlendirmesini ve Vercel kopyasının `noindex` başlığını kontrol edin. Dil başlığı olmadan kök Türkçe açılmalı, desteklenen dil tercihiyle geçici yönlendirme çalışmalı ve açık dil adresleri kendi dilinde kalmalıdır. Tarayıcıda mobil dil seçiciyi ve randevu akışını doğrulayın.
+Yayın sonrasında 91 canonical adresi, 404 yanıtını, www yönlendirmesini ve Vercel kopyasının `noindex` başlığını kontrol edin. Dil başlığı olmadan kök Türkçe açılmalı, desteklenen dil tercihiyle geçici yönlendirme çalışmalı ve açık dil adresleri kendi dilinde kalmalıdır. Tarayıcıda mobil dil seçiciyi ve randevu akışını doğrulayın.
 
 ## IndexNow bildirimi
 

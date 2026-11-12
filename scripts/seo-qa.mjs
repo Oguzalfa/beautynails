@@ -105,6 +105,10 @@ function inspectHtml(html, { source, locale, entry, path }) {
   const descriptions = meta.filter(item => item.name === 'description')
   assert.equal(descriptions.length, 1, `${path}: one description`)
   assert.ok(descriptions[0].content.length >= 40, `${path}: useful description`)
+  if (locale === 'tr' && (source.type === 'home' || source.type === 'contact')) {
+    assert.match(titles[0], /Kartal Cevizli/, `${path}: studio locality in the search title`)
+    assert.match(descriptions[0].content, /Kartal Cevizli/, `${path}: studio locality in the search description`)
+  }
   const links = tags(head, 'link')
   const canonicals = links.filter(item => item.rel === 'canonical')
   assert.equal(canonicals.length, 1, `${path}: one canonical`)

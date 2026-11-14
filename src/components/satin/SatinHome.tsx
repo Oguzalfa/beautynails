@@ -5,7 +5,7 @@ import { pathForLocale } from '../../routes'
 import { LanguageSelector } from '../LanguageSelector'
 import { ArrowIcon, CloseIcon, InstagramIcon, MenuIcon, WhatsAppIcon } from './icons'
 import { JournalSection } from './JournalSection'
-import { journalImages, libraryGallery } from './collection'
+import { journalImages, libraryGallery, nailPhotoGallery } from './collection'
 import { homeCopy } from './home-copy'
 
 type Props = {
@@ -46,6 +46,7 @@ const services = [
 ] as const
 
 const gallery = [
+  ...nailPhotoGallery,
   {
     id: 'nails-example',
     width: 1122,
@@ -67,6 +68,8 @@ const gallery = [
 ] as const
 
 type GalleryShot = (typeof gallery)[number]
+const featuredGallery = gallery.slice(0, 6)
+const remainingGallery = gallery.slice(6)
 
 function focusSection(id: string) {
   const target = document.getElementById(id)
@@ -112,7 +115,9 @@ export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
   const copy = homeCopy[locale]
   const menuTitleId = useId()
   const lightTitleId = useId()
+  const morePhotosId = useId()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [galleryExpanded, setGalleryExpanded] = useState(false)
   const [shot, setShot] = useState<GalleryShot | null>(null)
   const menuRef = useRef<HTMLDialogElement>(null)
   const lightRef = useRef<HTMLDialogElement>(null)
@@ -209,6 +214,31 @@ export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
   }
 
   const whatsappHref = siteConfig.whatsappNumber ? `https://wa.me/${siteConfig.whatsappNumber}` : null
+
+  const renderGalleryItem = (item: GalleryShot) => (
+    <button
+      key={item.id}
+      className="gallery-item"
+      type="button"
+      onClick={(event) => {
+        lightOpener.current = event.currentTarget
+        setMenuOpen(false)
+        setShot(item)
+      }}
+    >
+      <img
+        src={item.src}
+        srcSet={item.srcSet}
+        sizes={item.sizes}
+        width={item.width}
+        height={item.height}
+        alt={copy.galleryAlts[item.id]}
+        loading="lazy"
+        decoding="async"
+      />
+      <span className="gallery-corner" aria-hidden="true">+</span>
+    </button>
+  )
 
   return (
     <div className="satin-page" lang={locale}>
@@ -324,30 +354,24 @@ export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
                 <span />
               </div>
               <div className="gallery-grid">
-                {gallery.map((item) => (
-                  <button
-                    key={item.id}
-                    className="gallery-item"
-                    type="button"
-                    onClick={(event) => {
-                      lightOpener.current = event.currentTarget
-                      setMenuOpen(false)
-                      setShot(item)
-                    }}
-                  >
-                    <img
-                      src={item.src}
-                      srcSet={item.srcSet}
-                      sizes={item.sizes}
-                      width={item.width}
-                      height={item.height}
-                      alt={copy.galleryAlts[item.id]}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span className="gallery-corner" aria-hidden="true">+</span>
-                  </button>
-                ))}
+                {featuredGallery.map(renderGalleryItem)}
+              </div>
+              <button
+                className="gallery-more"
+                type="button"
+                aria-controls={morePhotosId}
+                aria-expanded={galleryExpanded}
+                onClick={() => setGalleryExpanded((expanded) => !expanded)}
+              >
+                {galleryExpanded ? copy.galleryShowLess : copy.galleryShowAll}
+                <span aria-hidden="true">{galleryExpanded ? '−' : '+'}</span>
+              </button>
+              <div id={morePhotosId}>
+                {galleryExpanded && (
+                  <div className="gallery-grid gallery-grid-more">
+                    {remainingGallery.map(renderGalleryItem)}
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -480,6 +480,34 @@
   gap: 10px;
 }
 
+.satin-page .gallery-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 44px;
+  max-width: 100%;
+  margin: 16px auto 0;
+  padding: 7px 18px;
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+  color: var(--blush-50);
+  font-size: 13px;
+}
+
+.satin-page .gallery-more:hover {
+  background: rgba(255, 241, 246, 0.12);
+}
+
+.satin-page .gallery-more span {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.satin-page .gallery-grid-more {
+  margin-top: 16px;
+}
+
 .satin-page .gallery-item {
   position: relative;
   display: block;

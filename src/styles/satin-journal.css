@@ -1,4 +1,5 @@
-.satin-page .gallery-item:nth-child(n + 3) { aspect-ratio: 0.95; }
+.satin-page .gallery-item:nth-child(n + 3),
+.satin-page .gallery-grid-more .gallery-item { aspect-ratio: 0.95; }
 .satin-page .gallery-item:focus-visible { outline-offset: 3px; }
 
 .satin-page .journal {
@@ -119,7 +120,7 @@
 }
 @media (min-width: 1024px) {
   .satin-page .gallery-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .satin-page .gallery-item:nth-child(-n + 2) { grid-column: span 2; }
+  .satin-page .gallery-grid:not(.gallery-grid-more) > .gallery-item:nth-child(-n + 2) { grid-column: span 2; }
   .satin-page .journal { padding-bottom: 96px; }
   .satin-page .journal-heading { padding-top: 36px; margin-bottom: 44px; }
   .satin-page .journal-heading h2 { font-size: 64px; }

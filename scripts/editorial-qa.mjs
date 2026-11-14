@@ -7,13 +7,23 @@ import { chromium, webkit } from 'playwright'
 const dist = resolve('dist')
 const output = resolve(process.env.QA_OUT || '../.sazi-gallery-qa')
 await mkdir(output,{recursive:true})
-const types={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.webp':'image/webp','.png':'image/png','.ttf':'font/ttf','.svg':'image/svg+xml','.xml':'application/xml','.txt':'text/plain'}
+const types={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.webp':'image/webp','.png':'image/png','.mp4':'video/mp4','.ttf':'font/ttf','.svg':'image/svg+xml','.xml':'application/xml','.txt':'text/plain'}
 const server=createServer(async(req,res)=>{
   try {
     const path=decodeURIComponent(new URL(req.url,'http://localhost').pathname)
     const file=resolve(dist,'.'+(path.endsWith('/')?path+'index.html':path))
     if(!file.startsWith(dist+'/')&&!file.startsWith(dist+'\\'))throw new Error('Invalid path')
-    res.writeHead(200,{'Content-Type':types[extname(file)]||'application/octet-stream'});res.end(await readFile(file))
+    const data=await readFile(file)
+    const contentType=types[extname(file)]||'application/octet-stream'
+    const range=extname(file)==='.mp4' && /^bytes=(\d+)-(\d*)$/.exec(req.headers.range||'')
+    if(range){
+      const start=Number(range[1])
+      const end=Math.min(range[2]?Number(range[2]):data.length-1,data.length-1)
+      if(start>end){res.writeHead(416,{'Content-Range':`bytes */${data.length}`});res.end();return}
+      const chunk=data.subarray(start,end+1)
+      res.writeHead(206,{'Content-Type':contentType,'Accept-Ranges':'bytes','Content-Range':`bytes ${start}-${end}/${data.length}`,'Content-Length':chunk.length});res.end(chunk);return
+    }
+    res.writeHead(200,{'Content-Type':contentType,'Content-Length':data.length});res.end(data)
   }catch{res.writeHead(404);res.end('Not found')}
 })
 await new Promise(r=>server.listen(0,'127.0.0.1',r))
@@ -50,16 +60,21 @@ try{
     const variant=width<768?'mobile':'desktop'
     const gallery=page.locator(`.sz-gallery.sz-only-${variant}`)
     const journal=page.locator(`.sz-journal.sz-only-${variant}`)
-    assert.equal(await gallery.locator('.sz-shot').count(),6,'Six curated images')
+    assert.equal(await gallery.locator('.sz-shot').count(),8,'Eight featured photos')
+    assert.equal(await gallery.locator('video').count(),0,'Video resources are absent before playback')
     const homepageArticles=await journal.locator('a.sz-article-card').evaluateAll(cards=>cards.map(card=>card.getAttribute('href')))
     assert.deepEqual(homepageArticles,articlePaths.slice(0,3),'Three current articles on the homepage')
     assert.ok(await journal.locator('a.sz-pill-link[href="/bakim-rehberi/"]').isVisible(),'Visible link to the complete journal')
     await gallery.screenshot({path:resolve(output,`${label}-${width}-gallery.png`)})
     await journal.screenshot({path:resolve(output,`${label}-${width}-journal.png`)})
-    for(const [category,count] of[['Tırnak',3],['Kirpik',1],['Makyaj',2],['Tümü',6]]){
+    for(const [category,count] of[['French',3],['Sade',5],['Desenli',16],['Videolar',4],['İlham',6],['Tümü',8]]){
       await gallery.getByRole('button',{name:category,exact:true}).click()
       assert.equal(await gallery.locator('.sz-shot').count(),count,category+' filter')
     }
+    await gallery.getByRole('button',{name:'Tüm fotoğrafları göster',exact:true}).click()
+    assert.equal(await gallery.locator('.sz-shot').count(),24,'Complete studio photo collection')
+    await gallery.getByRole('button',{name:'Seçkiyi göster',exact:true}).click()
+    assert.equal(await gallery.locator('.sz-shot').count(),8,'Returns to the featured photos')
     const opener=gallery.locator('.sz-shot').first()
     await opener.click()
     const dialog=page.locator('.sz-lightbox[open]')
@@ -74,6 +89,20 @@ try{
     await page.keyboard.press('Escape')
     assert.equal(await page.locator('.sz-lightbox[open]').count(),0,'Lightbox closes')
     assert.equal(await opener.evaluate(e=>e===document.activeElement),true,'Lightbox restores focus')
+    await gallery.getByRole('button',{name:'Videolar',exact:true}).click()
+    assert.equal(await gallery.locator('video').count(),0,'Video poster thumbnails do not create players')
+    const videoOpener=gallery.getByRole('button',{name:'Pembe French · Videoyu oynat',exact:true})
+    await videoOpener.click()
+    const player=dialog.locator('video')
+    await player.waitFor()
+    assert.equal(await player.getAttribute('src'),'/images/studio/clip-01.mp4','Selected video opens')
+    assert.equal(await player.evaluate(video=>video.controls&&video.playsInline&&video.muted),true,'Video controls, inline and muted playback')
+    await page.waitForFunction(()=>document.querySelector('.sz-lightbox[open] video')?.readyState>=2)
+    await dialog.getByRole('button',{name:'Sonraki',exact:true}).click()
+    assert.equal(await player.getAttribute('src'),'/images/studio/clip-02.mp4','Video navigation replaces the player')
+    await page.keyboard.press('Escape')
+    assert.equal(await gallery.locator('video').count(),0,'Closing stops and removes the video')
+    assert.equal(await videoOpener.evaluate(e=>e===document.activeElement),true,'Video dialog restores focus')
     await page.goto(base+'/#calismalarimiz')
     await page.locator('.bn-header').waitFor({state:'attached'})
     await ready()
@@ -117,8 +146,8 @@ try{
     }
     assert.deepEqual(errors,[],'Browser errors')
     assert.deepEqual(failed,[],'Network errors')
-    reports.push({width,height,engine,gallery:6,articles:articles.length,homepageArticleCards:3,listingLink:true,filters:true,lightbox:true,hashes:true,articleRoutes:true,overflow:false,result:'PASS'})
-    console.log(`PASS ${engine} ${width}x${height}: 6 images, filters + lightbox, 3 homepage cards with listing link, ${articles.length} complete articles, direct URLs, no overflow/errors`)
+    reports.push({width,height,engine,gallery:24,videos:4,articles:articles.length,homepageArticleCards:3,listingLink:true,filters:true,lightbox:true,hashes:true,articleRoutes:true,overflow:false,result:'PASS'})
+    console.log(`PASS ${engine} ${width}x${height}: 24 photos, 4 video posters with on-demand player, 3 homepage cards, ${articles.length} complete articles, no overflow/errors`)
     await context.close()
   }
 }finally{

@@ -484,7 +484,7 @@ try {
     await page.keyboard.press('Escape')
     assert.equal(await page.locator('.bn-modal').count(),0,'Service modal remains functional')
     const gallery = page.locator(`.sz-gallery.sz-only-${variant}`)
-    for (const [category,count] of [['Tırnak',3],['Kirpik',1],['Makyaj',2],['Tümü',6]]) {
+    for (const [category,count] of [['French',3],['Sade',5],['Desenli',16],['Videolar',4],['İlham',6],['Tümü',8]]) {
       await gallery.getByRole('button',{name:category,exact:true}).click()
       assert.equal(await gallery.locator('.sz-shot').count(),count,category+' filter after hydration')
     }

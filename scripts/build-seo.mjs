@@ -11,6 +11,16 @@ const journalPath = '/bakim-rehberi/'
 const articlePath = slug => journalPath + slug + '/'
 const contactPath = '/iletisim/'
 const original = localizedContent.tr
+const nailDesignCopy = {
+  tr: { title: 'Tırnak çalışmalarımız', link: 'Tüm çalışmaları gör', alts: ['Pembe zeminde leopar desenli French uçlar', 'Kırmızı puantiyeli French uçlar', 'Beyaz üzerine mavi çini desenli tırnaklar'] },
+  en: { title: 'Our nail designs', link: 'See all our work', alts: ['Leopard-print French tips on pink nails', 'Red polka-dot French tips', 'Blue tile motifs on white nails'] },
+  de: { title: 'Unsere Nageldesigns', link: 'Alle Arbeiten ansehen', alts: ['French-Spitzen mit Leopardenmuster auf rosa Nägeln', 'Rote French-Spitzen mit Punkten', 'Blaue Fliesenmuster auf weißen Nägeln'] },
+  ar: { title: 'تصاميم الأظافر من أعمالنا', link: 'اطّلع على جميع أعمالنا', alts: ['أطراف فرنسية بنقشة الفهد على أظافر وردية', 'أطراف فرنسية حمراء منقطة', 'زخارف بلاط زرقاء على أظافر بيضاء'] },
+  ru: { title: 'Наши работы по дизайну ногтей', link: 'Посмотреть все работы', alts: ['Розовые ногти с леопардовым френчем', 'Красный френч в горошек', 'Синие узоры под плитку на белых ногтях'] },
+  uz: { title: 'Tirnoq dizayni ishlarimiz', link: 'Barcha ishlarimizni koʻring', alts: ['Pushti tirnoqlarda leopard naqshli french uchlar', 'Oq nuqtali qizil french uchlar', 'Oq tirnoqlarda koʻk koshin naqshlari'] },
+  tk: { title: 'Dyrnak dizaýnlarymyz', link: 'Ähli işlerimizi görüň', alts: ['Gülgüne dyrnaklarda gaplaň nagyşly frenç uçlar', 'Nokatly gyzyl frenç uçlar', 'Ak dyrnaklarda gök kaşaň nagyşlar'] },
+}
+const featuredNailDesigns = ['01', '16', '20']
 const journalPaths = [journalPath, ...original.journal.map(article => articlePath(article.slug))]
 const turkishPaths = ['/', ...original.services.map(service => servicePath(service.slug)), contactPath, ...journalPaths]
 const localizedPaths = new Set()
@@ -52,6 +62,15 @@ function serviceEntity(locale, service) {
   }
 }
 
+function nailDesignStrip(locale) {
+  const { title, link, alts } = nailDesignCopy[locale]
+  const images = featuredNailDesigns.map((design, index) => {
+    const base = `/images/studio/nail-${design}`
+    return `<img src="${base}-360.webp" srcset="${base}-360.webp 360w, ${base}-900.webp 900w" sizes="(max-width:767px) 28vw, 30vw" width="360" height="480" alt="${escape(alts[index])}" loading="lazy" decoding="async">`
+  }).join('')
+  return `<section class="sz-related sz-service-work" aria-labelledby="service-work-title"><h2 id="service-work-title">${escape(title)}</h2><div class="sz-service-work-grid">${images}</div><a class="sz-under-link" href="${escape(pageHref(locale, '/#calismalarimiz'))}">${escape(link)} <span aria-hidden="true">${arrow(locale)}</span></a></section>`
+}
+
 for (const locale of locales) {
   const copy = readingCopy[locale]
   const { services, journal } = localizedContent[locale]
@@ -72,7 +91,7 @@ for (const locale of locales) {
     const turkishPath = servicePath(service.slug)
     const related = journal.filter(article => article.slug === service.relatedArticle || article.relatedServices?.includes(service.slug))
     const relatedLinks = related.length ? `<div class="sz-reading-related">${related.map(article => `<a class="sz-under-link" href="${escape(pageHref(locale, articlePath(article.slug)))}">${escape(article.title)} ${arrow(locale)}</a>`).join('')}</div>` : ''
-    const body = `<main class="sz-content"><div class="sz-reading-hero"><div><ol class="sz-breadcrumbs" aria-label="${escape(copy.breadcrumb)}"><li><a href="${homeHref}">${escape(siteConfig.brand)}</a></li><li aria-hidden="true">/</li><li><a href="${servicesHref}">${escape(copy.services)}</a></li></ol><p class="sz-eyebrow">${escape(copy.serviceGuide)}</p><h1>${escape(service.title)}</h1><p class="sz-reading-deck">${escape(service.description)}</p></div><figure class="sz-reading-cover"><img src="${escape(service.image)}" alt="${escape(copy.serviceImage(service.title))}" width="1200" height="900" fetchpriority="high"></figure></div><article class="sz-reading-body"><p class="sz-reading-intro">${escape(service.intro)}</p>${service.sections.map(section => `<section><h2>${escape(section.title)}</h2>${section.paragraphs.map(paragraph => `<p>${escape(paragraph)}</p>`).join('')}</section>`).join('')}<section><h2>${escape(copy.faq)}</h2>${service.questions.map(question => `<details><summary>${escape(question.question)}</summary><p>${escape(question.answer)}</p></details>`).join('')}</section>${relatedLinks}<aside class="sz-reading-cta"><p>${copy.serviceCta.map(escape).join('<br>')}</p><a class="sz-pill-link" href="${bookingHref}">${escape(copy.book)} ${arrow(locale)}</a></aside></article><section class="sz-related"><h2>${escape(copy.relatedServices)}</h2>${serviceLinks(service.slug)}</section></main>`
+    const body = `<main class="sz-content"><div class="sz-reading-hero"><div><ol class="sz-breadcrumbs" aria-label="${escape(copy.breadcrumb)}"><li><a href="${homeHref}">${escape(siteConfig.brand)}</a></li><li aria-hidden="true">/</li><li><a href="${servicesHref}">${escape(copy.services)}</a></li></ol><p class="sz-eyebrow">${escape(copy.serviceGuide)}</p><h1>${escape(service.title)}</h1><p class="sz-reading-deck">${escape(service.description)}</p></div><figure class="sz-reading-cover"><img src="${escape(service.image)}" alt="${escape(copy.serviceImage(service.title))}" width="1200" height="900" fetchpriority="high"></figure></div><article class="sz-reading-body"><p class="sz-reading-intro">${escape(service.intro)}</p>${service.sections.map(section => `<section><h2>${escape(section.title)}</h2>${section.paragraphs.map(paragraph => `<p>${escape(paragraph)}</p>`).join('')}</section>`).join('')}<section><h2>${escape(copy.faq)}</h2>${service.questions.map(question => `<details><summary>${escape(question.question)}</summary><p>${escape(question.answer)}</p></details>`).join('')}</section>${relatedLinks}<aside class="sz-reading-cta"><p>${copy.serviceCta.map(escape).join('<br>')}</p><a class="sz-pill-link" href="${bookingHref}">${escape(copy.book)} ${arrow(locale)}</a></aside></article>${service.slug === 'tirnak-sanati' ? nailDesignStrip(locale) : ''}<section class="sz-related"><h2>${escape(copy.relatedServices)}</h2>${serviceLinks(service.slug)}</section></main>`
     await writePage(locale, turkishPath, metadata(readingShell({ locale, turkishPath, stylesheet: stylesheetPath, body }), {
       locale, turkishPath, title: service.title + ' | ' + siteConfig.brand, description: service.description, image: service.image,
       imageAlt: copy.serviceImage(service.title),

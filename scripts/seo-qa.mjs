@@ -105,6 +105,12 @@ function inspectHtml(html, { source, locale, entry, path }) {
   const descriptions = meta.filter(item => item.name === 'description')
   assert.equal(descriptions.length, 1, `${path}: one description`)
   assert.ok(descriptions[0].content.length >= 40, `${path}: useful description`)
+  if (locale === 'tr' && source.type === 'service' && source.slug === 'ipek-kirpik') {
+    assert.equal(titles[0], 'Cevizli İpek Kirpik | Şazi Beauty', 'Lash search title uses verified studio locality')
+    assert.match(descriptions[0].content, /Kartal Cevizli/, 'Lash snippet names actual location')
+    assert.match(html, /Cevizli, Kartal’daki stüdyosunda/, 'Lash introduction names actual location')
+    assert.match(html, /maltepe-kirpik-kalici-makyaj-randevu-rehberi/, 'Nearby Maltepe visitor guide remains linked')
+  }
   const links = tags(head, 'link')
   const canonicals = links.filter(item => item.rel === 'canonical')
   assert.equal(canonicals.length, 1, `${path}: one canonical`)

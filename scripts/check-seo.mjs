@@ -183,6 +183,20 @@ for (const [path, { kind, language, paths }] of routes) {
   const visibleText = text(visibleHtml)
   assert.equal([...visibleHtml.matchAll(/<h1(?:\s|>)/gi)].length, 1, `${path}: one server-rendered H1`)
   assert.match(visibleHtml, /data-prerendered="true"/)
+  if (path === '/') {
+    assert.match(visibleHtml, /<a href="\/hizmetler\/protez-tirnak\/">Protez tırnak hizmeti ve randevu/)
+  }
+  const localServiceHeadings = {
+    '/hizmetler/protez-tirnak/': 'Maltepe Protez Tırnak',
+    '/hizmetler/tirnak-sanati/': 'Maltepe Nail Art ve Tırnak Tasarımı',
+  }
+  const localHeading = localServiceHeadings[path]
+  if (localHeading) {
+    assert.ok(text(title[0][1]).startsWith(localHeading), `${path}: local service title`)
+    const h1 = visibleHtml.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)
+    assert.equal(text(h1?.[1] ?? ''), localHeading, `${path}: visible local service heading`)
+  }
+
   assert.doesNotMatch(visibleHtml, /<div\s+id="root"[^>]*>\s*<\/div>/i)
   assert.doesNotMatch(html, /şazi|sazibeauty/i, `${path}: correct business identity`)
   assert.ok(visibleText.includes('0532 242 23 03'), `${path}: verified contact is visible`)

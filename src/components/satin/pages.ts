@@ -26,12 +26,12 @@ export type ContentPageData = {
 const servicePages: readonly ContentPageData[] = [
   {
     path: '/hizmetler/tirnak-sanati/',
-    title: 'Tırnak Tasarımı ve Manikür Randevusu | BeautyNails',
+    title: 'Maltepe Nail Art ve Tırnak Tasarımı | BeautyNails',
     description: 'BeautyNails’te tırnak tasarımı, manikür, renk, French ve desen seçeneklerini inceleyin. Güncel fiyat ve randevu saati için WhatsApp’tan yazın.',
     kind: 'service',
     serviceId: 'tirnak-sanati',
     category: 'Tırnak',
-    heading: 'Tırnak Sanatı',
+    heading: 'Maltepe Nail Art ve Tırnak Tasarımı',
     intro: 'Renk, şekil ve küçük bir detay. Ellerinize ve günlük hayatınıza uyan görünümü birlikte netleştirelim.',
     image: { src: '/images/satin/service-nails-960.webp', width: 1122, height: 1402, alt: 'Fuşya badem tırnak tasarımının yakın planı' },
     sections: [
@@ -55,12 +55,12 @@ const servicePages: readonly ContentPageData[] = [
   },
   {
     path: '/hizmetler/protez-tirnak/',
-    title: 'Protez Tırnak Randevusu ve Fiyat Bilgisi | BeautyNails',
+    title: 'Maltepe Protez Tırnak: Fiyat ve Randevu | BeautyNails',
     description: 'BeautyNails’te protez tırnak için boy ve şekil seçeneklerini konuşun. Maltepe’den ziyaret planı, güncel fiyat ve uygun saat için WhatsApp’tan yazın.',
     kind: 'service',
     serviceId: 'protez-tirnak',
     category: 'Tırnak',
-    heading: 'Protez Tırnak',
+    heading: 'Maltepe Protez Tırnak',
     intro: 'BeautyNails’te protez tırnak uygulaması için istediğiniz uzunluğu, şekli ve bitişi birlikte belirleyelim. Modelinizi WhatsApp’tan paylaşarak güncel fiyatı ve uygun saatleri öğrenebilirsiniz.',
     image: { src: '/images/satin/service-nails-960.webp', width: 1122, height: 1402, alt: 'Fuşya badem biçimli tırnak tasarımı örneği' },
     sections: [

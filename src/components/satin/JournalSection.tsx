@@ -53,6 +53,9 @@ export function JournalSection({ images, locale }: Props) {
         <aside className="content-related" aria-label={guideListHeading[locale]}>
           <h2>{guideListHeading[locale]}</h2>
           <ul>
+            {locale === 'tr' && (
+              <li><a href={pathForLocale('/hizmetler/protez-tirnak/', locale)}>Protez tırnak hizmeti ve randevu<ArrowIcon /></a></li>
+            )}
             {guides.map((guide) => (
               <li key={guide.path}><a href={guide.path}>{guide.heading}<ArrowIcon /></a></li>
             ))}

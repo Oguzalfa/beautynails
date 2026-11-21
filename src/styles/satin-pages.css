@@ -80,3 +80,27 @@
   .satin-page .content-related li + li { border-top: 0; }
   .satin-page .content-related a { border-bottom: 1px solid var(--rule); height: 100%; }
 }
+
+.satin-page .journal-editorial,
+.satin-page .content-design-brief {
+  border: 1px solid var(--rule);
+  background: rgba(244, 190, 212, .08);
+  padding: clamp(20px, 4vw, 34px);
+}
+.satin-page .journal-editorial {
+  margin-block-start: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 32px;
+}
+.satin-page .journal-editorial > div { min-width: 0; }
+.satin-page .journal-editorial h3 { font: 400 clamp(23px, 4vw, 36px)/1.15 var(--serif); margin-block: 8px; }
+.satin-page .journal-editorial .journal-read { min-height: 44px; }
+.satin-page .content-design-brief { margin-block-start: 34px; }
+.satin-page .content-design-brief blockquote { margin: 0; font-size: 15px; line-height: 1.7; }
+.satin-page figure.content-story-image { margin: 0; }
+.satin-page .content-story-image figcaption { margin-block-start: 8px; font-size: 13px; line-height: 1.5; }
+.satin-page .content-story-image-captioned { aspect-ratio: auto; background: transparent; }
+.satin-page .content-story-image-captioned img { height: auto; display: block; border: 1px solid var(--rule); }

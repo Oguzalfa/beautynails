@@ -7,6 +7,7 @@ import ar, { journalSummaries as journalAr } from './components/satin/localized-
 import uz, { journalSummaries as journalUz } from './components/satin/localized-pages/uz'
 import tk, { journalSummaries as journalTk } from './components/satin/localized-pages/tk'
 import { locales, type Locale } from './locales'
+import { nailArtEditorial } from './components/satin/nail-art-editorial'
 import { makeLocalGuidePages } from './components/satin/local-guides'
 
 export type { Locale } from './locales'
@@ -47,7 +48,9 @@ for (const locale of locales) {
   const journalPath = locale === 'tr' ? '/yazilar/' : translations[locale]['/yazilar/'].path
   const guides = makeLocalGuidePages(locale, journalPath)
   for (const { page, sourcePath } of guides) registerRoute({ locale, path: page.path, sourcePath, page })
-  localePages[locale] = [...guides.map(({ page }) => page), ...pages]
+  const editorials = locale === 'tr' ? [nailArtEditorial] : []
+  for (const page of editorials) registerRoute({ locale, path: page.path, sourcePath: page.path, page })
+  localePages[locale] = [...editorials, ...guides.map(({ page }) => page), ...pages]
 }
 
 export const pagePaths = [...routes.keys()]
@@ -59,6 +62,11 @@ export function getRoute(path: string) {
 export function pathForLocale(path: string, locale: Locale): string {
   const source = getRoute(path)?.sourcePath ?? '/'
   return pathsBySource.get(source)?.get(locale) ?? (locale === 'tr' ? '/' : `/${locale}/`)
+}
+
+export function availableRouteLocales(path: string) {
+  const source = getRoute(path)?.sourcePath
+  return source ? locales.filter((locale) => pathsBySource.get(source)?.has(locale)) : []
 }
 
 export function getLocalizedPage(path: string, locale: Locale) {

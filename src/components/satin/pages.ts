@@ -21,6 +21,7 @@ export type ContentPageData = {
   sections: readonly { heading: string; paragraphs: readonly string[] }[]
   image?: ContentImage
   serviceId?: string
+  brief?: { heading: string; text: string; imageCaption: string }
 }
 
 const servicePages: readonly ContentPageData[] = [

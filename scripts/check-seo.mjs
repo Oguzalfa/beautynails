@@ -102,7 +102,9 @@ const routeGroups = [
 ].map((group) => ({ ...group, ar: group.en.replace('/en/', '/ar/') }))
 const routes = new Map(routeGroups.flatMap(({ kind, ...paths }) =>
   languages.map((language) => [paths[language], { kind, language, paths }])))
-assert.equal(routes.size, 91, 'seven languages with thirteen distinct routes each')
+const turkishEditorial = '/yazilar/maltepe-kisa-tirnak-nail-art-modelleri/'
+routes.set(turkishEditorial, { kind: 'article', language: 'tr', paths: null })
+assert.equal(routes.size, 92, 'ninety-one localized routes plus one Turkish-only editorial')
 const dist = resolve('dist')
 const decode = (value) => value.replace(/&(amp|quot|apos|lt|gt|#39);/g, (_, key) => ({
   amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', '#39': "'",
@@ -161,11 +163,11 @@ for (const [path, { kind, language, paths }] of routes) {
   const canonical = headLinks.filter((item) => item.rel === 'canonical')
   assert.deepEqual(canonical.map((item) => item.href), [origin + path], `${path}: exact preferred canonical`)
   const alternates = headLinks.filter((item) => item.rel === 'alternate' && item.hreflang !== undefined)
-  assert.equal(alternates.length, languages.length + 1, `${path}: one hreflang per language and the default`)
-  const expectedAlternates = Object.fromEntries([
+  assert.equal(alternates.length, paths ? languages.length + 1 : 0, `${path}: hreflang only for equivalent localized content`)
+  const expectedAlternates = paths ? Object.fromEntries([
     ...languages.map((choice) => [choice, origin + paths[choice]]),
     ['x-default', origin + paths.tr],
-  ])
+  ]) : {}
   assert.deepEqual(Object.fromEntries(alternates.map((item) => [item.hreflang, item.href])),
     expectedAlternates, `${path}: reciprocal language group, including the Turkish x-default`)
   const robots = meta.filter((item) => item.name === 'robots')
@@ -184,7 +186,17 @@ for (const [path, { kind, language, paths }] of routes) {
   assert.equal([...visibleHtml.matchAll(/<h1(?:\s|>)/gi)].length, 1, `${path}: one server-rendered H1`)
   assert.match(visibleHtml, /data-prerendered="true"/)
   if (path === '/') {
+    assert.ok(visibleHtml.includes(`href="${turkishEditorial}"`), "homepage links directly to editorial")
     assert.match(visibleHtml, /<a href="\/hizmetler\/protez-tirnak\/">Protez tırnak hizmeti ve randevu/)
+  }
+  if (path === turkishEditorial) {
+    assert.match(visibleText, /Kısa tırnakta nail art: 3 sade tasarım/)
+    assert.match(visibleText, /görseli; birebir uygulama sonucu değildir/)
+    assert.match(visibleText, /Randevu mesajına ekleyebileceğiniz kısa tarif/)
+    assert.ok(visibleHtml.includes('href="/hizmetler/tirnak-sanati/"'))
+  }
+  if (path === '/yazilar/' || path === '/hizmetler/tirnak-sanati/') {
+    assert.ok(visibleHtml.includes(`href="${turkishEditorial}"`), `${path}: links to editorial`)
   }
   const localServiceHeadings = {
     '/hizmetler/protez-tirnak/': 'Maltepe Protez Tırnak',
@@ -259,8 +271,9 @@ for (const [path, { kind, language, paths }] of routes) {
   }
   for (const choice of languages) {
     if (choice === language) continue
-    assert.ok(languageLinks.get(choice)?.has(paths[choice]),
-      `${path}: body language link to ${paths[choice]} required`)
+    const alternate = paths?.[choice] ?? routeGroups.find((group) => group.tr === '/yazilar/')[choice]
+    assert.ok(languageLinks.get(choice)?.has(alternate),
+      `${path}: body language link to ${alternate} required`)
   }
   links.set(path, localLinks)
   for (const tag of ['script', 'link', 'img', 'source']) for (const resource of tags(html, tag)) {

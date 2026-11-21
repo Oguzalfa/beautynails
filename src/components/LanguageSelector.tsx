@@ -1,9 +1,10 @@
 import { languageCookie, localeDetails, locales, type Locale } from '../locales'
-import { pathForLocale } from '../routes'
+import { availableRouteLocales, pathForLocale } from '../routes'
 
 type Props = { locale: Locale; path: string }
 
 export function LanguageSelector({ locale, path }: Props) {
+  const equivalents = availableRouteLocales(path)
   return (
     <details className="language-selector">
       <summary aria-label={`${localeDetails[locale].selector} · ${localeDetails[locale].name}`}>
@@ -18,7 +19,7 @@ export function LanguageSelector({ locale, path }: Props) {
           return (
             <li key={choice}>
               <a
-                href={target === '/' ? '/?lang=tr' : target}
+                href={equivalents.length === 1 && choice !== locale ? pathForLocale('/yazilar/', choice) : target === '/' ? '/?lang=tr' : target}
                 hrefLang={choice}
                 lang={choice}
                 dir={choice === 'ar' ? 'rtl' : 'ltr'}

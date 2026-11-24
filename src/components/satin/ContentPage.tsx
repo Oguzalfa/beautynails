@@ -4,6 +4,8 @@ import { getLocalizedPage, pagesForLocale, pathForLocale } from '../../routes'
 import { LanguageSelector } from '../LanguageSelector'
 import { contentPageCopy } from './content-page-copy'
 import { ArrowIcon, WhatsAppIcon } from './icons'
+import { ContactPanel } from '../ContactPanel'
+import { NailCampaign } from './NailCampaign'
 import type { ContentPageData } from './pages'
 
 type Props = {
@@ -24,9 +26,14 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
   const servicesPath = pathForLocale('/hizmetler/', locale)
   const journalPath = pathForLocale('/yazilar/', locale)
   const serviceId = page?.serviceId
-  const bookingService = serviceId
-    ? getLocalizedPage(`/hizmetler/${serviceId}/`, 'tr')?.heading
-    : undefined
+  const bookingServices: Record<string, string> = {
+    'protez-tirnak': 'Protez Tırnak',
+    'tirnak-sanati': 'Tırnak Sanatı',
+    'ipek-kirpik': 'İpek Kirpik',
+    'kalici-makyaj': 'Kalıcı Makyaj',
+    'erkek-manikur-pedikur': 'Erkek Manikür & Pedikür',
+  }
+  const bookingService = serviceId ? bookingServices[serviceId] : undefined
   const book = () => onBook(bookingService)
   const companion = serviceId && (page?.kind === 'service'
     ? articles.find((item) => item.serviceId === (serviceId === 'protez-tirnak' ? 'tirnak-sanati' : serviceId))
@@ -35,7 +42,6 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
     ? getLocalizedPage('/hizmetler/protez-tirnak/', locale)
     : null
   const hasPriceInquiry = page?.kind === 'service' && (serviceId === 'tirnak-sanati' || serviceId === 'protez-tirnak')
-  const priceMessage = `Merhaba, BeautyNails’te ${bookingService} için güncel fiyat ve uygun randevu saatini öğrenebilir miyim?${locale === 'tr' ? '' : `\nDil: ${locale.toUpperCase()}`}`
 
   return (
     <div className="satin-page content-page" lang={locale}>
@@ -64,19 +70,14 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
 
         {page ? (
           <>
-            <article className={`content-story content-story-${page.kind}`}>
+            <article className={`content-story content-story-${page.kind}${hasPriceInquiry ? ' content-story-nail-campaign' : ''}`}>
               <header className="content-story-heading">
                 <p className="content-kicker">{page.category}</p>
                 <h1>{page.heading}</h1>
                 {page.kind === 'article' ? <p className="content-byline">{siteConfig.brand} · {copy.journal}</p> : null}
-                <p className="content-story-intro">{page.intro}</p>
-                {hasPriceInquiry ? (
-                  <a className="content-read-link" href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(priceMessage)}`} target="_blank" rel="noopener noreferrer">
-                    {copy.askPrice}<ArrowIcon />
-                  </a>
-                ) : null}
+                {hasPriceInquiry ? <NailCampaign locale={locale} serviceId={serviceId} compact /> : <p className="content-story-intro">{page.intro}</p>}
               </header>
-              {page.image ? (
+              {page.image && !hasPriceInquiry ? (
                 <div className="content-story-image">
                   <img {...page.image} fetchPriority="high" decoding="async" />
                 </div>
@@ -147,6 +148,8 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
           </section>
         )}
       </main>
+
+      <ContactPanel locale={locale} />
 
       <footer className="content-page-footer">
         <div className="content-width">

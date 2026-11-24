@@ -7,6 +7,8 @@ import { ArrowIcon, CloseIcon, InstagramIcon, MenuIcon, WhatsAppIcon } from './i
 import { JournalSection } from './JournalSection'
 import { journalImages, libraryGallery, nailPhotoGallery } from './collection'
 import { homeCopy } from './home-copy'
+import { ContactPanel, contactCopy, PhoneIcon } from '../ContactPanel'
+import { NailCampaign } from './NailCampaign'
 
 type Props = {
   locale: Locale
@@ -301,10 +303,10 @@ export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
                 <span>{copy.heroHeading[0]}</span>{' '}
                 <em>{copy.heroHeading[1]}</em>
               </h1>
-              <button className="circle-book" type="button" onClick={book}>
-                <span>{copy.heroBook}</span>
-                <ArrowIcon />
-              </button>
+              <a className="circle-book" href={`tel:+${siteConfig.whatsappNumber}`} data-contact-placement="home-hero">
+                <span>{contactCopy[locale].call}</span>
+                <PhoneIcon />
+              </a>
             </div>
           </div>
         </section>
@@ -347,6 +349,8 @@ export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
                 </a>
               ))}
             </div>
+
+            <NailCampaign locale={locale} />
 
             <div className="gallery" id="ornekler" tabIndex={-1}>
               <div className="section-label">
@@ -412,6 +416,8 @@ export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
           </div>
         </div>
       </section>
+
+      <ContactPanel locale={locale} />
 
       <footer className="site-footer">
         <div className="content-width">

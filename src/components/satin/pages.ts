@@ -27,7 +27,7 @@ const servicePages: readonly ContentPageData[] = [
   {
     path: '/hizmetler/tirnak-sanati/',
     title: 'Maltepe Nail Art ve Tırnak Tasarımı | BeautyNails',
-    description: 'BeautyNails’te tırnak tasarımı, manikür, renk, French ve desen seçeneklerini inceleyin. Güncel fiyat ve randevu saati için WhatsApp’tan yazın.',
+    description: 'Maltepe BeautyNails’te nail art, French ve kırmızı tırnak modellerini inceleyin. Uygulama detayları ve uygun randevu saati için hemen arayın.',
     kind: 'service',
     serviceId: 'tirnak-sanati',
     category: 'Tırnak',
@@ -56,7 +56,7 @@ const servicePages: readonly ContentPageData[] = [
   {
     path: '/hizmetler/protez-tirnak/',
     title: 'Maltepe Protez Tırnak: Fiyat ve Randevu | BeautyNails',
-    description: 'BeautyNails’te protez tırnak için boy ve şekil seçeneklerini konuşun. Maltepe’den ziyaret planı, güncel fiyat ve uygun saat için WhatsApp’tan yazın.',
+    description: 'Maltepe BeautyNails’te protez tırnak için boy, şekil ve tasarım seçeneklerini keşfedin. Detaylar ve uygun randevu saati için hemen arayın.',
     kind: 'service',
     serviceId: 'protez-tirnak',
     category: 'Tırnak',
@@ -78,7 +78,7 @@ const servicePages: readonly ContentPageData[] = [
       },
       {
         heading: 'Maltepe’den randevuya gelirken',
-        paragraphs: ['Maltepe’den yola çıkacaksanız randevu saatinizi onaylatırken güncel konum bağlantısını da isteyin. Ulaşım sürenizi paylaşılan konuma göre hesaplayın. WhatsApp mesajına size uyan günleri ve model fotoğrafınızı ekleyerek hem işlem hem ziyaret planını aynı görüşmede netleştirebilirsiniz.'],
+        paragraphs: ['BeautyNails, Feyzullah Mahallesi Mimar Sinan Caddesi No:12, Daire 2 adresinde. Sayfadaki Yol Tarifi Al düğmesiyle konumumuza ulaşabilirsiniz. Yola çıkmadan önce arayarak randevu saatinizi ve uygulama detaylarını netleştirin. İsterseniz beğendiğiniz modelin fotoğrafını WhatsApp’tan da paylaşabilirsiniz.'],
       },
     ],
   },

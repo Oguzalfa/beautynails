@@ -4,6 +4,7 @@ import { BookingPanel } from './components/BookingPanel'
 import { SatinHome } from './components/satin/SatinHome'
 import { ContentPage } from './components/satin/ContentPage'
 import { getRoute } from './routes'
+import { MobileContactBar } from './components/ContactPanel'
 
 type Props = { initialPath?: string }
 
@@ -29,6 +30,7 @@ export default function App({ initialPath }: Props) {
         <ServiceDetail locale={locale} serviceId={serviceId} onClose={() => setServiceId(null)} />
         <BookingPanel locale={locale} open={bookingOpen} initialService={bookingService} onClose={() => setBookingOpen(false)} />
       </div>
+      <MobileContactBar locale={locale} hidden={bookingOpen || serviceId !== null} />
     </>
   )
 }

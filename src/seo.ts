@@ -18,8 +18,11 @@ export function getSeo(pathname: string) {
     { language: 'x-default', url: siteConfig.url + route.sourcePath },
   ] : []
   const image = `${siteConfig.url}${page?.image?.src ?? '/images/satin/hero-desktop-960.webp'}`
-  const org = { '@type': 'Organization', '@id': `${siteConfig.url}/#organization`, name: siteConfig.brand,
+  const org = { '@type': ['Organization', 'NailSalon'], '@id': `${siteConfig.url}/#organization`, name: siteConfig.brand,
     url: `${siteConfig.url}/`, telephone: `+${siteConfig.whatsappNumber}`,
+    address: { '@type': 'PostalAddress', ...siteConfig.postalAddress },
+    geo: { '@type': 'GeoCoordinates', ...siteConfig.coordinates },
+    hasMap: siteConfig.mapsUrl,
     ...(siteConfig.instagramUrl ? { sameAs: [siteConfig.instagramUrl] } : {}) }
   const graph: Record<string, unknown>[] = valid ? [org,
     { '@type': 'WebSite', '@id': `${siteConfig.url}/#website`, url: `${siteConfig.url}/`, name: siteConfig.brand,

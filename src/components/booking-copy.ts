@@ -18,8 +18,10 @@ type BookingCopy = {
   title: string
   providerIntro: string
   whatsappIntro: (phone: string) => string
-  opened: string
-  blocked: string
+  draftReady: string
+  directWhatsApp: string
+  directMessage: (service?: string) => string
+  optionalDetails: string
   openDraft: string
   services: string
   serviceNames: Record<ServiceOption, string>
@@ -38,8 +40,10 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     title: 'Randevu talebi',
     providerIntro: 'Sizi mevcut randevu akışına yönlendireceğiz.',
     whatsappIntro: (phone) => `Randevu talebi ${phone} numaralı WhatsApp hattına hazırlanır. Mesajı siz gönderirsiniz.`,
-    opened: 'WhatsApp taslağı açıldı. Mesaj gönderilmeden randevu iletilmez.',
-    blocked: 'Tarayıcı yeni pencereyi engelledi. Aşağıdaki düğme aynı WhatsApp taslağını açar.',
+    draftReady: 'Mesaj taslağınız hazır. Açılmadıysa aşağıdaki düğmeyle WhatsApp’a geçin ve mesajı gönderin. Randevunuz işletmenin yanıtı ve onayıyla kesinleşir.',
+    directWhatsApp: 'WhatsApp’tan fiyat ve saat sor',
+    directMessage: (service) => `Merhaba, ${service ? `${service} için` : 'hizmetleriniz hakkında'} güncel fiyat ve uygun randevu saatlerini öğrenebilir miyim?`,
+    optionalDetails: 'İsterseniz ayrıntılı talep hazırlayın',
     openDraft: 'WhatsApp taslağını aç',
     services: 'Hizmet',
     serviceNames: {
@@ -67,8 +71,10 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     title: 'Appointment request',
     providerIntro: 'We’ll take you to the booking page.',
     whatsappIntro: (phone) => `We’ll prepare a WhatsApp draft for ${phone}. You can review it before sending.`,
-    opened: 'Your WhatsApp draft is open. Send the message to submit your request.',
-    blocked: 'Your browser blocked the new window. Use the button below to open your WhatsApp draft.',
+    draftReady: 'Your message draft is ready. If it did not open, use the button below and send it in WhatsApp. Your appointment is confirmed only after the salon replies and agrees on a time.',
+    directWhatsApp: 'Ask about prices and times on WhatsApp',
+    directMessage: (service) => `Hello, could you share ${service ? `the current price and appointment options for ${service}` : 'your current prices and appointment options'}?`,
+    optionalDetails: 'Optional: prepare a detailed request',
     openDraft: 'Open WhatsApp draft',
     services: 'Services',
     serviceNames: {
@@ -96,8 +102,10 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     title: 'Terminanfrage',
     providerIntro: 'Wir leiten Sie zur Terminbuchung weiter.',
     whatsappIntro: (phone) => `Wir erstellen einen WhatsApp-Entwurf für ${phone}. Sie können ihn vor dem Senden prüfen.`,
-    opened: 'Ihr WhatsApp-Entwurf ist geöffnet. Senden Sie die Nachricht, um Ihren Termin anzufragen.',
-    blocked: 'Ihr Browser hat das neue Fenster blockiert. Über die Schaltfläche unten können Sie Ihren WhatsApp-Entwurf öffnen.',
+    draftReady: 'Ihr Nachrichtenentwurf ist bereit. Falls er nicht geöffnet wurde, nutzen Sie die Schaltfläche unten und senden Sie ihn in WhatsApp. Ihr Termin ist erst nach Rückmeldung und Bestätigung des Salons verbindlich.',
+    directWhatsApp: 'Preise und Termine per WhatsApp anfragen',
+    directMessage: (service) => `Hallo, könnten Sie mir ${service ? `den aktuellen Preis und freie Termine für ${service}` : 'Ihre aktuellen Preise und freie Termine'} mitteilen?`,
+    optionalDetails: 'Optional: eine ausführliche Anfrage vorbereiten',
     openDraft: 'WhatsApp-Entwurf öffnen',
     services: 'Leistungen',
     serviceNames: {
@@ -125,8 +133,10 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     title: 'Запрос на запись',
     providerIntro: 'Мы перенаправим вас на страницу записи.',
     whatsappIntro: (phone) => `Мы подготовим черновик сообщения в WhatsApp для номера ${phone}. Вы сможете проверить его перед отправкой.`,
-    opened: 'Черновик открыт в WhatsApp. Отправьте сообщение, чтобы передать запрос на запись.',
-    blocked: 'Браузер заблокировал новое окно. Нажмите кнопку ниже, чтобы открыть черновик в WhatsApp.',
+    draftReady: 'Черновик сообщения готов. Если он не открылся, нажмите кнопку ниже и отправьте его в WhatsApp. Запись подтверждается только после ответа и согласования времени с салоном.',
+    directWhatsApp: 'Узнать цены и время в WhatsApp',
+    directMessage: (service) => `Здравствуйте! Подскажите, пожалуйста, ${service ? `актуальную стоимость и свободное время для услуги «${service}»` : 'актуальные цены и свободное время для записи'}.`,
+    optionalDetails: 'По желанию: подготовить подробный запрос',
     openDraft: 'Открыть черновик в WhatsApp',
     services: 'Услуги',
     serviceNames: {
@@ -154,8 +164,10 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     title: 'طلب موعد',
     providerIntro: 'سننقلك إلى صفحة حجز المواعيد.',
     whatsappIntro: (phone) => `سنجهّز مسودة رسالة واتساب للرقم ${phone}. يمكنك مراجعتها قبل الإرسال.`,
-    opened: 'فُتحت المسودة في واتساب. أرسل الرسالة لتقديم طلب الموعد.',
-    blocked: 'منع المتصفح فتح نافذة جديدة. استخدم الزر أدناه لفتح المسودة في واتساب.',
+    draftReady: 'مسودة رسالتك جاهزة. إذا لم تُفتح، استخدم الزر أدناه وأرسلها في واتساب. لا يتأكد الموعد إلا بعد رد الصالون والاتفاق على الوقت.',
+    directWhatsApp: 'اسأل عن الأسعار والمواعيد عبر واتساب',
+    directMessage: (service) => `مرحباً، هل يمكنني معرفة ${service ? `السعر الحالي والمواعيد المتاحة لخدمة ${service}` : 'الأسعار الحالية والمواعيد المتاحة'}؟`,
+    optionalDetails: 'اختياري: إعداد طلب مفصّل',
     openDraft: 'فتح المسودة',
     services: 'الخدمات',
     serviceNames: {
@@ -183,8 +195,10 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     title: 'Qabulga yozilish',
     providerIntro: 'Sizni qabulga yozilish sahifasiga yo‘naltiramiz.',
     whatsappIntro: (phone) => `${phone} raqami uchun WhatsApp xabari qoralamasini tayyorlaymiz. Uni yuborishdan oldin tekshirishingiz mumkin.`,
-    opened: 'Qoralama WhatsApp’da ochildi. So‘rovni yuborish uchun xabarni jo‘nating.',
-    blocked: 'Brauzer yangi oynani blokladi. WhatsApp qoralamasini ochish uchun quyidagi tugmani bosing.',
+    draftReady: 'Xabar qoralamasi tayyor. Agar ochilmagan bo‘lsa, quyidagi tugmani bosing va uni WhatsApp’da yuboring. Qabul vaqti salon javob berib, vaqtni tasdiqlaganidan keyingina belgilanadi.',
+    directWhatsApp: 'Narx va vaqtni WhatsApp’da so‘rang',
+    directMessage: (service) => `Assalomu alaykum, ${service ? `${service} uchun` : 'xizmatlaringiz bo‘yicha'} joriy narx va bo‘sh qabul vaqtlarini bilsam bo‘ladimi?`,
+    optionalDetails: 'Ixtiyoriy: batafsil so‘rov tayyorlash',
     openDraft: 'Qoralamani ochish',
     services: 'Xizmatlar',
     serviceNames: {
@@ -212,8 +226,10 @@ export const bookingCopy: Record<Locale, BookingCopy> = {
     title: 'Wagt bellemek',
     providerIntro: 'Sizi wagt belleme sahypasyna ugrukdyrarys.',
     whatsappIntro: (phone) => `WhatsApp-da ${phone} belgisi üçin hat taslamasyny taýýarlarys. Ony ibermezden öň barlap bilersiňiz.`,
-    opened: 'Hatyň taslamasy WhatsApp-da açyldy. Ýüz tutmaňyzy ugratmak üçin haty iberiň.',
-    blocked: 'Brauzer täze penjiräni açmaga päsgel berdi. WhatsApp-daky taslamany açmak üçin aşakdaky düwmä basyň.',
+    draftReady: 'Hatyň taslamasy taýýar. Açylmadyk bolsa, aşakdaky düwmä basyp, ony WhatsApp-da iberiň. Wagt diňe salon jogap berip, ony tassyklandan soň bellenilýär.',
+    directWhatsApp: 'Baha we wagt barada WhatsApp-da soraň',
+    directMessage: (service) => `Salam, ${service ? `${service} üçin` : 'hyzmatlaryňyz boýunça'} häzirki baha we boş wagtlar barada maglumat berip bilersiňizmi?`,
+    optionalDetails: 'Islege görä: jikme-jik ýüz tutma taýýarlamak',
     openDraft: 'Taslamany açmak',
     services: 'Hyzmatlar',
     serviceNames: {

@@ -132,7 +132,7 @@ async function checkAsset(value, pagePath) {
 function checkNoInventedBusinessFields(value, pagePath) {
   if (!value || typeof value !== 'object') return
   // Update this guard only after the corresponding business facts are verified.
-  const unverified = new Set(['address', 'geo', 'openingHours', 'openingHoursSpecification',
+  const unverified = new Set(['openingHours', 'openingHoursSpecification',
     'aggregateRating', 'review', 'priceRange', 'price', 'datePublished', 'dateModified'])
   for (const [key, child] of Object.entries(value)) {
     assert.ok(!unverified.has(key), `${pagePath}: unverified structured-data field ${key}`)
@@ -222,6 +222,14 @@ for (const [path, { kind, language, paths }] of routes) {
   assert.equal(org.name, 'BeautyNails')
   assert.equal(org.url, origin + '/')
   assert.equal(org.telephone, '+905322422303')
+  assert.ok(type(org, 'NailSalon'), `${path}: verified local business type`)
+  assert.deepEqual(org.address, {
+    '@type': 'PostalAddress',
+    streetAddress: 'Feyzullah Mahallesi, Mimar Sinan Caddesi No:12, Daire 2',
+    addressLocality: 'Maltepe', addressRegion: 'İstanbul', postalCode: '34843', addressCountry: 'TR',
+  }, `${path}: owner-confirmed Daire 2 address`)
+  assert.deepEqual(org.geo, { '@type': 'GeoCoordinates', latitude: 40.924485, longitude: 29.128367 })
+  assert.equal(org.hasMap, 'https://www.google.com/maps?cid=17846514519554582129')
   assert.ok(graph.some((node) => type(node, 'WebSite') && node.url === origin + '/'))
   const page = graph.find((node) => type(node, kind === 'index' ? 'CollectionPage' : 'WebPage'))
   assert.equal(page?.url, origin + path, `${path}: page entity matches canonical`)

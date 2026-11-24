@@ -4,7 +4,7 @@ import { getLocalizedPage, pagesForLocale, pathForLocale } from '../../routes'
 import { LanguageSelector } from '../LanguageSelector'
 import { contentPageCopy } from './content-page-copy'
 import { ArrowIcon, WhatsAppIcon } from './icons'
-import { ContactPanel } from '../ContactPanel'
+import { contactCopy, PhoneIcon } from '../ContactPanel'
 import { NailCampaign } from './NailCampaign'
 import type { ContentPageData } from './pages'
 
@@ -42,6 +42,7 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
     ? getLocalizedPage('/hizmetler/protez-tirnak/', locale)
     : null
   const hasPriceInquiry = page?.kind === 'service' && (serviceId === 'tirnak-sanati' || serviceId === 'protez-tirnak')
+  const modelMessage = `${contactCopy[locale].message}${bookingService ? `\n${bookingService}` : ''}`
 
   return (
     <div className="satin-page content-page" lang={locale}>
@@ -70,18 +71,29 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
 
         {page ? (
           <>
-            <article className={`content-story content-story-${page.kind}${hasPriceInquiry ? ' content-story-nail-campaign' : ''}`}>
+            <article className={`content-story content-story-${page.kind}`}>
               <header className="content-story-heading">
                 <p className="content-kicker">{page.category}</p>
                 <h1>{page.heading}</h1>
                 {page.kind === 'article' ? <p className="content-byline">{siteConfig.brand} · {copy.journal}</p> : null}
-                {hasPriceInquiry ? <NailCampaign locale={locale} serviceId={serviceId} compact /> : <p className="content-story-intro">{page.intro}</p>}
+                <p className="content-story-intro">{page.intro}</p>
+                {hasPriceInquiry ? (
+                  <div className="content-call-actions">
+                    <a className="content-read-link" href={`tel:+${siteConfig.whatsappNumber}`} data-contact-placement="service-hero-call">
+                      <PhoneIcon /><span>{contactCopy[locale].call}</span>
+                    </a>
+                    <a className="content-read-link" href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(modelMessage)}`} target="_blank" rel="noopener noreferrer" data-contact-placement="service-hero-model">
+                      <WhatsAppIcon /><span>{contactCopy[locale].model}</span>
+                    </a>
+                  </div>
+                ) : null}
               </header>
-              {page.image && !hasPriceInquiry ? (
+              {page.image ? (
                 <div className="content-story-image">
                   <img {...page.image} fetchPriority="high" decoding="async" />
                 </div>
               ) : null}
+              {hasPriceInquiry ? <NailCampaign locale={locale} serviceId={serviceId} compact /> : null}
               {page.sections.length ? (
                 <div className="content-story-body">
                   {page.sections.map((section) => (
@@ -149,14 +161,19 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
         )}
       </main>
 
-      <ContactPanel locale={locale} />
-
       <footer className="content-page-footer">
         <div className="content-width">
           <a className="brand" href={homePath} aria-label={copy.brandHome}>{siteConfig.wordmark}</a>
           <div className="content-page-contact">
             <a href={`tel:+${siteConfig.whatsappNumber}`} dir="ltr">{siteConfig.phone}</a>
             <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer"><WhatsAppIcon /><span>WhatsApp</span></a>
+          </div>
+          <div className="footer-location content-footer-location" id="iletisim">
+            <address>{siteConfig.address}</address>
+            <div className="footer-location__links">
+              <a href={siteConfig.directionsUrl} target="_blank" rel="noopener noreferrer" data-contact-placement="content-footer" data-contact-action="directions">{contactCopy[locale].directions}</a>
+              <a href={siteConfig.mapsUrl} target="_blank" rel="noopener noreferrer" data-contact-placement="content-footer-profile" data-contact-action="directions">{contactCopy[locale].profile}</a>
+            </div>
           </div>
           <p>© {siteConfig.brand}</p>
         </div>

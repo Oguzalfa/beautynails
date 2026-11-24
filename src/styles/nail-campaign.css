@@ -2,9 +2,9 @@
   grid-column: 1 / -1;
   width: 100%;
   min-width: 0;
-  color: var(--graphite-950, #111012);
-  background: var(--blush-50, #fff1f6);
-  border-block: 1px solid rgba(90, 11, 50, .18);
+  color: var(--white, #fff);
+  background: transparent;
+  border-block: 1px solid var(--rule, rgba(255, 241, 246, .52));
 }
 
 .nail-campaign,
@@ -17,7 +17,7 @@
   gap: 26px;
   width: min(100%, 1280px);
   margin-inline: auto;
-  padding: clamp(24px, 5vw, 52px) clamp(18px, 3.2vw, 44px);
+  padding-block: clamp(28px, 4vw, 44px);
 }
 
 .nail-campaign__copy {
@@ -27,9 +27,9 @@
 
 .nail-campaign .nail-campaign__label {
   margin: 0 0 16px;
-  color: var(--pink-900, #5a0b32);
-  font: 600 14px/1.6 var(--sans, Arial, sans-serif);
-  letter-spacing: .13em;
+  color: var(--blush-100, #f4bed4);
+  font: 500 14px/1.6 var(--sans, Arial, sans-serif);
+  letter-spacing: .08em;
   text-transform: uppercase;
 }
 
@@ -37,8 +37,8 @@
   max-width: 17ch;
   margin: 0;
   color: inherit;
-  font: 400 clamp(34px, 7.8vw, 58px)/1.06 var(--serif, Georgia, serif);
-  letter-spacing: -.035em;
+  font: 400 clamp(28px, 5vw, 42px)/1.12 var(--serif, Georgia, serif);
+  letter-spacing: -.02em;
   overflow-wrap: anywhere;
   text-wrap: balance;
 }
@@ -46,8 +46,8 @@
 .nail-campaign .nail-campaign__intro {
   max-width: 44ch;
   margin: 18px 0 0;
-  color: #4e3944;
-  font: 400 16px/1.65 var(--sans, Arial, sans-serif);
+  color: var(--blush-50, #fff1f6);
+  font: 400 16px/1.7 var(--sans, Arial, sans-serif);
 }
 
 .nail-campaign__actions {
@@ -62,15 +62,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  width: 100%;
-  max-width: 340px;
-  min-height: 66px;
-  padding: 13px 18px;
-  color: #fff;
-  background: var(--pink-900, #5a0b32);
-  border: 1px solid var(--pink-900, #5a0b32);
+  width: min(100%, 280px);
+  min-height: 60px;
+  padding: 10px 0;
+  color: var(--white, #fff);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule, rgba(255, 241, 246, .52));
   text-decoration: none;
-  font: 600 16px/1.4 var(--sans, Arial, sans-serif);
+  font: 500 16px/1.4 var(--sans, Arial, sans-serif);
 }
 
 .nail-campaign__call > span {
@@ -99,7 +99,7 @@
   min-height: 48px;
   max-width: 100%;
   padding: 6px 0;
-  color: var(--pink-900, #5a0b32);
+  color: var(--blush-100, #f4bed4);
   text-decoration: underline;
   text-underline-offset: 4px;
   font: 500 14px/1.5 var(--sans, Arial, sans-serif);
@@ -113,7 +113,7 @@
 
 .nail-campaign .nail-campaign__call:focus-visible,
 .nail-campaign .nail-campaign__model:focus-visible {
-  outline: 3px solid var(--pink-900, #5a0b32);
+  outline: 3px solid var(--focus, #fff1f6);
   outline-offset: 4px;
 }
 
@@ -136,7 +136,7 @@
   height: auto;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  background: #e7d5dd;
+  background: rgba(255, 241, 246, .06);
 }
 
 .nail-campaign__photo figcaption {
@@ -144,20 +144,14 @@
   align-items: baseline;
   gap: 8px;
   margin-top: 9px;
-  color: #4e3944;
+  color: var(--blush-100, #f4bed4);
   font: 400 14px/1.5 var(--sans, Arial, sans-serif);
   overflow-wrap: anywhere;
 }
 
-.nail-campaign__photo figcaption > span {
-  flex: none;
-  color: var(--pink-900, #5a0b32);
-  font-size: 9px;
-}
-
 .nail-campaign--compact .nail-campaign__heading {
   max-width: 20ch;
-  font-size: clamp(32px, 6.7vw, 46px);
+  font-size: clamp(28px, 4.5vw, 38px);
 }
 
 .nail-campaign--compact .nail-campaign__photo img {

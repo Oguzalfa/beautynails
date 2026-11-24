@@ -7,8 +7,7 @@ import { ArrowIcon, CloseIcon, InstagramIcon, MenuIcon, WhatsAppIcon } from './i
 import { JournalSection } from './JournalSection'
 import { journalImages, libraryGallery, nailPhotoGallery } from './collection'
 import { homeCopy } from './home-copy'
-import { ContactPanel, contactCopy, PhoneIcon } from '../ContactPanel'
-import { NailCampaign } from './NailCampaign'
+import { contactCopy, PhoneIcon } from '../ContactPanel'
 
 type Props = {
   locale: Locale
@@ -350,8 +349,6 @@ export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
               ))}
             </div>
 
-            <NailCampaign locale={locale} />
-
             <div className="gallery" id="ornekler" tabIndex={-1}>
               <div className="section-label">
                 <h2>{copy.galleryHeading}</h2>
@@ -417,8 +414,6 @@ export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
         </div>
       </section>
 
-      <ContactPanel locale={locale} />
-
       <footer className="site-footer">
         <div className="content-width">
           <div className="footer-top">
@@ -443,6 +438,13 @@ export function SatinHome({ locale, onOpenBooking, onOpenService }: Props) {
                 <span>WhatsApp</span>
               </a>
             ) : null}
+          </div>
+          <div className="footer-location" id="iletisim">
+            <address>{siteConfig.address}</address>
+            <div className="footer-location__links">
+              <a href={siteConfig.directionsUrl} target="_blank" rel="noopener noreferrer" data-contact-placement="home-footer" data-contact-action="directions">{contactCopy[locale].directions}</a>
+              <a href={siteConfig.mapsUrl} target="_blank" rel="noopener noreferrer" data-contact-placement="home-footer-profile" data-contact-action="directions">{contactCopy[locale].profile}</a>
+            </div>
           </div>
           <div className="footer-meta">
             <small>© 2026 {siteConfig.brand}</small>

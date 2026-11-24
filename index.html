@@ -9,6 +9,41 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
     </script>
+    <!-- Site Telefon Tıklaması: report the salon's phone-link clicks. -->
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof url !== 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18514909573/KwJmCKin7r4dEIWzzPxE',
+          'event_callback': callback
+        });
+        return false;
+      }
+      (function () {
+        if (window.__beautyNailsPhoneClickBound) return;
+        window.__beautyNailsPhoneClickBound = true;
+        document.addEventListener('click', function (event) {
+          if (event.defaultPrevented || event.button > 0) return;
+          var target = event.target;
+          var link = target && typeof target.closest === 'function'
+            ? target.closest('a[href]')
+            : null;
+          if (!link) return;
+          var href = (link.getAttribute('href') || '').toLowerCase().replace(/[\s().-]/g, '');
+          if (href !== 'tel:+905322422303') return;
+          try {
+            // No URL: the browser opens the native tel link without waiting for analytics.
+            gtag_report_conversion();
+          } catch (_) {
+            // Phone links remain usable when measurement is unavailable.
+          }
+        }, { passive: true });
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta

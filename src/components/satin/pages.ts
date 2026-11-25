@@ -49,7 +49,7 @@ const servicePages: readonly ContentPageData[] = [
       },
       {
         heading: 'Randevu kapsamı ve fiyatı',
-        paragraphs: ['Kendi tırnağınızın boyunu koruyarak renk veya desen istiyorsanız tasarım tercihinizi belirtin. Boyunu uzatmak için Protez Tırnak hizmetine bakabilirsiniz. Seçtiğiniz modelin, mevcut kaplamanın ve istediğiniz desenin fotoğrafları üzerinden randevu kapsamını, tahmini süreyi ve güncel ücreti WhatsApp’ta netleştirebilirsiniz.'],
+        paragraphs: ['Kendi tırnağınızın boyunu koruyarak renk veya desen istiyorsanız tasarım tercihinizi belirtin. Boyunu uzatmak için Protez Tırnak hizmetine bakabilirsiniz. Uygulama kapsamını, tahmini süreyi, güncel ücreti ve uygun randevu saatini telefonla birlikte netleştirelim. Beğendiğiniz modeli WhatsApp’tan paylaşabilirsiniz.'],
       },
     ],
   },
@@ -61,7 +61,7 @@ const servicePages: readonly ContentPageData[] = [
     serviceId: 'protez-tirnak',
     category: 'Tırnak',
     heading: 'Maltepe Protez Tırnak',
-    intro: 'BeautyNails’te protez tırnak uygulaması için istediğiniz uzunluğu, şekli ve bitişi birlikte belirleyelim. Modelinizi WhatsApp’tan paylaşarak güncel fiyatı ve uygun saatleri öğrenebilirsiniz.',
+    intro: 'BeautyNails’te protez ve jel tırnak için istediğiniz uzunluğu, şekli ve bitişi birlikte belirleyelim. Uygulama detayları ve uygun randevu saati için bizi arayın. Beğendiğiniz modeli WhatsApp’tan paylaşabilirsiniz.',
     image: { src: '/images/satin/service-nails-960.webp', width: 1122, height: 1402, alt: 'Fuşya badem biçimli tırnak tasarımı örneği' },
     sections: [
       {
@@ -74,7 +74,7 @@ const servicePages: readonly ContentPageData[] = [
       },
       {
         heading: 'Protez tırnak fiyatı ve uygulama süresi',
-        paragraphs: ['Güncel fiyat ve tahmini süre için seçtiğiniz uzunluğu, tek renk ya da desen tercihinizi ve mevcut kaplama durumunu WhatsApp’ta paylaşın. Düğün, davet veya seyahat için hazırlanıyorsanız tarihi de ekleyin. İşlem kapsamını, toplam ücreti ve uygun saati randevunuz kesinleşmeden önce birlikte netleştirebilirsiniz.'],
+        paragraphs: ['İstediğiniz uzunluğu, tek renk ya da desen tercihinizi ve mevcut kaplama durumunu telefonla konuşalım. İşlem kapsamını, tahmini süreyi, toplam ücreti ve uygun saati randevunuz kesinleşmeden önce birlikte netleştirelim. Beğendiğiniz modelin fotoğrafını WhatsApp’tan paylaşabilirsiniz.'],
       },
       {
         heading: 'Maltepe’den randevuya gelirken',

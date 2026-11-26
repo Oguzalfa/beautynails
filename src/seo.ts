@@ -1,7 +1,7 @@
 import { siteConfig } from './config/site'
 import { contentPageCopy } from './components/satin/content-page-copy'
 import { localeDetails, locales } from './locales'
-import { getRoute, pagesForLocale, pathForLocale } from './routes'
+import { availableRouteLocales, getRoute, pagesForLocale, pathForLocale } from './routes'
 
 export function getSeo(pathname: string) {
   const route = getRoute(pathname)
@@ -13,8 +13,9 @@ export function getSeo(pathname: string) {
   const canonical = route ? `${siteConfig.url}${route.path}` : undefined
   const title = page?.title ?? (valid ? localeMeta.title : `${copy.notFound} | BeautyNails`)
   const description = page?.description ?? (valid ? localeMeta.description : copy.notFoundDescription)
-  const alternates = route ? [
-    ...locales.map((language) => ({ language, url: siteConfig.url + pathForLocale(route.path, language) })),
+  const equivalentLocales = availableRouteLocales(pathname)
+  const alternates = route && equivalentLocales.length > 1 ? [
+    ...equivalentLocales.map((language) => ({ language, url: siteConfig.url + pathForLocale(route.path, language) })),
     { language: 'x-default', url: siteConfig.url + route.sourcePath },
   ] : []
   const image = `${siteConfig.url}${page?.image?.src ?? '/images/satin/hero-desktop-960.webp'}`
@@ -47,7 +48,7 @@ export function getSeo(pathname: string) {
       .map((p, index) => ({ '@type': 'ListItem', position: index + 1, name: p.heading, url: `${siteConfig.url}${p.path}` })) })
   }
   return { valid, canonical, title, description, image, locale, alternates, isHome: route?.sourcePath === '/',
-    ogLocale: localeMeta.og, ogAlternates: locales.filter((language) => language !== locale).map((language) => localeDetails[language].og),
+    ogLocale: localeMeta.og, ogAlternates: equivalentLocales.filter((language) => language !== locale).map((language) => localeDetails[language].og),
     imageAlt: page?.image?.alt ?? localeMeta.imageAlt, type: page?.kind === 'article' ? 'article' : 'website',
     jsonLd: graph.length ? { '@context': 'https://schema.org', '@graph': graph } : null }
 }

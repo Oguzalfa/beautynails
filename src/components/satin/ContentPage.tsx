@@ -17,6 +17,7 @@ type Props = {
 
 export function ContentPage({ locale, path, page, onBook }: Props) {
   const copy = contentPageCopy[locale]
+  const StoryImage = page?.brief ? 'figure' : 'div'
   const contentPages = pagesForLocale(locale)
   const articles = contentPages.filter((item) => item.kind === 'article')
   const services = contentPages.filter((item) => item.kind === 'service')
@@ -89,9 +90,10 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
                 ) : null}
               </header>
               {page.image ? (
-                <div className="content-story-image">
+                <StoryImage className={`content-story-image${page.brief ? " content-story-image-captioned" : ""}`}>
                   <img {...page.image} fetchPriority="high" decoding="async" />
-                </div>
+                  {page.brief ? <figcaption>{page.brief.imageCaption}</figcaption> : null}
+                </StoryImage>
               ) : null}
               {hasPriceInquiry ? <NailCampaign locale={locale} serviceId={serviceId} compact /> : null}
               {page.sections.length ? (
@@ -102,6 +104,12 @@ export function ContentPage({ locale, path, page, onBook }: Props) {
                       {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                     </section>
                   ))}
+                  {page.brief ? (
+                    <aside className="content-design-brief" aria-labelledby="tasarim-notu">
+                      <h2 id="tasarim-notu">{page.brief.heading}</h2>
+                      <blockquote>{page.brief.text}</blockquote>
+                    </aside>
+                  ) : null}
                   <div className="content-story-contact">
                     <p>{copy.contactPrompt}</p>
                     {companion ? (

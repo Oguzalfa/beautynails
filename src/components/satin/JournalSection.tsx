@@ -2,6 +2,7 @@ import { useId } from 'react'
 import type { Locale } from '../../locales'
 import { journalForLocale, pagesForLocale, pathForLocale } from '../../routes'
 import { homeCopy } from './home-copy'
+import { nailArtEditorial } from './nail-art-editorial'
 import { guideListHeading } from './local-guides'
 import { ArrowIcon } from './icons'
 import type { JournalArticleId } from './journal'
@@ -12,7 +13,7 @@ type Props = { images: Record<JournalArticleId, JournalImage>; locale: Locale }
 export function JournalSection({ images, locale }: Props) {
   const copy = homeCopy[locale]
   const sectionTitleId = useId()
-  const guides = pagesForLocale(locale).filter((page) => page.kind === 'article' && page.serviceId)
+  const guides = pagesForLocale(locale).filter((page) => page.kind === 'article' && page.serviceId && page.path !== nailArtEditorial.path)
   return (
     <section className="journal" id="yazilar" tabIndex={-1} aria-labelledby={sectionTitleId}>
       <div className="content-width">
@@ -50,6 +51,18 @@ export function JournalSection({ images, locale }: Props) {
             )
           })}
         </div>
+        {locale === 'tr' && (
+          <article className="journal-editorial">
+            <div>
+              <p className="journal-category">BeautyNails Journal · Tasarım Rehberi</p>
+              <h3>{nailArtEditorial.heading}</h3>
+              <p>İnce French, sütlü nude ya da tek tırnakta desen. Kısa boyu koruyarak görünümünüzü seçin.</p>
+            </div>
+            <a href={nailArtEditorial.path} className="journal-read" aria-label={`${nailArtEditorial.heading} — Devamını oku`}>
+              <span>Devamını oku</span><ArrowIcon />
+            </a>
+          </article>
+        )}
         <aside className="content-related" aria-label={guideListHeading[locale]}>
           <h2>{guideListHeading[locale]}</h2>
           <ul>
